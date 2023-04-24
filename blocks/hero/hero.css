@@ -1,25 +1,99 @@
 /* block specific CSS goes here */
 
-main .hero-container > div {
+main .hero-container>div {
   max-width: unset;
 }
-  
+
 main .hero-container {
   padding: 0;
-}
-  
-main .hero {
   position: relative;
-  padding: 32px;
-  min-height: 300px;
 }
 
-main .hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+main .hero {
+  margin-top: 126px;
+  min-height: calc(100vh - 190px);
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
+
+main .hero-content {
+  text-align: center;
+}
+
+main .hero-content h1 {
+  font-size: 100px;
+  font-weight: 400;
+  letter-spacing: -2.3px;
+  text-transform: uppercase;
+}
+
+main .hero-content h2 {
+  font-size: 24px;
+  letter-spacing: -0.6px;
+  font-weight: 300;
+}
+
+main .hero-content h2,
+main .hero-content h1 {
+  text-align: center;
+  margin: 0;
+  margin-bottom: 22px;
+}
+
+main .hero-content a:first-of-type {
+  box-sizing: border-box;
+  margin: 0 auto;
+  text-transform: uppercase;
+  display: inline-block;
+  font-size: 20px;
+  letter-spacing: -0.2px;
+  padding: 10px 25px;
+  box-shadow: 0 3px 6px 0 #00000029;
+  background-color: #016ace;
+  border-radius: 10px;
+  font-weight: 100;
+}
+
+main .hero-content a:nth-of-type(2) {
+  display: block;
+  background: unset;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+  color: #ffffff;
+  margin: 20px 0;
+  text-align: center;
+  text-decoration: none;
+}
+
+main .hero-content a:nth-of-type(3) {
+  display: block;
+  background: unset;
+  font-size: 15px;
+  text-align: center;
+  color: #ffffff;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 100;
+  letter-spacing: 0.03em;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
+}
+
+main .hero-content a:nth-of-type(3)::before {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNy4yMTEgMTguMDAyIj48ZGVmcz48c3R5bGU+LmNscy0yLC5jbHMtNHtmaWxsOiNmZmZ9LmNscy0zLC5jbHMtNHtzdHJva2U6bm9uZX08L3N0eWxlPjwvZGVmcz48ZyBpZD0iZGVzY2FyZ2EiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE3Nzc2IC0yNzY0KSIgb3BhY2l0eT0iLjgiPjxnIGlkPSJTdWJ0cmFjdGlvbl8xNSIgY2xhc3M9ImNscy0yIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDE1Ij48cGF0aCBkPSJNNS4wNyAxMC44OThoLS44MjNBMy43NSAzLjc1IDAgMCAxIC41IDcuMTVhMy43NTYgMy43NTYgMCAwIDEgMy4yNC0zLjcxbC4zNDMtLjA0Ni4wNzctLjMzN0EzLjMxMyAzLjMxMyAwIDAgMSA1LjMwNyAxLjIzIDMuMzA3IDMuMzA3IDAgMCAxIDcuMzc2LjVjMS4wNzcgMCAyLjA5LjUyOCAyLjcwOCAxLjQxMmwuMTgzLjI2My4zMTYtLjA1N2EzLjMwMyAzLjMwMyAwIDAgMSAzLjg5MyAzLjI0NmMwIC4wMyAwIC4wNi0uMDAyLjA5bC0uMDEuMzkzLjM4MS4xMDJhMi41MiAyLjUyIDAgMCAxIDEuMTYgNC4xOGMtLjQ1NC40NjgtMS4wNi43NC0xLjcxLjc2NmwtMS4yNi4wMDFWNy4zMDRINS4wN3YzLjU5NHoiIGNsYXNzPSJjbHMtMyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE3Nzc2IDI3NjQpIi8+PHBhdGggZD0iTTQuNTcgMTAuMzk3VjYuODA0aDguOTY1djMuNTkybC43NS0uMDAxYy41MTYtLjAyMy45OTktLjI0IDEuMzYtLjYxNGEyLjAxOSAyLjAxOSAwIDAgMC0uOTI4LTMuMzVsLS43NjItLjIwMy4wMi0uNzg3di0uMDc3YTIuODAzIDIuODAzIDAgMCAwLTMuMzAyLTIuNzU0bC0uNjMyLjExNS0uMzY3LS41MjZhMi44MDYgMi44MDYgMCAwIDAtNC4wNTMtLjU4IDIuODEgMi44MSAwIDAgMC0uOTczIDEuNTQ5bC0uMTU2LjY3NC0uNjg1LjA5M0EzLjI1NCAzLjI1NCAwIDAgMCAxIDcuMTVhMy4yNSAzLjI1IDAgMCAwIDMuMjQ4IDMuMjQ2aC4zMjJtMSAxLjAwMUg0LjI0NkE0LjI1MSA0LjI1MSAwIDAgMSAwIDcuMTVhNC4yNTggNC4yNTggMCAwIDEgMy42NzMtNC4yMDdBMy44MTYgMy44MTYgMCAwIDEgNC45OTMuODM5IDMuODA5IDMuODA5IDAgMCAxIDcuMzc3IDBjMS4yNCAwIDIuNDA2LjYwOCAzLjExNyAxLjYyNmEzLjgwNCAzLjgwNCAwIDAgMSA0LjQ4IDMuODQgMy4wMiAzLjAyIDAgMCAxIDIuMjM4IDIuOTE0IDMgMyAwIDAgMS0uODQ3IDIuMDk2IDMgMyAwIDAgMS0yLjA1OS45MTlsLTEuNzcuMDAyVjcuODA0SDUuNTd2My41OTR6IiBjbGFzcz0iY2xzLTQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNzc3NiAyNzY0KSIvPjwvZz48ZyBpZD0iVW5pb25fMTEiIGNsYXNzPSJjbHMtMiIgZGF0YS1uYW1lPSJVbmlvbiAxMSI+PHBhdGggZD0iTTMuNjg0IDcuNjQxTDEuMTE2IDQuNzY0aDEuMzkyVi41SDQuODZ2NC4yNjRoMS4zOTFMMy42ODQgNy42NDF6IiBjbGFzcz0iY2xzLTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNzc3MC42NjYgMjc3My42MDkpIi8+PHBhdGggZD0iTTMuNjg0IDYuODlsMS40NTItMS42MjZINC4zNlYxSDMuMDA4djQuMjY0aC0uNzc1bDEuNDUxIDEuNjI3bTAgMS41TDAgNC4yNjVoMi4wMDhWMEg1LjM2djQuMjY0aDIuMDA4TDMuNjg1IDguMzkyeiIgY2xhc3M9ImNscy00IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTc3NzAuNjY2IDI3NzMuNjA5KSIvPjwvZz48L2c+PC9zdmc+);
+  width: 20px;
+  background-repeat: no-repeat;
+  color: #fff;
+  height: 20px;
+  margin-right: 8px;
+  content: '';
+}
+
 
 main .hero picture {
   position: absolute;
