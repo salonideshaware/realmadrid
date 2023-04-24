@@ -25,14 +25,14 @@ function buildHeroBlock(main) {
   // eslint-disable-next-line no-bitwise
   if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
     const section = document.createElement('div');
-    const elems = [picture, h1]
+    const elems = [picture, h1];
     const h2 = h1.nextElementSibling;
     if (h2.tagName === 'H2') {
-      elems.push(h2)
+      elems.push(h2);
       let nextElement = h2.nextElementSibling;
       while (nextElement && nextElement.tagName === 'P' && nextElement.className === 'button-container') {
         elems.push(nextElement.querySelector('a'));
-        nextElement = nextElement.nextElementSibling
+        nextElement = nextElement.nextElementSibling;
       }
     }
     section.append(buildBlock('hero', { elems }));
