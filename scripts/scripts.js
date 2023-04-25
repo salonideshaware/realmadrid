@@ -28,7 +28,7 @@ function buildHeroBlock(main) {
     const elems = [picture, h1];
     const h2 = h1.nextElementSibling;
     let heading = h1;
-    if (h2?.tagName === 'H2') {
+    if (h2 && h2.tagName === 'H2') {
       elems.push(h2);
       heading = h2;
     }

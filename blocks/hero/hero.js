@@ -5,7 +5,9 @@ export default async function decorate(block) {
     block.append(heroPic);
   }
   if (heroContent) {
-    heroContent.parentElement?.remove();
+    if (heroContent.parentElement) {
+      heroContent.parentElement.remove();
+    }
     heroContent.classList.add('hero-content');
     block.append(heroContent);
   }
