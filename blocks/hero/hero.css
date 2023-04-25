@@ -42,6 +42,14 @@ main .hero-content h1 {
   margin-bottom: 22px;
 }
 
+main .hero-content a:any-link {
+  padding :0;
+  margin: 20px 0 0;
+  background: unset;
+  text-align: center;
+  color: #fff;
+}
+
 main .hero-content a:first-of-type {
   box-sizing: border-box;
   margin: 0 auto;
@@ -58,32 +66,22 @@ main .hero-content a:first-of-type {
 
 main .hero-content a:nth-of-type(2) {
   display: block;
-  background: unset;
   font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.1px;
-  color: #fff;
-  margin: 20px 0;
-  text-align: center;
-  text-decoration: none;
 }
 
-main .hero-content a:nth-of-type(3) {
-  background: unset;
+main .hero-content a[download="download"] {
   font-size: 15px;
-  text-align: center;
-  color: #fff;
   align-items: center;
-  text-decoration: none;
   font-weight: 100;
   letter-spacing: 0.03em;
-  margin: 20px 0;
   display: flex;
   justify-content: center;
   align-content: space-around;
 }
 
-main .hero-content a:nth-of-type(3)::before {
+main .hero-content a[download="download"]::before {
   background-image: url('/icons/download.svg');
   width: 20px;
   background-repeat: no-repeat;

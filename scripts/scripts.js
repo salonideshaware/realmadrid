@@ -27,13 +27,20 @@ function buildHeroBlock(main) {
     const section = document.createElement('div');
     const elems = [picture, h1];
     const h2 = h1.nextElementSibling;
-    if (h2.tagName === 'H2') {
+    let heading = h1;
+    if (h2?.tagName === 'H2') {
       elems.push(h2);
-      let nextElement = h2.nextElementSibling;
-      while (nextElement && nextElement.tagName === 'P' && nextElement.className === 'button-container') {
-        elems.push(nextElement.querySelector('a'));
-        nextElement = nextElement.nextElementSibling;
+      heading = h2;
+    }
+    for (let nextElem = heading.nextElementSibling;
+      nextElem && nextElem.tagName === 'P' && nextElem.className === 'button-container';
+      nextElem = nextElem.nextElementSibling
+    ) {
+      const anchor = nextElem.querySelector('a');
+      if (anchor.href.endsWith('.pdf')) {
+        anchor.setAttribute('download', 'download');
       }
+      elems.push(anchor);
     }
     section.append(buildBlock('hero', { elems }));
     main.prepend(section);
