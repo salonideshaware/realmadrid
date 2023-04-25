@@ -4,7 +4,7 @@ export default async function decorate(block) {
   // eslint-disable-next-line no-unused-expressions
   heroPic && block.append(heroPic);
   if (heroContent) {
-    heroContent.parentElement.remove();
+    heroContent.parentElement?.remove();
     heroContent.classList.add('hero-content');
     block.append(heroContent);
   }
