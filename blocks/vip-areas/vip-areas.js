@@ -6,20 +6,34 @@ async function fetchVIPAreas() {
   return json.data;
 }
 
+function areaTemplate(area) {
+  return `
+    <a href="${area.path}">
+      <img src="${area.image}" alt="${area.title}"/>
+      <div class="info">
+        <h3>${area.title}</h3>
+        <p>${area.description}</p>
+      </div>
+    </a>
+  `;
+}
+
 /**
  * decorates the vip areas block. Makes a query to get the available VIP areas pages
  * @param {Element} block The VIP areas element
  */
 export default async function decorate(block) {
+  function toListItem(html) {
+    const li = document.createElement('li');
+    li.innerHTML = html;
+    return li;
+  }
+
   const vipareas = await fetchVIPAreas();
-  vipareas.map((area) => `
-        <a href="${area.path}"><h3>${area.title}</h3></a>
-        <p>${area.description}</p>
-        <img src="${area.image}" </img>`)
-    .map((html) => {
-      const div = document.createElement('div');
-      div.innerHTML = html;
-      return div;
-    })
-    .forEach((div) => block.appendChild(div));
+  const ul = document.createElement('ul');
+
+  vipareas.map(areaTemplate)
+    .map(toListItem)
+    .forEach((li) => ul.appendChild(li));
+  block.append(ul);
 }
