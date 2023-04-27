@@ -2,6 +2,7 @@
 
 main .hero-container>div {
   max-width: unset;
+  width: unset;
 }
 
 main .hero-container {
@@ -24,7 +25,6 @@ main .hero {
 }
 
 main .hero-content {
-  font-family: Oswald, sans-serif;
   box-sizing: border-box;
   padding: 0 20px;
   margin-bottom: 85px;
@@ -35,7 +35,7 @@ main .hero-content {
 }
 
 main .hero-content h1 {
-  font-family: Oswald, sans-serif;
+  font-family: var(--heading-font-family);
   font-size: 55px;
   font-weight: 400;
   text-transform: uppercase;
@@ -44,12 +44,14 @@ main .hero-content h1 {
 }
 
 main .hero-content h2 {
+  font-family: var(--heading-font-family);
   font-size: 19px;
   font-weight: 300;
   text-transform: uppercase;
-  margin :0;
-  margin-bottom: 12px;
-  margin-top: 10px;
+  margin :0 0 17px;
+  color: var(--background-color);
+  border: unset;
+  padding: 0;
 }
 
 main .hero-content a:any-link {
@@ -60,28 +62,30 @@ main .hero-content a:first-of-type {
   text-transform: uppercase;
   font-size: 20px;
   letter-spacing: -0.2px;
-  padding: 10px 25px;
+  padding: 8px 25px;
   box-shadow: 0 3px 6px 0 #00000029;
   border-radius: 10px;
   font-weight: 100;
   border: 0;
   margin: 0;
-  background-color: #016ace;
+  background-color: var(--link-hover-color);
 }
 
 main .hero-content a:nth-of-type(2) {
   background: unset;
-  margin: 0;
+  margin: 13px 0 0;
   display: block;
   font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.1px;
-  margin-top: 20px;
+  padding: 0;
+  border: unset;
 }
 
 main .hero-content a[download="download"] {
   background: unset;
-  margin: 0;
+  border: unset;
+  margin: 17px 0 0;
   font-size: 15px;
   align-items: center;
   font-weight: 100;
@@ -123,7 +127,7 @@ main .hero img {
 @media screen and (min-width:990px) {
   main .hero {
     height: auto;
-    margin-top: 126px;
+    margin-top: 118px;
     min-height: calc(100vh - 150px);
   }
   
@@ -131,6 +135,7 @@ main .hero img {
     text-align: center;
     margin-bottom: 50px;
     display: block;
+    padding: 0;
   }
   
   main .hero-content h1 {
@@ -143,23 +148,13 @@ main .hero img {
     font-size: 24px;
     letter-spacing: -0.6px;
     font-weight: 300;
-    margin-bottom: 22px;
     text-align: center;
-    margin-top:16px;
-  }
-  
-  main .hero-content a:any-link {
-    margin: 0;
   }
   
   main .hero-content a:first-of-type {
     display: inline-block;
   }
     
-  main .hero-content a[download="download"] {
-    margin-top: 10px;
-  }
-  
   main .hero picture {
     position: absolute;
     top: 0;
