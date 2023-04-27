@@ -35,7 +35,6 @@ main .hero-content {
 }
 
 main .hero-content h1 {
-  font-family: var(--heading-font-family);
   font-size: 55px;
   font-weight: 400;
   text-transform: uppercase;
@@ -44,7 +43,6 @@ main .hero-content h1 {
 }
 
 main .hero-content h2 {
-  font-family: var(--heading-font-family);
   font-size: 19px;
   font-weight: 300;
   text-transform: uppercase;
@@ -52,10 +50,6 @@ main .hero-content h2 {
   color: var(--background-color);
   border: unset;
   padding: 0;
-}
-
-main .hero-content a:any-link {
-  display: block;
 }
 
 main .hero-content a:first-of-type {
@@ -68,7 +62,6 @@ main .hero-content a:first-of-type {
   font-weight: 100;
   border: 0;
   margin: 0;
-  background-color: var(--link-hover-color);
 }
 
 main .hero-content a:nth-of-type(2) {
@@ -76,7 +69,6 @@ main .hero-content a:nth-of-type(2) {
   margin: 13px 0 0;
   display: block;
   font-size: 18px;
-  font-weight: 600;
   letter-spacing: -0.1px;
   padding: 0;
   border: unset;
@@ -92,7 +84,6 @@ main .hero-content a[download="download"] {
   letter-spacing: 0.03em;
   display: flex;
   justify-content: center;
-  align-content: space-around;
   align-self: flex-start;
   padding: 0;
 }
@@ -147,13 +138,9 @@ main .hero img {
   main .hero-content h2 {
     font-size: 24px;
     letter-spacing: -0.6px;
-    font-weight: 300;
     text-align: center;
   }
-  
-  main .hero-content a:first-of-type {
-    display: inline-block;
-  }
+
     
   main .hero picture {
     position: absolute;

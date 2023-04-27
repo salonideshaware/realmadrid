@@ -105,9 +105,12 @@ header {
   height: var(--nav-height);
 }
 
+h1, h2 {
+  font-family: var(--heading-font-family);
+}
+
 /* RM: Seems to be only regular heading in text */
 h2 {
-  font-family: var(--heading-font-family);
   font-weight: 500;
   line-height: 1.25;
   margin-bottom: 15px;
