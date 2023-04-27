@@ -25,7 +25,24 @@ function buildHeroBlock(main) {
   // eslint-disable-next-line no-bitwise
   if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
     const section = document.createElement('div');
-    section.append(buildBlock('hero', { elems: [picture, h1] }));
+    const elems = [picture, h1];
+    const h2 = h1.nextElementSibling;
+    let heading = h1;
+    if (h2 && h2.tagName === 'H2') {
+      elems.push(h2);
+      heading = h2;
+    }
+    for (let nextElem = heading.nextElementSibling;
+      nextElem && nextElem.tagName === 'P' && nextElem.className === 'button-container';
+      nextElem = nextElem.nextElementSibling
+    ) {
+      const anchor = nextElem.querySelector('a');
+      if (anchor.href.endsWith('.pdf')) {
+        anchor.setAttribute('download', 'download');
+      }
+      elems.push(anchor);
+    }
+    section.append(buildBlock('hero', { elems }));
     main.prepend(section);
   }
 }
