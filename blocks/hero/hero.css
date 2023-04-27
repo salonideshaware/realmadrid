@@ -2,6 +2,7 @@
 
 main .hero-container>div {
   max-width: unset;
+  width: 100%;
 }
 
 main .hero-container {
@@ -35,7 +36,6 @@ main .hero-content {
 }
 
 main .hero-content h1 {
-  font-family: Oswald, sans-serif;
   font-size: 55px;
   font-weight: 400;
   text-transform: uppercase;
@@ -46,42 +46,33 @@ main .hero-content h1 {
 main .hero-content h2 {
   font-size: 19px;
   font-weight: 300;
-  text-transform: uppercase;
   margin :0;
   margin-bottom: 12px;
   margin-top: 10px;
+  padding-bottom: 0;
+  border: 0;
+  width: 100%;
+  color: #fff;
 }
 
 main .hero-content a:any-link {
   display: block;
-}
-
-main .hero-content a:first-of-type {
-  text-transform: uppercase;
-  font-size: 20px;
-  letter-spacing: -0.2px;
-  padding: 10px 25px;
-  box-shadow: 0 3px 6px 0 #00000029;
-  border-radius: 10px;
-  font-weight: 100;
-  border: 0;
-  margin: 0;
-  background-color: #016ace;
+  font-family: var(--body-font-family);
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
 }
 
 main .hero-content a:nth-of-type(2) {
-  background: unset;
-  margin: 0;
-  display: block;
   font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.1px;
-  margin-top: 20px;
+  padding: 10px;
+  border: 2px solid transparent;
 }
 
 main .hero-content a[download="download"] {
   background: unset;
-  margin: 0;
   font-size: 15px;
   align-items: center;
   font-weight: 100;
@@ -126,19 +117,20 @@ main .hero img {
     margin-top: 126px;
     min-height: calc(100vh - 150px);
   }
-  
+
   main .hero-content {
     text-align: center;
     margin-bottom: 50px;
     display: block;
+    color: #fff;
   }
-  
+
   main .hero-content h1 {
     font-size: 100px;
     letter-spacing: -2.3px;
   }
-  
-  
+
+
   main .hero-content h2 {
     font-size: 24px;
     letter-spacing: -0.6px;
@@ -147,19 +139,25 @@ main .hero img {
     text-align: center;
     margin-top:16px;
   }
-  
+
   main .hero-content a:any-link {
-    margin: 0;
+    margin-top: 0;
   }
-  
-  main .hero-content a:first-of-type {
+
+  main .hero-content .button.primary {
     display: inline-block;
   }
-    
+
+  main .hero-content a:nth-of-type(2) {
+    margin-top: 10px;
+    padding: 0;
+  }
+
   main .hero-content a[download="download"] {
     margin-top: 10px;
   }
-  
+
+
   main .hero picture {
     position: absolute;
     top: 0;
