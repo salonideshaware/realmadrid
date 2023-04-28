@@ -17,7 +17,11 @@ async function fetchVIPAreas() {
 }
 
 function areaElement(area) {
-  const picture = createOptimizedPicture(area.image, area.title, false);
+  const breakpoints = [
+    { media: '(min-width: 990px)', width: '960' },
+    { width: '1280' },
+  ];
+  const picture = createOptimizedPicture(area.image, area.title, false, breakpoints);
   const li = document.createElement('li');
   li.innerHTML = `
     <a href="${area.path}">
