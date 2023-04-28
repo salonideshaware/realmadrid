@@ -1,30 +1,23 @@
-.section.contact-card-container > .contact-card-wrapper {
+.section.intro.contact-card-container > .contact-card-wrapper {
     height: 350px;
-    /* thi should be a variabale */
+    /* this should be a variabale */
     background-color: rgba(0,0,0,0.05);
 }
 
-.section.contact-card-container > .contact-card-wrapper h2 {
+.section.intro.contact-card-container > .contact-card-wrapper h2 {
     font-size: 19px;
     font-weight: 500;
   }
 
 @media (min-width: 990px)  {
-    .section.contact-card-container {
+    .section.intro.contact-card-container {
         display: grid;
         grid-template-columns: auto 800px 400px auto;
         grid-template-rows: auto auto;
     }
 
-    .section.contact-card-container > .contact-card-wrapper {
+    .section.intro.contact-card-container > .contact-card-wrapper {
         grid-column: 3/4;
-        grid-row: 1/2;
-    }
-
-    .section.contact-card-container > .default-content-wrapper {
-        margin-top: 60px;
-        padding: 25px 100px 0 15px;
-        grid-column: 2/3;
         grid-row: 1/2;
     }
 }

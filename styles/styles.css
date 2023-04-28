@@ -208,6 +208,13 @@ main img {
 }
 
 main .section > div {
-  width: var(--wrapper-width);
+/*  width: var(--wrapper-width); */
   margin: 0 auto;
+}
+
+.section.intro > .default-content-wrapper {
+  margin-top: 60px;
+  padding: 25px 100px 0 15px;
+  grid-column: 2/3;
+  grid-row: 1/2;
 }
