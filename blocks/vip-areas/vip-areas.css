@@ -1,26 +1,8 @@
 main .vip-areas-container {
   width: 100%;
-  padding: 10px;
-  margin-top: 50px;
-  margin-bottom: 10px;
   box-sizing: border-box;
-}
-
-main .vip-areas-container .default-content-wrapper h2 {
-  margin: 0;
-  padding: 0;
-  width: 40%;
-  margin-bottom: 21px;
-  border-left: 0;
-  text-align: left;
-  border-right: 4px solid transparent;
-  text-transform: uppercase;
-  font-family: Oswald, sans-serif;
-  font-size: 20px;
-  font-weight: 500;
-  color: #333;
-  padding-bottom: 5px;
-  border-bottom: 4px solid #0255A5;
+  margin: 50px auto 10px;
+  padding: 10px;
 }
 
 .vip-areas ul {
@@ -33,14 +15,14 @@ main .vip-areas-container .default-content-wrapper h2 {
 }
 
 .vip-areas ul li {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .vip-areas ul .info {
   padding: 10px 12px;
   box-sizing: border-box;
   transform: translateY(-20px);
-  background-color: #fff;
+  background-color: var(--background-color);
   width: calc(100% - 30px);
   margin: 0 auto;
 }
@@ -51,7 +33,7 @@ main .vip-areas-container .default-content-wrapper h2 {
   font-size: 20px;
   line-height: 1.25;
   letter-spacing: -0.2px;
-  color: #000;
+  color: var(--text-color);
   font-weight: 400;
   text-align: left;
 }
@@ -74,8 +56,8 @@ main .vip-areas-container .default-content-wrapper h2 {
   main .vip-areas-container {
     width: 1200px;
     max-width: 1200px;
-    margin: 70px auto 0;
     padding: 0;
+    margin: 70px auto 0;
   }
 
   .vip-areas ul li {
@@ -125,7 +107,7 @@ main .vip-areas-container .default-content-wrapper h2 {
   }
 
   .vip-areas ul .info:hover p {
-    color: #000;
+    color: var(--text-color);
     transition: color 0.75s ease-in;
   } 
 

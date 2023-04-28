@@ -59,7 +59,7 @@
 
   /* default width for content wrapper divs */
   --wrapper-width: 100%;
-
+  --section-heading-width: 100%;
 }
 
 /* Desktop */
@@ -67,6 +67,7 @@
   :root {
     --heading-font-size-xxl: 100px; /* RM: h1 */
     --wrapper-width: 960px;
+    --section-heading-width: 40%;
   }
 }
 
@@ -114,7 +115,9 @@ h2 {
   padding-bottom: 5px;
   color: #333;
   border-bottom: 4px solid #0255A5;
-  font-size: var(--heading-font-size-s)
+  font-size: var(--heading-font-size-s);
+  width: var(--section-heading-width);
+  border-right: 4px solid transparent;
 }
 
 /* RM: default content */
@@ -194,5 +197,5 @@ main img {
 
 main .section > div {
   width: var(--wrapper-width);
-  margin: 0 auto;
+  margin: 0 auto;  
 }
