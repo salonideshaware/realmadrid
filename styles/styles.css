@@ -54,6 +54,7 @@
   --heading-font-size-s: 20px; /* RM:h2, h3 */
   --heading-font-size-xs: 18px;
 
+  /** heading color */
   --heading-color: #333;
   --heading-border-color: #0255A5;
 
@@ -62,7 +63,7 @@
 
   /* default width for content wrapper divs */
   --wrapper-width: 100%;
-
+  --section-heading-width: 100%;
 }
 
 /* Desktop */
@@ -70,6 +71,7 @@
   :root {
     --heading-font-size-xxl: 100px; /* RM: h1 */
     --wrapper-width: 960px;
+    --section-heading-width: 40%;
   }
 
   h2 {
@@ -125,10 +127,12 @@ h2 {
   font-size: var(--heading-font-size-s);
   font-weight: 500;
   line-height: 1.25;
-  color: var(--heading-color); /*333*/
+  color: var(--heading-color); /* #333 */
   text-transform: uppercase;
   margin-bottom: 21px;
   padding-bottom: 5px;
+  width: var(--section-heading-width);
+  border-right: 4px solid transparent;
   border-bottom: 4px solid var(--heading-border-color);
 }
 
