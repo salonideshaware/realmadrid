@@ -51,6 +51,10 @@ main .vip-areas-container {
   min-height: 200px;
 }
 
+.vip-areas ul a:hover {
+  text-decoration: none;
+}
+
 
 @media screen and (min-width:990px) {
   main .vip-areas-container {

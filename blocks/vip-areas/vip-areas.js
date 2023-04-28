@@ -1,10 +1,12 @@
 import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
 
+const VIP_AREA_REST_API = '/area-vip/query-index.json';
+
 async function fetchVIPAreas() {
   const url = new URL(window.location);
 
   try {
-    const resp = await fetch(`${url.origin}/area-vip/query-index.json`);
+    const resp = await fetch(`${url.origin}${VIP_AREA_REST_API}`);
     const json = await resp.json();
     return json.data;
   } catch (e) {
