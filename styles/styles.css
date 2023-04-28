@@ -212,5 +212,5 @@ main img {
 
 main .section > div {
   width: var(--wrapper-width);
-  margin: 0 auto;  
+  margin: 0 auto;
 }
