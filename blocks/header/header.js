@@ -10,38 +10,57 @@ async function fetchData() {
   return null;
 }
 
-/**
- * decorates the header.
- *
- * Placeholder for now until decision who/how/if we are going to
- * do the header ourselfs.
- *
- * @param {Element} block The header block element
- */
+function addHamburger(block) {
+  let state = false;
+  const icon = () => {
+    const src = `https://app-rm-spa-web-dev.azurewebsites.net/assets/icons/sprite/cibeles-sprite.svg#${state ? 'times' : 'menu'}`;
+    return `<svg focusable="false" width="32" height="32" aria-hidden="true"><use xlink:href="${src}"></use></svg>`;
+  };
+  const menu = document.createElement('div');
+  menu.setAttribute('style', 'width: 32px; height: 32px;');
+  console.log(`menu button created, state: ${state}`);
+  menu.innerHTML = icon();
+  menu.addEventListener('click', () => {
+    state = !state;
+    console.log(`menu button clicked, state: ${state}`);
+    menu.innerHTML = icon();
+  });
+  block.appendChild(menu);
+}
+
+function addMenu(data, block) {
+  const menuItems = data.data.header.items[0].additionalNavigation.map((nav) => {
+    return `<li><a class='menu-item' href="${nav.url}">${nav.title}</a></li>`;
+  }).join('');
+
+  block.appendChild(document.createRange().createContextualFragment(`
+    <ul style='display: flex; flex-direction: row; list-style-type: none; gap: 1rem'>${menuItems}</ul>
+  `));
+}
+
+function addLogos(block, data) {
+  block.appendChild(document.createRange().createContextualFragment(`
+    <svg focusable="false" width="40" height="40">
+      <use xlink:href="https://app-rm-spa-web-dev.azurewebsites.net/assets/icons/sprite/cibeles-sprite.svg#logo-rm"></use>
+   </svg>
+  `));
+
+  block.appendChild(document.createRange().createContextualFragment(`
+    <img src='${data.data.header.items[0].additionalLogos[0]._publishUrl}' style="height: 40px;"/>
+  `));
+}
+
 export default async function decorate(block) {
   console.log('decorating header');
-  block.setAttribute('style', 'height: var(--nav-height); display: flex; flex-direction: row; list-style-type: none; gap: 1rem;');
+
+  block.className = 'header';
 
   const data = await fetchData();
-
   console.log(data.data.header.items[0]);
 
-  const image = document.createElement('img');
-  // eslint-disable-next-line no-underscore-dangle
-  image.src = data.data.header.items[0].additionalLogos[0]._publishUrl;
-  block.appendChild(image);
-
-  const ul = document.createElement('ul');
-  ul.setAttribute('style', 'display: flex; flex-direction: row; list-style-type: none; gap: 1rem;');
-  block.appendChild(ul);
-  data.data.header.items[0].additionalNavigation.forEach((nav) => {
-    const li = document.createElement('li');
-    ul.appendChild(li);
-    const link = document.createElement('a');
-    link.href = nav.url;
-    link.innerHTML = nav.title;
-    li.appendChild(link);
-  });
+  addHamburger(block);
+  addLogos(block, data);
+  addMenu(data, block);
 
   console.log('decorated header');
 }
