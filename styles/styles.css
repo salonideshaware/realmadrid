@@ -212,13 +212,37 @@ main img {
 }
 
 main .section > div {
-/*  width: var(--wrapper-width); */
+  width: var(--wrapper-width);
   margin: 0 auto;
 }
 
-.section.intro > .default-content-wrapper {
+.section.info-vip > .default-content-wrapper {
+  width: auto;
   margin-top: 60px;
   padding: 25px 100px 0 15px;
   grid-column: 2/3;
   grid-row: 1/2;
+}
+
+/* INFO VIP styles */
+@media (min-width: 990px)  {
+  .section.info-vip {
+    display: grid;
+    grid-template-columns: auto 800px 400px auto;
+    grid-template-rows: auto auto;
+  }
+
+  .section.info-vip > .default-content-wrapper {
+    width: auto;
+    margin-top: 60px;
+    padding: 25px 100px 0 15px;
+    grid-column: 2/3;
+    grid-row: 1/2;
+  }
+}
+
+@media (min-width: 990px) and (max-width: 1200px) {
+  .section.info-vip {
+    grid-template-columns: auto 600px 360px auto;
+  }
 }

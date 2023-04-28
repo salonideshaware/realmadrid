@@ -1,5 +1,9 @@
 export default function decorate(block) {
-  /* change to ul, li */
+  const divclasses = ['title', 'telephone', 'contact'];
+  block.querySelectorAll(':scope > div')
+    .forEach((div, index) => {
+      div.classList.add(divclasses[index]);
+    });
 
   Array.from(block.querySelectorAll('.button-container'))
     .forEach((buttonContainer) => {
