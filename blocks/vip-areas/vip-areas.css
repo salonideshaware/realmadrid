@@ -1,5 +1,4 @@
 main .vip-areas-container {
-  width: 100%;
   box-sizing: border-box;
   margin: 50px auto 10px;
   padding: 10px;
@@ -58,8 +57,6 @@ main .vip-areas-container {
 
 @media screen and (min-width:990px) {
   main .vip-areas-container {
-    width: 1200px;
-    max-width: 1200px;
     padding: 0;
     margin: 70px auto 0;
   }
@@ -118,11 +115,6 @@ main .vip-areas-container {
 }
 
 @media screen and (min-width:990px) and (max-width:1200px) {
-  main .vip-areas-container {
-    width: 960px;
-    max-width: 960px;
-  }
-
   .vip-areas ul li {
     width: 50%;
     height: auto;
