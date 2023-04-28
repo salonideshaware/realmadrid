@@ -68,7 +68,6 @@ main .hero-content a:nth-of-type(2) {
   font-weight: 600;
   letter-spacing: -0.1px;
   padding: 10px;
-  border: 2px solid transparent;
 }
 
 main .hero-content a[download="download"] {

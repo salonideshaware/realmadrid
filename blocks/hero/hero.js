@@ -13,11 +13,9 @@ export default async function decorate(block) {
     if (heroContent.parentElement) {
       heroContent.parentElement.remove();
       // Remove button class from all except first link
-      Array.from(heroContent.querySelectorAll('.button'))
-        .forEach((button, index) => {
-          if (index > 0) {
-            button.classList.remove('button');
-          }
+      Array.from(heroContent.querySelectorAll('.button:not(:first-of-type)'))
+        .forEach((button) => {
+          button.classList.remove('button');
         });
     }
     heroContent.classList.add('hero-content');
