@@ -54,6 +54,7 @@
   --heading-font-size-s: 20px; /* RM:h2, h3 */
   --heading-font-size-xs: 18px;
 
+  /** heading color */
   --heading-color: #333;
   --heading-border-color: #0255A5;
 
@@ -126,7 +127,7 @@ h2 {
   font-size: var(--heading-font-size-s);
   font-weight: 500;
   line-height: 1.25;
-  color: var(--heading-color); /*333*/
+  color: var(--heading-color); /* #333 */
   text-transform: uppercase;
   margin-bottom: 21px;
   padding-bottom: 5px;
