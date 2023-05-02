@@ -18,8 +18,12 @@ async function fetchVIPAreas() {
 
 function areaElement(area) {
   const breakpoints = [
-    { media: '(min-width: 990px)', width: '960' },
-    { width: '1280' },
+    { media: '(max-width: 480px)', width: '480' },
+    { media: '(min-width: 480px) and (max-width: 600px)', width: '600' },
+    { media: '(min-width: 600px) and (max-width: 750px)', width: '750' },
+    { media: '(min-width: 750px) and (max-width: 990px)', width: '960' },
+    { media: '(min-width: 990px) and (max-width:1200px)', width: '480' },
+    { media: '(min-width: 1200)', width: '960' },
   ];
   const picture = createOptimizedPicture(area.image, area.title, false, breakpoints);
   const li = document.createElement('li');
