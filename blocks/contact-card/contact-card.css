@@ -30,7 +30,7 @@
 .contact-card div.telephone::before {
   content: "\e90a";
   font-family: Real-Madrid-New-Icons, sans-serif;
-  color: #999;
+  color: var(--icon-primary-color);
   font-size: 45px;
   margin-bottom: 10px;
 }
@@ -67,7 +67,7 @@
   .contact-card>div.contact>div>a:first-of-type::before {
     content: "\e90b";
     font-family: Real-Madrid-New-Icons, sans-serif;
-    color: #999;
+    color: var(--icon-primary-color);
     font-size: 35px;
     margin-top: 10px;
     margin-bottom: 6px;
@@ -78,8 +78,8 @@
     content: "\e909";
     width: 28px;
     height: 28px;
-    background-color: #999;
-    color: #fff;
+    background-color: var(--icon-primary-color);
+    color: var(--icon-secondary-color);
     display: flex;
     border-radius: 50%;
     font-size: 23px;
@@ -110,10 +110,10 @@
         content: "\e90a";
         font-family: Real-Madrid-New-Icons, sans-serif;
         font-size: 29px;
-        color: #fff;
+        color: var(--icon-secondary-color);
         border-radius: 50%;
-        border: solid 1px #999;
-        background-color: #999;
+        border: solid 1px var(--icon-primary-color);
+        background-color: var(--icon-primary-color);
         padding: 5px;
     }
 }

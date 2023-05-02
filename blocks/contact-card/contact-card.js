@@ -11,8 +11,7 @@ export default function decorate(block) {
       Array.from(buttonContainer.querySelectorAll('a[href]'))
         .filter((alink) => alink.href.startsWith('mailto:') || alink.href.startsWith('tel:'))
         .forEach((alink) => {
-          alink.classList.remove('button');
-          alink.classList.remove('primary');
+          alink.classList.remove('button', 'primary');
           removeButton = true;
         });
       if (removeButton) {

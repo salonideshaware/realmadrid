@@ -64,6 +64,10 @@
   /* default width for content wrapper divs */
   --wrapper-width: 100%;
   --section-heading-width: 100%;
+
+  /* RM Icons colors */
+  --icon-primary-color: #999;
+  --icon-secondary-color: #fff;
 }
 
 /* Desktop */
