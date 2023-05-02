@@ -1,0 +1,111 @@
+main .section > .carousel-wrapper {
+  margin: 0;
+  width: 100%;
+  max-width: unset;
+  overflow: hidden;
+}
+
+main .carousel > .carousel-pics-container {
+    width: 100%;
+    white-space: nowrap;
+    float:left;
+  }
+
+main .carousel > .carousel-pics-container > div {
+    vertical-align: middle;
+    display: inline-block;
+    position: relative;
+}
+
+main .carousel > .carousel-pics-container .pic-container {
+    width: 350px;
+    height: 235px;
+    margin-right: 4px;
+}
+
+main .carousel > .carousel-pics-container .pic-container > picture::after {
+    content: "\e627";
+    display: inline-block;
+    font-family: Real-Madrid-Icons;
+    color: var(--icon-secondary-color);
+    font-size: 67px;
+    font-weight: 400;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+main .carousel .carousel-buttons-container {
+    display: none;
+}
+
+@media (min-width: 990px) {
+
+    main .carousel > .carousel-pics-container .pic-container {
+        margin-right: 4px;
+        width: 480px;
+        height: 320px;
+    }
+
+    main .carousel .carousel-buttons-container {
+        max-width: 1200px !important;
+        margin: 0 auto;
+        display: block;
+        height: 50px;
+        padding-top: 20px;
+        clear: both;
+        position: relative;
+    }
+
+    main .carousel .carousel-buttons-container > .carousel-button {
+        bottom: 0;
+        margin-bottom: 0;
+        width: 50px;
+        height: 50px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        font-size: 0;
+        text-decoration: none;
+        left: auto;
+        position: absolute;
+    }
+
+    main .carousel .carousel-buttons-container > .carousel-button-prev {
+        right: 50px;
+    }
+
+    main .carousel .carousel-buttons-container > .carousel-button-next {
+        right: 0px;
+    }
+
+    main .carousel .carousel-buttons-container > .carousel-button-prev::after {
+        content: '\e604';
+        display: inline-block;
+        font-family: Real-Madrid-Icons;
+        text-indent: 0;
+        color: #777;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 16px;
+        font-weight: 400;
+        vertical-align: middle;
+    }
+
+    main .carousel .carousel-buttons-container > .carousel-button-next::after {
+        content: '\e603';
+        display: inline-block;
+        font-family: real-madrid-icons;
+        text-indent: 0;
+        color: #777;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 16px;
+        font-weight: 400;
+        vertical-align: middle;
+    }
+}
