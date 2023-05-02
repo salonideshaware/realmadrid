@@ -11,9 +11,10 @@ footer .footer h2 {
   font-weight: 500;
   padding-bottom: 0.75rem;
   position: relative;
-  margin-bottom: 1.88rem;
+  margin: 1.88rem auto 0;
   text-transform: uppercase;
   border: none;
+  white-space: nowrap;
 }
 
 /* all links in the footer */
