@@ -26,6 +26,7 @@ function buildHeroBlock(main) {
   if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
     const section = document.createElement('div');
     const elems = [picture, h1];
+    const parents = [picture.parentElement];
     const h2 = h1.nextElementSibling;
     let heading = h1;
     if (h2 && h2.tagName === 'H2') {
@@ -41,8 +42,11 @@ function buildHeroBlock(main) {
         anchor.setAttribute('download', 'download');
       }
       elems.push(anchor);
+      parents.push(anchor.parentElement);
     }
     section.append(buildBlock('hero', { elems }));
+    parents.filter((elem) => elem.tagName === 'P')
+      .forEach((elem) => elem.remove());
     main.prepend(section);
   }
 }
