@@ -220,6 +220,7 @@ main .section > div {
   margin: 0 auto;
 }
 
+/* INFO VIP styles */
 .section.info-vip > .default-content-wrapper {
   width: auto;
   margin-top: 60px;
@@ -228,7 +229,16 @@ main .section > div {
   grid-row: 1/2;
 }
 
-/* INFO VIP styles */
+.section.info-vip > .default-content-wrapper h2 {
+  font-size: 21px;
+  font-weight: 300;
+  color: var(--text-color);
+  margin-bottom: 15px;
+  line-height: 1.43;
+  border: none;
+  text-transform: none;
+}
+
 @media (min-width: 990px)  {
   .section.info-vip {
     display: grid;
@@ -243,6 +253,15 @@ main .section > div {
     grid-column: 2/3;
     grid-row: 1/2;
   }
+
+  .section.info-vip > .default-content-wrapper h2 {
+    width: auto;
+    font-size: 29px;
+    font-weight: 200;
+    line-height: 1.03;
+    margin-bottom: 25px;
+  }
+
 }
 
 @media (min-width: 990px) and (max-width: 1200px) {
