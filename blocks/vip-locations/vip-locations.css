@@ -59,18 +59,17 @@
   position: absolute;
   top: 14px;
   left: 6px;
+  background-color: var(--vip-locations-color);
 }
 
 /* common legend entry props */
 .vip-locations .legend .legend-entry {
   text-decoration: none;
-  font-family: Oswald, sans-serif;
+  font-family: var(--heading-font-family);
   font-size: 14px;
   font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
   letter-spacing: -0.2px;
-  color: black;
+  color: var(--text-color);
   flex-basis: 50%;
   height: auto;
   padding: 10px 0;
@@ -81,30 +80,9 @@
 
 /* the different colors for the VIP sections */
 
-/* VIP 130/132 */
-.vip-locations .legend a:nth-child(2)::before {
-  background-color: #93c145;
-}
-
-/* VIP Silver Club 227 */
-.vip-locations .legend a:nth-child(4)::before {
-  background-color: #1c73c1;
-}
-
 @media (max-width: 990px) {
-  /* Silver club 2 */
-  .vip-locations .legend a:nth-child(1)::after {
-    background-color: #0A4A27;
-  }
-
-  /* VIP Silver Club 127 */
-  .vip-locations .legend a:nth-child(3)::after {
-    background-color: #0a7139;
-  }
-
-  /* VIP Silver Club 130/132 */
-  .vip-locations .legend a:nth-child(5)::after {
-    background-color: #93c145;
+  .vip-locations .legend a:nth-child(odd)::after {
+    background-color:  var(--vip-locations-color);
   }
 }
 
@@ -117,8 +95,8 @@
 
   /* the block */
   .vip-locations {
-    width: 960px;
-    max-width: 960px;
+    width: var(--wrapper-width);
+    max-width: var(--wrapper-width);
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -170,26 +148,15 @@
     position: static;
   }
 
-  /* Silver club 2 */
-  .vip-locations .legend a:nth-child(1)::before {
-    background-color: #0A4A27;
-  }
 
-  /* VIP Silver Club 127 */
-  .vip-locations .legend a:nth-child(3)::before {
-    background-color: #0a7139;
-  }
-
-  /* VIP Silver Club 130/132 */
-  .vip-locations .legend a:nth-child(5)::before {
-    background-color: #93c145;
+  .vip-locations .legend a:nth-child(odd)::before {
+    background-color:  var(--vip-locations-color);
   }
 }
 
 @media (min-width: 1200px) {
   .vip-locations {
-    width: 1200px;
-    max-width: 1200px;
+    width: var(--wrapper-width);
+    max-width: var(--wrapper-width);
   }
-
 }
