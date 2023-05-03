@@ -22,6 +22,7 @@ function decorateVideo(block) {
     const video = document.createElement('video');
     video.setAttribute('loop', '');
     video.setAttribute('muted', '');
+    video.muted = true;
     video.setAttribute('playsInline', '');
     video.setAttribute('autoplay', '');
     video.innerHTML = `<source src="${a.href}" type="video/mp4" />`;
