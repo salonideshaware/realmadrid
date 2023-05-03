@@ -10,7 +10,7 @@ function createButtons() {
 function createPicturesContainer(block) {
   const divPicContainer = document.createElement('div');
   divPicContainer.classList.add('carousel-pics-container');
-  Array.from(block.children).forEach((child) => divPicContainer.append(child));
+  [...block.children].forEach((child) => divPicContainer.append(child));
   return divPicContainer;
 }
 
