@@ -1,3 +1,5 @@
+import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
+
 function createButtons() {
   const divButtons = document.createElement('div');
   divButtons.classList.add('carousel-buttons-container');
@@ -20,17 +22,8 @@ function showPic(picNumber, picWidth, carouselPicContainer) {
 }
 
 function showHideButtons(currentPic, maxShift, prevButton, nextButton) {
-  if (currentPic === 0) {
-    prevButton.style.display = 'none';
-  } else {
-    prevButton.style.display = '';
-  }
-
-  if (currentPic === maxShift) {
-    nextButton.style.display = 'none';
-  } else {
-    nextButton.style.display = '';
-  }
+  prevButton.style.display = currentPic === 0 ? 'none' : '';
+  nextButton.style.display = currentPic === maxShift ? 'none' : '';
 }
 
 export default function decorate(block) {
@@ -47,6 +40,12 @@ export default function decorate(block) {
 
   [...block.querySelectorAll('picture')].forEach((pic) => {
     const div = pic.closest('div');
+    const img = pic.querySelector('img');
+    if (img) {
+      const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ media: '(min-width: 990px)', width: '750' }, { width: '600' }]);
+      pic.remove();
+      div.append(optimizedPic);
+    }
     div.classList.add('pic-container');
     picContainerStyle = picContainerStyle || getComputedStyle(div);
     numPics += 1;

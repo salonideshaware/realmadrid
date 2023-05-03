@@ -27,6 +27,8 @@ main .carousel .carousel-buttons-container {
   display: none;
 }
 
+
+
 @media (max-width: 990px) {
   /* show icon overlay always on mobile */
   main .carousel > .carousel-pics-container .pic-container > picture::after {
@@ -109,7 +111,7 @@ main .carousel .carousel-buttons-container {
     font-weight: 400;
     vertical-align: middle;
   }
-  
+
   main .carousel .carousel-buttons-container > .carousel-button-next::after {
     content: '\e603';
   }
