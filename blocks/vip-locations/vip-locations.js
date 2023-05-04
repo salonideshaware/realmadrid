@@ -1,6 +1,8 @@
 export default async function decorate(block) {
-  // first row is link to plan
-  const planUrl = block.querySelector('a').href;
+  // mandatory that first row contains link to plan
+  const planLink = block.querySelector(':scope > div:first-of-type > div:first-of-type > a');
+  if (planLink === null || planLink.getAttribute('href') === null) return;
+  const planUrl = planLink.href;
   block.children[0].remove();
 
   // get all legend entries
@@ -20,26 +22,26 @@ export default async function decorate(block) {
   const legend = document.createElement('div');
   legend.classList.add('legend');
 
-  // collect all path classes for filtering
+  // All path classes for filtering in event handler
   const pathClassesFilter = [];
-  [...legendEntries].forEach((entry) => {
-    pathClassesFilter.push(entry.children[0].textContent);
-  });
 
   // set each legend entry
   [...legendEntries].forEach((entry) => {
-    // the class of the SVG path element
+    // get the current class of the SVG path element
     const svgPathClass = entry.children[0].textContent;
-    // the link
+    // collect all path classes for filtering in event handler
+    pathClassesFilter.push(svgPathClass);
+    // get the link
     const a = entry.children[1].children[0];
-    // set classes for entries
+    // set classes for entry
     a.removeAttribute('class');
     a.classList.add('legend-entry');
-    // get the color from SVG
+    // get the color from SVG path
     const color = block.querySelector(`path.${svgPathClass}`).getAttribute('fill');
+    // property will be picked up by pseudo :before/:after CSS selectors
     a.style.setProperty('--vip-locations-color', color);
 
-    // on hover hide all oder VIP sections
+    // eventhandler : on mouseover hide all other VIP sections
     a.addEventListener('mouseover', () => {
       pathClassesFilter.forEach((filter) => {
         if (filter !== svgPathClass) {
@@ -49,7 +51,7 @@ export default async function decorate(block) {
       });
     });
 
-    // on exit show all VIP sections again
+    // eventhandler: on exit show all VIP sections again
     a.addEventListener('mouseout', () => {
       pathClassesFilter.forEach((filter) => {
         block.querySelector(`path.${filter}`).style.opacity = 1;
