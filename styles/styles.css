@@ -42,9 +42,9 @@
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
 
   /* RM: body sizes */
-  --body-font-size-m: 19px; 
+  --body-font-size-m: 19px;
   --body-font-size-s: 17px; /* RM: Standard text */
-  --body-font-size-xs: 15px; 
+  --body-font-size-xs: 15px;
 
   /* heading sizes */
   --heading-font-size-xxl: 55px; /* RM: h1 */
@@ -54,12 +54,21 @@
   --heading-font-size-s: 20px; /* RM:h2, h3 */
   --heading-font-size-xs: 18px;
 
+  /** heading color */
+  --heading-color: #333;
+  --heading-border-color: #0255A5;
+
   /* nav height */
-  --nav-height: 4rem; 
+  --nav-height: 4rem;
 
   /* default width for content wrapper divs */
   --wrapper-width: 100%;
+  --section-heading-width: 100%;
 
+  /* RM Icons colors */
+  --icon-primary-color: #999;
+  --icon-secondary-color: #fff;
+  --icon-terciary-color: #777;
 }
 
 /* Desktop */
@@ -67,13 +76,18 @@
   :root {
     --heading-font-size-xxl: 100px; /* RM: h1 */
     --wrapper-width: 960px;
+    --section-heading-width: 40%;
+  }
+
+  h2 {
+    width: 40%;
   }
 }
 
 /* new header: switch from  mobile to desktop nav */
 @media (min-width: 66.0625rem) {
   :root {
-    --nav-height: 4.5rem; 
+    --nav-height: 4.5rem;
   }
 }
 
@@ -105,16 +119,26 @@ header {
   height: var(--nav-height);
 }
 
+h1, h2, h3 {
+  font-family: var(--heading-font-family);
+}
+
+h1 {
+  line-height: normal;
+}
+
 /* RM: Seems to be only regular heading in text */
 h2 {
-  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-s);
   font-weight: 500;
   line-height: 1.25;
-  margin-bottom: 15px;
+  color: var(--heading-color); /* #333 */
+  text-transform: uppercase;
+  margin-bottom: 21px;
   padding-bottom: 5px;
-  color: #333;
-  border-bottom: 4px solid #0255A5;
-  font-size: var(--heading-font-size-s)
+  width: var(--section-heading-width);
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid var(--heading-border-color);
 }
 
 /* RM: default content */
@@ -141,22 +165,22 @@ a:hover {
 /* RM : TBD , buttons */
 a.button:any-link, button {
   font-family: var(--body-font-family);
-  display: inline-block;
-  box-sizing: border-box;
+  font-size: var(--heading-font-size-s);
+  font-weight: 100;
   text-decoration: none;
-  border: 2px solid transparent;
-  padding: 5px 30px;
+  text-transform: uppercase;
   text-align: center;
-  font-style: normal;
-  font-weight: 600;
-  cursor: pointer;
+  letter-spacing: -0.2px;
   color: var(--background-color);
   background-color: var(--link-color);
-  margin: 16px 0;
-  white-space: nowrap;
+  display: inline-block;
+  padding: 10px 25px;
+  box-sizing: border-box;
+  box-shadow: 0 3px 6px 0 #00000029;
+  border-radius: 10px;
+  cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
-  border-radius: 30px;
 }
 
 a.button:hover, a.button:focus, button:hover, button:focus  {
@@ -195,4 +219,54 @@ main img {
 main .section > div {
   width: var(--wrapper-width);
   margin: 0 auto;
+}
+
+/* INFO VIP styles */
+.section.info-vip > .default-content-wrapper {
+  width: auto;
+  margin-top: 60px;
+  padding: 25px 100px 0 15px;
+  grid-column: 2/3;
+  grid-row: 1/2;
+}
+
+.section.info-vip > .default-content-wrapper h2 {
+  font-size: 21px;
+  font-weight: 300;
+  color: var(--text-color);
+  margin-bottom: 15px;
+  line-height: 1.43;
+  border: none;
+  text-transform: none;
+}
+
+@media (min-width: 990px)  {
+  .section.info-vip {
+    display: grid;
+    grid-template-columns: auto 800px 400px auto;
+    grid-template-rows: auto auto;
+  }
+
+  .section.info-vip > .default-content-wrapper {
+    width: auto;
+    margin-top: 60px;
+    padding: 25px 100px 0 15px;
+    grid-column: 2/3;
+    grid-row: 1/2;
+  }
+
+  .section.info-vip > .default-content-wrapper h2 {
+    width: auto;
+    font-size: 29px;
+    font-weight: 200;
+    line-height: 1.03;
+    margin-bottom: 25px;
+  }
+
+}
+
+@media (min-width: 990px) and (max-width: 1200px) {
+  .section.info-vip {
+    grid-template-columns: auto 600px 360px auto;
+  }
 }
