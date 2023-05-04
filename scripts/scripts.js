@@ -22,11 +22,18 @@ const LCP_BLOCKS = []; // add your LCP blocks to the list
 function buildHeroBlock(main) {
   const h1 = main.querySelector('h1');
   const picture = main.querySelector('picture');
-  // eslint-disable-next-line no-bitwise
-  if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
+  const video = main.querySelector('.video');
+  const isPictureHero = h1 && picture
+    // eslint-disable-next-line no-bitwise
+    && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING);
+  const isVideoHero = h1 && video
+    // eslint-disable-next-line no-bitwise
+    && (h1.compareDocumentPosition(video) & Node.DOCUMENT_POSITION_PRECEDING);
+  if (isPictureHero || isVideoHero) {
     const section = document.createElement('div');
-    const elems = [picture, h1];
-    const parents = [picture.parentElement];
+    const heroMedia = isPictureHero ? picture : video;
+    const elems = [heroMedia, h1];
+    const parents = [heroMedia.parentElement];
     const h2 = h1.nextElementSibling;
     let heading = h1;
     if (h2 && h2.tagName === 'H2') {
@@ -44,7 +51,11 @@ function buildHeroBlock(main) {
       elems.push(anchor);
       parents.push(anchor.parentElement);
     }
-    section.append(buildBlock('hero', { elems }));
+    const heroBlock = buildBlock('hero', { elems });
+    if (isVideoHero) {
+      heroBlock.classList.add('hero-video');
+    }
+    section.append(heroBlock);
     parents.filter((elem) => elem.tagName === 'P')
       .forEach((elem) => elem.remove());
     main.prepend(section);
