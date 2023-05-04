@@ -33,9 +33,9 @@ function addHamburger(block) {
 }
 
 function createMenu(data) {
-  const menuItems = data.data.header.items[0].additionalNavigation.map((nav) => {
-    return `<li><a class='menu-item' href="${nav.url}">${nav.title}</a></li>`;
-  }).join('');
+  const menuItems = data.data.header.items[0].additionalNavigation.map((nav) => (
+    `<li><a class='menu-item' href="${nav.url}">${nav.title}</a></li>`
+  )).join('');
   return `
     <ul style='display: flex; flex: 0 0; flex-direction: row; list-style-type: none; gap: 1rem; justify-content: space-around; padding: 0; white-space: nowrap'>${menuItems}</ul>
   `;
@@ -51,26 +51,29 @@ export default async function decorate(block) {
 
   addHamburger(block);
 
+  // eslint-disable-next-line no-underscore-dangle
+  const logoUrl = data.data.header.items[0].additionalLogos[0]._publishUrl;
+
   block.appendChild(document.createRange().createContextualFragment(`
-    <div style="flex: 1 0 auto; display: flex; flex-direction: row; justify-content: space-between; align-items: center">
+    <div style="flex: 1 0 auto; display: flex; flex-direction: row; justify-content: space-between; align-items: center; padding-right: 10px">
       <!-- Logos -->
       <div style="flex: 0 0 auto; display: flex; flex-direction: row; justify-content: space-between; align-items: center; gap: 10px">
         <svg focusable="false" width="40" height="40">
           <use xlink:href="https://app-rm-spa-web-stg.azurewebsites.net/assets/icons/sprite/cibeles-sprite.svg#logo-rm"></use>
         </svg>
         <div style="width: 1px; height: 40px; border-right: 1px solid #888"></div>
-        <img src='${data.data.header.items[0].additionalLogos[0]._publishUrl}' style="width: 40px; height: 40px; margin-left: 10px"/>
+        <img src='${logoUrl}' style="width: 40px; height: 40px; margin-left: 10px"/>
       </div>
       ${createMenu(data)}
       <div style="flex: 0; display: flex; flex-direction: row; justify-content: space-between; align-items: center; gap: 10px">
         <svg focusable="false" width="24" height="24">
           <use xlink:href="https://app-rm-spa-web-stg.azurewebsites.net/assets/icons/sprite/cibeles-sprite.svg#dots-v"></use>
         </svg>
-        <button style="border-color: #3e31fa; color: #3e31fa; border-radius: 5px; background-color: transparent">
+        <button style="border-color: #3e31fa; color: #3e31fa; border-radius: 5px; background-color: transparent; flex: 0 0 auto; display: flex; flex-direction: row; justify-content: space-between; align-items: center; gap: 10px; padding: 5px 10px">
           <svg focusable="false" width="16" height="16" aria-hidden="true" style="filter: invert(26%) sepia(75%) saturate(7487%) hue-rotate(245deg) brightness(95%) contrast(107%);">
             <use xlink:href="https://app-rm-spa-web-stg.azurewebsites.net/assets/icons/sprite/cibeles-sprite.svg#profile"></use>
           </svg>
-          <span>Acceso</span>
+          <div>Acceso</div>
         </button>
       </div>
     </div>
