@@ -95,8 +95,6 @@
 
   /* the block */
   .vip-locations {
-    width: var(--wrapper-width);
-    max-width: var(--wrapper-width);
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -154,9 +152,3 @@
   }
 }
 
-@media (min-width: 1200px) {
-  .vip-locations {
-    width: var(--wrapper-width);
-    max-width: var(--wrapper-width);
-  }
-}
