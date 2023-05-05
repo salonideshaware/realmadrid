@@ -108,9 +108,23 @@
     margin: 0 28px;
   }
 
+  .area-features .cards .modal > .modal-content.iframe-content > p {
+    margin: 0;
+  }
+
   .area-features .cards .modal > .modal-content .icon {
     margin: 0;
   }
 
+  .area-features .cards .modal .modal-content.iframe-content {
+    width: 1000px;
+  }
+
+  .area-features .cards .modal iframe {
+    width: 960px;
+    height: 645px;
+    margin: 0;
+    padding: 0;
+  }
 
 }

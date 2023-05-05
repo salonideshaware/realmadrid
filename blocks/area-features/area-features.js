@@ -17,10 +17,20 @@ function makePopupCards(block) {
   const items = block.querySelectorAll('li');
   items.forEach((li) => {
     const headingElements = li.querySelectorAll('span,h3');
-    const content = [...li.querySelectorAll('p')];
+    let content = [...li.querySelectorAll('p')];
+    const iframeLink = li.querySelector('p > a[href$="iframe=true"]');
     const modalDiv = createDiv('modal');
     const modalContentDiv = createDiv('modal-content');
     const header = createDiv('header');
+    if (iframeLink) {
+      const { parentElement } = iframeLink;
+      const link = iframeLink.href;
+      if (link) {
+        parentElement.innerHTML = `<iframe src="${link}" allow="fullscreen" frameborder="0"/>`;
+      }
+      content = [parentElement];
+      modalContentDiv.classList.add('iframe-content');
+    }
     header.append(...[...headingElements].map((h) => h.cloneNode(true)));
     modalContentDiv.append(header, ...content);
     modalDiv.append(modalContentDiv);
