@@ -5,6 +5,7 @@
     list-style-type: none;
     gap: 1rem;
     align-items: center;
+    border-bottom: 1px solid #ccc;
 }
 
 .header button {
