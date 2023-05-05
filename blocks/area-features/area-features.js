@@ -1,50 +1,98 @@
 import { buildBlock, decorateBlock, loadBlock } from '../../scripts/lib-franklin.js';
 
-function createDiv(...classNames) {
-  const div = document.createElement('div');
-  div.classList.add(...classNames);
-  return div;
+function handleKeyUp(e) {
+  const visibleModal = document.querySelector('.area-features .modal.appear');
+  if (visibleModal && e.keyCode === 27) {
+    // eslint-disable-next-line no-use-before-define
+    togglePopup(visibleModal, false);
+  }
 }
 
-function showPopup(e) {
-  const li = e.currentTarget;
+function togglePopup(modal, bShow) {
   const modalOverlay = document.getElementById('modal-overlay');
-  modalOverlay.classList.add('appear');
-  li.querySelector('.modal').classList.add('appear');
+  modalOverlay.classList.toggle('appear', bShow);
+  modal.classList.toggle('appear', bShow);
+  const body = document.querySelector('body');
+  if (bShow) {
+    body.addEventListener('keyup', handleKeyUp);
+  } else {
+    body.removeEventListener('keyup', handleKeyUp);
+  }
+}
+
+function loadIframe(entries, observer) {
+  entries.forEach((e) => {
+    if (e.isIntersecting) {
+      const li = e.target;
+      const iframeLink = li.querySelector('p > a[href$="iframe=true"]');
+      if (iframeLink) {
+        const { parentElement } = iframeLink;
+        const link = iframeLink.href;
+        if (link) {
+          parentElement.innerHTML = `<iframe src="${link}" allow="fullscreen" frameborder="0"/>`;
+        }
+      }
+      observer.unobserve(li);
+    }
+  });
+}
+
+function enableIframeLoad(li) {
+  const options = {
+    rootMargin: '0px',
+    threshold: 0.5,
+  };
+  const observer = new IntersectionObserver(loadIframe, options);
+  observer.observe(li);
+}
+
+function attachEventHandlers(li) {
+  const modal = li.querySelector('.modal');
+  modal.addEventListener('click', (e) => {
+    togglePopup(modal, false);
+    e.stopPropagation();
+  });
+  modal.querySelector('.close').addEventListener('click', () => {
+    togglePopup(modal, false);
+  });
+
+  li.querySelector('.modal-content').addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
+  li.addEventListener('click', () => {
+    togglePopup(modal, true);
+    modal.focus();
+  });
+}
+
+function createModal(headingElements, content, hasIFrame) {
+  const modal = document.createElement('div');
+  modal.classList.add('modal');
+  modal.setAttribute('tabindex', '-1');
+  modal.innerHTML = `
+  <div class="modal-content ${hasIFrame ? 'iframe-content' : ''}">
+  <button class="close" tabindex="0"></button>
+  <div class="header">
+    ${[...headingElements].map((h) => h.outerHTML).join('')}
+  </div>
+    ${content.map((c) => c.outerHTML).join('')}
+  </div>`;
+  return modal;
 }
 
 function makePopupCards(block) {
   const items = block.querySelectorAll('li');
   items.forEach((li) => {
     const headingElements = li.querySelectorAll('span,h3');
-    let content = [...li.querySelectorAll('p')];
+    const content = [...li.querySelectorAll('p')];
     const iframeLink = li.querySelector('p > a[href$="iframe=true"]');
-    const modalDiv = createDiv('modal');
-    const modalContentDiv = createDiv('modal-content');
-    const header = createDiv('header');
     if (iframeLink) {
-      const { parentElement } = iframeLink;
-      const link = iframeLink.href;
-      if (link) {
-        parentElement.innerHTML = `<iframe src="${link}" allow="fullscreen" frameborder="0"/>`;
-      }
-      content = [parentElement];
-      modalContentDiv.classList.add('iframe-content');
+      enableIframeLoad(li);
     }
-    header.append(...[...headingElements].map((h) => h.cloneNode(true)));
-    modalContentDiv.append(header, ...content);
-    modalDiv.append(modalContentDiv);
-    li.append(modalDiv);
-    modalDiv.addEventListener('click', (e) => {
-      e.currentTarget.classList.remove('appear');
-      const modalOverlay = document.getElementById('modal-overlay');
-      modalOverlay.classList.remove('appear');
-      e.stopPropagation();
-    });
-    modalContentDiv.addEventListener('click', (e) => {
-      e.stopPropagation();
-    });
-    li.addEventListener('click', showPopup);
+    li.append(createModal(headingElements, content, iframeLink != null));
+    content.forEach((c) => c.remove());
+    attachEventHandlers(li);
   });
 }
 

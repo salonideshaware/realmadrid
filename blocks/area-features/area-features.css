@@ -95,10 +95,12 @@
     margin: auto;
     /* stylelint-disable-next-line color-function-notation,alpha-value-notation */
     box-shadow: 0 0 20px 0 rgba(0,0,0,0.4);
+    position: relative;
   }
 
   .area-features .cards .modal > .modal-content > .header {
     display: flex;
+    align-items: center;
     gap: 18px;
     padding: 50px 20px 28px;
   }
@@ -115,6 +117,31 @@
   .area-features .cards .modal > .modal-content .icon {
     margin: 0;
   }
+
+  .area-features .cards .modal-content > .close {
+    width: 17px;
+    height: 30px;
+    top: 18px;
+    right: 18px;
+    position: absolute;
+    cursor: pointer;
+    background-color: unset;
+    border: unset;
+    box-shadow: unset;
+    padding: 0;
+    margin: 0;
+  }
+
+  .area-features .cards .modal-content > .close::after {
+    font-size: 17px;
+    font-weight: 700;
+    color: #7fb3e6;
+    content: '\e606';
+    display: block;
+    font-family: Real-Madrid-Icons, sans-serif;
+    text-indent: 0;
+  }
+
 
   .area-features .cards .modal .modal-content.iframe-content {
     width: 1000px;
