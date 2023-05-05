@@ -12,6 +12,7 @@ function togglePopup(modal, bShow) {
   const modalOverlay = document.getElementById('modal-overlay');
   modalOverlay.classList.toggle('appear', bShow);
   modal.classList.toggle('appear', bShow);
+  document.body.classList.toggle('modal-visible', bShow);
   const body = document.querySelector('body');
   if (bShow) {
     body.addEventListener('keyup', handleKeyUp);
@@ -71,13 +72,16 @@ function createModal(headingElements, content, hasIFrame) {
   modal.classList.add('modal');
   modal.setAttribute('tabindex', '-1');
   modal.innerHTML = `
-  <div class="modal-content ${hasIFrame ? 'iframe-content' : ''}">
+  <div class="modal-content-wrapper ${hasIFrame ? 'iframe-content' : ''}">
+  <div class="modal-content">
   <button class="close" tabindex="0"></button>
   <div class="header">
     ${[...headingElements].map((h) => h.outerHTML).join('')}
   </div>
     ${content.map((c) => c.outerHTML).join('')}
-  </div>`;
+  </div>
+  <div>
+  `;
   return modal;
 }
 
