@@ -111,10 +111,6 @@ export default async function decorate(block) {
     const div = document.createElement('div');
     div.id = 'modal-overlay';
     document.body.insertAdjacentElement('afterbegin', div);
-    div.addEventListener('click', () => {
-      modalOverlay.classList.remove('appear');
-      document.querySelector('modal.appear').classList.remove('appear');
-    });
   }
   makePopupCards(block);
 }
