@@ -139,6 +139,7 @@ h2 {
   color: var(--heading-color); /* #333 */
   text-transform: uppercase;
   margin-bottom: 21px;
+  margin-left: 10px;
   padding-bottom: 5px;
   width: var(--section-heading-width);
   border-right: 4px solid transparent;
@@ -234,7 +235,11 @@ main .section > div {
   grid-row: 1/2;
 }
 
-.section.info-vip > .default-content-wrapper h2 {
+.section.section.info-vip > .default-content-wrapper h2 {
+  margin-left: 0;
+}
+
+.section.info-vip > .default-content-wrapper h2:first-of-type {
   font-size: 21px;
   font-weight: 300;
   color: var(--text-color);
@@ -259,7 +264,7 @@ main .section > div {
     grid-row: 1/2;
   }
 
-  .section.info-vip > .default-content-wrapper h2 {
+  .section.info-vip > .default-content-wrapper h2:first-of-type {
     width: auto;
     font-size: 29px;
     font-weight: 200;
@@ -267,6 +272,11 @@ main .section > div {
     margin-bottom: 25px;
   }
 
+
+  .section.info-vip > .default-content-wrapper h2 {
+    width: 68%;
+    margin-left: 0;
+  }
 }
 
 @media (min-width: 990px) and (max-width: 1200px) {
