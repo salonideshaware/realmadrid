@@ -264,17 +264,16 @@ main .section > div {
     grid-row: 1/2;
   }
 
+  .section.info-vip > .default-content-wrapper h2 {
+    width: 68%;
+  }
+
   .section.info-vip > .default-content-wrapper h2:first-of-type {
     width: auto;
     font-size: 29px;
     font-weight: 200;
     line-height: 1.03;
     margin-bottom: 25px;
-  }
-
-
-  .section.info-vip > .default-content-wrapper h2 {
-    width: 68%;
     margin-left: 0;
   }
 }
@@ -287,16 +286,15 @@ main .section > div {
 
 
 /* TOUR STYLES */
-
 .tour main .section {
   padding: 0 20px;
 }
 
- .tour .default-content-wrapper ul {
+.tour .default-content-wrapper ul {
   margin-left: 1.75rem;
  }
-
-.tour h2 {
+/* stylelint-disable-next-line no-descending-specificity */
+ .tour h2 {
   font-size: var(--heading-font-size-m);
   font-weight: 400;
   margin-bottom: 15px;
