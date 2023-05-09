@@ -230,7 +230,7 @@ main .section > div {
 .section.info-vip > .default-content-wrapper {
   width: auto;
   margin-top: 60px;
-  padding: 25px 100px 0 15px;
+  padding: 25px 20px 0;
   grid-column: 2/3;
   grid-row: 1/2;
 }
