@@ -22,7 +22,7 @@ function createPopupMenu(data) {
 
   const hasChildrenIcon = `
     <svg focusable="false" width="18" height="18" aria-hidden="true">
-      <use xlink:href="blocks/header/cibeles-sprite.svg#chevron-right"></use>
+      <use xlink:href="/blocks/header/cibeles-sprite.svg#chevron-right"></use>
     </svg>`;
 
   const subMenu = document.createElement('div');
@@ -86,7 +86,7 @@ function createPopupMenu(data) {
 function addHamburger(block, data) {
   let state = false;
   const icon = () => {
-    const src = `blocks/header/cibeles-sprite.svg#${state ? 'times' : 'menu'}`;
+    const src = `/blocks/header/cibeles-sprite.svg#${state ? 'times' : 'menu'}`;
     return `
         <svg focusable="false" width="32" height="32" aria-hidden="true">
             <use xlink:href="${src}"></use>
@@ -152,7 +152,7 @@ export default async function decorate(block) {
       <!-- Logos -->
       <div style="flex: 0 0 auto; display: flex; flex-direction: row; justify-content: space-between; align-items: center; gap: 10px">
         <svg focusable="false" width="40" height="40">
-          <use xlink:href="blocks/header/cibeles-sprite.svg#logo-rm"></use>
+          <use xlink:href="/blocks/header/cibeles-sprite.svg#logo-rm"></use>
         </svg>
         <div style="width: 1px; height: 40px; border-right: 1px solid #888"></div>
         <img src='${logoUrl}' style="width: 40px; height: 40px; margin-left: 10px"/>
@@ -161,11 +161,11 @@ export default async function decorate(block) {
       <div style="flex: 0; display: flex; flex-direction: row; justify-content: space-between; align-items: center; gap: 10px">
         <img src='${sponsorUrl}' style="width: 40px; height: 40px; margin-left: 10px"/>
         <svg focusable="false" width="24" height="24">
-          <use xlink:href="blocks/header/cibeles-sprite.svg#dots-v"></use>
+          <use xlink:href="/blocks/header/cibeles-sprite.svg#dots-v"></use>
         </svg>
         <button style="border-color: #3e31fa; color: #3e31fa; border-radius: 5px; background-color: transparent; flex: 0 0 auto; display: flex; flex-direction: row; justify-content: space-between; align-items: center; gap: 10px; padding: 5px 10px">
           <svg focusable="false" width="16" height="16" aria-hidden="true" style="filter: invert(26%) sepia(75%) saturate(7487%) hue-rotate(245deg) brightness(95%) contrast(107%);">
-            <use xlink:href="blocks/header/cibeles-sprite.svg#profile"></use>
+            <use xlink:href="/blocks/header/cibeles-sprite.svg#profile"></use>
           </svg>
           <div>Acceso</div>
         </button>
