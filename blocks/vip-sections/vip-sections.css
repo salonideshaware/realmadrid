@@ -1,22 +1,22 @@
 main .vip-sections-container {
   box-sizing: border-box;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
+  max-width: 960px;
 }
 
 .vip-sections ul {
   margin: 0;
   padding: 0;
   display: flex;
-  flex-wrap: wrap;
   box-sizing: border-box;
   list-style: none;
 }
 
 .vip-sections ul li {
   margin-bottom: 5px;
-  width: 100%;
   position: relative;
+  flex: 1 0 auto;
 }
 
 .vip-sections ul .info {
@@ -63,7 +63,7 @@ main .vip-sections-container {
   display: block;
   object-fit: cover;
   object-position: center;
-  min-height: 200px;
+  min-height: 250px;
 }
 
 .vip-sections li a:first-of-type {
@@ -104,16 +104,17 @@ main .vip-sections-container {
   content: '';
 }
 
-@media screen and (min-width:990px) {
+@media screen and (min-width:960px) {
   main .vip-sections-container {
-    margin: 50px auto 10px;
-    padding: 10px;
+    margin: 70px auto 0;
+    padding: 0;
+    width: 1200px;
+    max-width: 1200px;
   }
 
   .vip-sections ul li {
-    margin-bottom: 0;
-    height: 300px;
-    width: 600px;
+    margin: 0;
+    max-height: 300px;
   }
 
   .vip-sections ul li .info:hover {
@@ -129,6 +130,20 @@ main .vip-sections-container {
 
   .vip-sections ul li .info:hover p {
     color: var(--background-color);
-    transition: color 0.5s ease-in;
+    transition: color 0.5s ease-out;
+  }
+
+  .vip-sections ul img {
+    height: 100%;
+    width: 100%;
+    min-height: 250px;
+  }
+}
+
+@media screen and (min-width:960px) and (max-width:1200px) {
+  main .vip-sections-container {
+    margin-bottom: 0;
+    width: 960px;
+    max-width: 960px;
   }
 }
