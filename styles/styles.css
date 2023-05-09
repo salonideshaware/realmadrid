@@ -139,6 +139,7 @@ h2 {
   color: var(--heading-color); /* #333 */
   text-transform: uppercase;
   margin-bottom: 21px;
+  margin-left: 10px;
   padding-bottom: 5px;
   width: var(--section-heading-width);
   border-right: 4px solid transparent;
@@ -229,12 +230,16 @@ main .section > div {
 .section.info-vip > .default-content-wrapper {
   width: auto;
   margin-top: 60px;
-  padding: 25px 100px 0 15px;
+  padding: 25px 20px 0;
   grid-column: 2/3;
   grid-row: 1/2;
 }
 
-.section.info-vip > .default-content-wrapper h2 {
+.section.section.info-vip > .default-content-wrapper h2 {
+  margin-left: 0;
+}
+
+.section.info-vip > .default-content-wrapper h2:first-of-type {
   font-size: 21px;
   font-weight: 300;
   color: var(--text-color);
@@ -260,13 +265,17 @@ main .section > div {
   }
 
   .section.info-vip > .default-content-wrapper h2 {
+    width: 68%;
+  }
+
+  .section.info-vip > .default-content-wrapper h2:first-of-type {
     width: auto;
     font-size: 29px;
     font-weight: 200;
     line-height: 1.03;
     margin-bottom: 25px;
+    margin-left: 0;
   }
-
 }
 
 @media (min-width: 990px) and (max-width: 1200px) {
@@ -277,16 +286,15 @@ main .section > div {
 
 
 /* TOUR STYLES */
-
 .tour main .section {
   padding: 0 20px;
 }
 
- .tour .default-content-wrapper ul {
+.tour .default-content-wrapper ul {
   margin-left: 1.75rem;
  }
-
-.tour h2 {
+/* stylelint-disable-next-line no-descending-specificity */
+ .tour h2 {
   font-size: var(--heading-font-size-m);
   font-weight: 400;
   margin-bottom: 15px;
