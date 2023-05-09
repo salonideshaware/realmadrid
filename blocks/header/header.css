@@ -1,4 +1,6 @@
 .header {
+    position: fixed;
+    width: 100vw;
     height: var(--nav-height);
     display: flex;
     flex-direction: row;
@@ -6,6 +8,9 @@
     gap: 1rem;
     align-items: center;
     border-bottom: 1px solid #ccc;
+    background: white;
+    z-index: 999;
+    transition: 0.5s ease-out all;
 }
 
 .header button {
@@ -14,9 +19,12 @@
     border: 1px solid;
 }
 
+.header.hidden {
+    transform: translateY(calc(0rem - var(--nav-height)));
+}
+
 .menu-item {
     border: 0;
-    padding: .625rem .75rem;
     line-height: 1.2;
     color: #888;
 }
@@ -40,7 +48,8 @@ a.menu-item:hover {
     z-index: 100;
     visibility: hidden;
     backdrop-filter: none;
-    transition: 0.3s linear all;
+    overscroll-behavior: none;
+    transition: 0.5s ease-out all;
 }
 
 .popup-menu-area.visible {
@@ -58,30 +67,34 @@ a.menu-item:hover {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 80% 20%;
     background: white;
+    opacity: 0;
     gap: 0 0;
     grid-auto-flow: row;
     grid-template-areas: "main sub image" "bottom bottom bottom";
-    transition: 0.3s linear all;
+    transition: 0.5s ease-out all;
 }
 
 .popup-menu-area.visible .popup-menu {
     left: 0;
+    opacity: 1;
 }
 
 .main-menu-area {
     list-style-type: none;
     justify-content: space-around;
-    padding: 0;
     white-space: nowrap;
     grid-area: main;
+    padding: 15px;
 }
 
 .sub-menu-area {
     grid-area: sub;
+    padding: 15px;
 }
 
 .image-menu-area {
     grid-area: image;
+    padding: 15px;
 }
 
 .image-menu-area img {
@@ -95,4 +108,10 @@ a.menu-item:hover {
     grid-area: bottom;
     padding: 10px;
     border-top: 1px solid #ccc;
+}
+
+header ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }

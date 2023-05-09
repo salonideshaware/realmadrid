@@ -111,6 +111,7 @@ body {
   color: var(--text-color);
   background-color: var(--background-color);
   display: none;
+  padding-top: var(--nav-height);
 }
 
 /* required by franklin */

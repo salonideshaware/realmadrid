@@ -37,15 +37,18 @@ function createPopupMenu(data) {
         `<li><a class='menu-item' href="${nav.url}">${nav.title}</a></li>`
       )).join('');
     if (data.data.header.items[0].mainNavigation[index].image) {
+      // eslint-disable-next-line no-underscore-dangle
+      const imageUrl = data.data.header.items[0].mainNavigation[index].image._publishUrl;
       imageArea.innerHTML = `
-        <img src="${data.data.header.items[0].mainNavigation[index].image._publishUrl}"></img>
+        <img src="${imageUrl}"></img>
       `;
     } else {
       imageArea.innerHTML = '';
     }
   };
 
-  updateSubMenu(data.data.header.items[0].mainNavigation.findIndex((nav) => nav.childNavigationItems.length));
+  updateSubMenu(data.data.header.items[0].mainNavigation
+    .findIndex((nav) => nav.childNavigationItems.length));
 
   const mainMenu = document.createElement('ul');
   mainMenu.classList.add('main-menu-area');
@@ -56,7 +59,6 @@ function createPopupMenu(data) {
     link.textContent = nav.title;
     if (nav.childNavigationItems.length) {
       link.innerHTML += hasChildrenIcon;
-      link.setAttribute('href', '#');
       link.addEventListener('click', (e) => {
         console.log(index);
         e.preventDefault();
@@ -102,8 +104,10 @@ function addHamburger(block, data) {
     menu.innerHTML = icon();
     if (state) {
       popup.classList.add('visible');
+      document.body.style.overflow = 'hidden';
     } else {
       popup.classList.remove('visible');
+      document.body.style.overflow = 'auto';
     }
   });
   block.appendChild(menu);
@@ -123,6 +127,16 @@ export default async function decorate(block) {
 
   block.className = 'header';
 
+  let lastScroll = 0;
+  document.addEventListener('scroll', () => {
+    if (lastScroll < window.scrollY) {
+      block.classList.add('hidden');
+    } else {
+      block.classList.remove('hidden');
+    }
+    lastScroll = window.scrollY;
+  });
+
   const data = await fetchData();
   console.log(data.data.header.items[0]);
 
@@ -130,6 +144,7 @@ export default async function decorate(block) {
 
   // eslint-disable-next-line no-underscore-dangle
   const logoUrl = data.data.header.items[0].additionalLogos[0]._publishUrl;
+  // eslint-disable-next-line no-underscore-dangle
   const sponsorUrl = data.data.header.items[0].sponsors[1].logo._publishUrl;
 
   block.appendChild(document.createRange().createContextualFragment(`
