@@ -11,16 +11,74 @@ async function fetchData() {
 }
 
 function createPopupMenu(data) {
+  const popupArea = document.createElement('div');
+  popupArea.classList.add('popup-menu-area');
+
+  const popup = document.createElement('div');
+  popup.classList.add('popup-menu');
+  popupArea.appendChild(popup);
+
+  popup.innerHTML = '<div class=".popup-background"></div>';
+
   const hasChildrenIcon = `
     <svg focusable="false" width="18" height="18" aria-hidden="true">
       <use xlink:href="blocks/header/cibeles-sprite.svg#chevron-right"></use>
     </svg>`;
-  const menuItems = data.data.header.items[0].mainNavigation.map((nav) => (
-    `<li><a class='menu-item' href="${nav.url}">${nav.title}${nav.childNavigationItems.length ? hasChildrenIcon : ''}</a></li>`
-  )).join('');
-  return `
-    <ul style='display: flex; flex: 0 0; flex-direction: column; list-style-type: none; gap: 1rem; justify-content: space-around; padding: 0; white-space: nowrap'>${menuItems}</ul>
-  `;
+
+  const subMenu = document.createElement('div');
+  subMenu.classList.add('sub-menu-area');
+
+  const imageArea = document.createElement('div');
+  imageArea.classList.add('image-menu-area');
+
+  const updateSubMenu = (index) => {
+    subMenu.innerHTML = data.data.header.items[0]
+      .mainNavigation[index].childNavigationItems.map((nav) => (
+        `<li><a class='menu-item' href="${nav.url}">${nav.title}</a></li>`
+      )).join('');
+    if (data.data.header.items[0].mainNavigation[index].image) {
+      imageArea.innerHTML = `
+        <img src="${data.data.header.items[0].mainNavigation[index].image._publishUrl}"></img>
+      `;
+    } else {
+      imageArea.innerHTML = '';
+    }
+  };
+
+  updateSubMenu(data.data.header.items[0].mainNavigation.findIndex((nav) => nav.childNavigationItems.length));
+
+  const mainMenu = document.createElement('ul');
+  mainMenu.classList.add('main-menu-area');
+  data.data.header.items[0].mainNavigation.forEach((nav, index) => {
+    const menuItem = document.createElement('li');
+    const link = document.createElement('a');
+    link.setAttribute('class', 'menu-item');
+    link.textContent = nav.title;
+    if (nav.childNavigationItems.length) {
+      link.innerHTML += hasChildrenIcon;
+      link.setAttribute('href', '#');
+      link.addEventListener('click', (e) => {
+        console.log(index);
+        e.preventDefault();
+        updateSubMenu(index);
+      });
+    } else {
+      link.setAttribute('href', nav.url);
+    }
+    menuItem.appendChild(link);
+    mainMenu.appendChild(menuItem);
+  });
+
+  popup.appendChild(mainMenu);
+  popup.appendChild(subMenu);
+  popup.appendChild(imageArea);
+
+  const footer = document.createElement('div');
+  popup.appendChild(footer);
+  footer.classList.add('footer-menu-area');
+  footer.innerHTML = '<button class="footer-menu-item">ES</button>';
+
+  return popupArea;
 }
 
 function addHamburger(block, data) {
@@ -33,24 +91,20 @@ function addHamburger(block, data) {
         </svg>
     `;
   };
-  const popup = document.createElement('div');
-  popup.style.display = state ? 'block' : 'none';
-  popup.style.position = 'absolute';
+  const popup = createPopupMenu(data);
   block.appendChild(popup);
-  popup.innerHTML = `
-    <div style="width: 600px; height: 2000px; background-color: #fff; position: absolute; top: 50px; left: 0; z-index: 100; overflow: hidden">
-        <p>${createPopupMenu(data)}</p>
-    </div>
-  `;
   const menu = document.createElement('div');
   menu.setAttribute('style', 'width: 32px; height: 32px; background-color: #fff; border-radius: 5px');
   console.log(`menu button created, state: ${state}`);
   menu.innerHTML = icon();
   menu.addEventListener('click', () => {
     state = !state;
-    console.log(`menu button clicked, state: ${state}`);
     menu.innerHTML = icon();
-    popup.style.display = state ? 'block' : 'none';
+    if (state) {
+      popup.classList.add('visible');
+    } else {
+      popup.classList.remove('visible');
+    }
   });
   block.appendChild(menu);
 }
@@ -76,6 +130,7 @@ export default async function decorate(block) {
 
   // eslint-disable-next-line no-underscore-dangle
   const logoUrl = data.data.header.items[0].additionalLogos[0]._publishUrl;
+  const sponsorUrl = data.data.header.items[0].sponsors[1].logo._publishUrl;
 
   block.appendChild(document.createRange().createContextualFragment(`
     <div style="flex: 1 0 auto; display: flex; flex-direction: row; justify-content: space-between; align-items: center; padding-right: 10px">
@@ -89,6 +144,7 @@ export default async function decorate(block) {
       </div>
       ${createMenu(data)}
       <div style="flex: 0; display: flex; flex-direction: row; justify-content: space-between; align-items: center; gap: 10px">
+        <img src='${sponsorUrl}' style="width: 40px; height: 40px; margin-left: 10px"/>
         <svg focusable="false" width="24" height="24">
           <use xlink:href="blocks/header/cibeles-sprite.svg#dots-v"></use>
         </svg>
