@@ -1,7 +1,7 @@
 main .vip-sections-container {
   box-sizing: border-box;
-  margin: 50px auto 10px;
-  padding: 10px;
+  margin: 0;
+  padding: 0;
 }
 
 .vip-sections ul {
@@ -14,9 +14,8 @@ main .vip-sections-container {
 }
 
 .vip-sections ul li {
-  margin-bottom: 0;
-  height: 300px;
-  width: 600px;
+  margin-bottom: 5px;
+  width: 100%;
   position: relative;
 }
 
@@ -29,7 +28,7 @@ main .vip-sections-container {
   margin: 0 auto;
   overflow: hidden;
   min-height: 0;
-  bottom: 50px;
+  bottom: 60px;
   position: absolute;
 }
 
@@ -85,9 +84,9 @@ main .vip-sections-container {
   display: flex;
   font-size: var(--body-font-size-xs);
   font-weight: 400;
-  height: 40px;
+  height: 50px;
   width: calc(100% - 30px);
-  line-height: 21px;
+  line-height: 1.4;
   letter-spacing: -0.2px;
   padding-left: 15px;
   padding-right: 15px;
@@ -106,8 +105,19 @@ main .vip-sections-container {
 }
 
 @media screen and (min-width:990px) {
+  main .vip-sections-container {
+    margin: 50px auto 10px;
+    padding: 10px;
+  }
+
+  .vip-sections ul li {
+    margin-bottom: 0;
+    height: 300px;
+    width: 600px;
+  }
+
   .vip-sections ul li .info:hover {
-    min-height: calc(100% - 40px);
+    min-height: calc(100% - 50px);
     transition: all 0.5s ease-out;
     background-color: rgb(0 0 0 / 60%);
   }
