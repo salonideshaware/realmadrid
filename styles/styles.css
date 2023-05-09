@@ -292,6 +292,7 @@ body.tour main .section {
 body.tour .default-content-wrapper ul {
   margin-left: 1.75rem;
  }
+
 /* stylelint-disable-next-line no-descending-specificity */
 body.tour h2 {
   font-size: var(--heading-font-size-m);
@@ -302,7 +303,7 @@ body.tour h2 {
   text-transform: none;
 }
 
-/* -- VIP FAQ Template Styles -- */ 
+/* -- VIP FAQ Template Styles -- */
 
 /* restyle contact card */
 body.vip-faq .contact-card.block {
@@ -346,7 +347,7 @@ body.vip-faq main .section div p, body.vip-faq main .section div ul {
   /* fix width for columns for all non-mobile media */
   body.vip-faq main  {
     display: grid;
-    grid: 'header header header header' 
+    grid: 'header header header header'
           '. content info .' / auto 640px 320px auto;
   }
 
