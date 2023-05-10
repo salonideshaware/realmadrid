@@ -34,6 +34,7 @@
   --background-color: #fff;
   --overlay-background-color: #eee; /* ??? needed */
   --highlight-background-color: #ccc; /* ??? needed */
+  --section-tour-background-color: #efefef; /* ??? needed */
   --text-color: #43526E;
 
   /* RM: fonts */
@@ -293,4 +294,15 @@ main .section > div {
   line-height: 1.43;
   border: none;
   text-transform: none;
+}
+
+.tour main .section-organize-visit {
+  background-color: var(--section-tour-background-color);
+  overflow: hidden;
+  padding: 54px 20px 49px;
+}
+
+.tour main .section-organize-visit h2{
+  margin-bottom: 49px;
+  margin-top: 0;
 }
