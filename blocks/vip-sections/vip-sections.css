@@ -2,7 +2,7 @@ main .vip-sections-container {
   box-sizing: border-box;
   margin: 0 auto;
   padding: 0;
-  max-width: 990px;
+  max-width: 960px;
 }
 
 .vip-sections ul {
@@ -136,18 +136,11 @@ main .vip-sections-container {
     color: var(--background-color);
     transition: color 0.5s ease-out;
   }
-
-  .vip-sections ul img {
-    height: 100%;
-    width: 100%;
-    min-height: 250px;
-  }
 }
 
 @media screen and (min-width:990px) and (max-width:1200px) {
   main .vip-sections-container {
-    margin-bottom: 0;
-    width: 990px;
-    max-width: 990px;
+    width: 960px;
+    max-width: 960px;
   }
 }
