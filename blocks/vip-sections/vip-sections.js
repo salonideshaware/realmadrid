@@ -33,22 +33,11 @@ function transformToSectionsUnorderedList(input, excludedSectionPath) {
     if (pdfAnchor) {
       pdfAnchor.setAttribute('download', 'download');
     }
+
     const anchor = section.querySelector('p > a:first-of-type');
     if (!anchor || anchor.href.endsWith(excludedSectionPath)) {
       return; // exclude current section, exclude sections without path
     }
-
-    /*
-    const breakpoints = [
-      { media: '(max-width: 480px)', width: '375' },
-      { media: '(min-width: 480px) and (max-width: 640px)', width: '480' },
-      { media: '(min-width: 640px) and (max-width: 768px)', width: '640' },
-      { media: '(min-width: 768px) and (max-width: 990px)', width: '768' },
-      { media: '(min-width: 990px)', width: '960' },
-    ];
-    const img = section.querySelector('p > picture > img');
-    const picture = createOptimizedPicture(img.src, anchor.textContent, false, breakpoints);
-    */
 
     const picture = section.querySelector('picture');
 
