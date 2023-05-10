@@ -136,19 +136,11 @@ main .vip-sections-container {
     color: var(--background-color);
     transition: color 0.5s ease-out;
   }
-
-  .vip-sections ul img {
-    width: 600px;
-  }
 }
 
 @media screen and (min-width:990px) and (max-width:1200px) {
   main .vip-sections-container {
     width: 960px;
     max-width: 960px;
-  }
-
-  .vip-sections ul img {
-    width: 480px;
   }
 }

@@ -39,7 +39,12 @@ function transformToSectionsUnorderedList(input, excludedSectionPath) {
       return; // exclude current section, exclude sections without path
     }
 
-    const picture = section.querySelector('picture');
+    const breakpoints = [
+      { media: '(max-width:1200px)', width: '480' },
+      { media: '(min-width: 1200px)', width: '600' },
+    ];
+    const img = section.querySelector('p > picture > img');
+    const picture = createOptimizedPicture(img.src, anchor.textContent, false, breakpoints);
 
     anchor.innerHTML = `
       ${picture.outerHTML}
@@ -75,6 +80,5 @@ export default async function decorate(block) {
     // turn into list
     const vipSections = transformToSectionsUnorderedList(fragment, excludedSectionPath);
     block.replaceChildren(vipSections);
-    console.log('block outerHTML', block.outerHTML);
   }
 }
