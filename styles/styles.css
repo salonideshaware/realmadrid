@@ -303,13 +303,13 @@ body.tour h2 {
   text-transform: none;
 }
 
-.tour main .section-organize-visit {
+body.tour main .section-organize-visit {
   background-color: var(--section-tour-background-color);
   overflow: hidden;
   padding: 54px 20px 49px;
 }
 
-.tour main .section-organize-visit h2{
+body.tour main .section-organize-visit h2{
   margin-bottom: 49px;
   margin-top: 0;
 }
