@@ -38,9 +38,11 @@ function transformToSectionsUnorderedList(input, excludedSectionPath) {
     }
 
     const breakpoints = [
-      { media: '(max-width:1200px)', width: '480' },
+      { media: '(max-width: 990px)', width: '960' },
+      { media: '(min-width: 990px) and (max-width: 1200px)', width: '480' },
       { media: '(min-width: 1200px)', width: '600' },
     ];
+
     const img = section.querySelector('p > picture > img');
     const picture = createOptimizedPicture(img.src, anchor.textContent, false, breakpoints);
 
