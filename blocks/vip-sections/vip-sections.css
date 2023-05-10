@@ -2,13 +2,13 @@ main .vip-sections-container {
   box-sizing: border-box;
   margin: 0 auto;
   padding: 0;
-  max-width: 960px;
+  max-width: 990px;
 }
 
 .vip-sections ul {
   margin: 0;
   padding: 0;
-  display: flex;
+  display: block;
   box-sizing: border-box;
   list-style: none;
 }
@@ -112,6 +112,10 @@ main .vip-sections-container {
     max-width: 1200px;
   }
 
+  .vip-sections ul {
+    display: flex;
+  }
+
   .vip-sections ul li {
     margin: 0;
     max-height: 300px;
@@ -143,7 +147,7 @@ main .vip-sections-container {
 @media screen and (min-width:990px) and (max-width:1200px) {
   main .vip-sections-container {
     margin-bottom: 0;
-    width: 960px;
-    max-width: 960px;
+    width: 990px;
+    max-width: 990px;
   }
 }
