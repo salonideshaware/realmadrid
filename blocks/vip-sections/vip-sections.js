@@ -2,6 +2,8 @@
  * VIP Section Block
  */
 
+import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
+
 /**
  * Loads a fragment.
  * @param {string} path The path to the fragment
@@ -36,16 +38,19 @@ function transformToSectionsUnorderedList(input, excludedSectionPath) {
       return; // exclude current section, exclude sections without path
     }
 
-    const picture = section.querySelector('picture');
-
     /*
     const breakpoints = [
+      { media: '(max-width: 480px)', width: '375' },
+      { media: '(min-width: 480px) and (max-width: 640px)', width: '480' },
+      { media: '(min-width: 640px) and (max-width: 768px)', width: '640' },
+      { media: '(min-width: 768px) and (max-width: 990px)', width: '768' },
       { media: '(min-width: 990px)', width: '960' },
-      { width: '1280' },
     ];
-    const img = section.querySelector('p > picture');
+    const img = section.querySelector('p > picture > img');
     const picture = createOptimizedPicture(img.src, anchor.textContent, false, breakpoints);
     */
+
+    const picture = section.querySelector('picture');
 
     anchor.innerHTML = `
       ${picture.outerHTML}
