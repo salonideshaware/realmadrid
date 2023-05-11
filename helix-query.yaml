@@ -1,0 +1,51 @@
+indices:
+  area-vip-es:
+    include:
+      - /area-vip
+      - /area-vip/**
+    exclude:
+      - /en/**
+      - /de/**
+      - /fr/**
+      - /pt/**
+      - /ja/**
+      - /hi/**
+      - /ar/**
+    target: /area-vip/query-index.json
+    properties:
+      lastModified:
+        select: none
+        value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      description:
+        select: .section.info-vip > .default-content-wrapper:first-of-type > p:first-of-type
+        value: attribute(el, "content")
+      image:
+        select: head > meta[property="og:image"]
+        value: match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
+      category:
+        select: head > meta[property="category"]
+        value: match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
+  area-vip-en:
+    include:
+      - /en/area-vip
+      - /en/area-vip/**
+    target: /en/area-vip/query-index.json
+    properties:
+      lastModified:
+        select: none
+        value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      description:
+        select: .section.info-vip > .default-content-wrapper:first-of-type > p:first-of-type
+        value: attribute(el, "content")
+      image:
+        select: head > meta[property="og:image"]
+        value: match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
+      category:
+        select: head > meta[property="category"]
+        value: match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
