@@ -279,11 +279,11 @@ main .section > div {
 
   .section.info-vip > .area-features-wrapper +  .default-content-wrapper {
     grid-row: 3/4;
-    margin: 0;
+    margin-left: 0;
   }
 
   .section.info-vip > .area-features-wrapper +  .default-content-wrapper h2 {
-    margin: 0;
+    margin-bottom: 0;
   }
 }
 
