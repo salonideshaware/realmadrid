@@ -30,9 +30,9 @@ indices:
         value: match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
   area-vip-en:
     include:
-      - /en/area-vip
-      - /en/area-vip/**
-    target: /en/area-vip/query-index.json
+      - /en/vip-area
+      - /en/vip-area/**
+    target: /en/vip-area/query-index.json
     properties:
       lastModified:
         select: none
