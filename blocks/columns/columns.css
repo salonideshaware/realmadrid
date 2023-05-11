@@ -65,6 +65,11 @@
     padding: 25px 100px 0 15px;
   }
 
+  .section.info-vip > .area-features-wrapper +  .default-content-wrapper + .columns-wrapper {
+    grid-row: 4/5;
+    padding-top:0;
+  }
+
   /* COLUMNS VIP LOCATION TYPE */
   .columns.vip-location > div {
     display: flex;
