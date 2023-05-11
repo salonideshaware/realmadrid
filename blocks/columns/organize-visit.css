@@ -93,9 +93,6 @@
         font-size: 14px;
         padding: 5px 14px;
         flex-basis: 100%;
-        flex-basis: -moz-available; /* WebKit-based browsers will ignore this. */
-        flex-basis: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
-        flex-basis: fill-available;
     }
 
     .columns.organize-visit .visit-box .text-wrapper p {
