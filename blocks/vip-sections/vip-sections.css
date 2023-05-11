@@ -143,13 +143,12 @@ main .vip-sections-container {
     width: 100%;
     grid-template-rows: 272px 310px auto auto;
     grid-template-columns: auto 600px 300px auto;
-    }
   }
 
   .section.info-vip.homepage > .default-content-wrapper:first-of-type {
     margin-top: 0;
     padding-top: 0;
-}
+  }
 
   .section.info-vip.homepage.vip-sections-container .vip-sections ul {
     display: flex;
