@@ -1,4 +1,7 @@
+import { loadCSS } from '../../scripts/lib-franklin.js';
+
 function decorateOrganizeVisit(el) {
+  loadCSS(`${window.hlx.codeBasePath}/blocks/columns/organize-visit.css`);
   [...el.children].forEach((row) => {
     row.classList.add('visit-box');
     if (row.children.length > 1) {
