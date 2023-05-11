@@ -229,10 +229,13 @@ main .section > div {
 /* INFO VIP styles */
 .section.info-vip > .default-content-wrapper {
   width: auto;
-  margin-top: 60px;
   padding: 25px 20px 0;
   grid-column: 2/3;
-  grid-row: 1/2;
+  grid-row: auto;
+}
+
+.section.info-vip > .default-content-wrapper:first-of-type {
+  margin-top: 60px;
 }
 
 .section.section.info-vip > .default-content-wrapper h2 {
@@ -258,10 +261,14 @@ main .section > div {
 
   .section.info-vip > .default-content-wrapper {
     width: auto;
-    margin-top: 60px;
     padding: 25px 100px 0 15px;
     grid-column: 2/3;
-    grid-row: 1/2;
+    grid-row: auto;
+    margin-left: 0;
+  }
+
+  .section.info-vip > .default-content-wrapper:first-of-type {
+    margin-top: 60px;
   }
 
   .section.info-vip > .default-content-wrapper h2 {
@@ -275,15 +282,6 @@ main .section > div {
     line-height: 1.03;
     margin-bottom: 25px;
     margin-left: 0;
-  }
-
-  .section.info-vip > .area-features-wrapper +  .default-content-wrapper {
-    grid-row: 3/4;
-    margin-left: 0;
-  }
-
-  .section.info-vip > .area-features-wrapper +  .default-content-wrapper h2 {
-    margin-bottom: 0;
   }
 }
 
