@@ -11,7 +11,8 @@ const timeformat = new Intl.DateTimeFormat('es-ES', { minute: '2-digit', hour12:
 const dateformat = new Intl.DateTimeFormat('es-ES', { weekday: 'short', month: 'short', day: '2-digit' });
 const renderMatch = (placeholders) => (match) => {
   const div = document.createElement('div');
-  const ctaLabel = placeholders['COMPRAR ENTRADAS VIP'];
+  const ctaLabel = placeholders.buyTickets;
+  const fromText = placeholders.from;
   const time = new Date(match.dateTime);
   div.classList.add('match');
   div.innerHTML = `<img class="logo competition" src="${match.competition.logo._publishUrl}" alt="match logo">
@@ -29,8 +30,8 @@ const renderMatch = (placeholders) => (match) => {
       <span>${match.homeTeam.name}</span>
       <span>${match.awayTeam.name}</span>
     </div>
-    <div class="price">desde 1.400€</div>
-    <a class="button cta" href="#">COMPRAR ENTRADAS VIP</a>
+    <div class="price">${fromText} 1.400€</div>
+    <a class="button cta" href="#">${ctaLabel}</a>
   </div>
   `;
   return div;
