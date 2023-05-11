@@ -170,12 +170,15 @@ main .vip-sections-container {
     width: 960px;
     max-width: 960px;
   }
+}
 
+@media (min-width:1200px) {
   /* homepage version */
-  main .section.info-vip.homepage.vip-sections-container {
+  .section.info-vip.homepage.vip-sections-container {
     max-width: none;
     width: 100%;
     grid-template-rows: 272px 340px auto auto;
+    grid-template-columns: auto 800px 400px auto;
   }
 }
 
