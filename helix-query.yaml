@@ -20,14 +20,14 @@ indices:
         select: head > meta[property="og:title"]
         value: attribute(el, "content")
       description:
-        select: .section.info-vip > .default-content-wrapper:first-of-type > p:first-of-type
+        select: head > meta[name="og:description"]
         value: attribute(el, "content")
       image:
         select: head > meta[property="og:image"]
         value: match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
       category:
-        select: head > meta[property="category"]
-        value: match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
+        select: head > meta[name="category"]
+        value: match(attribute(el, "content"))
   area-vip-en:
     include:
       - /en/vip-area
@@ -41,11 +41,11 @@ indices:
         select: head > meta[property="og:title"]
         value: attribute(el, "content")
       description:
-        select: .section.info-vip > .default-content-wrapper:first-of-type > p:first-of-type
+        select: head > meta[name="og:description"]
         value: attribute(el, "content")
       image:
         select: head > meta[property="og:image"]
         value: match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
       category:
-        select: head > meta[property="category"]
-        value: match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
+        select: head > meta[name="category"]
+        value: match(attribute(el, "content"))

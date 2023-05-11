@@ -120,7 +120,7 @@
     /* the home page version */
     .section.info-vip.homepage.contact-card-container>.contact-card-wrapper {
         grid-column: 1/5;
-        grid-row: auto;
+        grid-row: 3/4;
         width: 100%;
         max-height: none;
         display: grid;
