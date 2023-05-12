@@ -1,6 +1,7 @@
 import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
 
 const VIP_AREA_REST_API = '/area-vip/query-index.json';
+const AREAS_VIP_PATH = '/area-vip/partido-vip/';
 
 async function fetchVIPAreas() {
   const url = new URL(window.location);
@@ -8,7 +9,7 @@ async function fetchVIPAreas() {
   try {
     const resp = await fetch(`${url.origin}${VIP_AREA_REST_API}`);
     const json = await resp.json();
-    return json.data;
+    return json.data.filter((area) => area.path.startsWith(AREAS_VIP_PATH));
   } catch (e) {
     // eslint-disable-next-line no-console
     console.log(`unable to fetch vip areas ${e}`);
