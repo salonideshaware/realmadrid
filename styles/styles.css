@@ -34,6 +34,7 @@
   --background-color: #fff;
   --overlay-background-color: #eee; /* ??? needed */
   --highlight-background-color: #ccc; /* ??? needed */
+  --section-tour-background-color: #efefef; /* ??? needed */
   --text-color: #43526E;
 
   /* RM: fonts */
@@ -308,6 +309,18 @@ body.tour h2 {
   line-height: 1.43;
   border: none;
   text-transform: none;
+}
+
+body.tour main .section-organize-visit {
+  background-color: var(--section-tour-background-color);
+  overflow: hidden;
+  padding: 54px 20px 49px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+body.tour main .section-organize-visit h2{
+  margin-bottom: 49px;
+  margin-top: 0;
 }
 
 /* -- VIP FAQ Template Styles -- */
