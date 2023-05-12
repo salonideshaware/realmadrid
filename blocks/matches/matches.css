@@ -1,86 +1,162 @@
-main > .matches-container {
-  background: linear-gradient(to right, #3476b6 0%, #699ac9 100%);
-}
+@media (min-width: 990px) {
+  main > .matches-container {
+    background: linear-gradient(to right, #3476b6 0%, #699ac9 100%);
+  }
 
-.matches {
-  padding-bottom: 10px;
-}
+  .matches {
+    padding-bottom: 10px;
+  }
 
-.match {
-  background-color: var(--background-color);
-  display: flex;
-  font-size: 0.75rem;
-  justify-content: space-between;
-  min-height: 70px;
-  margin: 0 0 10px;
-  border-radius: 10px;
-  padding: 5px 60px 5px 20px;
-  align-items: center;
-}
+  .match, .empty-match {
+    display: none;
+    background-color: var(--background-color);
+    font-size: 0.75rem;
+    justify-content: space-between;
+    min-height: 70px;
+    margin: 0 0 10px;
+    border-radius: 10px;
+    padding: 5px 60px 5px 20px;
+    align-items: center;
+  }
 
-.match img {
-  height: 40px;
-  flex: 0 0 40px;
-}
+  .empty-match {
+    font-size: 20px;
+    justify-content: center;
+  }
 
-.match img.team.logo {
-  width: 52px;
-  height: 52px;
-  flex: 0 0 60px;
-  margin-left: 27px;
-}
+  .match.appear, .empty-match.appear {
+    display: flex;
+  }
 
-.match .datetime {
-  flex: 0 0 100px;
-  margin: 0 50px 0 7px;
-  align-self: center;
-  font-size: 26px;
-  font-weight: 300;
-  display: flex;
-  flex-direction: column;
-  color: #333;
-  line-height: 1;
-}
+  .match img {
+    height: 40px;
+    flex: 0 0 40px;
+  }
 
-.match .datetime .date {
-  font-size: 14px;
-  font-weight: 400;
-}
+  .match img.team.logo {
+    width: 52px;
+    height: 52px;
+    flex: 0 0 60px;
+    margin-left: 27px;
+  }
 
-.match .competition-info,
-.match .teams {
-  display:flex;
-  flex-direction: column;
-  align-items: end;
-  flex: 0 0 205px;
-  color: #808080;
-  padding-right: 15px;
-  box-sizing: border-box;
-  border-right: 1px solid rgb(0 0 0 / 12%);
-  margin: 5px 5px 5px 0;
-}
+  .match .datetime {
+    flex: 0 0 100px;
+    margin: 0 50px 0 7px;
+    align-self: center;
+    font-size: 26px;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    color: #333;
+    line-height: 1;
+  }
 
-.match .teams {
-  align-items: flex-start;
-  flex: 0 1 100%;
-  margin: 0 5px 0 10px;
-  border: 0;
-  font-size: 0.875rem;
-  font-weight: 300;
-  color: #000;
-}
+  .match .datetime .date {
+    font-size: 14px;
+    font-weight: 400;
+  }
 
-.match .price {
-  flex: 0 1 100%;
-  text-align: right;
-  margin-right: 20px;
-  font-size: 14px;
-  font-weight: 100;
-}
+  .match .competition-info,
+  .match .teams {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 0 205px;
+    color: #808080;
+    padding-right: 15px;
+    box-sizing: border-box;
+    border-right: 1px solid rgb(0 0 0 / 12%);
+    margin: 5px 5px 5px 0;
+  }
 
-.match a.button {
-  flex: 0 1 220px;
-  min-width: 220px;
-  padding: 15px 20px;
-  font-size: 14px;
+  .match .teams {
+    align-items: flex-start;
+    flex: 0 1 100%;
+    margin: 0 5px 0 10px;
+    border: 0;
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: #000;
+  }
+
+  .match .price {
+    flex: 0 1 100%;
+    text-align: right;
+    margin-right: 20px;
+    font-size: 14px;
+    font-weight: 100;
+  }
+
+  .match a.button {
+    flex: 0 1 220px;
+    min-width: 220px;
+    padding: 15px 20px;
+    font-size: 14px;
+  }
+
+  /** styling of the controls */
+  .matches .filters {
+    list-style-type: none;
+    display: flex;
+    padding: 0;
+    color: var(--background-color);
+  }
+
+  .matches > .filters {
+    margin: 0 0 20px;
+  }
+
+  .matches .filters > .option {
+    margin-right: 22px;
+    flex: 0 1 auto;
+  }
+
+  .matches .filters .option.nested {
+    display: inline-block;
+    flex: 1 1 auto;
+  }
+
+  .matches .filters.level-1 > .option.active {
+    border-bottom: solid 2px var(--background-color);
+    padding-bottom: 3px;
+  }
+
+  .matches .filters.level-2 > .option.active {
+    border-bottom: solid 4px var(--background-color);
+  }
+
+  .matches .filters .option .filters {
+    display: none;
+  }
+
+  .matches .filters .option.active .filters {
+    display: inline-block;
+  }
+
+  .matches .filters .option.active .filters li {
+    display: inline-block;
+    margin-bottom: -3px;
+  }
+
+  .matches .filters.level-2 {
+    padding-left: 80px;
+    font-size: 15px;
+  }
+
+  .matches .filters .option a {
+    cursor: pointer;
+    color: var(--background-color);
+    font-weight: 300;
+    letter-spacing: -0.2px;
+  }
+
+  .matches .filters .option.active > a {
+    font-weight: 400;
+  }
+
+  .matches .filters .option a:hover {
+    text-decoration: none;
+    color: var(--background-color);;
+  }
 }
