@@ -131,7 +131,22 @@ h1 {
   line-height: normal;
 }
 
+
+/* Default H2 for the whole website, and specifically for the first h2 in the info-vip section */
+h2,
+body.area-vip .section.section.info-vip > .default-content-wrapper:first-of-type h2 {
+  font-size: var(--heading-font-size-s);
+  font-weight: 300;
+  color: var(--text-color);
+  margin-bottom: 15px;
+  line-height: 1.43;
+  border: none;
+  text-transform: none;
+}
+
+
 /* Default H2 for area-vip */
+/* stylelint-disable-next-line no-descending-specificity */
 body.area-vip h2 {
   font-size: var(--heading-font-size-xs);
   font-weight: 500;
@@ -144,18 +159,6 @@ body.area-vip h2 {
   width: var(--section-heading-width);
   border-right: 4px solid transparent;
   border-bottom: 4px solid var(--heading-border-color);
-}
-
-/* Default H2 for the whole website, and specifically for the first h2 in the info-vip section */
-h2,
-body.area-vip .section.section.info-vip > .default-content-wrapper:first-of-type h2 {
-  font-size: var(--heading-font-size-s);
-  font-weight: 300;
-  color: var(--text-color);
-  margin-bottom: 15px;
-  line-height: 1.43;
-  border: none;
-  text-transform: none;
 }
 
 /* RM: default content */
@@ -250,7 +253,8 @@ main .section > div {
   margin-top: 60px;
 }
 
-.section.section.info-vip > .default-content-wrapper h2 {
+/* stylelint-disable-next-line no-descending-specificity */
+.section.info-vip > .default-content-wrapper h2 {
   margin-left: 0;
 }
 
@@ -275,6 +279,7 @@ main .section > div {
     margin-left: 0;
   }
 
+  /* stylelint-disable-next-line no-descending-specificity */
   .section.info-vip > .default-content-wrapper h2 {
     width: 68%;
   }
@@ -297,16 +302,6 @@ body.tour main .section {
 
 body.tour .default-content-wrapper ul {
   margin-left: 1.75rem;
- }
-
-/* stylelint-disable-next-line no-descending-specificity */
-body.tour h2 {
-  font-size: var(--heading-font-size-m);
-  font-weight: 400;
-  margin-bottom: 15px;
-  line-height: 1.43;
-  border: none;
-  text-transform: none;
 }
 
 /* -- VIP FAQ Template Styles -- */
@@ -367,4 +362,3 @@ body.vip-faq main .section div p, body.vip-faq main .section div ul {
     margin-top:  40px 0 0 0;
   }
 }
-
