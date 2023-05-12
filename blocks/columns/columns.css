@@ -61,7 +61,7 @@
   .section.info-vip .columns-wrapper {
     width: unset;
     grid-column: 2/3;
-    grid-row: 2/3;
+    grid-row: auto;
     padding: 25px 100px 0 15px;
   }
 
