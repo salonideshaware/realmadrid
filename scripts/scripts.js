@@ -179,6 +179,42 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
+const VIP_AREA_INDEX = '/query-index.json';
+const VIP_AREA_LANGUAGE_HOME_PATH = {
+  es: '/area-vip',
+  en: '/en/vip-area',
+  fr: '/fr/zone-vip',
+  de: '/de/vip-zone',
+  pt: '/pt/area-vip',
+  ja: '/ja/vip-area',
+  ar: '/ar/vip-area',
+  hi: '/hi/vip-area',
+};
+
+let language;
+
+export function getLanguage() {
+  if (language) return language;
+  language = 'es';
+  const segs = window.location.pathname.split('/');
+  if (segs && segs.length > 0) {
+    language = segs[1] || 'es';
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [value] of Object.entries(VIP_AREA_LANGUAGE_HOME_PATH)) {
+      if (value === segs[1]) {
+        language = value;
+        break;
+      }
+    }
+  }
+  return language;
+}
+
+export function getVipAreaIndexPath(url) {
+  language = getLanguage();
+  return `${url.origin}${VIP_AREA_LANGUAGE_HOME_PATH[language]}${VIP_AREA_INDEX}`;
+}
+
 async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
