@@ -27,7 +27,7 @@ indices:
         value: match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
       category:
         select: head > meta[name="category"]
-        value: match(attribute(el, "content"))
+        value: attribute(el, "content")
   area-vip-en:
     include:
       - /en/vip-area
@@ -48,4 +48,4 @@ indices:
         value: match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
       category:
         select: head > meta[name="category"]
-        value: match(attribute(el, "content"))
+        value: attribute(el, "content")
