@@ -198,7 +198,6 @@ export function getLanguage() {
   language = 'es';
   const segs = window.location.pathname.split('/');
   if (segs && segs.length > 0) {
-    language = segs[1] || 'es';
     // eslint-disable-next-line no-restricted-syntax
     for (const [value] of Object.entries(VIP_AREA_LANGUAGE_HOME_PATH)) {
       if (value === segs[1]) {
