@@ -18,3 +18,11 @@
   font-weight:normal;
   font-style:normal;
 }
+
+@font-face{
+  font-family:RMNeue;
+  font-display:auto;
+  src: url("/fonts/RMNeue-SemiBold.woff2") format("woff");
+  font-weight:normal;
+  font-style:normal;
+}
