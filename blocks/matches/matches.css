@@ -1,13 +1,217 @@
+main > .matches-container {
+  background: linear-gradient(to right, #3476b6 0%, #699ac9 100%);
+  position:relative;
+  padding-top: 40px;
+  padding-left: 10px;
+  margin: 50px 0 0;
+}
+
+main > .matches-container > * {
+  margin: 50px 0 0 10px;
+}
+
+main > .matches-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 0;
+  height: 0;
+  box-sizing: border-box;
+  border: 100vw solid #fff;
+  border-top: none;
+  border-bottom: 25px solid transparent;
+}
+
+.matches .filters {
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+  color: var(--background-color);
+}
+
+.matches .filters a {
+  cursor: pointer;
+  color: var(--background-color);
+  font-weight: 300;
+  letter-spacing: -0.2px;
+  display: inline-block;
+}
+
+.matches > .filters {
+  margin: 0 0 20px;
+  position: relative;
+}
+
+.matches > .filters > .option {
+  margin-right: 22px;
+  flex: 0 1 auto;
+}
+
+.matches .filters a:hover {
+  text-decoration: none;
+  color: var(--background-color);;
+}
+
+.matches .filters.level-2 {
+  display: none;
+  position: absolute;
+  left: -10px;
+  top: 53px;
+  background: transparent;
+  height: 395px;
+  overflow: hidden;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.matches .filters.level-2 > .option {
+  width:42px;
+  font-size: 15px;
+  line-height: 2.73;
+}
+
+.matches .option.nested.active > .filters {
+  display: block;
+}
+
+.matches .option.active > a {
+  font-weight: 400;
+}
+
+.matches > .filters > .option.active {
+  border-bottom: solid 2px var(--background-color);
+  padding-bottom: 3px;
+}
+
+.matches .filters.level-2 .option.active > a {
+  border-bottom: solid 4px var(--background-color);
+  display: inline;
+}
+
+.matches > .match {
+  width: 250px;
+  min-height: 395px;
+  background-color: #fff;
+  border-radius: 10px;
+  display: inline-flex;
+  overflow: hidden;
+  margin: 0 4px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 20px;
+}
+
+.matches > .match:first-of-type {
+  margin-left: 32px;
+}
+
+.match img {
+  flex: 0 1 100%;
+  height: 40px;
+}
+
+.match img.team.logo {
+  width: 65px;
+  height: 65px;
+  flex: 0 0 65px;
+  margin-top: 10px;
+}
+
+.match img.team.home {
+  order: 2;
+}
+
+.match img.team.away {
+  order: 3;
+}
+
+.match .teams {
+  display:flex;
+  align-items: center;
+  flex: 0 1 100%;
+  border: 0;
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: #000;
+  order: 4;
+  justify-content: center;
+}
+
+.match .teams > span:first-child::after {
+  content: '-';
+  padding: 0 5px;
+}
+
+.match .datetime {
+  flex: 0 0 100%;
+  font-size: 1.875rem;
+  font-weight: 300;
+  display: flex;
+  flex-direction: column;
+  color: #333;
+  line-height: 1.33;
+  order: 5;
+  align-items: center;
+}
+
+.match .datetime .date {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.match .competition-info {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.813rem;;
+  font-weight: 300;
+  flex: 0 0 100%;
+  color: #808080;
+  box-sizing: border-box;
+  border-right: 1px solid rgb(0 0 0 / 12%);
+  order: 6;
+}
+
+
+.match .price {
+  flex: 0 1 100%;
+  text-align: center;
+  font-size: 0.813rem;;
+  font-weight: 300;
+  order: 7;
+}
+
+.match a.button {
+  flex: 0 1 100%;
+  min-width: auto;
+  padding: 15px 10px;
+  font-size: 14px;
+  order: 8;
+}
+
 @media (min-width: 990px) {
   main > .matches-container {
     background: linear-gradient(to right, #3476b6 0%, #699ac9 100%);
+  }
+
+  main > .matches-container::before {
+    display: none;
   }
 
   .matches {
     padding-bottom: 10px;
   }
 
-  .match, .empty-match {
+  .empty-match {
+    font-size: 20px;
+    justify-content: center;
+  }
+
+  .matches > .match, .matches > .empty-match {
     display: none;
     background-color: var(--background-color);
     font-size: 0.75rem;
@@ -17,11 +221,12 @@
     border-radius: 10px;
     padding: 5px 60px 5px 20px;
     align-items: center;
+    width: 100%;
+    flex-wrap: nowrap;
   }
 
-  .empty-match {
-    font-size: 20px;
-    justify-content: center;
+  .matches > .match:first-of-type {
+    margin-left: 0;
   }
 
   .match.appear, .empty-match.appear {
@@ -38,7 +243,9 @@
     height: 52px;
     flex: 0 0 60px;
     margin-left: 27px;
+    order: 4;
   }
+
 
   .match .datetime {
     flex: 0 0 100px;
@@ -50,6 +257,7 @@
     flex-direction: column;
     color: #333;
     line-height: 1;
+    order: 3;
   }
 
   .match .datetime .date {
@@ -68,6 +276,10 @@
     box-sizing: border-box;
     border-right: 1px solid rgb(0 0 0 / 12%);
     margin: 5px 5px 5px 0;
+  }
+
+  .match .competition-info {
+    order: 2;
   }
 
   .match .teams {
@@ -117,6 +329,7 @@
 
   .matches .filters.level-2 > .option {
     width: 42px;
+    line-height: unset;
   }
 
   .matches .filters .option a {
@@ -148,8 +361,8 @@
 
   .matches .filters.level-2 > .option.active > a {
     border-bottom: solid 4px var(--background-color);
+    display: inline-block;
   }
-
 
   .matches .filters .option .filters {
     display: none;
@@ -168,6 +381,9 @@
   .matches .filters.level-2 {
     padding-left: 80px;
     font-size: 15px;
+    position: static;
+    height: auto;
+    overflow: unset;
   }
 
 

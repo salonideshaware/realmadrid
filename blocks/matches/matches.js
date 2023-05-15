@@ -36,7 +36,7 @@ const renderMatch = (placeholders) => (match) => {
       <span class="date">${dateformat.format(time)}</span>
     </div>
     <img class="logo team home" src="${match.homeTeam.logo._publishUrl}" alt="${match.homeTeam.name}">
-    <img class="logo team home" src="${match.awayTeam.logo._publishUrl}" alt="${match.awayTeam.name}">
+    <img class="logo team away" src="${match.awayTeam.logo._publishUrl}" alt="${match.awayTeam.name}">
     <div class="teams">
       <span>${match.homeTeam.name}</span>
       <span>${match.awayTeam.name}</span>
@@ -125,7 +125,8 @@ export default async function decorate(block) {
   const months = [
     monthNames[currentMonth - 1],
     monthNames[currentMonth],
-    monthNames[currentMonth + 1]]; // ideally this would be created from the api response done on line #118
+    monthNames[currentMonth + 1]]; // ideally this would be created
+    // from the api response
   block.innerHTML = '';
   const emptyMatch = document.createElement('div');
   emptyMatch.classList.add('empty-match');
