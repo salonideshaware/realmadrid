@@ -8,19 +8,21 @@
     align-items: center;
     border-bottom: 1px solid #ccc;
     background: white;
+    box-sizing: border-box;
     z-index: 999;
-    transition: 0.5s ease-out transform;
+    transition: 0.1s ease-out transform;
     padding: 0 32px 0 31px;
 }
 
 .header button {
     box-shadow: none;
-    border: 1px solid;
+    border: 2px solid;
     font-family: RMNeue, Arial, Helvetica, sans-serif;
     font-size: 14px;
     border-color: #3e31fa;
     color: #3e31fa;
-    border-radius: 5px;
+    line-height: 21px;
+    border-radius: 8px;
     background-color: transparent;
     flex: 0 0 auto;
     display: flex;
@@ -28,8 +30,9 @@
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    padding: 5px 10px;
+    padding: 8px 9px;
     text-transform: none;
+    letter-spacing: 0.2px;
 }
 
 .header.hidden {
@@ -51,9 +54,10 @@
 
 .menu-item {
     border: 0;
-    line-height: 1.2;
     color: #888;
     padding: 10px 12px;
+    font-family: RMNeue, Arial, Helvetica, sans-serif;
+    font-size: 16px;
 }
 
 a.menu-item {
@@ -63,7 +67,7 @@ a.menu-item {
 
 a.menu-item:hover {
     color: blue;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 .popup-menu-area {
@@ -106,17 +110,33 @@ a.menu-item:hover {
     opacity: 1;
 }
 
+.popup-menu-item {
+    font-family: RMNeue, Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 19.2px;
+    color: #0F2145;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px;
+    display: block;
+}
+
+.popup-menu-item:any-link {
+    color: #0F2145;
+    text-decoration: none;
+}
+
 .main-menu-area {
     list-style-type: none;
     justify-content: space-around;
     white-space: nowrap;
     grid-area: main;
-    padding: 15px;
+    padding: 50px;
 }
 
 .sub-menu-area {
     grid-area: sub;
-    padding: 15px;
+    padding-top: 50px;
 }
 
 .image-menu-area {

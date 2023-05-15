@@ -22,8 +22,8 @@ export default function createPopupMenu(data) {
   const updateSubMenu = (index) => {
     subMenu.innerHTML = data.data.header.items[0]
       .mainNavigation[index].childNavigationItems.map((nav) => (
-      `<li><a class='menu-item' href="${nav.url}">${nav.title}</a></li>`
-    )).join('');
+        `<li><a class='popup-menu-item' href="${nav.url}">${nav.title}</a></li>`
+      )).join('');
     if (data.data.header.items[0].mainNavigation[index].image) {
       // eslint-disable-next-line no-underscore-dangle
       const imageUrl = data.data.header.items[0].mainNavigation[index].image._publishUrl;
@@ -43,7 +43,7 @@ export default function createPopupMenu(data) {
   data.data.header.items[0].mainNavigation.forEach((nav, index) => {
     const menuItem = document.createElement('li');
     const link = document.createElement('a');
-    link.setAttribute('class', 'menu-item');
+    link.setAttribute('class', 'popup-menu-item');
     link.textContent = nav.title;
     if (nav.childNavigationItems.length) {
       link.innerHTML += hasChildrenIcon;
