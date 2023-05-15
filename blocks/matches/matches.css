@@ -108,8 +108,32 @@
   }
 
   .matches .filters > .option {
-    margin-right: 22px;
     flex: 0 1 auto;
+  }
+
+  .matches .filters.level-1 > .option {
+    margin-right: 22px;
+  }
+
+  .matches .filters.level-2 > .option {
+    width: 42px;
+  }
+
+  .matches .filters .option a {
+    cursor: pointer;
+    color: var(--background-color);
+    font-weight: 300;
+    letter-spacing: -0.2px;
+    display: inline-block;
+  }
+
+  .matches .filters .option.active > a {
+    font-weight: 400;
+  }
+
+  .matches .filters .option a:hover {
+    text-decoration: none;
+    color: var(--background-color);;
   }
 
   .matches .filters .option.nested {
@@ -122,13 +146,15 @@
     padding-bottom: 3px;
   }
 
-  .matches .filters.level-2 > .option.active {
+  .matches .filters.level-2 > .option.active > a {
     border-bottom: solid 4px var(--background-color);
   }
+
 
   .matches .filters .option .filters {
     display: none;
   }
+
 
   .matches .filters .option.active .filters {
     display: inline-block;
@@ -144,19 +170,5 @@
     font-size: 15px;
   }
 
-  .matches .filters .option a {
-    cursor: pointer;
-    color: var(--background-color);
-    font-weight: 300;
-    letter-spacing: -0.2px;
-  }
 
-  .matches .filters .option.active > a {
-    font-weight: 400;
-  }
-
-  .matches .filters .option a:hover {
-    text-decoration: none;
-    color: var(--background-color);;
-  }
 }
