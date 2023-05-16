@@ -64,15 +64,15 @@ function getMonthOptions(months) {
 }
 
 function filterMonth(block, month) {
-  const allMatches = block.querySelectorAll(':scope > .match');
+  const allMatches = block.querySelectorAll(':scope .match');
   let matchesToDisplay;
   if (month === 'all') {
     matchesToDisplay = allMatches;
   } else {
     allMatches.forEach((x) => x.classList.remove('appear'));
-    matchesToDisplay = block.querySelectorAll(`:scope > .match[data-month="${month}"]`);
+    matchesToDisplay = block.querySelectorAll(`:scope .match[data-month="${month}"]`);
   }
-  const emptyMatch = block.querySelector(':scope > .empty-match');
+  const emptyMatch = block.querySelector(':scope .empty-match');
   emptyMatch.classList.toggle('appear', matchesToDisplay.length === 0);
   matchesToDisplay.forEach((x) => x.classList.add('appear'));
 }
@@ -82,7 +82,7 @@ function createFilters(block, placeholders, months) {
   const ol = document.createElement('ol');
   ol.classList.add('filters', 'level-1');
   ol.innerHTML = `
-    <li class="option active"><a href="#allMatches" tabIndex="0" data-filter="all">${matchesOnSale}</a></li>
+    <li class="option"><a href="#allMatches" tabIndex="0" data-filter="all">${matchesOnSale}</a></li>
     <li class="option nested"><a href="#calendar"tabIndex="0">${calendar} ${getCurrentSeason()}</a>
       ${getMonthOptions(months)}
     </li>
@@ -92,11 +92,13 @@ function createFilters(block, placeholders, months) {
     if (target.nodeName === 'A') {
       const li = target.parentElement;
       if (!li.classList.contains('active')) {
+        const href = target.getAttribute('href');
         const currentOl = li.parentElement;
         const currentActiveEl = currentOl.querySelector(':scope > li.active');
         if (currentActiveEl) {
           currentActiveEl.classList.remove('active');
         }
+        currentOl.setAttribute('data-selected', href.substring(1));
         li.classList.add('active');
         if (li.classList.contains('nested')) {
           const selectedOpt = li.querySelector(':scope li.active a') || li.querySelector(':scope li:first-child a');
@@ -112,6 +114,18 @@ function createFilters(block, placeholders, months) {
   return ol;
 }
 
+function createDiv(classNames, ...children) {
+  const element = document.createElement('div');
+  element.classList.add(...classNames.split(' '));
+  if (children.length && typeof children[0] === 'string') {
+    // eslint-disable-next-line prefer-destructuring
+    element.innerHTML = children[0];
+  } else if (children.length) {
+    element.append(...children);
+  }
+  return element;
+}
+
 export default async function decorate(block) {
   const config = readBlockConfig(block);
   const placeholders = await fetchPlaceholders();
@@ -120,7 +134,14 @@ export default async function decorate(block) {
   const url = new URL(`${matchesGqApi}${API[sport.toLowerCase()]}`); // todo: add params fromDate endDate
   const response = await fetch(url);
   const data = await response.json();
-  const items = data.data.matchList.items.map(renderMatch(placeholders));
+  const _items = data.data.matchList.items.concat(data.data.matchList.items);
+  const items = _items.map(renderMatch(placeholders));
+  const itemsWrapper = createDiv(
+    'match-list',
+    ...items,
+    createDiv('empty-match', noMatches),
+  );
+
   // const months = new Set(items.map((x) => x.dataset.month));
   const months = [
     monthNames[currentMonth - 1],
@@ -128,9 +149,7 @@ export default async function decorate(block) {
     monthNames[currentMonth + 1]]; // ideally this would be created
     // from the api response
   block.innerHTML = '';
-  const emptyMatch = document.createElement('div');
-  emptyMatch.classList.add('empty-match');
-  emptyMatch.innerHTML = noMatches;
-  block.append(createFilters(block, placeholders, months), ...items, emptyMatch);
-  filterMonth(block, 'all');
+  const filters = createFilters(block, placeholders, months);
+  block.append(filters, itemsWrapper);
+  filters.querySelector(':scope > li:first-child a').click();
 }
