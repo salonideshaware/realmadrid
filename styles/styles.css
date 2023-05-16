@@ -119,10 +119,11 @@ body.appear {
   display: unset;
 }
 
-/* RM: changes with width */
+/* RM: changes with width
 header {
   height: var(--nav-height);
 }
+*/
 
 h1, h2, h3 {
   font-family: var(--heading-font-family);
