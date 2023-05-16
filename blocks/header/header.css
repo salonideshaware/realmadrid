@@ -1,6 +1,7 @@
 @import url('topMenu.css');
 @import url('popupMenu.css');
 
+
 .header {
     position: fixed;
     width: 100vw;
@@ -24,7 +25,7 @@
 .login-button {
     box-shadow: none;
     border: 2px solid;
-    font-family: RMNeue, Arial, Helvetica, sans-serif;
+    font-family: var(--header-font-family-bold);
     font-weight: 600;
     font-size: 14px;
     border-color: #3e31fa;
