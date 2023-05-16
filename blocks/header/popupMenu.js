@@ -6,23 +6,23 @@ export default function createPopupMenu(data) {
   popup.classList.add('popup-menu');
   popupArea.appendChild(popup);
 
-  popup.innerHTML = '<div class=".popup-background"></div>';
+  popup.innerHTML = '<div></div>';
 
   const hasChildrenIcon = `
-    <svg focusable="false" width="18" height="18" aria-hidden="true">
+    <svg focusable="false" width="18" height="18" aria-hidden="true" class="main-popup-menu-has-children">
       <use xlink:href="/blocks/header/cibeles-sprite.svg#chevron-right"></use>
     </svg>`;
 
-  const subMenu = document.createElement('div');
-  subMenu.classList.add('sub-menu-area');
-
   const imageArea = document.createElement('div');
-  imageArea.classList.add('image-menu-area');
+  imageArea.classList.add('image-popup-menu-area');
+
+  const subMenu = document.createElement('div');
+  subMenu.classList.add('sub-popup-menu-area');
 
   const updateSubMenu = (index) => {
     subMenu.innerHTML = data.data.header.items[0]
       .mainNavigation[index].childNavigationItems.map((nav) => (
-        `<li><a class='popup-menu-item' href="${nav.url}">${nav.title}</a></li>`
+        `<li><a class='sub-popup-menu-item' href="${nav.url}">${nav.title}</a></li>`
       )).join('');
     if (data.data.header.items[0].mainNavigation[index].image) {
       // eslint-disable-next-line no-underscore-dangle
@@ -39,16 +39,15 @@ export default function createPopupMenu(data) {
     .findIndex((nav) => nav.childNavigationItems.length));
 
   const mainMenu = document.createElement('ul');
-  mainMenu.classList.add('main-menu-area');
+  mainMenu.classList.add('main-popup-menu-area');
   data.data.header.items[0].mainNavigation.forEach((nav, index) => {
     const menuItem = document.createElement('li');
     const link = document.createElement('a');
-    link.setAttribute('class', 'popup-menu-item');
-    link.textContent = nav.title;
+    link.setAttribute('class', 'main-popup-menu-item');
+    link.innerHTML = `<span>${nav.title}</span>`;
     if (nav.childNavigationItems.length) {
       link.innerHTML += hasChildrenIcon;
       link.addEventListener('click', (e) => {
-        console.log(index);
         e.preventDefault();
         updateSubMenu(index);
       });
@@ -65,8 +64,18 @@ export default function createPopupMenu(data) {
 
   const footer = document.createElement('div');
   popup.appendChild(footer);
-  footer.classList.add('footer-menu-area');
-  footer.innerHTML = '<button class="footer-menu-item">ES</button>';
+  footer.classList.add('footer-popup-menu-area');
+  footer.innerHTML = `
+    <button class="lang-button">
+      <svg focusable="false" width="16" height="16" aria-hidden="true">
+        <use xlink:href="/blocks/header/landing-sprite.svg#lang"></use>
+      </svg>
+      <span>ES</span>
+      <svg focusable="false" width="16" height="16" aria-hidden="true">
+        <use xlink:href="/blocks/header/cibeles-sprite.svg#chevron-up"></use>
+      </svg>
+    </button>
+  `;
 
   return popupArea;
 }

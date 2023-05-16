@@ -1,6 +1,6 @@
 import fetchMenuData from './utils.js';
 import createPopupMenu from './popupMenu.js';
-import createMainMenu from './mainMenu.js';
+import createMainMenu from './topMenu.js';
 
 function addHamburger(block, data) {
   let state = false;
@@ -16,9 +16,9 @@ function addHamburger(block, data) {
   block.appendChild(popup);
   const menu = document.createElement('div');
   menu.setAttribute('style', 'background-color: #fff; border-radius: 5px; padding: 0px 9px; display: flex; flex-direction: column; justify-content: center; align-items: center');
-  console.log(`menu button created, state: ${state}`);
   menu.innerHTML = icon();
-  menu.addEventListener('click', () => {
+
+  const toggle = () => {
     state = !state;
     menu.innerHTML = icon();
     if (state) {
@@ -28,7 +28,14 @@ function addHamburger(block, data) {
       popup.classList.remove('visible');
       document.body.style.overflow = 'auto';
     }
-  });
+  };
+  menu.addEventListener('click', toggle, false);
+  popup.addEventListener('click', (e) => {
+    if (e.target.classList.contains('popup-menu-area') && state) {
+      toggle();
+    }
+  }, false);
+
   block.appendChild(menu);
 }
 
@@ -71,7 +78,7 @@ export default async function decorate(block) {
         <svg focusable="false" width="24" height="24" style="margin-right: 9px; filter: invert(75%) sepia(18%) saturate(182%) hue-rotate(178deg) brightness(95%) contrast(87%);">
           <use xlink:href="/blocks/header/cibeles-sprite.svg#dots-v"></use>
         </svg>
-        <button>
+        <button class="login-button">
           <svg focusable="false" width="16" height="16" aria-hidden="true" style="margin-left: 0px; filter: invert(26%) sepia(75%) saturate(7487%) hue-rotate(245deg) brightness(95%) contrast(107%);">
             <use xlink:href="/blocks/header/cibeles-sprite.svg#profile"></use>
           </svg>
