@@ -1,9 +1,9 @@
 main > .matches-container {
   background: linear-gradient(to right, #3476b6 0%, #699ac9 100%);
   position:relative;
-  padding-top: 40px;
-  padding-left: 10px;
   margin: 50px 0 0;
+  box-sizing: border-box;
+  padding: 40px 10px 35px;
 }
 
 main > .matches-container > * {
@@ -22,6 +22,12 @@ main > .matches-container::before {
   border: 100vw solid #fff;
   border-top: none;
   border-bottom: 25px solid transparent;
+}
+
+main > .matches-container h2 {
+  color: #fff;
+  border-bottom-color: #fff;
+  margin-left: 0;
 }
 
 .matches .filters {
