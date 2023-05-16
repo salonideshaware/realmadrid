@@ -5,6 +5,7 @@ export default async function fetchMenuData() {
     const response = await fetch(DATA_URL);
     return await response.json();
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(error);
   }
   return null;
