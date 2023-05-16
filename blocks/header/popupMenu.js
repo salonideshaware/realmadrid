@@ -26,7 +26,10 @@ export default function createPopupMenu(data) {
       )).join('');
     if (data.data.header.items[0].mainNavigation[index].image) {
       // eslint-disable-next-line no-underscore-dangle
-      const imageUrl = data.data.header.items[0].mainNavigation[index].image._publishUrl;
+      const originalImageUrl = data.data.header.items[0].mainNavigation[index].image._publishUrl;
+      const lastDotIndex = originalImageUrl.lastIndexOf('.');
+      // eslint-disable-next-line prefer-template
+      const imageUrl = originalImageUrl.slice(0, lastDotIndex) + '.app.' + originalImageUrl.slice(lastDotIndex) + '?wid=150';
       imageArea.innerHTML = `
         <img src="${imageUrl}"></img>
       `;
