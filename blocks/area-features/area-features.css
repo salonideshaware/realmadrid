@@ -161,7 +161,7 @@ main .area-features-wrapper {
 @media (min-width: 990px)  {
   .section.info-vip > .area-features-wrapper {
     grid-column: 2/3;
-    grid-row: auto/auto;
+    grid-row: auto;
     width: 100%;
     margin: 30px 0;
     padding: 0 100px 0 0;
