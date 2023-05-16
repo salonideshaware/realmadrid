@@ -311,10 +311,53 @@ body.tour main .section-organize-visit {
   padding: 54px 20px 49px;
 }
 
+body.tour main .section .default-content-wrapper p {
+  font-size: 16px;
+  color: #444;
+  margin: 0 0 28px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+body.tour main h2 {
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+  margin-bottom: 3px;
+  font-size: 28px;
+  color: #444;
+}
+
 /* stylelint-disable-next-line no-descending-specificity */
 body.tour main .section-organize-visit h2{
   margin-bottom: 49px;
   margin-top: 0;
+  color: black;
+}
+
+body.tour main .merge-blocks-desktop {
+  padding-bottom: 50px;
+}
+
+@media (min-width: 990px) {
+  body.tour .merge-blocks-desktop {
+    display: flex;
+    width: var(--wrapper-width);
+    margin: 0 auto;
+    column-gap: 26px;
+    padding-bottom: 96px;
+  }
+
+  body.tour .merge-blocks-desktop .columns-wrapper{
+    flex-basis: 75%;
+  }
+
+  body.tour .merge-blocks-desktop .columns > div{
+    align-items: flex-start;
+    column-gap: 26px;
+  }
+
+  body.tour .merge-blocks-desktop .badge-wrapper{
+    flex-basis: 25%;
+  }
 }
 
 /* -- VIP FAQ Template Styles -- */
