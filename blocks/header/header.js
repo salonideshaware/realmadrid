@@ -40,8 +40,6 @@ function addHamburger(block, data) {
 }
 
 export default async function decorate(block) {
-  console.log('decorating header');
-
   let lastScroll = 0;
   document.addEventListener('scroll', () => {
     if (lastScroll < window.scrollY) {
@@ -53,8 +51,6 @@ export default async function decorate(block) {
   });
 
   const data = await fetchMenuData();
-  console.log(data.data.header.items[0]);
-
   addHamburger(block, data);
 
   // eslint-disable-next-line no-underscore-dangle
@@ -62,7 +58,7 @@ export default async function decorate(block) {
   // eslint-disable-next-line no-underscore-dangle
   const sponsorUrl = data.data.header.items[0].sponsors[1].logo._publishUrl;
 
-  block.appendChild(document.createRange().createContextualFragment(`    
+  block.appendChild(document.createRange().createContextualFragment(`
     <div style="flex: 1 0 auto; display: flex; flex-direction: row; justify-content: space-between; align-items: center">
       <!-- Logos -->
       <div style="flex: 0 0 auto; display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin: 0 9px 0 10px">
@@ -87,6 +83,4 @@ export default async function decorate(block) {
       </div>
     </div>
   `));
-
-  console.log('decorated header');
 }
