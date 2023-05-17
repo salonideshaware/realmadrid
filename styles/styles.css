@@ -317,6 +317,14 @@ body.tour main .section-organize-visit h2{
   margin-top: 0;
 }
 
+@media (min-width: 990px) {
+  body.tour main .section {
+    padding: 0;
+    position:relative;
+    background: white;
+  }
+}
+
 /* -- VIP FAQ Template Styles -- */
 
 /* restyle contact card */
