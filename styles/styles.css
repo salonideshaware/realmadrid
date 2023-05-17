@@ -410,6 +410,7 @@ body.vip-faq main .section > div {
 }
 
 /* define font settings for all default content elements */
+/* stylelint-disable-next-line no-descending-specificity */
 body.vip-faq main .section div p, body.vip-faq main .section div ul {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;

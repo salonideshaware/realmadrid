@@ -9,9 +9,10 @@ function decorateOrganizeVisit(el) {
       rowElements[0].classList.add('icon-wrapper');
       rowElements[1].classList.add('text-wrapper');
       // remove buttons styling from stand-alone links
-      rowElements[1].querySelectorAll('.button, .button-container').forEach((button) => {
-        button.classList.remove('button', 'button-container', 'primary');
-      });
+      rowElements[1].querySelectorAll('.button, .button-container')
+        .forEach((button) => {
+          button.classList.remove('button', 'button-container', 'primary');
+        });
     }
   });
 }
@@ -21,7 +22,7 @@ function decorateFullColumns(el) {
   const elements = el.querySelectorAll(':scope > div > div');
   if (elements != null) {
     elements.forEach((element) => {
-      if(element.children.length > 0) {
+      if (element.children.length > 0) {
         [...element.children].forEach((row, index) => {
           switch (index) {
             case 0:
