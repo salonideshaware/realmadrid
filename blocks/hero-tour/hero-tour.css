@@ -1,22 +1,215 @@
+body.tour .section.hero-tour-container .hero-tour.block {
+  overflow: hidden;
+  max-width: 100%;
+}
+
 body.tour .section.hero-tour-container .hero-tour-wrapper {
   width:100%;
 }
 
-@media (min-width: 990px) {
-  body.tour .section.hero-tour-container .hero-tour.block {
-    overflow: hidden;
-    max-width: 100%;
-  }
+/* the content section */
+body.tour .section.hero-tour-container .hero-tour.block .content {
+  position: relative;
+  z-index: 2;
+  background-color: rgba(255 255 255 0%);
+  box-sizing: border-box;
+  transition: background-color 0.45s ease-in;
+}
 
-  /* the content section */
-  body.tour .section.hero-tour-container .hero-tour.block .content {
-    position: relative;
-    z-index: 2;
-    background-color: rgba(255 255 255 0%);
-    box-sizing: border-box;
-    transition: background-color 0.45s ease-in;
-  }
+body.tour .section.hero-tour-container .hero-tour.block .content .content-wrapper {
+  padding: 1.25rem 0;
+}
 
+/* pretitle */
+body.tour .section.hero-tour-container .hero-tour.block .content .pretitle {
+  padding: 0 1.25rem;
+  margin: 0;
+  font-size: 1.25rem;
+  font-family: var(--heading-font-family);
+  font-weight: 300;
+  line-height: 1.5;
+  color: white;
+}
+
+/* title */
+body.tour .section.hero-tour-container .hero-tour.block .content h1 {
+  font-size: 3.3125rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03rem;
+  padding: 0 1.25rem;
+  margin:0;
+  color: white;
+  font-family: var(--heading-font-family);
+}
+
+/* navigation */
+body.tour .section.hero-tour-container .hero-tour.block .content .navcontainer {
+  width: auto;
+  height: 2rem;
+  margin: 1.25rem 1.25rem 1.875rem;
+  position: relative;
+  padding: 0;
+  z-index: 1;
+}
+
+body.tour .section.hero-tour-container .hero-tour.block .content .navcontainer nav {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  font-size: 0;
+  white-space: nowrap;
+  align-items: flex-start;
+  z-index: 1;
+  display: flex;
+  transition-property: transform;
+  transition-timing-function: ease-out;
+  box-sizing: content-box;
+}
+
+/* navigation entries */
+body.tour .section.hero-tour-container .hero-tour.block .content .navcontainer nav a {
+  font-size: 0.875rem;
+  color: #fff;
+  height: 2rem;
+  margin-right: 1rem;
+  flex-shrink: 0;
+  position: relative;
+  transition-property: transform;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: auto;
+  box-sizing: border-box;
+  font-family: var(--body-font-family);
+  font-weight: 600;
+  line-height: 0.8;
+  padding: 0 0.75rem;
+  border-radius: 1rem;
+  border: solid 0.06rem #fff;
+  background-color: rgba(0 0 0 / 50%);
+  text-transform: uppercase;
+  text-decoration: none;
+  vertical-align: top;
+}
+
+/* the icon on the left */
+body.tour .section.hero-tour-container .hero-tour.block .content .navcontainer nav a::before {
+  content: var(--nav-icon);
+  font-family: Real-Madrid-New-Icons, sans-serif;
+  width: 1.1875rem;
+  text-indent: -.375rem;
+  margin-right: 0.5rem;
+  height: 1rem;
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.06rem;
+  line-height: 0.6;
+  font-weight: 400;
+  font-style: normal;
+  font-variant: normal;
+  color:white;
+}
+
+/* when we are on the page itself */
+body.tour .section.hero-tour-container .hero-tour.block .content .navcontainer nav a.selected {
+  color: black;
+  background-color: rgba(255 255 255 / 85%);
+  cursor: default;
+  pointer-events: none;
+}
+
+body.tour .section.hero-tour-container .hero-tour.block .content .navcontainer nav a.selected::before {
+  color:black;
+}
+
+/* icon on the right for extenal links */
+body.tour .section.hero-tour-container .hero-tour.block .content .navcontainer nav a::after {
+  content: var(--external-icon);
+  font-family: Real-Madrid-New-Icons, sans-serif;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  width: 0.5625rem;
+  text-indent: -.125rem;
+  height: 1em;
+  margin-left: 0.5rem;
+  line-height: 1;
+  font-weight: 400;
+  font-style: normal;
+  font-variant: normal;
+  color:white;
+}
+
+/* promo text */
+body.tour .section.hero-tour-container .hero-tour.block .content .promo {
+  margin: 0 auto 0.813rem;
+  padding: 0;
+  font-family: var(--body-font-family);
+  font-size: 0.9375rem;
+  opacity: 0.9;
+  line-height: 1.4;
+  letter-spacing: -0.01rem;
+  text-align: center;
+  max-width: 18.75rem;
+  color: white;
+}
+
+/* promo text bold */
+body.tour .section.hero-tour-container .hero-tour.block .content .promo strong {
+  display: block;
+  text-align: center;
+  font-size: 1.3125rem;
+  font-weight: 700;
+  letter-spacing: -0.03rem;
+  text-transform: uppercase;
+}
+
+/* the background div */
+body.tour .section.hero-tour-container .hero-tour.block .background {
+  position: fixed;
+  top: 3.56rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  width:100%;
+  height:100%;
+}
+
+/* darken the background */
+body.tour .section.hero-tour-container .hero-tour.block .background::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0 0 0 / 65%) 35%, rgba(84 84 84 / 0%) 100%);
+}
+
+/* background image(s) */
+body.tour .section.hero-tour-container .hero-tour.block .background picture img {
+  width: auto;
+  min-width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* show mobile image */
+body.tour .section.hero-tour-container .hero-tour.block .background picture.mobile img {
+  display: block;
+}
+
+/* hide the desktop image */
+body.tour .section.hero-tour-container .hero-tour.block .background picture.desktop img {
+  display:none;
+}
+
+/* --- at about 600px ---- */
+@media (min-width: 37.5rem) {
   body.tour .section.hero-tour-container .hero-tour.block .content .content-wrapper {
     padding: 3.125rem 0 0;
     min-height: calc(100vh - 9.38rem);
@@ -25,175 +218,66 @@ body.tour .section.hero-tour-container .hero-tour-wrapper {
   /* pretitle */
   body.tour .section.hero-tour-container .hero-tour.block .content .pretitle {
     padding: 0;
-    margin: 0;
     text-align: center;
-    font-size: 1.25rem;
     text-transform: uppercase;
-    font-family: var(--heading-font-family);
-    font-weight: 300;
-    line-height: 1.5;
-    color: white;
   }
 
   /* title */
   body.tour .section.hero-tour-container .hero-tour.block .content h1 {
     padding: 0;
-    margin:0;
     text-align: center;
     font-size: 4.375rem;
     font-weight: 500;
     text-transform: uppercase;
     line-height: 1.2;
-    color: white;
-    font-family: var(--heading-font-family);
   }
 
   /* navigation */
-  body.tour .section.hero-tour-container .hero-tour.block .content .navcontainer {
-    width: auto;
-    height: 2rem;
-    margin: 1.25rem 1.25rem 1.875rem;
-    position: relative;
-    padding: 0;
-    z-index: 1;
-  }
-
   body.tour .section.hero-tour-container .hero-tour.block .content .navcontainer nav {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    font-size: 0;
-    white-space: nowrap;
-    align-items: flex-start;
-    z-index: 1;
-    display: flex;
-    transition-property: transform;
-    transition-timing-function: ease-out;
-    box-sizing: content-box;
     justify-content: center;
     margin: 1.875rem 0;
   }
 
+  /* navigation entries */
   body.tour .section.hero-tour-container .hero-tour.block .content .navcontainer nav a {
     font-size: 0.75rem;
-    color: #fff;
     height: 1.625rem;
-    margin-right: 1rem;
-    flex-shrink: 0;
-    position: relative;
-    transition-property: transform;
-    display: inline-flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: auto;
-    box-sizing: border-box;
-    font-family: var(--body-font-family);
-    font-weight: 600;
-    line-height: 0.8;
-    padding: 0 0.75rem;
-    border-radius: 1rem;
-    border: solid 0.06rem #fff;
-    background-color: rgba(0 0 0 / 50%);
-    text-transform: uppercase;
-    text-decoration: none;
-    vertical-align: top;
   }
 
   body.tour .section.hero-tour-container .hero-tour.block .content .navcontainer nav a::before {
-    content: var(--nav-icon);
-    font-family: Real-Madrid-New-Icons, sans-serif;
-    width: 0.875rem;
-    text-indent: -.375rem;
-    margin-right: 0.5rem;
+    width: 1.0625rem;
+    text-indent: -.25rem;
     height: 0.8125rem;
     font-size: 1.625rem;
-    display: block;
-    margin-bottom: 0.06rem;
-    line-height: 0.6;
-    font-weight: 400;
-    font-style: normal;
-    font-variant: normal;
-    color:white;
-  }
-
-  body.tour .section.hero-tour-container .hero-tour.block .content .navcontainer nav a.selected::before {
-    color:black;
   }
 
   body.tour .section.hero-tour-container .hero-tour.block .content .navcontainer nav a::after {
-    content: var(--external-icon);
-    font-family: Real-Madrid-New-Icons, sans-serif;
     font-size: 0.625rem;
-    display: flex;
-    align-items: center;
-    width: 0.5625rem;
-    text-indent: -.125rem;
-    height: 1em;
-    margin-left: 0.5rem;
-    line-height: 1;
-    font-weight: 400;
-    font-style: normal;
-    font-variant: normal;
-    color:white;
-  }
-
-  body.tour .section.hero-tour-container .hero-tour.block .content .navcontainer nav a.selected::after {
-    color:black;
-  }
-
-  body.tour .section.hero-tour-container .hero-tour.block .content .navcontainer nav a.selected {
-    color: black;
-    background-color: rgba(255 255 255 / 85%);
-    cursor: default;
-    pointer-events: none;
   }
 
   /* promo text */
   body.tour .section.hero-tour-container .hero-tour.block .content .promo {
     font-size: 1.25rem;
     margin-bottom: 4.6875rem;
-    margin-top: 0;
     font-weight: 400;
     max-width: none;
-    font-family: "Open Sans", Arial, Helvetica, sans-serif;
-    opacity: 0.9;
-    line-height: 1.4;
-    letter-spacing: -0.01rem;
-    text-align: center;
-    color: white;
+  }
+
+  body.tour .section.hero-tour-container .hero-tour.block .content .promo strong {
+    display: inline;
+    font-weight: 600;
   }
 
   /* the background div */
   body.tour .section.hero-tour-container .hero-tour.block .background {
-    position:fixed;
     top: 2.563rem;
-    bottom: 0;
-    left: 0;
-    right: 0;
     min-height: 36.88rem;
-    overflow: hidden;
     width:100%;
     height:100%;
   }
 
-  body.tour .section.hero-tour-container .hero-tour.block .background::after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, rgba(0 0 0 / 65%) 35%, rgba(84 84 84 / 0%) 100%);
-  }
-
   body.tour .section.hero-tour-container .hero-tour.block .background picture.desktop img {
     display:block;
-    width: auto;
-    min-width: 100%;
-    height: 100%;
-    object-fit: cover;
   }
 
   body.tour .section.hero-tour-container .hero-tour.block .background picture.mobile img {

@@ -90,11 +90,14 @@ function buildAutoBlocks(main) {
   try {
     // we use fragments in auto blocks which generates its own main and calls decorateMain()
     // on it. So we have to check that we are not ending in a recursive loop
-    if ((getMetadata('template') === 'vip-faq') && main === document.querySelector('main')) {
-      buildFAQPage(main);
-      return;
+    if (main === document.querySelector('main')) {
+      if (getMetadata('template') === 'vip-faq') {
+        buildFAQPage(main);
+      }
+      if (getMetadata('template') === 'area vip') {
+        buildHeroBlock(main);
+      }
     }
-    buildHeroBlock(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);

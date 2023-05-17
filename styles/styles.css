@@ -315,7 +315,9 @@ main .section > div {
 
 /* TOUR STYLES */
 body.tour main .section {
-  padding: 0 20px;
+  padding: 0;
+  position:relative;
+  background: white;
 }
 
 body.tour .default-content-wrapper ul {
@@ -332,14 +334,6 @@ body.tour main .section-organize-visit {
 body.tour main .section-organize-visit h2{
   margin-bottom: 49px;
   margin-top: 0;
-}
-
-@media (min-width: 990px) {
-  body.tour main .section {
-    padding: 0;
-    position:relative;
-    background: white;
-  }
 }
 
 /* -- VIP FAQ Template Styles -- */

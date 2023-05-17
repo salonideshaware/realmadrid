@@ -6,7 +6,9 @@ export default async function decorate(block) {
   const {
     pretitle, title, promo, desktop, navigation, mobile,
   } = cfg;
-  // create dom structure
+  const promoTitle = cfg['promo-title'];
+
+  // create basic dom structure
   const dom = document.createRange().createContextualFragment(`
       <div class='content'>
         <div class='content-wrapper'>
@@ -19,22 +21,22 @@ export default async function decorate(block) {
   `);
 
   // shortcuts
-  const contentWrapper = dom.querySelector('.content-wrapper');
+  const ticketContainer = dom.querySelector('.ticket-container');
   const background = dom.querySelector('.background');
 
   // if a pretitle is defined
   if (pretitle) {
     const preTitleElem = document.createElement('p');
     preTitleElem.classList.add('pretitle');
-    preTitleElem.textContent = pretitle.toUpperCase();
-    contentWrapper.append(preTitleElem);
+    preTitleElem.textContent = pretitle;
+    ticketContainer.before(preTitleElem);
   }
 
   // if title is defined
   if (title) {
     const titleElem = document.createElement('h1');
-    titleElem.textContent = title.toUpperCase();
-    contentWrapper.append(titleElem);
+    titleElem.textContent = title;
+    ticketContainer.before(titleElem);
   }
 
   // if navigation is defined
@@ -46,18 +48,19 @@ export default async function decorate(block) {
       divNavContainer.classList.add('navcontainer');
       const navElem = document.createElement('nav');
       divNavContainer.append(navElem);
-      contentWrapper.append(divNavContainer);
+      ticketContainer.before(divNavContainer);
       // get the navigation table from the fragment
       const navEntries = document.createRange().createContextualFragment(await resp.text()).querySelector('.navigation');
       // add entries
       [...navEntries.children].forEach((navEntry) => {
         const a = navEntry.children[1].children[0];
         a.style.setProperty('--nav-icon', `'${navEntry.children[0].textContent.trim()}'`);
-        // if its the current page
         const href = a.getAttribute('href');
+        // if its the current page
         if (href.endsWith(document.location.pathname)) {
           a.classList.add('selected');
         }
+        // if its an external link
         if (href.indexOf('www.realmadrid.') === -1) {
           a.style.setProperty('--external-icon', "'\\e916'");
         }
@@ -66,12 +69,19 @@ export default async function decorate(block) {
     }
   }
 
-  // if promo text is defined
-  if (promo) {
+  // if promo text and/or promo title is defined
+  if (promo || promoTitle) {
     const promoElem = document.createElement('p');
     promoElem.classList.add('promo');
-    promoElem.textContent = promo;
-    contentWrapper.append(promoElem);
+    if (promoTitle) {
+      const strong = document.createElement('strong');
+      strong.textContent = promoTitle;
+      promoElem.append(strong);
+    }
+    if (promo) {
+      promoElem.append(` ${promo}`);
+    }
+    ticketContainer.before(promoElem);
   }
 
   // if background is defined
@@ -90,6 +100,7 @@ export default async function decorate(block) {
     picture.classList.add('mobile');
     background.append(picture);
   }
+
   block.textContent = '';
   block.append(dom);
 }
