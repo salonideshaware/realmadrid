@@ -77,7 +77,7 @@ function buildFAQPage(main) {
   buildContentHeaderBlock(main);
   // create a section for the info box
   const infoSection = document.createElement('div');
-  const fragmentBlock = buildBlock('fragment', [['/area-vip/es/fragments/contact-card']]);
+  const fragmentBlock = buildBlock('fragment', [[VIP_AREA_LANGUAGE_HOME_PATH[getLanguage()]+'/fragments/contact-card']]);
   infoSection.append(fragmentBlock);
   main.append(infoSection);
 }
