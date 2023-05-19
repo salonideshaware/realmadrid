@@ -24,16 +24,12 @@ export default function decorate(block) {
     tabsWrapper.classList.add('swiper-container', 'tour-faq-tabs');
     block.prepend(tabsWrapper);
 
-    /*  const swiperapper = document.createElement('div');
-     swiperapper.classList.add('swiper-wrapper');
-     tabsWrapper.appendChild(swiperapper); */
-
     // Create a new div to wrap the tab contents
     const contentWrapper = document.createElement('div');
     contentWrapper.classList.add('tour-faq-content-wrapper');
 
     // Move the tab titles into the new wrapper div and add tab functionality
-    const tourFaqTabs = [...block.querySelectorAll('.columns > div')];
+    const tourFaqTabs = block.querySelectorAll('.columns > div'); // Removed the array conversion
 
     tourFaqTabs.forEach((tab, index) => {
       const tabTitle = tab.firstElementChild;

@@ -59,7 +59,7 @@
 
 
   /** heading color */
-  --heading-color: #333;
+  --text-color: #333;
   --heading-border-color: #0255A5;
 
   /* nav height */
@@ -73,6 +73,10 @@
   --icon-primary-color: #999;
   --icon-secondary-color: #fff;
   --icon-terciary-color: #777;
+
+  /*Faq Tabs Background Color */
+  --tabs-backgrounf-color: rgba(104,122,142,0.85);
+
 }
 
 /* Desktop */
