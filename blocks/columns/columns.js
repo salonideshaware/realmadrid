@@ -9,11 +9,37 @@ function decorateOrganizeVisit(el) {
       rowElements[0].classList.add('icon-wrapper');
       rowElements[1].classList.add('text-wrapper');
       // remove buttons styling from stand-alone links
-      rowElements[1].querySelectorAll('.button, .button-container').forEach((button) => {
-        button.classList.remove('button', 'button-container', 'primary');
-      });
+      rowElements[1].querySelectorAll('.button, .button-container')
+        .forEach((button) => {
+          button.classList.remove('button', 'button-container', 'primary');
+        });
     }
   });
+}
+
+function decorateFullColumns(el) {
+  loadCSS(`${window.hlx.codeBasePath}/blocks/columns/full-columns.css`);
+  const elements = el.querySelectorAll(':scope > div > div');
+  if (elements != null) {
+    elements.forEach((element) => {
+      Array.from(element.children).forEach((row, index) => {
+        switch (index) {
+          case 0:
+            row.classList.add('image');
+            break;
+          case 1:
+            row.classList.add('subtitle');
+            break;
+          case 2:
+            row.classList.add('title');
+            break;
+          default:
+            row.classList.add('text');
+            break;
+        }
+      });
+    });
+  }
 }
 
 export default function decorate(block) {
@@ -37,5 +63,9 @@ export default function decorate(block) {
   // customization for organize-visit-column
   if (block.classList.contains('organize-visit')) {
     decorateOrganizeVisit(block);
+  }
+  // customization for full-column
+  if (block.classList.contains('full')) {
+    decorateFullColumns(block);
   }
 }
