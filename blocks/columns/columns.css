@@ -1,4 +1,4 @@
-.columns>div {
+.columns > div {
   display: flex;
   flex-direction: column;
 }
@@ -7,22 +7,46 @@
   width: 100%;
 }
 
-.columns>div>div {
+/* Font-family uses the var(--body-font-family) */
+.tour-faq-tabs > div {
+  display: inline-block;
+  margin-right: 0.625rem;
+  margin-top: 0.625rem;
+  border-radius: 1.875rem;
+  border: solid 1px #555;
+  font-size: 0.875rem;
+  padding: 0.375rem 1.375rem;
+  font-family: var(--body-font-family);
+  font-weight: normal;
+  line-height: 1.5;
+  box-sizing: border-box;
+  text-decoration: none;
+  text-align: center;
+}
+
+.tour-faq-content-wrapper > div {
+  display: none;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.columns > div > div {
   order: 1;
 }
 
-.columns>div>.columns-img-col {
+.columns > div > .columns-img-col {
   order: 0;
 }
 
-.columns>div>.columns-img-col img {
+.columns > div > .columns-img-col img {
   display: block;
 }
 
 /* COLUMNS VIP LOCATION TYPE */
 .columns.vip-location {
   padding: 25px 10px 0;
- }
+}
 
 .columns.vip-location ul {
   list-style-type: none;
@@ -46,13 +70,13 @@
 }
 
 @media (min-width: 990px) {
-  .columns>div {
+  .columns > div {
     align-items: center;
     flex-direction: unset;
     gap: 32px;
   }
 
-  .columns>div>div {
+  .columns > div > div {
     flex: 1;
     order: unset;
   }
@@ -115,10 +139,9 @@
   overflow: hidden;
 }
 
-.columns>.tour-faq-tabs {
+.columns > .tour-faq-tabs {
   display: block;
 }
-
 
 .tour-faq-tabs .swiper-container {
   width: 100%;
@@ -134,27 +157,9 @@
   width: auto;
 }
 
-/* Font-family uses the var(--body-font-family) */
-.tour-faq-tabs>div {
-  display: inline-block;
-  margin-right: 0.625rem;
-  margin-top: 0.625rem;
-  border-radius: 1.875rem;
-  border: solid 1px #555555;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  padding: 0.375rem 1.375rem;
-  font-family: var(--body-font-family);
-  font-weight: normal;
-  line-height: 1.4;
-  box-sizing: border-box;
-  text-decoration: none;
-  text-align: center;
-}
-
 /* Background-color and color value are taken from the defined variables */
-.tour-faq-tabs>div.active {
-  background-color: rgba(104,122,142,0.85);
+.tour-faq-tabs > div.active {
+  background-color: rgb(104 122 142 / 85%);
   color: var(--background-color);
 }
 
@@ -162,14 +167,7 @@
   width: 100%;
 }
 
-.tour-faq-content-wrapper>div {
-  display: none;
-  padding: 20px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.tour-faq-content-wrapper>div.active {
+.tour-faq-content-wrapper > div.active {
   display: block;
 }
 
@@ -187,7 +185,7 @@
   cursor: pointer;
 }
 
-.answer {
+body.tour main p.answer {
   font-family: var(--body-font-family);
   font-size: 1.063rem;
   font-weight: normal;
@@ -210,7 +208,7 @@
 }
 
 /* Splitting the rule into common and individual properties */
-.question.open:before, .question.close:before {
+.question.open::before, .question.close::before {
   width: 1.063rem;
   height: 1.063rem;
   border-radius: 50%;
@@ -224,12 +222,12 @@
   margin-right: 0.75rem;
 }
 
-.question.open:before {
+.question.open::before {
   content: '\2013';
   line-height: 0.8;
 }
 
-.question.close:before {
+.question.close::before {
   content: '+';
   line-height: 1.1;
 }
@@ -240,7 +238,7 @@
     line-height: 1.47;
   }
 
-  .answer {
+  body.tour main p.answer {
     font-size: 0.938rem;
     line-height: 1.47;
     max-height: inherit;
