@@ -60,40 +60,32 @@ export default function decorate(block) {
     });
   });
 
-
   // Tour-FAQ Fragment
-  if (block.classList.contains("tour-faq")) {
-    // Create a new div to wrap the tab titles
+  if (block.classList.contains('tour-faq')) {
     const tabsWrapper = document.createElement('div');
     tabsWrapper.classList.add('swiper-container', 'tour-faq-tabs');
     block.prepend(tabsWrapper);
 
-    // Create a new div to wrap the tab contents
     const contentWrapper = document.createElement('div');
     contentWrapper.classList.add('tour-faq-content-wrapper');
 
-    // Move the tab titles into the new wrapper div and add tab functionality
-    const tourFaqTabs = block.querySelectorAll('.columns > div'); // Removed the array conversion
+    const tourFaqTabs = block.querySelectorAll('.columns > div');
 
     tourFaqTabs.forEach((tab, index) => {
-      const tabTitle = tab.firstElementChild;
-      if (tabTitle) {
+      const tabTitleFirst = tab.firstElementChild;
+      if (tabTitleFirst) {
         const newTab = document.createElement('div');
-        newTab.innerHTML = tabTitle.innerHTML;
+        newTab.innerHTML = tabTitleFirst.innerHTML;
         newTab.classList.add('swiper-slide');
         tabsWrapper.appendChild(newTab);
-        tabTitle.remove();
+        tabTitleFirst.remove();
 
         newTab.addEventListener('click', (event) => {
           event.stopPropagation();
-          // Remove active class from all tab titles
-          tabsWrapper.querySelectorAll('div').forEach(tabTitle => tabTitle.classList.remove('active'));
-          // Add active class to the clicked tab title
+          tabsWrapper.querySelectorAll('div').forEach((tabTitle) => tabTitle.classList.remove('active'));
           newTab.classList.add('active');
 
-          // Remove active class from all content panels
-          contentWrapper.querySelectorAll('div').forEach(div => div.classList.remove('active'));
-          // Add active class to the corresponding content panel
+          contentWrapper.querySelectorAll('div').forEach((div) => div.classList.remove('active'));
           tab.classList.add('active');
         });
 
@@ -118,51 +110,49 @@ export default function decorate(block) {
     // Finally, append the content wrapper to the block element
     block.appendChild(contentWrapper);
 
-    // Add the "question" class and click event listeners to toggle answer visibility
-    const contentDivs = contentWrapper.querySelectorAll("div");
-    contentDivs.forEach((contentDiv, contentDivIndex) => {
-      const questionParas = contentDiv.querySelectorAll("p > strong");
+    const contentDivs = contentWrapper.querySelectorAll('div');
+    contentDivs.forEach((contentDiv) => {
+      const questionParas = contentDiv.querySelectorAll('p > strong');
       questionParas.forEach((question, questionIndex) => {
         const para = question.parentElement;
-        para.classList.add("question");
-        question.classList.add("question");
+        para.classList.add('question');
+        question.classList.add('question');
         const answer = question.parentElement.nextElementSibling;
-        answer.classList.add("answer");
+        answer.classList.add('answer');
         if (window.innerWidth <= 768) {
-          question.addEventListener("click", (event) => {
+          question.addEventListener('click', (event) => {
             event.stopImmediatePropagation();
             if (event.target !== question) return;
 
-            // Close any other open answers
-            contentDiv.querySelectorAll(".question.open").forEach((otherQuestion) => {
+            contentDiv.querySelectorAll('.question.open').forEach((otherQuestion) => {
               if (otherQuestion !== question) {
-                otherQuestion.classList.remove("open");
-                otherQuestion.classList.add("close");
-                otherQuestion.parentElement.nextElementSibling.classList.remove("open");
-                otherQuestion.parentElement.nextElementSibling.classList.add("close");
+                otherQuestion.classList.remove('open');
+                otherQuestion.classList.add('close');
+                otherQuestion.parentElement.nextElementSibling.classList.remove('open');
+                otherQuestion.parentElement.nextElementSibling.classList.add('close');
               }
             });
 
-            const isOpen = question.classList.contains("open");
+            const isOpen = question.classList.contains('open');
             if (isOpen) {
-              question.classList.remove("open");
-              question.classList.add("close");
-              answer.classList.remove("open");
-              answer.classList.add("close");
+              question.classList.remove('open');
+              question.classList.add('close');
+              answer.classList.remove('open');
+              answer.classList.add('close');
             } else {
-              question.classList.remove("close");
-              question.classList.add("open");
-              answer.classList.remove("close");
-              answer.classList.add("open");
+              question.classList.remove('close');
+              question.classList.add('open');
+              answer.classList.remove('close');
+              answer.classList.add('open');
             }
           });
           // Display the first question's answer by default
           if (questionIndex === 0) {
-            question.classList.add("open");
-            answer.classList.add("open");
+            question.classList.add('open');
+            answer.classList.add('open');
           } else {
-            question.classList.add("close");
-            answer.classList.add("close");
+            question.classList.add('close');
+            answer.classList.add('close');
           }
         }
       });
@@ -178,4 +168,3 @@ export default function decorate(block) {
     decorateFullColumns(block);
   }
 }
-
