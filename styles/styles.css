@@ -356,10 +356,6 @@ body.tour main .merge-blocks-desktop {
 }
 
 @media (min-width: 990px) {
-  body.tour main p {
-    font-size: var(--body-font-size-m);
-  }
-
   body.tour .merge-blocks-desktop {
     display: flex;
     width: var(--wrapper-width);
