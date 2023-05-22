@@ -92,7 +92,7 @@
 
 /* Background-color and color value are taken from the defined variables */
 .tour-faq-tabs>div.active {
-  background-color: var(--tabs-backgrounf-color);
+  background-color: rgba(104,122,142,0.85);
   color: var(--background-color);
 }
 
