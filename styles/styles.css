@@ -26,6 +26,20 @@
   src: local("Arial");
 }
 
+/* fallback font for RMNeue (normal - 400) for header */
+@font-face {
+  font-family: "rmneue-normal-400-fallback";
+  size-adjust: 98.669%;
+  src: local("Arial");
+}
+
+/* fallback font for RMNeue (normal - 700) for header */
+@font-face {
+  font-family: "rmneue-normal-700-fallback";
+  size-adjust: 100.491%;
+  src: local("Arial");
+}
+
 /* mobile settings */
  :root {
   /* RM: colors */
@@ -34,15 +48,18 @@
   --background-color: #fff;
   --overlay-background-color: #eee; /* ??? needed */
   --highlight-background-color: #ccc; /* ??? needed */
+  --section-tour-background-color: #efefef; /* ??? needed */
   --text-color: #43526E;
 
   /* RM: fonts */
   --body-font-family: "Open Sans", "open-sans-norma-400-fallback", arial, helvetica, sans-serif;
   --heading-font-family: "Oswald", "oswald-normal-400-fallback", sans-serif;
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
+  --header-font-family: "RMNeue","rmneue-normal-400-fallback";
+  --header-font-family-bold: "RMNeue","rmneue-normal-700-fallback";
 
-  /* RM: body sizes
-  --body-font-size-m: 19px; */
+  /* RM: body sizes */
+  --body-font-size-m: 20px;
   --body-font-size-s: 18px; /* RM: Standard text */
   --body-font-size-xs: 15px;
 
@@ -54,8 +71,8 @@
   --heading-font-size-xl: 40px;
   --heading-font-size-l: 32px;
   --heading-font-size-m: 28px;
-  --heading-font-size-s: 20px; /* RM:h2, h3 */
-  --heading-font-size-xs: 18px;
+  --heading-font-size-s: 21px; /* RM:h2, h3 */
+  --heading-font-size-xs: 20px;
 
 
   /** heading color */
@@ -112,6 +129,7 @@ body {
   color: var(--text-color);
   background-color: var(--background-color);
   display: none;
+  padding-top: var(--nav-height);
 }
 
 /* required by franklin */
@@ -132,14 +150,30 @@ h1 {
   line-height: normal;
 }
 
-/* RM: Seems to be only regular heading in text */
-h2 {
+
+/* Default H2 for the whole website, and specifically for the first h2 in the info-vip section */
+h2,
+body.area-vip .section.section.info-vip > .default-content-wrapper:first-of-type h2 {
   font-size: var(--heading-font-size-s);
+  font-weight: 300;
+  color: var(--text-color);
+  margin-bottom: 15px;
+  line-height: 1.43;
+  border: none;
+  text-transform: none;
+}
+
+
+/* Default H2 for area-vip */
+/* stylelint-disable-next-line no-descending-specificity */
+body.area-vip h2 {
+  font-size: var(--heading-font-size-xs);
   font-weight: 500;
   line-height: 1.25;
-  color: var(--heading-color); /* #333 */
+  color: var(--heading-color);
   text-transform: uppercase;
   margin-bottom: 21px;
+  margin-left: 10px;
   padding-bottom: 5px;
   width: var(--section-heading-width);
   border-right: 4px solid transparent;
@@ -229,23 +263,27 @@ main .section > div {
 /* INFO VIP styles */
 .section.info-vip > .default-content-wrapper {
   width: auto;
-  margin-top: 60px;
-  padding: 25px 100px 0 15px;
+  padding: 25px 20px 0;
   grid-column: 2/3;
-  grid-row: 1/2;
+  grid-row: auto;
 }
 
+.section.info-vip > .default-content-wrapper:first-of-type {
+  margin-top: 60px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
 .section.info-vip > .default-content-wrapper h2 {
-  font-size: 21px;
-  font-weight: 300;
-  color: var(--text-color);
-  margin-bottom: 15px;
-  line-height: 1.43;
-  border: none;
-  text-transform: none;
+  margin-left: 0;
 }
 
 @media (min-width: 990px)  {
+  h2,
+  body.area-vip .section.section.info-vip > .default-content-wrapper:first-of-type h2 {
+    font-size: var(--heading-font-size-m);
+    width: auto;
+  }
+
   .section.info-vip {
     display: grid;
     grid-template-columns: auto 800px 400px auto;
@@ -253,45 +291,150 @@ main .section > div {
   }
 
   .section.info-vip > .default-content-wrapper {
-    width: auto;
-    margin-top: 60px;
+    width: 685px; /* TODO: review this. hardcoding it for now */
     padding: 25px 100px 0 15px;
     grid-column: 2/3;
-    grid-row: 1/2;
+    grid-row: auto;
+    margin-left: 0;
   }
 
+  /* stylelint-disable-next-line no-descending-specificity */
   .section.info-vip > .default-content-wrapper h2 {
-    width: auto;
-    font-size: 29px;
-    font-weight: 200;
-    line-height: 1.03;
-    margin-bottom: 25px;
+    width: 68%;
   }
-
 }
 
 @media (min-width: 990px) and (max-width: 1200px) {
   .section.info-vip {
     grid-template-columns: auto 600px 360px auto;
   }
+
+  .section.info-vip > .default-content-wrapper {
+    width: 485px; /* TODO: review this. hardcoding it for now */
+  }
 }
 
-
 /* TOUR STYLES */
+body.tour main p {
+  font-size: var(--body-font-size-s);
+}
 
-.tour main .section {
+body.tour main .section {
   padding: 0 20px;
 }
 
- .tour .default-content-wrapper ul {
+body.tour .default-content-wrapper ul {
   margin-left: 1.75rem;
- }
+}
 
-.tour h2 {
-  font-size: var(--heading-font-size-m);
+body.tour main .section-organize-visit {
+  background-color: var(--section-tour-background-color);
+  overflow: hidden;
+  padding: 54px 20px 49px;
+}
+
+body.tour main .section .default-content-wrapper p {
+  color: #444;
+  margin: 0 0 28px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+body.tour main h2 {
+  font-family: var(--heading-font-family);
   font-weight: 400;
-  margin-bottom: 15px;
-  line-height: 1.43;
-  border: none;
-  text-transform: none;
+  margin-bottom: 3px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+body.tour main .section-organize-visit h2{
+  margin-bottom: 49px;
+  margin-top: 0;
+  color: var(--text-color);
+}
+
+body.tour main .merge-blocks-desktop {
+  padding-bottom: 50px;
+}
+
+@media (min-width: 990px) {
+  body.tour .merge-blocks-desktop {
+    display: flex;
+    width: var(--wrapper-width);
+    margin: 0 auto;
+    column-gap: 26px;
+    padding-bottom: 96px;
+  }
+
+  body.tour .merge-blocks-desktop .columns-wrapper{
+    flex-basis: 75%;
+  }
+
+  body.tour .merge-blocks-desktop .columns > div{
+    align-items: flex-start;
+    column-gap: 26px;
+  }
+
+  body.tour .merge-blocks-desktop .badge-wrapper{
+    flex-basis: 25%;
+  }
+}
+
+/* -- VIP FAQ Template Styles -- */
+
+/* restyle contact card */
+body.vip-faq .contact-card.block {
+  border: 1px solid #d9d9d9;
+  padding: 10px;
+  margin: 20px auto;
+}
+
+/* move default content to the main content grid area */
+body.vip-faq main .section {
+  grid-area: content;
+  margin: 10px;
+}
+
+/* header auto block to the top area */
+body.vip-faq main .section.content-header-container {
+  grid-area: header;
+  margin: 0;
+}
+
+/* contact card fragment to the right side */
+body.vip-faq main .section.contact-card-container {
+  grid-area: info;
+  margin: 20px;
+}
+
+/* ajust inner widths */
+body.vip-faq main .section > div {
+  width: 100%;
+}
+
+/* define font settings for all default content elements */
+/* stylelint-disable-next-line no-descending-specificity */
+body.vip-faq main .section div p, body.vip-faq main .section div ul {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: #666;
+}
+
+@media (min-width: 990px) {
+  /* fix width for columns for all non-mobile media */
+  body.vip-faq main  {
+    display: grid;
+    grid: 'header header header header'
+          '. content info .' / auto 640px 320px auto;
+  }
+
+  /* remove margin from info block */
+  body.vip-faq .contact-card.block {
+    margin: 0;
+  }
+
+  body.vip-faq main .section {
+    grid-area: content;
+    margin-top:  40px 0 0 0;
+  }
 }

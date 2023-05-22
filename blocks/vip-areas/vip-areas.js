@@ -1,14 +1,14 @@
 import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
+import { getVipAreaIndexPath } from '../../scripts/scripts.js';
 
-const VIP_AREA_REST_API = '/area-vip/query-index.json';
+const AREAS_VIP_DETAIL = 'vip-area-detail';
 
 async function fetchVIPAreas() {
-  const url = new URL(window.location);
-
   try {
-    const resp = await fetch(`${url.origin}${VIP_AREA_REST_API}`);
+    const vipAreaIndexPath = getVipAreaIndexPath(new URL(window.location));
+    const resp = await fetch(vipAreaIndexPath);
     const json = await resp.json();
-    return json.data;
+    return json.data.filter((area) => area.category === AREAS_VIP_DETAIL);
   } catch (e) {
     // eslint-disable-next-line no-console
     console.log(`unable to fetch vip areas ${e}`);
