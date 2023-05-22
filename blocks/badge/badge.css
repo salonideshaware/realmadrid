@@ -6,10 +6,7 @@
 
 .badge .background-image img {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  inset: 0;
   margin: auto;
   width: 100%;
 }
@@ -31,9 +28,7 @@
   font-weight: 400;
   font-family: var(--heading-font-family);
   position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
+  inset: 0;
 }
 
 .badge .upper-box p {
@@ -43,7 +38,7 @@
 }
 
 .badge .upper-box div > p:nth-child(1) {
-  color: white;
+  color: #fff;
   font-size: 19px;
 }
 
