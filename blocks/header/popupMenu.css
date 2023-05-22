@@ -1,3 +1,5 @@
+@import url('languageSelector.css');
+
 .popup-menu-area {
     position: absolute;
     top: calc(var(--nav-height) + 1px);
@@ -118,38 +120,3 @@
     border-top: 1px solid #E1E5E9;
 }
 
-.lang-button {
-    font-family: var(--header-font-family-bold);
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 24px;
-    color: #555;
-    border: none;
-    background: none;
-    box-shadow: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-left: 25px;
-}
-
-.lang-button:hover {
-    border: none;
-    background: none;
-    box-shadow: none;
-}
-
-.lang-button:focus {
-    border: none;
-    background: none;
-    box-shadow: none;
-}
-
-.lang-button span {
-    padding: 4px;
-}
-
-.lang-button svg {
-    filter: invert(30%) sepia(23%) saturate(741%) hue-rotate(180deg) brightness(93%) contrast(87%);;
-    padding: 4px;
-}

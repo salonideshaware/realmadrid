@@ -1,3 +1,5 @@
+import createLanguageSelectorButton from './languageSelector.js';
+
 export default function createPopupMenu(data) {
   const popupArea = document.createElement('div');
   popupArea.classList.add('popup-menu-area');
@@ -68,17 +70,8 @@ export default function createPopupMenu(data) {
   const footer = document.createElement('div');
   popup.appendChild(footer);
   footer.classList.add('footer-popup-menu-area');
-  footer.innerHTML = `
-    <button class="lang-button">
-      <svg focusable="false" width="16" height="16" aria-hidden="true">
-        <use xlink:href="/blocks/header/landing-sprite.svg#lang"></use>
-      </svg>
-      <span>ES</span>
-      <svg focusable="false" width="16" height="16" aria-hidden="true">
-        <use xlink:href="/blocks/header/cibeles-sprite.svg#chevron-up"></use>
-      </svg>
-    </button>
-  `;
+
+  createLanguageSelectorButton(footer, data.data.header.items[0].languages);
 
   return popupArea;
 }

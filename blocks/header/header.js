@@ -1,43 +1,6 @@
 import fetchMenuData from './utils.js';
-import createPopupMenu from './popupMenu.js';
 import createMainMenu from './topMenu.js';
-
-function addHamburger(block, data) {
-  let state = false;
-  const icon = () => {
-    const src = `/blocks/header/cibeles-sprite.svg#${state ? 'times' : 'menu'}`;
-    return `
-        <svg focusable="false" width="24" height="24" aria-hidden="true">
-            <use xlink:href="${src}"></use>
-        </svg>
-    `;
-  };
-  const popup = createPopupMenu(data);
-  block.appendChild(popup);
-  const menu = document.createElement('div');
-  menu.setAttribute('style', 'background-color: #fff; border-radius: 5px; padding: 0px 9px; display: flex; flex-direction: column; justify-content: center; align-items: center');
-  menu.innerHTML = icon();
-
-  const toggle = () => {
-    state = !state;
-    menu.innerHTML = icon();
-    if (state) {
-      popup.classList.add('visible');
-      document.body.style.overflow = 'hidden';
-    } else {
-      popup.classList.remove('visible');
-      document.body.style.overflow = 'auto';
-    }
-  };
-  menu.addEventListener('click', toggle, false);
-  popup.addEventListener('click', (e) => {
-    if (e.target.classList.contains('popup-menu-area') && state) {
-      toggle();
-    }
-  }, false);
-
-  block.appendChild(menu);
-}
+import addpopupMenuButton from './popupMenuButton.js';
 
 export default async function decorate(block) {
   let lastScroll = 0;
@@ -51,7 +14,9 @@ export default async function decorate(block) {
   });
 
   const data = await fetchMenuData();
-  addHamburger(block, data);
+  console.dir(data);
+
+  addpopupMenuButton(block, data);
 
   // eslint-disable-next-line no-underscore-dangle
   const logoUrl = data.data.header.items[0].additionalLogos[0]._publishUrl;
