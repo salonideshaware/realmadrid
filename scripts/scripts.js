@@ -120,12 +120,16 @@ export function decorateMain(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-  document.documentElement.lang = 'en';
+  // eslint-disable-next-line no-use-before-define
+  document.documentElement.lang = getLanguage();
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
     document.body.classList.add('appear');
+    if (document.documentElement.lang === 'ar') {
+      document.body.dir = 'rtl';
+    }
     await waitForLCP(LCP_BLOCKS);
   }
 }
