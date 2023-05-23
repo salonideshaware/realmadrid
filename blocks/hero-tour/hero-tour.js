@@ -1,10 +1,10 @@
-import { readBlockConfig } from '../../scripts/lib-franklin.js';
+import { readBlockConfig, loadBlock } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
   // get config entries
   const cfg = readBlockConfig(block);
   const {
-    pretitle, title, promo, desktop, navigation, mobile,
+    pretitle, title, promo, desktop, navigation, mobile, tours,
   } = cfg;
   const promoTitle = cfg['promo-title'];
 
@@ -103,4 +103,29 @@ export default async function decorate(block) {
 
   block.textContent = '';
   block.append(dom);
+
+  // what tours are offered
+  if (tours) {
+    // start list
+    const ul = document.createElement('ul');
+    ticketContainer.append(ul);
+
+    tours.forEach(async (tour) => {
+      const li = document.createElement('li');
+      ul.append(li);
+      // read tour data from detail page
+      const resp = await fetch(`${tour}.plain.html`);
+      if (resp.ok) {
+        const ticketCardBlock = document.createRange().createContextualFragment(`
+            <div class='ticket-card' data-block-name='ticket-card' >
+            <div>
+              <div>${tour}</div>
+            <div>
+          </div>
+        `);
+        await loadBlock(ticketCardBlock.firstElementChild);
+        li.append(ticketCardBlock);
+      }
+    });
+  }
 }
