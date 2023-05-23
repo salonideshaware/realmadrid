@@ -317,7 +317,7 @@ main .section > div {
 body.tour main .section {
   padding: 0;
   position:relative;
-  background: white;
+  background: var(--background-color);
 }
 
 body.tour .default-content-wrapper ul {

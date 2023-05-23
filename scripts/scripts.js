@@ -12,6 +12,7 @@ import {
   loadBlocks,
   loadCSS,
   getMetadata,
+  toClassName,
 } from './lib-franklin.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
@@ -91,10 +92,11 @@ function buildAutoBlocks(main) {
     // we use fragments in auto blocks which generates its own main and calls decorateMain()
     // on it. So we have to check that we are not ending in a recursive loop
     if (main === document.querySelector('main')) {
-      if (getMetadata('template') === 'vip-faq') {
+      const template = toClassName(getMetadata('template'));
+      if (template === 'vip-faq') {
         buildFAQPage(main);
       }
-      if (getMetadata('template') === 'area vip') {
+      if (template === 'area-vip') {
         buildHeroBlock(main);
       }
     }
