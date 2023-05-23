@@ -1,14 +1,6 @@
-const SITE_URL = 'https://app-rm-spa-web-stg.azurewebsites.net';
-const DEFAULT_LANGUAGE = 'es-ES';
+import { getLocale } from '../../scripts/scripts.js';
 
-function getLanguage() {
-  const { pathname } = new URL(window.location.href);
-  const urlParts = pathname.split('/');
-  if (urlParts.length > 1 && urlParts[urlParts.length - 1]) {
-    return urlParts[urlParts.length - 1];
-  }
-  return DEFAULT_LANGUAGE;
-}
+const SITE_URL = 'https://app-rm-spa-web-stg.azurewebsites.net';
 
 function createLanguageDropdown(languages, languageButtonContent, currentLanguage) {
   const languageDropdown = document.createElement('ul');
@@ -51,7 +43,7 @@ export default function createLanguageSelectorButton(parent, languages) {
   languageSelectorButton.id = 'language-selector-button';
   languageSelectorButton.classList.add('language-selector-button');
 
-  const currentLanguage = getLanguage();
+  const currentLanguage = getLocale();
   console.log(currentLanguage);
 
   const languageButtonContent = `
