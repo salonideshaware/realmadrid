@@ -10,12 +10,19 @@ function getLanguage() {
   return DEFAULT_LANGUAGE;
 }
 
-function createLanguageDropdown(languages) {
+function createLanguageDropdown(languages, languageButtonContent, currentLanguage) {
   const languageDropdown = document.createElement('ul');
   languageDropdown.classList.add('language-selector-dropdown');
 
-  const currentLanguage = getLanguage();
-  console.log(currentLanguage);
+  const languageButtonItem = document.createElement('li');
+  languageButtonItem.classList.add('language-button-item');
+  languageButtonItem.appendChild(document.createRange()
+    .createContextualFragment(languageButtonContent));
+  languageDropdown.appendChild(languageButtonItem);
+  languageButtonItem.addEventListener('click', (e) => {
+    e.preventDefault();
+    languageDropdown.classList.toggle('visible');
+  }, false);
 
   for (let i = 0; i < languages.length; i += 1) {
     const languageItem = document.createElement('li');
@@ -44,17 +51,27 @@ export default function createLanguageSelectorButton(parent, languages) {
   languageSelectorButton.id = 'language-selector-button';
   languageSelectorButton.classList.add('language-selector-button');
 
-  const languageDropdown = createLanguageDropdown(languages);
+  const currentLanguage = getLanguage();
+  console.log(currentLanguage);
 
-  languageSelectorButton.appendChild(document.createRange().createContextualFragment(`
+  const languageButtonContent = `
     <svg focusable="false" width="16" height="16" aria-hidden="true">
       <use xlink:href="/blocks/header/landing-sprite.svg#lang"></use>
     </svg>
-    <span>ES</span>
+    <span>${currentLanguage.substring(0, 2)}</span>
     <svg focusable="false" width="16" height="16" aria-hidden="true">
       <use xlink:href="/blocks/header/cibeles-sprite.svg#chevron-up"></use>
     </svg>
-  `));
+  `;
+
+  languageSelectorButton.appendChild(document.createRange()
+    .createContextualFragment(languageButtonContent));
+
+  const languageDropdown = createLanguageDropdown(
+    languages,
+    languageButtonContent,
+    currentLanguage,
+  );
 
   languageSelectorButton.addEventListener('click', (e) => {
     e.preventDefault();

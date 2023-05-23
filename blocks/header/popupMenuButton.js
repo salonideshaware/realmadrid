@@ -1,6 +1,6 @@
 import createPopupMenu from './popupMenu.js';
 
-export default function addpopupMenuButton(block, data) {
+export default function addPopupMenuButton(block, data) {
   let state = false;
   const icon = () => {
     const src = `/blocks/header/cibeles-sprite.svg#${state ? 'times' : 'menu'}`;

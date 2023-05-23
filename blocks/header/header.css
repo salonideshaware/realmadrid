@@ -49,3 +49,26 @@ header ul {
     padding: 0;
 }
 
+.header-left-section {
+    flex: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-sponsor-icon {
+    width: 57px;
+    height: 40px;
+    margin: -6px 9px 0 10px;
+}
+
+@media screen and (max-width: 1056px) {
+    .header-sponsor-icon {
+        display: none;
+    }
+
+    .header-sponsors-link {
+        display: none;
+    }
+}
