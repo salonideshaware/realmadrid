@@ -183,6 +183,22 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
+const DATA_URL = 'https://publish-p47754-e237356.adobeaemcloud.com/graphql/execute.json/realmadridmastersite/structurePage%3Balang=es-es';
+let navigationConfig;
+export async function fetchNavigationConfig() {
+  if (navigationConfig) {
+    return navigationConfig;
+  }
+  try {
+    const response = await fetch(DATA_URL);
+    navigationConfig = await response.json();
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
+  return navigationConfig;
+}
+
 const VIP_AREA_INDEX = '/query-index.json';
 const VIP_AREA_LANGUAGE_HOME_PATH = {
   es: '/area-vip',

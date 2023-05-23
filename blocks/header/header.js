@@ -1,8 +1,11 @@
-import fetchMenuData from './utils.js';
 import createMainMenu from './topMenu.js';
 import addPopupMenuButton from './popupMenuButton.js';
+import { fetchNavigationConfig } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
+  const data = await fetchNavigationConfig();
+  console.dir('Navigation config', data);
+
   let lastScroll = 0;
   document.addEventListener('scroll', () => {
     if (lastScroll < window.scrollY) {
@@ -12,9 +15,6 @@ export default async function decorate(block) {
     }
     lastScroll = window.scrollY;
   });
-
-  const data = await fetchMenuData();
-  console.dir(data);
 
   addPopupMenuButton(block, data);
 
