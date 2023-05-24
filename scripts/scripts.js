@@ -72,12 +72,46 @@ function buildContentHeaderBlock(main) {
   main.prepend(headerSection);
 }
 
+const VIP_AREA_LANGUAGE_HOME_PATH = {
+  es: '/area-vip',
+  en: '/en/vip-area',
+  fr: '/fr/zone-vip',
+  de: '/de/vip-zone',
+  pt: '/pt/area-vip',
+  ja: '/ja/vip-area',
+  ar: '/ar/vip-area',
+  hi: '/hi/vip-area',
+};
+
+let language;
+
+export function getLanguage() {
+  if (language) return language;
+  language = 'es';
+  const segs = window.location.pathname.split('/');
+  if (segs && segs.length > 0) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [value] of Object.entries(VIP_AREA_LANGUAGE_HOME_PATH)) {
+      if (value === segs[1]) {
+        language = value;
+        break;
+      }
+    }
+  }
+  return language;
+}
+
+export function getVIPAreaLangRoot() {
+  language = getLanguage();
+  return VIP_AREA_LANGUAGE_HOME_PATH[language];
+}
+
 function buildFAQPage(main) {
   // add header on top
   buildContentHeaderBlock(main);
   // create a section for the info box
   const infoSection = document.createElement('div');
-  const fragmentBlock = buildBlock('fragment', [[VIP_AREA_LANGUAGE_HOME_PATH[getLanguage()]+'/fragments/contact-card']]);
+  const fragmentBlock = buildBlock('fragment', `${getVIPAreaLangRoot()}/fragments/contact-card`);
   infoSection.append(fragmentBlock);
   main.append(infoSection);
 }
@@ -180,34 +214,6 @@ function loadDelayed() {
 }
 
 const VIP_AREA_INDEX = '/query-index.json';
-const VIP_AREA_LANGUAGE_HOME_PATH = {
-  es: '/area-vip',
-  en: '/en/vip-area',
-  fr: '/fr/zone-vip',
-  de: '/de/vip-zone',
-  pt: '/pt/area-vip',
-  ja: '/ja/vip-area',
-  ar: '/ar/vip-area',
-  hi: '/hi/vip-area',
-};
-
-let language;
-
-export function getLanguage() {
-  if (language) return language;
-  language = 'es';
-  const segs = window.location.pathname.split('/');
-  if (segs && segs.length > 0) {
-    // eslint-disable-next-line no-restricted-syntax
-    for (const [value] of Object.entries(VIP_AREA_LANGUAGE_HOME_PATH)) {
-      if (value === segs[1]) {
-        language = value;
-        break;
-      }
-    }
-  }
-  return language;
-}
 
 export function getVipAreaIndexPath(url) {
   language = getLanguage();
