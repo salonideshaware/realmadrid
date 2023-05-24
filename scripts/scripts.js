@@ -262,6 +262,25 @@ export async function loadFragment(path) {
   return null;
 }
 
+export function bindSwipeToElement(el) {
+  let touchstartX = 0;
+  let touchendX = 0;
+
+  el.addEventListener('touchstart', (e) => {
+    touchstartX = e.changedTouches[0].screenX;
+  });
+
+  el.addEventListener('touchend', (e) => {
+    touchendX = e.changedTouches[0].screenX;
+    if (touchendX < touchstartX) {
+      el.dispatchEvent(new CustomEvent('swipe-RTL'));
+    }
+    if (touchendX > touchstartX) {
+      el.dispatchEvent(new CustomEvent('swipe-LTR'));
+    }
+  });
+}
+
 async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
