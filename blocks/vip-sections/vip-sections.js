@@ -74,8 +74,8 @@ export default async function decorate(block) {
 
   if (fragment) {
     // current vip section
-    const currentUrl = block.baseURI;
-    const excludedSectionPath = currentUrl.substring(currentUrl.lastIndexOf('/') + 1);
+    const pathSegments = new URL(block.baseURI).pathname.split('/');
+    const excludedSectionPath = pathSegments[pathSegments.length - 1];
 
     // turn into list
     const vipSections = transformToSectionsUnorderedList(fragment, excludedSectionPath);

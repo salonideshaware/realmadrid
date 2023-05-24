@@ -154,12 +154,16 @@ export function decorateMain(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-  document.documentElement.lang = 'en';
+  // eslint-disable-next-line no-use-before-define
+  document.documentElement.lang = getLanguage();
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
     document.body.classList.add('appear');
+    if (document.documentElement.lang === 'ar') {
+      document.body.dir = 'rtl';
+    }
     await waitForLCP(LCP_BLOCKS);
   }
 }
@@ -214,10 +218,43 @@ function loadDelayed() {
 }
 
 const VIP_AREA_INDEX = '/query-index.json';
+const LANG_LOCALE = {
+  en: 'en-US',
+  de: 'de-DE',
+  fr: 'fr-FR',
+  ko: 'ko-KR',
+  es: 'es-ES',
+  it: 'it-IT',
+  jp: 'ja-JP',
+  br: 'pt-BR',
+};
+
+export function getLocale() {
+  return LANG_LOCALE[getLanguage()];
+}
 
 export function getVipAreaIndexPath(url) {
   language = getLanguage();
   return `${url.origin}${VIP_AREA_LANGUAGE_HOME_PATH[language]}${VIP_AREA_INDEX}`;
+}
+
+/**
+   * Loads a fragment.
+   * @param {string} path The path to the fragment
+   * @returns {HTMLElement} The root element of the fragment
+   */
+export async function loadFragment(path) {
+  if (path && path.startsWith('/')) {
+    const resp = await fetch(`${path}.plain.html`);
+    if (resp.ok) {
+      const main = document.createElement('main');
+      main.innerHTML = await resp.text();
+      decorateMain(main);
+      await loadBlocks(main);
+      return main;
+    }
+  }
+  return null;
 }
 
 async function loadPage() {

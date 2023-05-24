@@ -34,7 +34,6 @@ main .vip-areas-container {
   letter-spacing: -0.2px;
   color: var(--text-color);
   font-weight: 400;
-  text-align: left;
 }
 
 .vip-areas ul p {
@@ -110,7 +109,7 @@ main .vip-areas-container {
   .vip-areas ul .info:hover p {
     color: var(--text-color);
     transition: color 0.75s ease-in;
-  } 
+  }
 
 }
 
