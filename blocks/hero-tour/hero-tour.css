@@ -28,7 +28,7 @@ body.tour .section.hero-tour-container .hero-tour.block .content .pretitle {
   font-family: var(--heading-font-family);
   font-weight: 300;
   line-height: 1.5;
-  color: white;
+  color: var(--background-color);
 }
 
 /* title */
@@ -109,7 +109,7 @@ body.tour .section.hero-tour-container .hero-tour.block .content .navcontainer n
   font-weight: 400;
   font-style: normal;
   font-variant: normal;
-  color:white;
+  color: var(--background-color);
 }
 
 /* when we are on the page itself */
@@ -124,7 +124,7 @@ body.tour .section.hero-tour-container .hero-tour.block .content .navcontainer n
   color:black;
 }
 
-/* icon on the right for extenal links */
+/* icon on the right for external links */
 body.tour .section.hero-tour-container .hero-tour.block .content .navcontainer nav a::after {
   content: var(--external-icon);
   font-family: Real-Madrid-New-Icons, sans-serif;
@@ -139,7 +139,7 @@ body.tour .section.hero-tour-container .hero-tour.block .content .navcontainer n
   font-weight: 400;
   font-style: normal;
   font-variant: normal;
-  color:white;
+  color: var(--background-color);
 }
 
 /* promo text */
@@ -153,7 +153,7 @@ body.tour .section.hero-tour-container .hero-tour.block .content .promo {
   letter-spacing: -0.01rem;
   text-align: center;
   max-width: 18.75rem;
-  color: white;
+  color: var(--background-color);
 }
 
 /* promo text bold */
