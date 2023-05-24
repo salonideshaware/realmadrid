@@ -29,7 +29,7 @@ body main .section.banner-carousel-container {
   right: 0;
   margin: 0 auto;
   z-index: 1;
-  color: #fff;
+  color: var(--background-color);
   text-align: center;
   font-size: var(--heading-font-size-xl);
 }
@@ -41,7 +41,7 @@ body main .section.banner-carousel-container {
   right: 0;
   margin: 0 auto;
   z-index: 1;
-  color: #fff;
+  color: var(--background-color);
   text-align: center;
   font-size: var(--heading-font-size-xs);
   font-weight: 400;
@@ -58,7 +58,7 @@ body main .section.banner-carousel-container {
   right: 0;
   margin: 0 auto;
   z-index: 1;
-  color: #fff;
+  color: var(--background-color);
   max-width: 300px;
   text-align: center;
   padding: 0 15px;
@@ -112,7 +112,7 @@ body main .section.banner-carousel-container {
 }
 
 .banner-carousel .control-container .image-pagination .indicator {
-  background: #fff;
+  background: var(--background-color);
   width: 100%;
   height: 2px;
   border-radius: 0;
