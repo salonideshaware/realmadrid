@@ -141,7 +141,7 @@ body main .section.banner-carousel-container {
 .banner-carousel .control-container .prev, .banner-carousel .control-container .next {
   width: calc(100vw / 2);
   height: 100%;
-  background-color: white;
+  background-color: var(--background-color);
   display: flex;
   justify-content: center;
   align-items: center;
