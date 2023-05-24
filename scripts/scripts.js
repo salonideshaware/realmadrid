@@ -12,6 +12,7 @@ import {
   loadBlocks,
   loadCSS,
   getMetadata,
+  toClassName,
 } from './lib-franklin.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
@@ -90,11 +91,15 @@ function buildAutoBlocks(main) {
   try {
     // we use fragments in auto blocks which generates its own main and calls decorateMain()
     // on it. So we have to check that we are not ending in a recursive loop
-    if ((getMetadata('template') === 'vip-faq') && main === document.querySelector('main')) {
-      buildFAQPage(main);
-      return;
+    if (main === document.querySelector('main')) {
+      const template = toClassName(getMetadata('template'));
+      if (template === 'vip-faq') {
+        buildFAQPage(main);
+      }
+      if (template === 'area-vip') {
+        buildHeroBlock(main);
+      }
     }
-    buildHeroBlock(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
@@ -120,12 +125,16 @@ export function decorateMain(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-  document.documentElement.lang = 'en';
+  // eslint-disable-next-line no-use-before-define
+  document.documentElement.lang = getLanguage();
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
     document.body.classList.add('appear');
+    if (document.documentElement.lang === 'ar') {
+      document.body.dir = 'rtl';
+    }
     await waitForLCP(LCP_BLOCKS);
   }
 }
@@ -227,6 +236,25 @@ export function getLocale() {
 export function getVipAreaIndexPath(url) {
   language = getLanguage();
   return `${url.origin}${VIP_AREA_LANGUAGE_HOME_PATH[language]}${VIP_AREA_INDEX}`;
+}
+
+/**
+   * Loads a fragment.
+   * @param {string} path The path to the fragment
+   * @returns {HTMLElement} The root element of the fragment
+   */
+export async function loadFragment(path) {
+  if (path && path.startsWith('/')) {
+    const resp = await fetch(`${path}.plain.html`);
+    if (resp.ok) {
+      const main = document.createElement('main');
+      main.innerHTML = await resp.text();
+      decorateMain(main);
+      await loadBlocks(main);
+      return main;
+    }
+  }
+  return null;
 }
 
 export function bindSwipeToElement(el) {

@@ -90,6 +90,7 @@
   --icon-primary-color: #999;
   --icon-secondary-color: #fff;
   --icon-terciary-color: #777;
+
 }
 
 /* Desktop */
@@ -319,7 +320,9 @@ body.tour main p {
 }
 
 body.tour main .section {
-  padding: 0 20px;
+  padding: 0;
+  position:relative;
+  background: var(--background-color);
 }
 
 body.tour .default-content-wrapper ul {
