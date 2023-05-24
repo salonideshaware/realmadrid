@@ -233,6 +233,25 @@ export function getVipAreaIndexPath(url) {
   return `${url.origin}${VIP_AREA_LANGUAGE_HOME_PATH[language]}${VIP_AREA_INDEX}`;
 }
 
+/**
+   * Loads a fragment.
+   * @param {string} path The path to the fragment
+   * @returns {HTMLElement} The root element of the fragment
+   */
+export async function loadFragment(path) {
+  if (path && path.startsWith('/')) {
+    const resp = await fetch(`${path}.plain.html`);
+    if (resp.ok) {
+      const main = document.createElement('main');
+      main.innerHTML = await resp.text();
+      decorateMain(main);
+      await loadBlocks(main);
+      return main;
+    }
+  }
+  return null;
+}
+
 async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
