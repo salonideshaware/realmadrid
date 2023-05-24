@@ -1,4 +1,5 @@
 import { buildBlock, decorateBlock, loadBlock } from '../../scripts/lib-franklin.js';
+import { loadFragment } from '../../scripts/scripts.js';
 
 function handleKeyUp(e) {
   const visibleModal = document.querySelector('.area-features .modal.appear');
@@ -67,7 +68,7 @@ function attachEventHandlers(li) {
   });
 }
 
-function createModal(headingElements, content, hasIFrame) {
+function createModal(icon, heading, content, hasIFrame) {
   const modal = document.createElement('div');
   modal.classList.add('modal');
   modal.setAttribute('tabindex', '-1');
@@ -76,7 +77,7 @@ function createModal(headingElements, content, hasIFrame) {
   <div class="modal-content">
   <button class="close" tabindex="0"></button>
   <div class="modal-header">
-    ${[...headingElements].map((h) => h.outerHTML).join('')}
+    ${[icon, heading].map((h) => h.outerHTML).join('')}
   </div>
     ${content.map((c) => c.outerHTML).join('')}
   </div>
@@ -85,16 +86,34 @@ function createModal(headingElements, content, hasIFrame) {
   return modal;
 }
 
-function makePopupCards(block) {
+async function loadFragments(items) {
+  (await Promise.all([...items].filter((li) => {
+    // assumption here is that actual heading in the card will not start with /
+    const text = li.querySelector('.cards-card-body:last-child').innerText;
+    return text && text.startsWith('/');
+  }).map(async (li) => {
+    const text = li.querySelector('.cards-card-body:last-child').innerText;
+    return [li, await loadFragment(text)];
+  }))).forEach(([li, fragment]) => {
+    const element = li.querySelector('.cards-card-body:last-child');
+    element.innerHTML = '';
+    const fragmentSection = fragment.querySelector(':scope .section');
+    element.append(...fragmentSection.childNodes);
+  });
+}
+
+async function makePopupCards(block) {
   const items = block.querySelectorAll('li');
+  await loadFragments(items);
   items.forEach((li) => {
-    const headingElements = li.querySelectorAll('span,h3');
-    const content = [...li.querySelectorAll('p')];
+    const content = [...li.querySelectorAll('.cards-card-body:last-child p')];
+    const icon = li.querySelector('.cards-card-body:first-child span');
+    const heading = li.querySelector('.cards-card-body:last-child h3');
     const iframeLink = li.querySelector('p > a[href$="iframe=true"]');
     if (iframeLink) {
       enableIframeLoad(li);
     }
-    li.append(createModal(headingElements, content, iframeLink != null));
+    li.append(createModal(icon, heading, content, iframeLink != null));
     content.forEach((c) => c.remove());
     attachEventHandlers(li);
   });

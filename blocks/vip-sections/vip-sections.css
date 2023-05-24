@@ -54,7 +54,6 @@ main .vip-sections-container {
   letter-spacing: -0.4px;
   color: var(--background-color);
   text-transform: uppercase;
-  text-align: left;
 }
 
 .vip-sections ul img {
