@@ -4,9 +4,10 @@ export default async function decorate(block) {
   // get config entries
   const cfg = readBlockConfig(block);
   const {
-    pretitle, title, promo, desktop, navigation, mobile, tours,
+    pretitle, title, promo, desktop, navigation, mobile,
   } = cfg;
   const promoTitle = cfg['promo-title'];
+  const tourCategory = cfg['tour-category'];
 
   // create basic dom structure
   const dom = document.createRange().createContextualFragment(`
@@ -105,27 +106,16 @@ export default async function decorate(block) {
   block.append(dom);
 
   // what tours are offered
-  if (tours) {
-    // start list
-    const ul = document.createElement('ul');
-    ticketContainer.append(ul);
+  if (tourCategory) {
+    const ticketCardListBlock = document.createRange().createContextualFragment(`
+      <div class='ticket-card-list' data-block-name='ticket-card-list' >
+        <div>
+          <div>${tourCategory}</div>
+        <div>
+      </div>
+    `);
 
-    tours.forEach(async (tour) => {
-      const li = document.createElement('li');
-      ul.append(li);
-      // read tour data from detail page
-      const resp = await fetch(`${tour}.plain.html`);
-      if (resp.ok) {
-        const ticketCardBlock = document.createRange().createContextualFragment(`
-            <div class='ticket-card' data-block-name='ticket-card' >
-            <div>
-              <div>${tour}</div>
-            <div>
-          </div>
-        `);
-        await loadBlock(ticketCardBlock.firstElementChild);
-        li.append(ticketCardBlock);
-      }
-    });
+    await loadBlock(ticketCardListBlock.firstElementChild);
+    ticketContainer.append(ticketCardListBlock);
   }
 }
