@@ -2,7 +2,7 @@
 .section.vip-locations-container {
   background-color: #F6F6F6;
   padding: 41px 10px;
-  margin: 50px 0 0; 
+  margin: 50px 0 0;
   overflow: hidden;
 }
 
@@ -28,9 +28,9 @@
 
 /* left/ right alignment for 2 rows */
 .vip-locations .legend a:nth-child(odd){
-  padding-right: 26px;
+  padding-inline-end: 26px;
   box-sizing: border-box;
-  text-align: right;
+  text-align: end;
 }
 
 .vip-locations .legend a:nth-child(odd)::after{
@@ -39,13 +39,13 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  margin-left: 10px;
+  margin-inline-start: 10px;
   position: absolute;
   top: 14px;
 }
 
 .vip-locations .legend a:nth-child(even){
-  padding-left: 26px;
+  padding-inline-start: 26px;
   box-sizing: border-box;
 }
 
@@ -55,10 +55,12 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  margin-right: 10px;
+  margin-inline-end: 10px;
   position: absolute;
   top: 14px;
   left: 6px;
+  inset-inline-start: 6px; /* this is the same as left 6px but supporting rtl.
+   We keep both for old browsers not supporting inset-inline-start */
   background-color: var(--vip-locations-color);
 }
 
@@ -110,7 +112,7 @@
     flex-basis: 700px;
     display: flex;
     flex-flow: column wrap;
-    padding-left:200px;
+    padding-inline-start: 200px;
     margin-top: 35px;
   }
 
@@ -121,7 +123,7 @@
 
   /* align all entries to the left */
   .vip-locations .legend a:nth-child(odd){
-    text-align: left;
+    text-align: start;
   }
 
   /* remove the after settings */
@@ -130,8 +132,7 @@
   }
 
   .vip-locations .legend a:nth-child(even){
-    padding-left: 0;
-
+    padding-inline-start: 0;
   }
 
   .vip-locations .legend a:nth-child(odd)::before,
@@ -141,8 +142,8 @@
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    margin-right: 10px;
-    margin-left: 8px;
+    margin-inline-end: 10px;
+    margin-inline-start: 8px;
     position: static;
   }
 
