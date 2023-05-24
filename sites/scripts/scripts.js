@@ -276,7 +276,7 @@ function loadDelayed() {
 }
 
 const VIP_AREA_INDEX = '/query-index.json';
-const LANG_LOCALE = {
+export const LANG_LOCALE = {
   es: 'es-ES',
   en: 'en-US',
   de: 'de-DE',
@@ -342,10 +342,10 @@ export function wrapMergeBlocksSection(mergeBlockSection) {
 }
 
 /**
-   * Loads a fragment.
-   * @param {string} path The path to the fragment
-   * @returns {HTMLElement} The root element of the fragment
-   */
+ * Loads a fragment.
+ * @param {string} path The path to the fragment
+ * @returns {HTMLElement} The root element of the fragment
+ */
 export async function loadFragment(path) {
   if (path && path.startsWith('/')) {
     const resp = await fetch(`${path}.plain.html`);
