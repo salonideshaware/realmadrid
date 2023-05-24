@@ -12,6 +12,7 @@ import {
   loadBlocks,
   loadCSS,
   getMetadata,
+  toClassName,
 } from './lib-franklin.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
@@ -72,12 +73,46 @@ function buildContentHeaderBlock(main) {
   main.prepend(headerSection);
 }
 
+const VIP_AREA_LANGUAGE_HOME_PATH = {
+  es: '/area-vip',
+  en: '/en/vip-area',
+  fr: '/fr/zone-vip',
+  de: '/de/vip-zone',
+  pt: '/pt/area-vip',
+  ja: '/ja/vip-area',
+  ar: '/ar/vip-area',
+  hi: '/hi/vip-area',
+};
+
+let language;
+
+export function getLanguage() {
+  if (language) return language;
+  language = 'es';
+  const segs = window.location.pathname.split('/');
+  if (segs && segs.length > 0) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [value] of Object.entries(VIP_AREA_LANGUAGE_HOME_PATH)) {
+      if (value === segs[1]) {
+        language = value;
+        break;
+      }
+    }
+  }
+  return language;
+}
+
+export function getVIPAreaLangRoot() {
+  language = getLanguage();
+  return VIP_AREA_LANGUAGE_HOME_PATH[language];
+}
+
 function buildFAQPage(main) {
   // add header on top
   buildContentHeaderBlock(main);
   // create a section for the info box
   const infoSection = document.createElement('div');
-  const fragmentBlock = buildBlock('fragment', [['/area-vip/es/fragments/contact-card']]);
+  const fragmentBlock = buildBlock('fragment', `${getVIPAreaLangRoot()}/fragments/contact-card`);
   infoSection.append(fragmentBlock);
   main.append(infoSection);
 }
@@ -90,11 +125,15 @@ function buildAutoBlocks(main) {
   try {
     // we use fragments in auto blocks which generates its own main and calls decorateMain()
     // on it. So we have to check that we are not ending in a recursive loop
-    if ((getMetadata('template') === 'vip-faq') && main === document.querySelector('main')) {
-      buildFAQPage(main);
-      return;
+    if (main === document.querySelector('main')) {
+      const template = toClassName(getMetadata('template'));
+      if (template === 'vip-faq') {
+        buildFAQPage(main);
+      }
+      if (template === 'area-vip') {
+        buildHeroBlock(main);
+      }
     }
-    buildHeroBlock(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
@@ -200,17 +239,6 @@ export async function fetchNavigationConfig() {
 }
 
 const VIP_AREA_INDEX = '/query-index.json';
-const VIP_AREA_LANGUAGE_HOME_PATH = {
-  es: '/area-vip',
-  en: '/en/vip-area',
-  fr: '/fr/zone-vip',
-  de: '/de/vip-zone',
-  pt: '/pt/area-vip',
-  ja: '/ja/vip-area',
-  ar: '/ar/vip-area',
-  hi: '/hi/vip-area',
-};
-
 const LANG_LOCALE = {
   en: 'en-US',
   de: 'de-DE',
@@ -222,24 +250,6 @@ const LANG_LOCALE = {
   br: 'pt-BR',
 };
 
-let language;
-
-export function getLanguage() {
-  if (language) return language;
-  language = 'es';
-  const segs = window.location.pathname.split('/');
-  if (segs && segs.length > 0) {
-    // eslint-disable-next-line no-restricted-syntax
-    for (const [value] of Object.entries(VIP_AREA_LANGUAGE_HOME_PATH)) {
-      if (value === segs[1]) {
-        language = value;
-        break;
-      }
-    }
-  }
-  return language;
-}
-
 export function getLocale() {
   return LANG_LOCALE[getLanguage()];
 }
@@ -247,6 +257,44 @@ export function getLocale() {
 export function getVipAreaIndexPath(url) {
   language = getLanguage();
   return `${url.origin}${VIP_AREA_LANGUAGE_HOME_PATH[language]}${VIP_AREA_INDEX}`;
+}
+
+/**
+   * Loads a fragment.
+   * @param {string} path The path to the fragment
+   * @returns {HTMLElement} The root element of the fragment
+   */
+export async function loadFragment(path) {
+  if (path && path.startsWith('/')) {
+    const resp = await fetch(`${path}.plain.html`);
+    if (resp.ok) {
+      const main = document.createElement('main');
+      main.innerHTML = await resp.text();
+      decorateMain(main);
+      await loadBlocks(main);
+      return main;
+    }
+  }
+  return null;
+}
+
+export function bindSwipeToElement(el) {
+  let touchstartX = 0;
+  let touchendX = 0;
+
+  el.addEventListener('touchstart', (e) => {
+    touchstartX = e.changedTouches[0].screenX;
+  });
+
+  el.addEventListener('touchend', (e) => {
+    touchendX = e.changedTouches[0].screenX;
+    if (touchendX < touchstartX) {
+      el.dispatchEvent(new CustomEvent('swipe-RTL'));
+    }
+    if (touchendX > touchstartX) {
+      el.dispatchEvent(new CustomEvent('swipe-LTR'));
+    }
+  });
 }
 
 async function loadPage() {
