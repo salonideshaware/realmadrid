@@ -4,6 +4,7 @@ import { fetchNavigationConfig } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   const data = await fetchNavigationConfig();
+  console.dir(data);
 
   let lastScroll = 0;
   document.addEventListener('scroll', () => {
