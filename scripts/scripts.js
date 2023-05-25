@@ -260,22 +260,6 @@ export function getVipAreaIndexPath(url) {
 }
 
 /**
- * Returns the element's parents which contains the given selector.
- * @param {HTMLElement} el
- * @param {String} selector
- * @returns {HTMLElements[]} parents
- */
-export function getParents(el, selector) {
-  const parents = [];
-  let parentEl = el.parentNode;
-  while (parentEl !== document) {
-    if (!selector || parentEl.matches(selector)) parents.push(parentEl);
-    parentEl = parentEl.parentNode;
-  }
-  return parents;
-}
-
-/**
  * Adds a child div that wraps the blocks below 'merge-blocks-desktop' section and moves the class
  * to the new child.
  * Useful for tour pages only.
