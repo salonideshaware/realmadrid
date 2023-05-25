@@ -11,6 +11,7 @@ indices:
       - /ja/**
       - /hi/**
       - /ar/**
+      - /area-vip/fragments/**
     target: /area-vip/query-index.json
     properties:
       lastModified:
@@ -32,6 +33,8 @@ indices:
     include:
       - /en/vip-area
       - /en/vip-area/**
+    exclude:
+      - /en/vip-area/fragments/**
     target: /en/vip-area/query-index.json
     properties:
       lastModified:
@@ -56,6 +59,8 @@ indices:
     include:
       - /de/vip-zone
       - /de/vip-zone/**
+    exclude:
+      - /de/vip-zone/fragments/**
     target: /de/vip-zone/query-index.json
     properties:
       lastModified:
@@ -80,6 +85,8 @@ indices:
     include:
       - /fr/zone-vip
       - /fr/zone-vip/**
+    exclude:
+      - /fr/zone-vip/fragments/**
     target: /fr/zone-vip/query-index.json
     properties:
       lastModified:
@@ -104,6 +111,8 @@ indices:
     include:
       - /pt/area-vip
       - /pt/area-vip/**
+    exclude:
+      - /pt/area-vip/fragments/**
     target: /pt/area-vip/query-index.json
     properties:
       lastModified:
@@ -128,6 +137,8 @@ indices:
     include:
       - /ja/vip-area
       - /ja/vip-area/**
+    exclude:
+      - /ja/vip-area/fragments/**
     target: /ja/vip-area/query-index.json
     properties:
       lastModified:
@@ -152,6 +163,8 @@ indices:
     include:
       - /hi/vip-area
       - /hi/vip-area/**
+    exclude:
+      - /hi/vip-area/fragments/**
     target: /hi/vip-area/query-index.json
     properties:
       lastModified:
@@ -176,6 +189,8 @@ indices:
     include:
       - /ar/vip-area
       - /ar/vip-area/**
+    exclude:
+      - /ar/vip-area/fragments/**
     target: /ar/vip-area/query-index.json
     properties:
       lastModified:

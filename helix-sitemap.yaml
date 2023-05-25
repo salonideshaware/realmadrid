@@ -17,3 +17,16 @@ sitemaps:
         source: /de/vip-zone/query-index.json
         destination: /sitemap.xml
         hreflang: de
+      fr:
+        source: /fr/zone-vip/query-index.json
+        destination: /sitemap.xml
+        hreflang: fr
+      ja:
+        source: /ja/vip-area/query-index.json
+        destination: /sitemap.xml
+        hreflang: ja
+      ar:
+        source: /ar/vip-area/query-index.json
+        destination: /sitemap.xml
+        hreflang: ar
+
