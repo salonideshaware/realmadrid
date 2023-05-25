@@ -1,3 +1,7 @@
+.columns.full > div > div {
+  padding-bottom: 28px;
+}
+
 .columns.full .image {
   margin: 0 0 14px;
 }
@@ -38,4 +42,10 @@
   box-shadow: none;
   padding: 8px 15px;
   text-decoration: none;
+}
+
+@media (min-width: 990px) {
+  .columns.full > div > div {
+    padding-bottom: 28px;
+  }
 }

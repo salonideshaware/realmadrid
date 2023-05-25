@@ -276,6 +276,23 @@ export function getParents(el, selector) {
 }
 
 /**
+ * Adds a child div that wraps the blocks below 'merge-blocks-desktop' section and moves the class
+ * to the new child.
+ * Useful for tour pages only.
+ * @param {HTMLElement} mergeBlockSection
+ */
+export function wrapMergeBlocksSection(mergeBlockSection) {
+  const fragment = document.createElement('div');
+  mergeBlockSection.classList.remove('merge-blocks-desktop');
+  fragment.classList.add('merge-blocks-desktop');
+  const blocks = [...mergeBlockSection.children];
+  blocks.forEach((block) => {
+    fragment.appendChild(block);
+  });
+  mergeBlockSection.appendChild(fragment);
+}
+
+/**
    * Loads a fragment.
    * @param {string} path The path to the fragment
    * @returns {HTMLElement} The root element of the fragment
