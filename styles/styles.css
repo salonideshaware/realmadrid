@@ -19,11 +19,20 @@
   src: local("Arial");
 }
 
+
 /* fallback font for Oswald (normal - 400) */
 @font-face {
   font-family: "oswald-normal-400-fallback";
   size-adjust: 81.4%;
   src: local("Arial");
+}
+
+/* fallback font for headings in arabic */
+@font-face {
+  font-family: arabic-heading-fallback;
+  src: local("Arial");
+  size-adjust: 110%;
+  unicode-range: U+0600-06FF;
 }
 
 /* fallback font for RMNeue (normal - 400) for header */
@@ -52,8 +61,8 @@
   --text-color: #43526E;
 
   /* RM: fonts */
-  --body-font-family: "Open Sans", "open-sans-norma-400-fallback", arial, helvetica, sans-serif;
-  --heading-font-family: "Oswald", "oswald-normal-400-fallback", sans-serif;
+  --body-font-family: "Open Sans", "open-sans-normal-400-fallback", arial, helvetica, sans-serif;
+  --heading-font-family: "Oswald", "arabic-heading-fallback", "oswald-normal-400-fallback", sans-serif;
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
   --header-font-family: "RMNeue","rmneue-normal-400-fallback";
   --header-font-family-bold: "RMNeue","rmneue-normal-700-fallback";
@@ -173,7 +182,7 @@ body.area-vip h2 {
   color: var(--heading-color);
   text-transform: uppercase;
   margin-bottom: 21px;
-  margin-left: 10px;
+  margin-inline-start: 10px;
   padding-bottom: 5px;
   width: var(--section-heading-width);
   border-right: 4px solid transparent;
@@ -292,7 +301,10 @@ main .section > div {
 
   .section.info-vip > .default-content-wrapper {
     width: 685px; /* TODO: review this. hardcoding it for now */
-    padding: 25px 100px 0 15px;
+    padding-top: 25px;
+    padding-inline-end: 100px;
+    padding-inline-start: 15px;
+    padding-bottom: 0;
     grid-column: 2/3;
     grid-row: auto;
     margin-left: 0;
