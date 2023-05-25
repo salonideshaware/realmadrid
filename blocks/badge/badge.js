@@ -1,3 +1,5 @@
+import { wrapMergeBlocksSection } from '../../scripts/scripts.js';
+
 function styleBlock(block) {
   const badgeElements = block.querySelector('a').children;
   if (badgeElements.length > 2) {
@@ -22,4 +24,9 @@ export default function decorate(block) {
     block.prepend(anchorWrapper);
   }
   styleBlock(block);
+  // extract merge-blocks-desktop elements in a dedicated div
+  const mergeBlocks = block.closest('.merge-blocks-desktop');
+  if (mergeBlocks != null) {
+    wrapMergeBlocksSection(mergeBlocks);
+  }
 }
