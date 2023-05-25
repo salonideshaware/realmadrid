@@ -44,8 +44,6 @@ export default function createLanguageSelectorButton(parent, languages) {
   languageSelectorButton.classList.add('language-selector-button');
 
   const currentLanguage = getLocale();
-  console.log(currentLanguage);
-
   const languageButtonContent = `
     <svg focusable="false" width="16" height="16" aria-hidden="true">
       <use xlink:href="/blocks/header/landing-sprite.svg#lang"></use>
