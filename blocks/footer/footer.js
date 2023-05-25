@@ -1,79 +1,136 @@
+import { fetchNavigationConfig } from '../../scripts/scripts.js';
+
+/* eslint no-underscore-dangle: 0 */
+
 /**
  * loads and decorates the footer
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  block.textContent = '';
-
-  // fetch footer content
-  const footerPath = '/footer';
-  const resp = await fetch(`${footerPath}.plain.html`, window.location.pathname.endsWith('/footer') ? { cache: 'reload' } : {});
-
-  if (resp.ok) {
-    const html = await resp.text();
-    // get the footer entries from footer fragment
-    const footerData = document.createRange().createContextualFragment(html).children[0].children;
-
-    // append the list of social media links
-    [...footerData[1].children].forEach((li) => {
-      const a = li.firstChild;
-      // we use domain name as class name
-      const sClass = a.innerText.match(/http[s]?:\/\/(.*?\.)?(.*?)\./)[2];
-      a.classList.add('social', sClass);
-      a.innerText = '';
-    });
-
-    // append the list of app links
-    [...footerData[3].children].forEach((li) => {
-      const a = li.firstChild;
-      // we use domain name as class name
-      const sClass = a.innerText.match(/http[s]?:\/\/(.*?\.)?(.*?)\./)[2];
-      a.classList.add('apps', sClass);
-      a.innerText = '';
-      // get app store name
-      const appStore = li.querySelector('strong').innerText;
-      // get the text before
-      const appPreText = li.innerText.split(appStore)[0];
-      const p = document.createRange().createContextualFragment(`
-      <p class='app-text'>${appPreText}<span class='store-name'>${appStore}</span></p>
-      `);
-      li.textContent = '';
-      li.append(a);
-      a.append(p);
-    });
-
-    // add sponsors
-    // skip for now as we will get a new footer anyway
-
-    // init the footer DOM struct
-    const footerDOM = document.createRange().createContextualFragment(`
-      <div class='social-apps-container'>
-        <div class='social-container'>
-          <h2>${footerData[0].innerText}</h2>
-          ${footerData[1].outerHTML}
-        </div>
-        <div class='apps-container'>
-          <h2>${footerData[2].innerText}</h2>
-          ${footerData[3].outerHTML}
-        </div>
-      </div>
-      <div class='sponsor-container'>
-        <h2>${footerData[4].innerText}</h2>
-        <div class='sponsor-content'>
-          <a rel='nofollow'>
-            <div class='logos'>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class='legal-container'>
-      ${footerData[footerData.length - 2].outerHTML}
-      </div>
-      <div class='copyright-container'>
-        ${footerData[footerData.length - 1].outerHTML.replace('{año}', new Date().getFullYear())}
-      </div>
-    `);
-
-    block.append(footerDOM);
+  const data = await fetchNavigationConfig();
+  if (!data) {
+    return;
   }
+
+  const footerConfig = data.data.footer.items[0];
+  console.dir(footerConfig);
+
+  const mainSection = document.createElement('div');
+  mainSection.classList.add('footer-main-section');
+  block.append(mainSection);
+
+  const mainNavigation = document.createElement('ul');
+  mainNavigation.classList.add('footer-main-navigation');
+  mainSection.append(mainNavigation);
+  footerConfig.mainNavigation.forEach((item) => {
+    const mainNavigationItem = document.createElement('li');
+    mainNavigation.append(mainNavigationItem);
+    mainNavigationItem.appendChild(document.createRange().createContextualFragment(`
+      <a href="${item.url}">${item.title}</a>
+      <svg focusable="false" width="24" height="24"><use xlink:href="/blocks/header/cibeles-sprite.svg#chevron-right"></use></svg>
+    `));
+    const childNavigation = document.createElement('ul');
+    mainNavigationItem.append(childNavigation);
+    childNavigation.classList.add('footer-child-navigation');
+    item.childNavigationItems.forEach((child) => {
+      const childNavigationItem = document.createElement('li');
+      childNavigation.append(childNavigationItem);
+      childNavigationItem.appendChild(document.createRange().createContextualFragment(`
+        <a href="${child.url}">${child.title}</a>
+      `));
+    });
+  });
+
+  const extraNavigation = document.createElement('ul');
+  extraNavigation.classList.add('footer-extra-navigation');
+  mainSection.append(extraNavigation);
+  footerConfig.additionalNavigation.forEach((item) => {
+    const li = document.createElement('li');
+    extraNavigation.append(li);
+    li.appendChild(document.createRange().createContextualFragment(`
+      <a href="${item.url}">${item.title}</a>
+    `));
+  });
+
+  const mobileApps = document.createElement('ul');
+  mobileApps.classList.add('footer-mobile-apps');
+  mainSection.append(mobileApps);
+  mobileApps.appendChild(document.createRange().createContextualFragment(`
+    <h3>${footerConfig.mobileAPPLinks.title}</h3>
+    <h4>${footerConfig.mobileAPPLinks.subtitle}</h4>
+  `));
+  footerConfig.mobileAPPLinks.appLinks.forEach((item) => {
+    const li = document.createElement('li');
+    mobileApps.append(li);
+    li.appendChild(document.createRange().createContextualFragment(`
+      <a href="${item.url}">
+        <img src="${item.image._publishUrl}" alt="${item.title}"/>
+      </a>
+    `));
+  });
+
+  const mainSponsors = document.createElement('ul');
+  mainSponsors.classList.add('footer-main-sponsors');
+  mainSection.append(mainSponsors);
+  footerConfig.sponsors.mainSponsors.forEach((item) => {
+    const li = document.createElement('li');
+    mainSponsors.append(li);
+    li.appendChild(document.createRange().createContextualFragment(`
+      <a href="${item.url}" alt="${item.title}">
+        <img src="${item.logo._publishUrl}">
+      </a>
+    `));
+  });
+  const otherSponsors = document.createElement('ul');
+  otherSponsors.classList.add('footer-other-sponsors');
+  mainSection.append(otherSponsors);
+  footerConfig.sponsors.otherSponsors.forEach((item) => {
+    const li = document.createElement('li');
+    otherSponsors.append(li);
+    li.appendChild(document.createRange().createContextualFragment(`
+      <a href="${item.url}" alt="${item.title}">
+        <img src="${item.logo._publishUrl}">
+      </a>
+    `));
+  });
+
+  const socialLinks = document.createElement('ul');
+  socialLinks.classList.add('footer-social-links');
+  mainSection.append(socialLinks);
+  footerConfig.socialLinks.forEach((item) => {
+    const li = document.createElement('li');
+    socialLinks.append(li);
+    li.appendChild(document.createRange().createContextualFragment(`
+      <a href="${item.url}">
+        <svg focusable="false" width="24" height="24"><title>${item.title}</title><use xlink:href="/blocks/header/cibeles-sprite.svg#${item.title.toLowerCase()}"></use></svg>
+      </a>
+    `));
+  });
+
+  const bottomSection = document.createElement('div');
+  bottomSection.classList.add('footer-bottom-section');
+  block.append(bottomSection);
+
+  const logo = document.createElement('div');
+  logo.classList.add('footer-logo');
+  bottomSection.append(logo);
+  logo.innerHTML = `
+    <svg focusable="false" width="56" height="56"><use xlink:href="/blocks/header/cibeles-sprite.svg#logo-rm"></use></svg>
+  `;
+
+  const bottomBar = document.createElement('ul');
+  bottomBar.classList.add('footer-bottom-links');
+  bottomSection.append(bottomBar);
+  footerConfig.bottomBarLinks.forEach((item) => {
+    const li = document.createElement('li');
+    bottomBar.append(li);
+    li.appendChild(document.createRange().createContextualFragment(`
+      <a href="${item.url}">${item.title}</a>
+    `));
+  });
+
+  const copyRight = document.createElement('div');
+  copyRight.classList.add('footer-copy-right');
+  bottomSection.append(copyRight);
+  copyRight.innerHTML = footerConfig.copyRightText;
 }

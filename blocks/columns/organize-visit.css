@@ -1,3 +1,7 @@
+body.tour .section.section-organize-visit .default-content-wrapper {
+  padding: 0;
+}
+
 .columns.organize-visit svg {
   display: none;
 }
