@@ -15,7 +15,7 @@ import {
   toClassName,
 } from './lib-franklin.js';
 
-const LCP_BLOCKS = []; // add your LCP blocks to the list
+const LCP_BLOCKS = ['hero-tour']; // add your LCP blocks to the list
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -198,6 +198,17 @@ const VIP_AREA_LANGUAGE_HOME_PATH = {
   ja: '/ja/vip-area',
   ar: '/ar/vip-area',
   hi: '/hi/vip-area',
+};
+
+export const TOURS_LANGUAGE_HOME_PATH = {
+  es: '/tour-bernabeu',
+  en: '/en/tour-bernabeu',
+  fr: '/fr/tour-bernabeu',
+  de: '/de/tour-bernabeu',
+  pt: '/pt/tour-bernabeu',
+  ja: '/ja/tour-bernabeu',
+  ar: '/ar/tour-bernabeu',
+  hi: '/hi/tour-bernabeu',
 };
 
 const LANG_LOCALE = {

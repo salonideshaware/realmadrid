@@ -106,7 +106,7 @@ export default async function decorate(block) {
   // what tours are offered
   if (tourCategory) {
     const ticketCardListBlock = document.createRange().createContextualFragment(`
-      <div class='ticket-card-list' data-block-name='ticket-card-list' >
+      <div class='ticket-card-list hero' data-block-name='ticket-card-list' >
         <div>
           <div>${tourCategory}</div>
         <div>

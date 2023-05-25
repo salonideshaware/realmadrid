@@ -1,97 +1,113 @@
 import { fetchPlaceholders } from '../../scripts/lib-franklin.js';
+import { getLanguage, TOURS_LANGUAGE_HOME_PATH } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   // get tour category
   const tourCategory = block.children[0].children[0].textContent.trim();
 
   // load list of tours
-  // TODO : make it language aware
-  const resp = await fetch(`${document.location.pathname}/tours.json`);
-  if (!resp.ok) {
-    block.textContent = '';
-    return;
-  }
+  const resp = await fetch(`${TOURS_LANGUAGE_HOME_PATH[getLanguage()]}/tours.json`);
+  if (!resp.ok) return;
 
   // get the tours for the selected category
   const selectedTours = (await resp.json()).data.filter((tour) => {
-    // get assigned categories
+    // get list of assigned categories for a tour
     const categories = tour.Categories.split(',').map((categoryEntry) => categoryEntry.trim());
     // check
     return categories.includes(tourCategory) && tour['Show on Category Page'].trim().toLowerCase().startsWith('y');
   });
 
-  console.log(selectedTours);
+  // if no tours are found
+  if (selectedTours.length === 0) return;
 
-  // get placeholders
+  // get placeholders (non-existing values are undefined)
   const placeholders = await fetchPlaceholders();
-  const { buy, itIncludes, moreInformation } = placeholders;
+  const {
+    buy = 'Comprar',
+    itIncludes = 'Incluye',
+    moreInformation = 'Más información',
+    from = 'desde',
+  } = placeholders;
 
   // start ul list
   const ul = document.createElement('ul');
 
-  // go through list of tours
+  // go through list of tours (non-existing values are always '')
   selectedTours.forEach((tour) => {
-    // for now by default we assume we are rendering the card in the tour hero
+    // extract tour info
+    const {
+      Description,
+      Price,
+      Subtitle,
+    } = tour;
+    const oldPrice = tour['Old Price'];
+    const descriptionTitle = tour['Description Title'];
+    const tourName = tour['Tour Name'];
+    const priceSubtitle = tour['Price Subtitle'];
+    const buyLink = tour['Buy Link'];
+    const detailPage = tour['Detail Page'];
+    const ticketLabel = tour['Ticket Label'];
+    // recover the bullet list
+    const ticketText = tour['Ticket Text'].split('\n').map((liContent) => `<li>${liContent.trim()}</li>`);
+
+    // if ticket is rendered inside hero, it has a schema for each ticket beforehand
+    if (block.classList.contains('hero')) {
+      const ticketSchema = document.createRange().createContextualFragment(`
+        <script type='application/ld+json'>
+          {
+            "@context":"https://www.schema.org",
+            "category":"tickets",
+            "description":"${descriptionTitle}\\n${Description}",
+            "@type":"Product",
+            "offers":{
+              "price":"${Price}",
+              "@type":"Offer",
+              "priceCurrency":"EURO",
+              "seller":{
+                "@type":"Organization",
+                "name":"Real Madrid C.F."
+              }
+            },
+            "name":"${tourName} ${Subtitle}",
+            "brand":"${Subtitle}",
+            "url":"https://www.realmadrid.com${detailPage}"
+          }
+        </script>
+      `);
+
+      ul.append(ticketSchema);
+    }
+
+    // the ticket card DOM
     const ticketCard = document.createRange().createContextualFragment(`
-      <script type='application/ld+json'>
-        {
-          "@context":"https://www.schema.org",
-          "category":"tickets",
-          "description":"${tour['Description Title']}\\n${tour.Description}",
-          "@type":"Product",
-          "offers":{
-            "price":"${tour.Price}",
-            "@type":"Offer",
-            "priceCurrency":"EURO",
-            "seller":{
-              "@type":"Organization",
-              "name":"Real Madrid C.F."
-            }
-          },
-          "name":"${tour['Tour Name']} ${tour.Subtitle}",
-          "brand":"${tour.Subtitle}",
-          "url":"https://www.realmadrid.com${tour}"
-        }
-      </script>
       <li>
         <div class='ticket-type'>
-          <div class='title'>${tour['Tour Name']}</div>
-          <div class='subtitle'>${tour.Subtitle}</div>
+          ${ticketLabel ? `<span class='label'>${ticketLabel}</span>` : ''}
+          <div class='title'>${tourName}</div>
+          <div class='subtitle'>${Subtitle}</div>
         </div>
-
         <div class='info-buy'>
           <div class='price'>
             <p>
-            ${tour['Price Pretext']}
-            <span class='amount'>${tour.Price}</span>
+            ${from}${oldPrice ? `&nbsp<del>${oldPrice}€</del>` : ''}
+            <span class='amount'>${Price}</span>
             <span class='currency'>€</span>
-            <span class='subtitle'>${tour['Price Subtitle']}</span>
+            ${priceSubtitle ? `<span class='subtitle'>${priceSubtitle}</span>` : ''}
             </p>
           </div>
-
           <div class='buy-button'>
-            <a href='${tour['Buy Link']}' target='_blank' rel='noreferrer'>${buy}</a>
+            <a href='${buyLink}' target='_blank' rel='noreferrer'>${buy}</a>
           </div>
         </div>
-
         <div class='ticket-detail'>
           <div class='content'>
             <p>${itIncludes}:</p>
-            ${tour['Ticket Text']}
+            ${ticketText ? `<ul>${ticketText.join('')}</ul>` : ''}
           </div>
         </div>
-
-        <a href='${tour['Detail Page']}' class='info-link'>${moreInformation}</a>
+        <a href='${detailPage}' class='info-link'>${moreInformation}</a>
       </li>
     `);
-
-    // if a label on top of ticket card is set
-    if (tour['Ticket Label']) {
-      const label = document.createElement('span');
-      label.textContent = tour['Ticket Label'];
-      label.classList.add('label');
-      ticketCard.querySelector('.ticket-type').prepend(label);
-    }
 
     ul.append(ticketCard);
   });
