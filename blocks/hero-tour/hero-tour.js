@@ -13,8 +13,6 @@ export default async function decorate(block) {
   const dom = document.createRange().createContextualFragment(`
       <div class='content'>
         <div class='content-wrapper'>
-          <div class='ticket-container'>
-          </div>
         </div>
       </div>
       <div class='background'>
@@ -22,7 +20,7 @@ export default async function decorate(block) {
   `);
 
   // shortcuts
-  const ticketContainer = dom.querySelector('.ticket-container');
+  const contentWrapper = dom.querySelector('.content-wrapper');
   const background = dom.querySelector('.background');
 
   // if a pretitle is defined
@@ -30,14 +28,14 @@ export default async function decorate(block) {
     const preTitleElem = document.createElement('p');
     preTitleElem.classList.add('pretitle');
     preTitleElem.textContent = pretitle;
-    ticketContainer.before(preTitleElem);
+    contentWrapper.append(preTitleElem);
   }
 
   // if title is defined
   if (title) {
     const titleElem = document.createElement('h1');
     titleElem.textContent = title;
-    ticketContainer.before(titleElem);
+    contentWrapper.append(titleElem);
   }
 
   // if navigation is defined
@@ -49,7 +47,7 @@ export default async function decorate(block) {
       divNavContainer.classList.add('navcontainer');
       const navElem = document.createElement('nav');
       divNavContainer.append(navElem);
-      ticketContainer.before(divNavContainer);
+      contentWrapper.append(divNavContainer);
       // get the navigation table from the fragment
       const navEntries = document.createRange().createContextualFragment(await resp.text()).querySelector('.navigation');
       // add entries
@@ -82,7 +80,7 @@ export default async function decorate(block) {
     if (promo) {
       promoElem.append(` ${promo}`);
     }
-    ticketContainer.before(promoElem);
+    contentWrapper.append(promoElem);
   }
 
   // if background is defined
@@ -116,6 +114,6 @@ export default async function decorate(block) {
     `);
 
     await loadBlock(ticketCardListBlock.firstElementChild);
-    ticketContainer.append(ticketCardListBlock);
+    contentWrapper.append(ticketCardListBlock);
   }
 }

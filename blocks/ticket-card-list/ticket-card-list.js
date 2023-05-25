@@ -2,96 +2,100 @@ import { fetchPlaceholders } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
   // get tour category
-  const tourCategory = block.children[0].children[0].textContent;
+  const tourCategory = block.children[0].children[0].textContent.trim();
 
-  // load list of tours available
+  // load list of tours
   // TODO : make it language aware
   const resp = await fetch(`${document.location.pathname}/tours.json`);
-  if (resp.ok) {
-    // get all tours
-    const tours = (await resp.json()).data;
+  if (!resp.ok) {
+    block.textContent = '';
+    return;
+  }
 
-    // get placeholders
-    const placeholders = await fetchPlaceholders();
-    const { buy, itIncludes, moreInformation } = placeholders;
+  // get the tours for the selected category
+  const selectedTours = (await resp.json()).data.filter((tour) => {
+    // get assigned categories
+    const categories = tour.Categories.split(',').map((categoryEntry) => categoryEntry.trim());
+    // check
+    return categories.includes(tourCategory) && tour['Show on Category Page'].trim().toLowerCase().startsWith('y');
+  });
 
-    // start ul list
-    const ul = document.createElement('ul');
+  console.log(selectedTours);
 
-    // go through list of tours
-    tours.forEach((tour) => {
-      // get categories
-      const categories = tour.Categories.split(',');
-      categories.forEach((e, i) => { categories[i] = e.trim(); });
+  // get placeholders
+  const placeholders = await fetchPlaceholders();
+  const { buy, itIncludes, moreInformation } = placeholders;
 
-      // if its the right category and its to be shown in the overview
-      if (categories.includes(tourCategory) && tour['Show on Category Page'].trim().toLowerCase().startsWith('y')) {
-        // for now by default we assume we are rendering the card in the tour hero
-        const dom = document.createRange().createContextualFragment(`
-        <script type='application/ld+json'>
-          {
-            "@context":"https://www.schema.org",
-            "category":"tickets",
-            "description":"${tour['Description Title']}\\n${tour.Description}",
-            "@type":"Product",
-            "offers":{
-              "price":"${price}",
-              "@type":"Offer",
-              "priceCurrency":"EURO",
-              "seller":{
-                "@type":"Organization",
-                "name":"Real Madrid C.F."
-              }
-            },
-            "name":"${tourName} ${subtitle}",
-            "brand":"${subtitle}",
-            "url":"https://www.realmadrid.com${tour}"
-          }
-        </script>
+  // start ul list
+  const ul = document.createElement('ul');
 
+  // go through list of tours
+  selectedTours.forEach((tour) => {
+    // for now by default we assume we are rendering the card in the tour hero
+    const ticketCard = document.createRange().createContextualFragment(`
+      <script type='application/ld+json'>
+        {
+          "@context":"https://www.schema.org",
+          "category":"tickets",
+          "description":"${tour['Description Title']}\\n${tour.Description}",
+          "@type":"Product",
+          "offers":{
+            "price":"${tour.Price}",
+            "@type":"Offer",
+            "priceCurrency":"EURO",
+            "seller":{
+              "@type":"Organization",
+              "name":"Real Madrid C.F."
+            }
+          },
+          "name":"${tour['Tour Name']} ${tour.Subtitle}",
+          "brand":"${tour.Subtitle}",
+          "url":"https://www.realmadrid.com${tour}"
+        }
+      </script>
+      <li>
         <div class='ticket-type'>
-          <div class='title'>${tourName}</div>
-          <div class='subtitle'>${subtitle}</div>
+          <div class='title'>${tour['Tour Name']}</div>
+          <div class='subtitle'>${tour.Subtitle}</div>
         </div>
 
         <div class='info-buy'>
           <div class='price'>
             <p>
-            ${pricePretext}
-            <span class='amount'>${price}</span>
+            ${tour['Price Pretext']}
+            <span class='amount'>${tour.Price}</span>
             <span class='currency'>€</span>
-            <span class='subtitle'>${priceSubtitle}</span>
+            <span class='subtitle'>${tour['Price Subtitle']}</span>
             </p>
           </div>
 
           <div class='buy-button'>
-            <a href='${buyLink}' target='_blank' rel='noreferrer'>${buy}</a>
+            <a href='${tour['Buy Link']}' target='_blank' rel='noreferrer'>${buy}</a>
           </div>
         </div>
 
         <div class='ticket-detail'>
           <div class='content'>
             <p>${itIncludes}:</p>
-            ${includes}
+            ${tour['Ticket Text']}
           </div>
         </div>
 
-        <a href='${tour}' class='info-link'>${moreInformation}</a>
-      `);
+        <a href='${tour['Detail Page']}' class='info-link'>${moreInformation}</a>
+      </li>
+    `);
 
-      }
-    });
-
-    
     // if a label on top of ticket card is set
-     if (ticketLabel) {
+    if (tour['Ticket Label']) {
       const label = document.createElement('span');
-      label.textContent = ticketLabel;
+      label.textContent = tour['Ticket Label'];
       label.classList.add('label');
-      dom.querySelector('.ticket-type').prepend(label);
-    } 
+      ticketCard.querySelector('.ticket-type').prepend(label);
+    }
 
-    block.textContent = '';
-    // block.append(dom);
-  }
+    ul.append(ticketCard);
+  });
+
+  block.textContent = '';
+  block.append(ul);
 }

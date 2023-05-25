@@ -1,7 +1,7 @@
 /* --- when shown inside the hero-tour block --- */
 
 /* the outermost div */
-.hero-tour.block .ticket-container li > div {
+.hero-tour.block .ticket-card-list li {
   width: auto;
   max-width: 18.75rem;
   box-sizing: border-box;
@@ -15,7 +15,7 @@
 }
 
 /* more info link */
-.hero-tour.block .ticket-container li > div > a  {
+.hero-tour.block .ticket-card-list li > a  {
   font-size: 1rem;
   line-height: 1;
   color: #0067d1;
@@ -28,7 +28,7 @@
   text-decoration: underline;
 }
 
-.hero-tour.block .ticket-container li > div > a::after  {
+.hero-tour.block .ticket-card-list li > a::after  {
   content: '\e914';
   font-family: Real-Madrid-New-Icons, sans-serif;
   font-size: 0.625rem;
@@ -49,14 +49,14 @@
 }
 
 /* ticket type block */
-.hero-tour.block .ticket-container li > div .ticket-type {
+.hero-tour.block .ticket-card-list li .ticket-type {
   padding: 1.25rem;
   text-align: center;
   position: relative;
   margin: 0;
 }
 
-.hero-tour.block .ticket-container li > div .ticket-type .label {
+.hero-tour.block .ticket-card-list li .ticket-type .label {
     display: inline-block;
     border-radius: 0.3125rem;
     background-color: #ad8100;
@@ -75,7 +75,7 @@
 }
 
 /* title */
-.hero-tour.block .ticket-container li > div .ticket-type .title {
+.hero-tour.block .ticket-card-list li .ticket-type .title {
   font-size: 2.75rem;
   font-weight: 300;
   line-height: 1;
@@ -84,7 +84,7 @@
 }
 
 /* subtitle */
-.hero-tour.block .ticket-container li > div .ticket-type .subtitle {
+.hero-tour.block .ticket-card-list li .ticket-type .subtitle {
   display: block;
   font-size: 0.75rem;
   line-height: 1;
@@ -96,18 +96,18 @@
 }
 
 /* the price block */
-.hero-tour.block .ticket-container li > div .info-buy {
+.hero-tour.block .ticket-card-list li .info-buy {
   display: flex;
   margin-bottom: 1.25rem;
 }
 
 /* price descriptions left side */
-.hero-tour.block .ticket-container li > div .info-buy .price {
+.hero-tour.block .ticket-card-list li .info-buy .price {
   width: 50%;
   flex: 0 1 auto;
 }
 
-.hero-tour.block .ticket-container li > div .info-buy .price p {
+.hero-tour.block .ticket-card-list li .info-buy .price p {
   text-align: right;
   font-size: 0.9375rem;
   letter-spacing: -0.02rem;
@@ -116,7 +116,7 @@
 }
 
 /* price */
-.hero-tour.block .ticket-container li > div .info-buy .price p .amount {
+.hero-tour.block .ticket-card-list li .info-buy .price p .amount {
   font-size: 1.5625rem;
   line-height: 0.96;
   letter-spacing: -0.03rem;
@@ -124,14 +124,14 @@
 }
 
 /* currency */
-.hero-tour.block .ticket-container li > div .info-buy .price p .currency {
+.hero-tour.block .ticket-card-list li .info-buy .price p .currency {
   font-size: 1.125rem;
   font-weight: 400;
   letter-spacing: -0.02rem;
 }
 
 /* subtitle */
-.hero-tour.block .ticket-container li > div .info-buy .price p .subtitle {
+.hero-tour.block .ticket-card-list li .info-buy .price p .subtitle {
   display: block;
   color: #444;
   font-size: 0.875rem;
@@ -139,12 +139,12 @@
 }
 
 /* buy button */
-.hero-tour.block .ticket-container li > div .info-buy .buy-button {
+.hero-tour.block .ticket-card-list li .info-buy .buy-button {
   width: 50%;
   flex: 0 1 auto;
 }
 
-.hero-tour.block .ticket-container li > div .info-buy .buy-button a {
+.hero-tour.block .ticket-card-list li .info-buy .buy-button a {
   display: block;
   width: 100%;
   border-radius: 0.625rem;
@@ -163,14 +163,14 @@
 }
 
 /* ticket details block */
-.hero-tour.block .ticket-container li > div .ticket-detail {
+.hero-tour.block .ticket-card-list li .ticket-detail {
   background-color: #fff;
   box-sizing: border-box;
   padding: 1.25rem 1.875rem 0.5rem;
 }
 
 /* 'includes' text */
-.hero-tour.block .ticket-container li > div .ticket-detail .content p {
+.hero-tour.block .ticket-card-list li .ticket-detail .content p {
   font-size: 0.9375rem;
   font-weight: 600;
   line-height: 1;
@@ -179,7 +179,7 @@
 }
 
 /* list of includes */
-.hero-tour.block .ticket-container li > div .ticket-detail ul {
+.hero-tour.block .ticket-card-list li .ticket-detail ul {
   margin: 0 0 1.125rem 1.125rem;
   padding: 0;
   list-style-type: none;
@@ -188,11 +188,11 @@
   color: #444;
 }
 
-.hero-tour.block .ticket-container li > div .ticket-detail ul li {
+.hero-tour.block .ticket-card-list li .ticket-detail ul li {
   position: relative;
 }
 
-.hero-tour.block .ticket-container li > div .ticket-detail ul li::before {
+.hero-tour.block .ticket-card-list li .ticket-detail ul li::before {
   content: '–';
   display: block;
   position: absolute;
@@ -202,7 +202,7 @@
 /* enable flex row and wide tickets */
 @media (min-width: 37.5rem) {
   /* the outermost div */
-  .hero-tour.block .ticket-container li > div {
+  .hero-tour.block .ticket-card-list li {
     width: 17.5rem;
     position: relative;
     background: linear-gradient(to bottom, #e5e5e5 29%, #fff 70%);
@@ -211,7 +211,7 @@
   }
 
   /* more info link */
-  .hero-tour.block .ticket-container li > div > a  {
+  .hero-tour.block .ticket-card-list li > a  {
     font-size: 0.8125rem;
     position: absolute;
     bottom: 1.5625rem;
@@ -222,7 +222,7 @@
   }
 
   /* ticket type block */
-  .hero-tour.block .ticket-container li > div .ticket-type {
+  .hero-tour.block .ticket-card-list li .ticket-type {
     padding: 1.5625rem 1.25rem;
     display: flex;
     flex-wrap: wrap;
@@ -231,49 +231,49 @@
   }
 
   /* title */
-  .hero-tour.block .ticket-container li > div .ticket-type .title {
+  .hero-tour.block .ticket-card-list li .ticket-type .title {
     font-size: 2.5rem;
     width: 100%;
   }
 
   /* subtitle */
-  .hero-tour.block .ticket-container li > div .ticket-type .subtitle {
+  .hero-tour.block .ticket-card-list li .ticket-type .subtitle {
     font-size: 0.625rem;
   }
 
   /* price descriptions left side */
-  .hero-tour.block .ticket-container li > div .info-buy .price {
+  .hero-tour.block .ticket-card-list li .info-buy .price {
     width: 50%;
   }
 
-  .hero-tour.block .ticket-container li > div .info-buy .price p {
+  .hero-tour.block .ticket-card-list li .info-buy .price p {
     font-size: 0.88rem;
   }
 
   /* price */
-  .hero-tour.block .ticket-container li > div .info-buy .price p .amount {
+  .hero-tour.block .ticket-card-list li .info-buy .price p .amount {
     font-size: 1.375rem;
   }
 
   /* currency */
-  .hero-tour.block .ticket-container li > div .info-buy .price p .currency {
+  .hero-tour.block .ticket-card-list li .info-buy .price p .currency {
     font-size: 1rem;
   }
 
   /* subtitle */
-  .hero-tour.block .ticket-container li > div .info-buy .price p .subtitle {
+  .hero-tour.block .ticket-card-list li .info-buy .price p .subtitle {
     font-size: 0.75rem;
   }
 
   /* buy button */
-  .hero-tour.block .ticket-container li > div .info-buy .buy-button {
+  .hero-tour.block .ticket-card-list li .info-buy .buy-button {
     width: 50%;
     padding: 0 0.9375rem 0 1.25rem;
     text-align: center;
     white-space: nowrap;
   }
 
-  .hero-tour.block .ticket-container li > div .info-buy .buy-button a {
+  .hero-tour.block .ticket-card-list li .info-buy .buy-button a {
     margin: 0 auto;
     font-size: 0.85rem;
     padding: 0.875rem 1rem 0.75rem;
@@ -281,7 +281,7 @@
   }
 
   /* ticket details block */
-  .hero-tour.block .ticket-container li > div .ticket-detail {
+  .hero-tour.block .ticket-card-list li .ticket-detail {
     background-color: transparent;
     padding: 1.25rem 1.875rem 1.5625rem;
     border-bottom-right-radius: 1rem;
@@ -289,12 +289,12 @@
   }
 
   /* 'includes' text */
-  .hero-tour.block .ticket-container li > div .ticket-detail .content p {
+  .hero-tour.block .ticket-card-list li .ticket-detail .content p {
     font-size: 0.8125rem;
   }
 
   /* list of includes */
-  .hero-tour.block .ticket-container li > div .ticket-detail ul {
+  .hero-tour.block .ticket-card-list li .ticket-detail ul {
     font-size: 0.8125rem;
     line-height: 1.77;
     margin: 0 0 0.875rem 1.125rem;
@@ -305,58 +305,58 @@
 @media (min-width: 58.13rem) {
 
    /* the outermost div */
-  .hero-tour.block .ticket-container li > div {
+  .hero-tour.block .ticket-card-list li {
     width: 13.75rem;
     margin: 0 0.9375rem 1.5rem 0;
   }
 
   /* more info link */
-  .hero-tour.block .ticket-container li > div > a {
+  .hero-tour.block .ticket-card-list li > a {
     padding: 0 0.9375rem;
   }
 
   /* ticket type block */
-  .hero-tour.block .ticket-container li > div .ticket-type {
+  .hero-tour.block .ticket-card-list li .ticket-type {
     min-height: 9.0625rem;
     box-sizing: border-box;
     padding: 1.25rem;
   }
 
   /* the price block */
-  .hero-tour.block .ticket-container li > div .info-buy {
+  .hero-tour.block .ticket-card-list li .info-buy {
     flex-wrap: wrap;
     margin-bottom: 0.3125rem;
   }
 
   /* price descriptions left side */
-  .hero-tour.block .ticket-container li > div .info-buy .price {
+  .hero-tour.block .ticket-card-list li .info-buy .price {
     width: 100%;
     margin: 0 0 0.5rem;
   }
 
-  .hero-tour.block .ticket-container li > div .info-buy .price p {
+  .hero-tour.block .ticket-card-list li .info-buy .price p {
     text-align: center;
   }
 
   /* subtitle */
-  .hero-tour.block .ticket-container li > div .info-buy .price p .subtitle {
+  .hero-tour.block .ticket-card-list li .info-buy .price p .subtitle {
     text-align: center;
   }
 
   /* buy button */
-  .hero-tour.block .ticket-container li > div .info-buy .buy-button {
+  .hero-tour.block .ticket-card-list li .info-buy .buy-button {
     width: 100%;
     padding: 0 0.9375rem;
   }
 
-  .hero-tour.block .ticket-container li > div .info-buy .buy-button a {
+  .hero-tour.block .ticket-card-list li .info-buy .buy-button a {
     width: auto;
     display: inline-block;
     padding: 0.875rem 1.5rem 0.75rem;
   }
 
   /* ticket details block */
-  .hero-tour.block .ticket-container li > div .ticket-detail {
+  .hero-tour.block .ticket-card-list li .ticket-detail {
     padding: 1.25rem 0.9375rem;
   }
 }
@@ -364,61 +364,61 @@
 /* normal wide tickets */
 @media (min-width: 75rem) {
   /* the outermost div */
-  .hero-tour.block .ticket-container li > div {
+  .hero-tour.block .ticket-card-list li {
     width: 17.5rem;
     margin: 0 1.5625rem 1.5rem 0;
   }
 
   /* more info link */
-  .hero-tour.block .ticket-container li > div > a {
+  .hero-tour.block .ticket-card-list li > a {
     padding: 0 1.875rem;
   }
 
   /* ticket type block */
-  .hero-tour.block .ticket-container li > div .ticket-type {
+  .hero-tour.block .ticket-card-list li .ticket-type {
     padding: 1.5625rem 1.25rem;
   }
 
   /* the price block */
-  .hero-tour.block .ticket-container li > div .info-buy {
+  .hero-tour.block .ticket-card-list li .info-buy {
     flex-wrap: nowrap;
     margin-bottom: 1.25rem;
   }
 
   /* price descriptions left side */
-  .hero-tour.block .ticket-container li > div .info-buy .price {
+  .hero-tour.block .ticket-card-list li .info-buy .price {
     width: 50%;
   }
 
-  .hero-tour.block .ticket-container li > div .info-buy .price p {
+  .hero-tour.block .ticket-card-list li .info-buy .price p {
     text-align: right;
   }
 
   /* subtitle */
-  .hero-tour.block .ticket-container li > div .info-buy .price p .subtitle {
+  .hero-tour.block .ticket-card-list li .info-buy .price p .subtitle {
     text-align: right;
   }
 
   /* buy button */
-  .hero-tour.block .ticket-container li > div .info-buy .buy-button {
+  .hero-tour.block .ticket-card-list li .info-buy .buy-button {
     width: 50%;
     padding: 0 0.9375rem 0 1.25rem;
   }
 
-  .hero-tour.block .ticket-container li > div .info-buy .buy-button a {
+  .hero-tour.block .ticket-card-list li .info-buy .buy-button a {
     width: 100%;
     display: block;
     padding: 0.875rem 1rem 0.75rem;
   }
 
   /* ticket details block */
-  .hero-tour.block .ticket-container li > div .ticket-detail {
+  .hero-tour.block .ticket-card-list li .ticket-detail {
     padding: 1.25rem 1.875rem 1.5625rem;
   }
 }
 
 /* list of ticket types */
-.hero-tour.block .ticket-container > ul {
+.hero-tour.block .ticket-card-list > ul {
   margin: 0 1.25rem;
   padding: 0;
   list-style-type: none;
@@ -426,7 +426,7 @@
 
 /* at 350px there is a slight change */
 @media (min-width: 21.88rem) {
-  .hero-tour.block .ticket-container > ul {
+  .hero-tour.block .ticket-card-list > ul {
     margin-left: auto;
     margin-right: auto;
     width: 21.875rem;
@@ -434,7 +434,7 @@
 }
 
 @media (min-width: 37.5rem) {
-  .hero-tour.block .ticket-container > ul {
+  .hero-tour.block .ticket-card-list > ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -445,7 +445,7 @@
 }
 
 @media (min-width: 58.13rem) {
-  .hero-tour.block .ticket-container > ul {
+  .hero-tour.block .ticket-card-list > ul {
     width: 100%;
     max-width: 58.125rem;
     justify-content: center;
@@ -455,7 +455,7 @@
 /* normal wide tickets */
 @media (min-width: 75rem) {
   /* list of ticket types */
-  .hero-tour.block .ticket-container > ul {
+  .hero-tour.block .ticket-card-list > ul {
     max-width: 76.25rem;
     justify-content: center;
   }
