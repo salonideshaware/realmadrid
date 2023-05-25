@@ -23,3 +23,9 @@ a.top-menu-item {
 a.top-menu-item:hover {
     color: blue;
 }
+
+@media screen and (max-width: 1056px) {
+    .top-menu {
+        display: none;
+    }
+}

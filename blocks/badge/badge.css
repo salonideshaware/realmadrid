@@ -43,7 +43,7 @@
 }
 
 .badge .upper-box div > p:nth-child(1) {
-  color: #fff;
+  color: var(--background-color);
   font-size: 19px;
 }
 
@@ -65,7 +65,7 @@
 /* stylelint-disable-next-line no-descending-specificity */
 .badge .lower-box p {
   font-size: 11px;
-  color: white;
+  color: var(--background-color);
   font-weight: 400;
   margin: 0;
 }

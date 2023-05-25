@@ -222,6 +222,22 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
+const DATA_URL = 'https://publish-p47754-e237356.adobeaemcloud.com/graphql/execute.json/realmadridmastersite/structurePage%3Balang=es-es';
+let navigationConfig;
+export async function fetchNavigationConfig() {
+  if (navigationConfig) {
+    return navigationConfig;
+  }
+  try {
+    const response = await fetch(DATA_URL);
+    navigationConfig = await response.json();
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
+  return navigationConfig;
+}
+
 const VIP_AREA_INDEX = '/query-index.json';
 const LANG_LOCALE = {
   en: 'en-US',
@@ -276,6 +292,25 @@ export async function loadFragment(path) {
     }
   }
   return null;
+}
+
+export function bindSwipeToElement(el) {
+  let touchstartX = 0;
+  let touchendX = 0;
+
+  el.addEventListener('touchstart', (e) => {
+    touchstartX = e.changedTouches[0].screenX;
+  });
+
+  el.addEventListener('touchend', (e) => {
+    touchendX = e.changedTouches[0].screenX;
+    if (touchendX < touchstartX) {
+      el.dispatchEvent(new CustomEvent('swipe-RTL'));
+    }
+    if (touchendX > touchstartX) {
+      el.dispatchEvent(new CustomEvent('swipe-LTR'));
+    }
+  });
 }
 
 async function loadPage() {
