@@ -169,6 +169,11 @@ main .carousel .carousel-buttons-container {
   left: auto;
 }
 
+.photo-close.rtl {
+  left: 21px;
+  right: auto;
+}
+
 .photo-close:hover {
   background: none;
 }
@@ -186,6 +191,11 @@ main .carousel .carousel-buttons-container {
 /* Styles for the header div */
 .photo-header {
   padding: 22px 70px 21px 17px;
+}
+
+/* Styles for the header div */
+.photo-header.rtl {
+  padding: 22px 17px 21px 70px;
 }
 
 /* Styles for the title div */
