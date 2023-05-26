@@ -13,6 +13,7 @@ import {
   loadCSS,
   getMetadata,
   toClassName,
+  fetchPlaceholders,
 } from './lib-franklin.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
@@ -222,7 +223,28 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
-const DATA_URL = 'https://publish-p47754-e237356.adobeaemcloud.com/graphql/execute.json/realmadridmastersite/structurePage%3Balang=es-es';
+const VIP_AREA_INDEX = '/query-index.json';
+const LANG_LOCALE = {
+  en: 'en-US',
+  de: 'de-DE',
+  fr: 'fr-FR',
+  ko: 'ko-KR',
+  es: 'es-ES',
+  it: 'it-IT',
+  hi: 'hi-IN',
+  jp: 'ja-JP',
+  br: 'pt-BR',
+};
+
+export function getLocale() {
+  return LANG_LOCALE[getLanguage()];
+}
+// eslint-disable-next-line no-undef
+const placeholders = await fetchPlaceholders();
+const { aemGqEndpoint } = placeholders;
+const locale = getLocale();
+
+const DATA_URL = `${aemGqEndpoint}/realmadridmastersite/structurePage%3Balang=${locale}`;
 let navigationConfig;
 export async function fetchNavigationConfig() {
   if (navigationConfig) {
@@ -236,22 +258,6 @@ export async function fetchNavigationConfig() {
     console.error(error);
   }
   return navigationConfig;
-}
-
-const VIP_AREA_INDEX = '/query-index.json';
-const LANG_LOCALE = {
-  en: 'en-US',
-  de: 'de-DE',
-  fr: 'fr-FR',
-  ko: 'ko-KR',
-  es: 'es-ES',
-  it: 'it-IT',
-  jp: 'ja-JP',
-  br: 'pt-BR',
-};
-
-export function getLocale() {
-  return LANG_LOCALE[getLanguage()];
 }
 
 export function getVipAreaIndexPath(url) {
