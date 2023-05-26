@@ -265,9 +265,9 @@ function createFilters(block, placeholders, months) {
 export default async function decorate(block) {
   const config = readBlockConfig(block);
   const placeholders = await fetchPlaceholders();
-  const { matchesGqApi, noMatches } = placeholders;
+  const { aemGqEndpoint, noMatches } = placeholders;
   const { sport } = config;
-  const url = new URL(`${matchesGqApi}${API[sport.toLowerCase()]}`); // todo: add params fromDate endDate
+  const url = new URL(`${aemGqEndpoint}${API[sport.toLowerCase()]}`); // todo: add params fromDate endDate
   const response = await fetch(url);
   const data = await response.json();
   const items = data.data.matchList.items.map(renderMatch(placeholders));
