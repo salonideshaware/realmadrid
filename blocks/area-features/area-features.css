@@ -131,7 +131,7 @@ main .area-features-wrapper {
   width: 17px;
   height: 30px;
   top: 18px;
-  right: 18px;
+  inset-inline-end: 18px;
   position: absolute;
   cursor: pointer;
   background-color: unset;
