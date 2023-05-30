@@ -25,7 +25,7 @@ function createLanguageDropdown(languages, languageButtonContent, currentLanguag
     languageItem.innerHTML = `
       <a href="${SITE_URL}/${languages[i].code}">${languages[i].label}</a>
       <svg focusable="false" width="22" height="22" aria-hidden="true">
-        <use xlink:href="/blocks/header/cibeles-sprite.svg#check"></use>
+        <use xlink:href="${window.hlx.codeBasePath}/blocks/header/cibeles-sprite.svg#check"></use>
       </svg>
     `;
     languageDropdown.appendChild(languageItem);
@@ -46,11 +46,11 @@ export default function createLanguageSelectorButton(parent, languages) {
   const currentLanguage = getLocale();
   const languageButtonContent = `
     <svg focusable="false" width="16" height="16" aria-hidden="true">
-      <use xlink:href="/blocks/header/landing-sprite.svg#lang"></use>
+      <use xlink:href="${window.hlx.codeBasePath}/blocks/header/landing-sprite.svg#lang"></use>
     </svg>
     <span>${currentLanguage.substring(0, 2)}</span>
     <svg focusable="false" width="16" height="16" aria-hidden="true">
-      <use xlink:href="/blocks/header/cibeles-sprite.svg#chevron-up"></use>
+      <use xlink:href="${window.hlx.codeBasePath}/blocks/header/cibeles-sprite.svg#chevron-up"></use>
     </svg>
   `;
 
