@@ -230,3 +230,43 @@ body main .section.banner-carousel-container {
     transition: opacity 0.5s;
   }
 }
+
+/*
+banner carousel - single banner option styling
+ */
+.banner-carousel.single-banner .carousel-slide h3 {
+  top: auto;
+  bottom: 105px;
+  left: 20px;
+  text-align: left;
+  font-size: var(--heading-font-size-l);
+  line-height: var(--heading-font-size-l);
+  font-weight: 500;
+}
+
+.banner-carousel.single-banner .carousel-slide h2 {
+  bottom: 35px;
+  left: 20px;
+  top: auto;
+  text-align: left;
+  font-size: 70px;
+  line-height: 70px;
+  font-weight: 500;
+}
+
+.banner-carousel.single-banner .control-container {
+  display: none;
+}
+
+.banner-carousel.single-banner .carousel-slide picture::before {
+  display: none;
+}
+
+@media screen and (min-width: 990px) {
+  .banner-carousel.single-banner .carousel-slide h3,
+  .banner-carousel.single-banner .carousel-slide h2 {
+    width: var(--wrapper-width);
+    margin: 0 auto;
+    left: 0;
+  }
+}
