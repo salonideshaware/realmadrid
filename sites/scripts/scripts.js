@@ -96,7 +96,7 @@ export function getLanguage() {
   if (segs && segs.length > 0) {
     // eslint-disable-next-line no-restricted-syntax
     for (const [value] of Object.entries(VIP_AREA_LANGUAGE_HOME_PATH)) {
-      if (value === segs[1]) {
+      if (value === segs[2]) {
         language = value;
         break;
       }
