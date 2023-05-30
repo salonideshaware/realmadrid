@@ -75,14 +75,14 @@ function buildContentHeaderBlock(main) {
 }
 
 const VIP_AREA_LANGUAGE_HOME_PATH = {
-  es: '/area-vip',
-  en: '/en/vip-area',
-  fr: '/fr/zone-vip',
-  de: '/de/vip-zone',
-  pt: '/pt/area-vip',
-  ja: '/ja/vip-area',
-  ar: '/ar/vip-area',
-  hi: '/hi/vip-area',
+  es: '/sites/area-vip',
+  en: '/sites/en/vip-area',
+  fr: '/sites/fr/zone-vip',
+  de: '/sites/de/vip-zone',
+  pt: '/sites/pt/area-vip',
+  ja: '/sites/ja/vip-area',
+  ar: '/sites/ar/vip-area',
+  hi: '/sites/hi/vip-area',
 };
 
 let language;
