@@ -21,6 +21,10 @@ sitemaps:
         source: /fr/zone-vip/query-index.json
         destination: /sitemap.xml
         hreflang: fr
+      pt:
+        source: /pt/area-vip/query-index.json
+        destination: /sitemap.xml
+        hreflang: pt
       ja:
         source: /ja/vip-area/query-index.json
         destination: /sitemap.xml
@@ -29,4 +33,7 @@ sitemaps:
         source: /ar/vip-area/query-index.json
         destination: /sitemap.xml
         hreflang: ar
-
+      hi:
+        source: /hi/vip-area/query-index.json
+        destination: /sitemap.xml
+        hreflang: hi
