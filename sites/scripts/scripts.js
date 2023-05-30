@@ -74,15 +74,17 @@ function buildContentHeaderBlock(main) {
   main.prepend(headerSection);
 }
 
+const DOCROOT = '/sites';
+
 const VIP_AREA_LANGUAGE_HOME_PATH = {
-  es: '/area-vip',
-  en: '/en/vip-area',
-  fr: '/fr/zone-vip',
-  de: '/de/vip-zone',
-  pt: '/pt/area-vip',
-  ja: '/ja/vip-area',
-  ar: '/ar/vip-area',
-  hi: '/hi/vip-area',
+  es: `${DOCROOT}/area-vip`,
+  en: `${DOCROOT}/en/vip-area`,
+  fr: `${DOCROOT}/fr/zone-vip`,
+  de: `${DOCROOT}/de/vip-zone`,
+  pt: `${DOCROOT}/pt/area-vip`,
+  ja: `${DOCROOT}/ja/vip-area`,
+  ar: `${DOCROOT}/ar/vip-area`,
+  hi: `${DOCROOT}/hi/vip-area`,
 };
 
 let language;
@@ -94,7 +96,7 @@ export function getLanguage() {
   if (segs && segs.length > 0) {
     // eslint-disable-next-line no-restricted-syntax
     for (const [value] of Object.entries(VIP_AREA_LANGUAGE_HOME_PATH)) {
-      if (value === segs[1]) {
+      if (value === segs[2]) {
         language = value;
         break;
       }
@@ -241,7 +243,7 @@ export function getLocale() {
 let navigationConfig;
 export async function fetchNavigationConfig() {
   // eslint-disable-next-line no-undef
-  const placeholders = await fetchPlaceholders();
+  const placeholders = await fetchPlaceholders(DOCROOT);
   const { aemGqEndpoint } = placeholders;
   const locale = getLocale();
 
@@ -266,9 +268,9 @@ export function getVipAreaIndexPath(url) {
 
 export async function fetchLanguagePlaceholders() {
   const currentLanguage = getLanguage();
-  let prefix = `/${currentLanguage}`;
+  let prefix = `${DOCROOT}/${currentLanguage}`;
   if (language === 'es') {
-    prefix = 'default';
+    prefix = DOCROOT;
   }
   const languagePlaceholders = await fetchPlaceholders(prefix);
   return languagePlaceholders;
