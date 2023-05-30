@@ -237,8 +237,8 @@ banner carousel - single banner option styling
 .banner-carousel.single-banner .carousel-slide h3 {
   top: auto;
   bottom: 105px;
-  left: 20px;
-  text-align: left;
+  inset-inline-start: 20px;
+  text-align: start;
   font-size: var(--heading-font-size-l);
   line-height: var(--heading-font-size-l);
   font-weight: 500;
@@ -246,9 +246,9 @@ banner carousel - single banner option styling
 
 .banner-carousel.single-banner .carousel-slide h2 {
   bottom: 35px;
-  left: 20px;
+  inset-inline-start: 20px;
   top: auto;
-  text-align: left;
+  text-align: start;
   font-size: 70px;
   line-height: 70px;
   font-weight: 500;
@@ -267,6 +267,6 @@ banner carousel - single banner option styling
   .banner-carousel.single-banner .carousel-slide h2 {
     width: var(--wrapper-width);
     margin: 0 auto;
-    left: 0;
+    inset-inline-start: 0;
   }
 }
