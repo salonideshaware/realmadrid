@@ -241,7 +241,7 @@ export function getLocale() {
 let navigationConfig;
 export async function fetchNavigationConfig() {
   // eslint-disable-next-line no-undef
-  const placeholders = await fetchPlaceholders();
+  const placeholders = await fetchPlaceholders('/sites');
   const { aemGqEndpoint } = placeholders;
   const locale = getLocale();
 
@@ -266,9 +266,9 @@ export function getVipAreaIndexPath(url) {
 
 export async function fetchLanguagePlaceholders() {
   const currentLanguage = getLanguage();
-  let prefix = `/${currentLanguage}`;
+  let prefix = `/sites/${currentLanguage}`;
   if (language === 'es') {
-    prefix = 'default';
+    prefix = '/sites';
   }
   const languagePlaceholders = await fetchPlaceholders(prefix);
   return languagePlaceholders;
