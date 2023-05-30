@@ -239,14 +239,14 @@ const LANG_LOCALE = {
 export function getLocale() {
   return LANG_LOCALE[getLanguage()];
 }
-// eslint-disable-next-line no-undef
-const placeholders = await fetchPlaceholders();
-const { aemGqEndpoint } = placeholders;
-const locale = getLocale();
-
-const DATA_URL = `${aemGqEndpoint}/realmadridmastersite/structurePage%3Balang=${locale}`;
 let navigationConfig;
 export async function fetchNavigationConfig() {
+  // eslint-disable-next-line no-undef
+  const placeholders = await fetchPlaceholders();
+  const { aemGqEndpoint } = placeholders;
+  const locale = getLocale();
+
+  const DATA_URL = `${aemGqEndpoint}/realmadridmastersite/structurePage%3Balang=${locale}`;
   if (navigationConfig) {
     return navigationConfig;
   }
@@ -263,6 +263,16 @@ export async function fetchNavigationConfig() {
 export function getVipAreaIndexPath(url) {
   language = getLanguage();
   return `${url.origin}${VIP_AREA_LANGUAGE_HOME_PATH[language]}${VIP_AREA_INDEX}`;
+}
+
+export async function fetchLanguagePlaceholders() {
+  const currentLanguage = getLanguage();
+  let prefix = `/${currentLanguage}`;
+  if (language === 'es') {
+    prefix = 'default';
+  }
+  const languagePlaceholders = await fetchPlaceholders(prefix);
+  return languagePlaceholders;
 }
 
 /**
