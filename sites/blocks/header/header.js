@@ -1,7 +1,6 @@
 import createTopMenu from './topMenu.js';
 import addPopupMenuButton from './popupMenuButton.js';
-import { fetchNavigationConfig } from '../../scripts/scripts.js';
-import { fetchPlaceholders } from '../../scripts/lib-franklin.js';
+import { fetchNavigationConfig, fetchLanguagePlaceholders } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   const data = await fetchNavigationConfig();
@@ -26,7 +25,7 @@ export default async function decorate(block) {
   const logo = data.data.header.items[0].additionalLogos[0];
   // eslint-disable-next-line no-underscore-dangle
   const logoImg = logo && logo.image ? `<img src='${logo.image._publishUrl}' style="width: 40px; height: 40px; margin-left: 16px"/>` : '';
-  const { login } = await fetchPlaceholders();
+  const { login } = await fetchLanguagePlaceholders();
   block.appendChild(document.createRange().createContextualFragment(`
     <div style="flex: 1 0 auto; display: flex; flex-direction: row; justify-content: space-between; align-items: center">
     <!-- Logos -->
