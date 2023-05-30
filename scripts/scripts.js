@@ -225,15 +225,14 @@ function loadDelayed() {
 
 const VIP_AREA_INDEX = '/query-index.json';
 const LANG_LOCALE = {
+  es: 'es-ES',
   en: 'en-US',
   de: 'de-DE',
   fr: 'fr-FR',
-  ko: 'ko-KR',
-  es: 'es-ES',
-  it: 'it-IT',
+  pt: 'pt-PT',
+  ar: 'ar-AE',
   hi: 'hi-IN',
-  jp: 'ja-JP',
-  br: 'pt-BR',
+  ja: 'ja-JP',
 };
 
 export function getLocale() {
