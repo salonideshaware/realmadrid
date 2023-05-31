@@ -23,7 +23,6 @@ export default async function decorate(block) {
   // get placeholders (non-existing values are undefined)
   const placeholders = await fetchPlaceholders();
   const {
-    buy = 'Comprar',
     itIncludes = 'Incluye',
     moreInformation = 'Más información',
     from = 'desde',
@@ -47,6 +46,7 @@ export default async function decorate(block) {
     const buyLink = tour['Buy Link'];
     const detailPage = tour['Detail Page'];
     const ticketLabel = tour['Ticket Label'];
+    const buttonText = tour['Button Text'];
     // recover the bullet list
     const ticketText = tour['Ticket Text'].split('\n').map((liContent) => `<li>${liContent.trim()}</li>`);
 
@@ -83,7 +83,7 @@ export default async function decorate(block) {
       <li>
         <div class='ticket-type'>
           ${ticketLabel ? `<span class='label'>${ticketLabel}</span>` : ''}
-          <div class='title'>${tourName}</div>
+          <div class='title'>${tourName.split('\n').map((line) => `${line.trim()}<br>`).join('')}</div>
           <div class='subtitle'>${Subtitle}</div>
         </div>
         <div class='info-buy'>
@@ -96,7 +96,7 @@ export default async function decorate(block) {
             </p>
           </div>
           <div class='buy-button'>
-            <a href='${buyLink}' target='_blank' rel='noreferrer'>${buy}</a>
+            <a href='${buyLink}' target='_blank' rel='noreferrer'>${buttonText}</a>
           </div>
         </div>
         <div class='ticket-detail'>
