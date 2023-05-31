@@ -234,24 +234,31 @@ body main .section.banner-carousel-container {
 /*
 banner carousel - single banner option styling
  */
+.banner-carousel.single-banner .carousel-slide h2,
 .banner-carousel.single-banner .carousel-slide h3 {
-  top: auto;
-  bottom: 105px;
   inset-inline-start: 20px;
+  top: auto;
   text-align: start;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1; /* number of lines to show */
+}
+
+.banner-carousel.single-banner .carousel-slide h3 {
+  bottom: 105px;
   font-size: var(--heading-font-size-l);
   line-height: var(--heading-font-size-l);
-  font-weight: 500;
+  max-height: calc(var(--heading-font-size-l) * 1); /* fallback */
 }
 
 .banner-carousel.single-banner .carousel-slide h2 {
   bottom: 35px;
-  inset-inline-start: 20px;
-  top: auto;
-  text-align: start;
   font-size: 70px;
   line-height: 70px;
-  font-weight: 500;
+  max-height: 70px; /* fallback */
 }
 
 .banner-carousel.single-banner .control-container {
