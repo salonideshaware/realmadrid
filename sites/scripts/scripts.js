@@ -242,11 +242,9 @@ export function getLocale() {
 }
 let navigationConfig;
 export async function fetchNavigationConfig() {
-  // eslint-disable-next-line no-undef
   const placeholders = await fetchPlaceholders(DOCROOT);
   const { aemGqEndpoint } = placeholders;
   const locale = getLocale();
-
   const DATA_URL = `${aemGqEndpoint}/realmadridmastersite/structurePage%3Balang=${locale}`;
   if (navigationConfig) {
     return navigationConfig;
