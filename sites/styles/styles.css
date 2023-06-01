@@ -66,6 +66,7 @@
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
   --header-font-family: "RMNeue","rmneue-normal-400-fallback";
   --header-font-family-bold: "RMNeue","rmneue-normal-700-fallback";
+  --icons-font-family : "Real-Madrid-Icons", sans-serif;
 
   /* RM: body sizes */
   --body-font-size-m: 20px;
@@ -363,8 +364,20 @@ body.tour main .section-organize-visit {
 }
 
 body.tour main .section .default-content-wrapper p {
-  color: #444;
+  color: var(--text-color);
   margin: 0;
+}
+
+body.tour main .section .default-content-wrapper p:last-of-type.button-container a {
+  text-transform: none;
+  font-size: var(--body-font-size-s);
+  color: var(--text-color);
+  background-color: unset;
+  font-weight: 500;
+  border: unset;
+  padding: 30px 0 0;
+  text-decoration: underline;
+  box-shadow: unset;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
@@ -373,6 +386,7 @@ body.tour main h2 {
   font-weight: 400;
   margin-bottom: 3px;
   margin-top: 0;
+  font-size: var(--heading-font-size-m);
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
@@ -456,7 +470,7 @@ body.tour.tour-detail main .main-section ul li::marker {
 }
 
 body.tour.tour-detail main .main-section ul li {
-  color: #444;
+  color: var(--text-color);
 }
 
 body.tour.tour-detail main .main-section blockquote::before,
@@ -567,4 +581,28 @@ body.vip-faq main .section div p, body.vip-faq main .section div ul {
     grid-area: content;
     margin-top:  40px 0 0 0;
   }
+}
+
+/** STYLES FOR AUTHORING GUIDE **/
+/* stylelint-disable-next-line no-descending-specificity */
+body.documentation h2 {
+  margin-top: 100px;
+  font-weight: 400;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+body.documentation h3 {
+  margin-top: 60px;
+  font-weight: 400;
+  font-size: 1.1em;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+body.documentation img {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  display: block;
+  border:solid 1px #444;
 }

@@ -74,7 +74,7 @@ function buildContentHeaderBlock(main) {
   main.prepend(headerSection);
 }
 
-const DOCROOT = '/sites';
+export const DOCROOT = '/sites';
 
 const VIP_AREA_LANGUAGE_HOME_PATH = {
   es: `${DOCROOT}/area-vip`,
@@ -87,16 +87,23 @@ const VIP_AREA_LANGUAGE_HOME_PATH = {
   hi: `${DOCROOT}/hi/vip-area`,
 };
 
-export const TOURS_LANGUAGE_HOME_PATH = {
-  es: `${DOCROOT}/tour-bernabeu`,
-  en: `${DOCROOT}/en/tour-bernabeu`,
-  fr: `${DOCROOT}/fr/tour-bernabeu`,
-  de: `${DOCROOT}/de/tour-bernabeu`,
-  pt: `${DOCROOT}/pt/tour-bernabeu`,
-  ja: `${DOCROOT}/ja/tour-bernabeu`,
-  ar: `${DOCROOT}/ar/tour-bernabeu`,
-  hi: `${DOCROOT}/hi/tour-bernabeu`,
+const TOUR_SECTION = 'tour-bernabeu';
+
+export const TOUR_LANGUAGE_HOME_PATH = {
+  es: `${DOCROOT}/${TOUR_SECTION}`,
+  en: `${DOCROOT}/en/${TOUR_SECTION}`,
+  fr: `${DOCROOT}/fr/${TOUR_SECTION}`,
+  de: `${DOCROOT}/de/${TOUR_SECTION}`,
+  pt: `${DOCROOT}/pt/${TOUR_SECTION}`,
+  ja: `${DOCROOT}/ja/${TOUR_SECTION}`,
+  ar: `${DOCROOT}/ar/${TOUR_SECTION}`,
+  hi: `${DOCROOT}/hi/${TOUR_SECTION}`,
 };
+
+const VIP_SECTION_PATHS = Object.values(VIP_AREA_LANGUAGE_HOME_PATH);
+
+const TOUR_SECTION_PATHS = Object.values(TOUR_LANGUAGE_HOME_PATH);
+
 let language;
 
 export function getLanguage() {
@@ -115,9 +122,24 @@ export function getLanguage() {
   return language;
 }
 
-export function getVIPAreaLangRoot() {
-  language = getLanguage();
-  return VIP_AREA_LANGUAGE_HOME_PATH[language];
+export function getVIPAreaLangRoot(lang) {
+  const requestedLang = typeof lang === 'string' ? lang : getLanguage();
+  return VIP_AREA_LANGUAGE_HOME_PATH[requestedLang];
+}
+
+export function getTourLangRoot(lang) {
+  const requestedLang = typeof lang === 'string' ? lang : getLanguage();
+  return TOUR_LANGUAGE_HOME_PATH[requestedLang];
+}
+
+export function getCurrentSection() {
+  const currentUrl = window.location.pathname;
+  if (VIP_SECTION_PATHS.find((x) => currentUrl.indexOf(x) > -1)) {
+    return 'vip';
+  } if (TOUR_SECTION_PATHS.find((x) => currentUrl.indexOf(x) > -1)) {
+    return 'tour';
+  }
+  return 'vip'; // todo: choose proper default
 }
 
 function buildFAQPage(main) {
@@ -215,8 +237,11 @@ async function loadLazy(doc) {
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
-  loadHeader(doc.querySelector('header'));
-  loadFooter(doc.querySelector('footer'));
+  /* Don't show header and footer in the authoring guide */
+  if (toClassName(getMetadata('template')) !== 'documentation') {
+    loadHeader(doc.querySelector('header'));
+    loadFooter(doc.querySelector('footer'));
+  }
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   addFavIcon(`${window.hlx.codeBasePath}/styles/favicon.svg`);
@@ -252,11 +277,9 @@ export function getLocale() {
 }
 let navigationConfig;
 export async function fetchNavigationConfig() {
-  // eslint-disable-next-line no-undef
   const placeholders = await fetchPlaceholders(DOCROOT);
   const { aemGqEndpoint } = placeholders;
   const locale = getLocale();
-
   const DATA_URL = `${aemGqEndpoint}/realmadridmastersite/structurePage%3Balang=${locale}`;
   if (navigationConfig) {
     return navigationConfig;

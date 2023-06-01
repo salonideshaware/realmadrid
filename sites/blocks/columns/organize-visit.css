@@ -66,13 +66,13 @@ body.tour .section.section-organize-visit .default-content-wrapper {
   flex-basis: max-content;
   line-height: 22px;
   font-weight: 400;
-  color: #222;
+  color: var(--text-color);
 }
 
 .columns.organize-visit .text-wrapper p {
   line-height: 22px;
   margin: 0;
-  color: #222;
+  color: var(--text-color);
 }
 
 @media (min-width: 900px) {

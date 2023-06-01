@@ -10,7 +10,7 @@ export function createTopMenuMobile(data) {
   return menu;
 }
 
-export default function createPopupMenu(data) {
+export default async function createPopupMenu(data) {
   const popupArea = document.createElement('div');
   popupArea.classList.add('popup-menu-area');
 
@@ -122,7 +122,7 @@ export default function createPopupMenu(data) {
   const footer = document.createElement('div');
   popup.appendChild(footer);
   footer.classList.add('language-popup-menu-area');
-  createLanguageSelectorButton(footer, data.data.header.items[0].languages);
+  await createLanguageSelectorButton(footer, data.data.header.items[0].languages);
 
   return popupArea;
 }
