@@ -411,7 +411,6 @@ main .section.related-tours-container .related-tours-wrapper {
   width: 12.5rem;
   height: 100%;
   display: flex;
-  align-content: flex-start;
   flex-flow: column;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -423,7 +422,7 @@ main .section.related-tours-container .related-tours-wrapper {
   word-spacing: 0;
   border-radius: 1rem;
   background: var(--background-color);
-  margin-right: 15px;
+  margin: 0 15px 0 0;
 }
 
 /* the sub category image */
