@@ -66,6 +66,7 @@
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
   --header-font-family: "RMNeue","rmneue-normal-400-fallback";
   --header-font-family-bold: "RMNeue","rmneue-normal-700-fallback";
+  --icons-font-family : "Real-Madrid-Icons", sans-serif;
 
   /* RM: body sizes */
   --body-font-size-m: 20px;
