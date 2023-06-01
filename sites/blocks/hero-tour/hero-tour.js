@@ -3,11 +3,13 @@ import { readBlockConfig, loadBlock } from '../../scripts/lib-franklin.js';
 export default async function decorate(block) {
   // get config entries
   const cfg = readBlockConfig(block);
+
   const {
     pretitle, title, promo, desktop, navigation, mobile,
   } = cfg;
   const promoTitle = cfg['promo-title'];
   const tourCategory = cfg['tour-category'];
+  const tourSubCategory = cfg['tour-sub-category'];
 
   // create basic dom structure
   const dom = document.createRange().createContextualFragment(`
@@ -20,6 +22,7 @@ export default async function decorate(block) {
   `);
 
   // shortcuts
+  const content = dom.querySelector('.content');
   const contentWrapper = dom.querySelector('.content-wrapper');
   const background = dom.querySelector('.background');
 
@@ -103,17 +106,37 @@ export default async function decorate(block) {
   block.textContent = '';
   block.append(dom);
 
-  // what tours are offered
+  // what main tour categories are offered
   if (tourCategory) {
     const ticketCardListBlock = document.createRange().createContextualFragment(`
       <div class='ticket-card-list hero' data-block-name='ticket-card-list' >
         <div>
           <div>${tourCategory}</div>
-        <div>
+        </div>
       </div>
     `);
 
     await loadBlock(ticketCardListBlock.firstElementChild);
     contentWrapper.append(ticketCardListBlock);
+  }
+
+  // if sub categories are defined
+  if (tourSubCategory) {
+    const subCatContainer = document.createRange().createContextualFragment(`
+    <div class='sub-wrapper'>
+      <h2 class='sub-cat-title'>
+        <span class='sub-cat-subtitle'>También podéis elegir</span>
+        VISITAS COMBINADAS
+      </h2>
+      <div class='ticket-card-list hero sub' data-block-name='ticket-card-list' >
+        <div>
+          <div>${tourSubCategory}</div>
+        </div>
+      </div>
+    </div>
+    `);
+    content.append(subCatContainer);
+
+    await loadBlock(content.querySelector('.ticket-card-list.hero.sub'));
   }
 }
