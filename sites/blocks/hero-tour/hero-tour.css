@@ -883,7 +883,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
 }
 
 /* the ticket description container */
-.hero-tour.block .ticket-card-list.hero.sub .ticket-type  {
+.hero-tour.block .ticket-card-list.hero.sub .ticket-type {
   margin-bottom: 1.25rem;
   padding: 0;
   display: block;
@@ -891,14 +891,15 @@ body.tour .section.hero-tour-container .hero-tour.block {
 }
 
 /* the ticket title  */
-.hero-tour.block .ticket-card-list.hero.sub .ticket-type .title  {
+.hero-tour.block .ticket-card-list.hero.sub .ticket-type .title {
   font-size: 2.1875rem;
   font-weight: 300;
   color: #0f3a64;
 }
 
 /* the ticket title  */
-.hero-tour.block .ticket-card-list.hero.sub .ticket-type  .subtitle  {
+/* stylelint-disable-next-line no-descending-specificity */
+.hero-tour.block .ticket-card-list.hero.sub .ticket-type .subtitle {
   display: block;
   font-size: 0.625rem;
   letter-spacing: 0.04rem;
@@ -908,7 +909,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
 }
 
 /* the container for ticket price and button */
-.hero-tour.block .ticket-card-list.hero.sub .info-buy  {
+.hero-tour.block .ticket-card-list.hero.sub .info-buy {
   margin-bottom: 1.25rem;
   display: block;
 }
