@@ -570,6 +570,20 @@ body.vip-faq main .section div p, body.vip-faq main .section div ul {
 }
 
 /** STYLES FOR AUTHORING GUIDE **/
+/* stylelint-disable-next-line no-descending-specificity */
+body.documentation h2 {
+  margin-top: 100px;
+  font-weight: 400;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+body.documentation h3 {
+  margin-top: 60px;
+  font-weight: 400;
+  font-size: 1.1em;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
 body.documentation img {
   margin-left: auto;
   margin-right: auto;
@@ -577,15 +591,4 @@ body.documentation img {
   margin-top: 50px;
   display: block;
   border:solid 1px #444;
-}
-
-body.documentation h2 {
-  margin-top: 100px;
-  font-weight: 400;
-}
-
-body.documentation h3 {
-  margin-top: 60px;
-  font-weight: 400;
-  font-size: 1.1em;
 }
