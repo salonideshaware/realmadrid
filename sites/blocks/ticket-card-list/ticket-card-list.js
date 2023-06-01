@@ -1,12 +1,12 @@
 import { fetchPlaceholders } from '../../scripts/lib-franklin.js';
-import { getLanguage, TOURS_LANGUAGE_HOME_PATH } from '../../scripts/scripts.js';
+import { getLanguage, TOUR_LANGUAGE_HOME_PATH } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   // get tour category
   const tourCategory = block.children[0].children[0].textContent.trim().toLowerCase();
 
   // load list of tours
-  const resp = await fetch(`${TOURS_LANGUAGE_HOME_PATH[getLanguage()]}/tours.json`);
+  const resp = await fetch(`${TOUR_LANGUAGE_HOME_PATH[getLanguage()]}/tours.json`);
   if (!resp.ok) return;
 
   // get the tours for the selected category and sub category
