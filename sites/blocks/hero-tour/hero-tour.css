@@ -898,7 +898,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
 }
 
 /* the ticket title  */
-.hero-tour.block .ticket-card-list.hero.sub .ticket-type .subtitle  {
+.hero-tour.block .ticket-card-list.hero.sub .ticket-type  .subtitle  {
   display: block;
   font-size: 0.625rem;
   letter-spacing: 0.04rem;
@@ -917,7 +917,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
 .hero-tour.block .ticket-card-list.hero.sub .info-buy > a {
   display: inline-block;
   border-radius: 0.63rem;
-  box-shadow: 0 0.19rem 0.5rem 0 rgba(0,0,0,0.4);
+  box-shadow: 0 0.19rem 0.5rem 0 rgba(0 0 0 / 40%);
   background-color: #0067d1;
   font-size: 1rem;
   font-weight: 600;
