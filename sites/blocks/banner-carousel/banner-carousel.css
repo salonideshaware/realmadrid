@@ -22,46 +22,44 @@ body main .section.banner-carousel-container {
   min-width: 100%;
 }
 
-.banner-carousel .carousel-slide h2 {
+.banner-carousel .carousel-slide .text-container {
   position: absolute;
-  top: 175px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   z-index: 1;
-  color: var(--background-color);
-  text-align: center;
-  font-size: var(--heading-font-size-xl);
+  align-content: space-evenly;
 }
 
-.banner-carousel .carousel-slide h3 {
-  position: absolute;
-  top: 150px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+.banner-carousel .carousel-slide .text-container h2 {
+  position: relative;
+  opacity: 0.9;
+  text-shadow: 0 2px 4px rgb(0 0 0 / 26%);
+  text-transform: uppercase;
   z-index: 1;
   color: var(--background-color);
   text-align: center;
   font-size: var(--heading-font-size-xs);
   font-weight: 400;
+  width: 100%;
 }
 
-.banner-carousel .carousel-slide p {
-  margin: 0;
+.banner-carousel .carousel-slide .text-container h2 strong {
+  font-size: var(--heading-font-size-xl);
+  font-weight: 400;
+  display: block;
 }
 
-.banner-carousel .carousel-slide p:last-of-type {
-  position: absolute;
-  bottom: 200px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+.banner-carousel .carousel-slide .text-container p {
+  position: relative;
   z-index: 1;
   color: var(--background-color);
   max-width: 300px;
   text-align: center;
   padding: 0 15px;
+  width: 100%;
 }
 
 .banner-carousel .carousel-slide picture::before {
@@ -81,19 +79,11 @@ body main .section.banner-carousel-container {
   height: 100%;
 }
 
-.banner-carousel .carousel-slide .pic-desktop {
-  display: none;
-}
-
-.banner-carousel .carousel-slide .pic-mobile {
-  display: block;
-}
-
-.banner-carousel .carousel-slide .pic-mobile img {
+.banner-carousel .carousel-slide picture img {
   object-fit: cover;
   min-width: 100%;
   height: 100%;
-  width: auto;
+  position: absolute;
 }
 
 .banner-carousel .control-container .image-pagination {
@@ -164,21 +154,6 @@ body main .section.banner-carousel-container {
   display: none;
 }
 
-@media screen and (orientation: landscape) and  (max-height: 430px) {
-  .banner-carousel .carousel-slide h2 {
-    top: 90px;
-  }
-
-  .banner-carousel .carousel-slide h3 {
-    top: 70px;
-  }
-
-  .banner-carousel .carousel-slide p:last-of-type{
-    bottom: 60px;
-    max-width: 500px;
-  }
-}
-
 @media screen and (min-width: 990px) {
   body main .section .banner-carousel-wrapper {
     margin: 0;
@@ -189,36 +164,15 @@ body main .section.banner-carousel-container {
     height: 550px;
   }
 
-  .banner-carousel .carousel-slide .pic-desktop {
-    display: block;
-  }
-
-  .banner-carousel .carousel-slide .pic-desktop img{
-    width: auto;
-    min-width: 100%;
+  .banner-carousel .carousel-slide .picture img {
     max-width: 100%;
-    height: 100%;
-    object-fit: cover;
   }
 
-  .banner-carousel .carousel-slide .pic-mobile {
-    display: none;
-  }
-
-  .banner-carousel .carousel-slide h2 {
-    top: 165px;
-  }
-
-  .banner-carousel .carousel-slide h3 {
-    top: 140px;
-  }
-
-  .banner-carousel .carousel-slide p:last-of-type{
-    bottom: 100px;
+  .banner-carousel .carousel-slide p:last-of-type {
     max-width: 750px;
   }
 
-  .banner-carousel .control-container .prev, .banner-carousel .control-container .next{
+  .banner-carousel .control-container .prev, .banner-carousel .control-container .next {
     height: 30px;
     width: 30px;
     opacity: 0.5;
@@ -234,31 +188,26 @@ body main .section.banner-carousel-container {
 /*
 banner carousel - single banner option styling
  */
-.banner-carousel.single-banner .carousel-slide h2,
-.banner-carousel.single-banner .carousel-slide h3 {
-  inset-inline-start: 20px;
-  top: auto;
-  text-align: start;
-  font-weight: 500;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1; /* number of lines to show */
+.banner-carousel.single-banner .carousel-slide .text-container {
+  align-content: unset;
 }
 
-.banner-carousel.single-banner .carousel-slide h3 {
-  bottom: 105px;
+.banner-carousel.single-banner .carousel-slide .text-container h2 {
+  margin-top: auto;
+  margin-left: 20px;
+  text-align: start;
+  width: auto;
+  margin-bottom: 35px;
+  font-weight: 500;
+  opacity: 1;
   font-size: var(--heading-font-size-l);
   line-height: var(--heading-font-size-l);
-  max-height: calc(var(--heading-font-size-l) * 1); /* fallback */
 }
 
-.banner-carousel.single-banner .carousel-slide h2 {
-  bottom: 35px;
+.banner-carousel.single-banner .carousel-slide .text-container h2 strong {
   font-size: 70px;
   line-height: 70px;
-  max-height: 70px; /* fallback */
+  font-weight: 500;
 }
 
 .banner-carousel.single-banner .control-container {
@@ -270,10 +219,7 @@ banner carousel - single banner option styling
 }
 
 @media screen and (min-width: 990px) {
-  .banner-carousel.single-banner .carousel-slide h3,
-  .banner-carousel.single-banner .carousel-slide h2 {
-    width: var(--wrapper-width);
-    margin: 0 auto;
-    inset-inline-start: 0;
+  .banner-carousel.single-banner .carousel-slide .text-container h2 {
+    margin-left: unset;
   }
 }

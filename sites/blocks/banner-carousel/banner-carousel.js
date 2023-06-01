@@ -143,19 +143,17 @@ function initializeScroll(block, slidesNo) {
 }
 
 export default function decorate(block) {
-  const cols = [...block.firstElementChild.children];
+  const cols = [...block.children];
   let entries = '';
+  // create carousel section
+  const carousel = document.createElement('div');
   cols.forEach((slide, index) => {
     slide.classList.add('carousel-slide');
-    const images = slide.querySelectorAll('picture');
-    if (images.length === 2) {
-      images[0].classList.add('pic-desktop');
-      images[1].classList.add('pic-mobile');
-    }
-    slide.prepend(images[0]);
-    slide.prepend(images[1]);
+    slide.lastElementChild.classList.add('text-container');
+    carousel.append(slide);
     entries += `<div data-slide="${index + 1}" class="indicator ${index === 0 ? 'active' : ''}"></div>`;
   });
+  // create indicators section
   const indicatorsHTML = `
 <div class="control-container">
     <div class="prev hide">&#10094</div>
@@ -164,6 +162,6 @@ export default function decorate(block) {
     </div>
     <div class="next hide">&#10095</div>
   </div>`;
-  block.innerHTML += indicatorsHTML;
+  block.innerHTML = carousel.outerHTML + indicatorsHTML;
   initializeScroll(block, cols.length);
 }
