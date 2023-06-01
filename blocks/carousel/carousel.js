@@ -1,5 +1,4 @@
 import { createOptimizedPicture, getMetadata } from '../../scripts/lib-franklin.js';
-import { getLanguage } from '../../scripts/scripts.js';
 
 function createButtons() {
   const divButtons = document.createElement('div');
@@ -125,12 +124,6 @@ export default function decorate(block) {
       // Create header div and add classes to it
       const headerDiv = document.createElement('div');
       headerDiv.classList.add('photo-header');
-
-      // Right close icon when lans is Arabic
-      if (getLanguage() === 'ar') {
-        closeButton.classList.add('rtl');
-        headerDiv.classList.add('rtl');
-      }
 
       // Create title div, add classes to it and set its content
       const titleDiv = document.createElement('div');
