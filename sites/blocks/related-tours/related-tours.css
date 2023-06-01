@@ -396,6 +396,7 @@ main .section.related-tours-container .related-tours-wrapper {
 }
 
 /* the sub category list */
+/* stylelint-disable-next-line no-descending-specificity */
 .related-tours.block .ticket-card-list.related.sub > ul {
   font-size: 0;
   white-space: nowrap;
@@ -407,6 +408,7 @@ main .section.related-tours-container .related-tours-wrapper {
 }
 
 /* the sub category list li */
+/* stylelint-disable-next-line no-descending-specificity */
 .related-tours.block .ticket-card-list.related.sub > ul > li {
   width: 12.5rem;
   height: 100%;
