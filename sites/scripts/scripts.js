@@ -16,7 +16,7 @@ import {
   fetchPlaceholders,
 } from './lib-franklin.js';
 
-const LCP_BLOCKS = []; // add your LCP blocks to the list
+const LCP_BLOCKS = ['hero-tour']; // add your LCP blocks to the list
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -89,7 +89,7 @@ const VIP_AREA_LANGUAGE_HOME_PATH = {
 
 const TOUR_SECTION = 'tour-bernabeu';
 
-const TOUR_LANGUAGE_HOME_PATH = {
+export const TOUR_LANGUAGE_HOME_PATH = {
   es: `${DOCROOT}/${TOUR_SECTION}`,
   en: `${DOCROOT}/en/${TOUR_SECTION}`,
   fr: `${DOCROOT}/fr/${TOUR_SECTION}`,
