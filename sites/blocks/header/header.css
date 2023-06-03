@@ -60,7 +60,9 @@ header ul {
 .header-sponsor-icon {
     width: 57px;
     height: 40px;
-    margin: -6px 9px 0 10px;
+    margin: -6px 0;
+    margin-inline-start: 10px;
+    margin-inline-end: 9px;
 }
 
 @media screen and (max-width: 1056px) {

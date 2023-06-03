@@ -70,7 +70,7 @@
   border: 2px solid #3E30FA;
   border-radius: 10px;
   bottom: calc(100% + 10px);
-  left: 10px;
+  inset-inline-start: 10px;
   z-index: 9999;
   width: 250px;
   height: 250px;
@@ -117,7 +117,7 @@
     display: block;
     visibility: hidden;
     z-index: 9999;
-    left: 0;
+    inset-inline-start: 0;
     width: 300px;
     overflow-y: scroll;
     bottom: 0;

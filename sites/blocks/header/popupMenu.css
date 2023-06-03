@@ -4,7 +4,7 @@
   box-sizing: border-box;
   position: absolute;
   top: calc(var(--nav-height));
-  left: 0;
+  inset-inline-start: 0;
   width: 100vw;
   height: calc(100vh - var(--nav-height) - 1px);
   z-index: 100;
@@ -23,7 +23,7 @@
   box-sizing: border-box;
   position: relative;
   top: 0;
-  left: -1100px;
+  inset-inline-start: -1100px;
   width: 1100px;
   height: 100%;
   opacity: 0;
@@ -33,7 +33,7 @@
 }
 
 .popup-menu-area.visible .popup-menu {
-  left: 0;
+  inset-inline-start: 0;
   opacity: 1;
 }
 
@@ -60,7 +60,8 @@ a.top-menu-mobile-item {
   list-style-type: none;
   justify-content: space-around;
   white-space: nowrap;
-  padding: 31px 0 0 40px;
+  padding: 31px 0;
+  padding-inline-start: 40px;
   box-sizing: border-box;
 }
 
@@ -113,10 +114,12 @@ a.top-menu-mobile-item {
 
 .sub-popup-menu-area {
   position: absolute;
-  left: 350px;
+  inset-inline-start: 350px;
   width: 300px;
   top: -5px;
-  padding: 43px 40px 0 59px;
+  padding-top: 43px;
+  padding-inline-start: 59px;
+  padding-inline-end: 40px;
 }
 
 .sub-popup-menu-item {
@@ -138,7 +141,7 @@ a.top-menu-mobile-item {
 
 .image-popup-menu-area {
   position: absolute;
-  left: 700px;
+  inset-inline-start: 700px;
   top: 0;
   padding: 30px 20px;
 }
@@ -172,12 +175,12 @@ a.top-menu-mobile-item {
 
 .language-popup-menu-area {
   border-top: 1px solid #E1E5E9;
-  padding-left: 40px;
+  padding-inline-start: 40px;
 }
 
 @media screen and (max-width: 1160px) {
   .popup-menu {
-    left: -770px;
+    inset-inline-start: -770px;
     width: 770px;
   }
 
@@ -188,7 +191,7 @@ a.top-menu-mobile-item {
 
 @media screen and (max-width: 1056px) {
   .popup-menu {
-    left: -300px;
+    inset-inline-start: -300px;
     width: 300px;
   }
 
@@ -210,7 +213,7 @@ a.top-menu-mobile-item {
 
   .sub-popup-menu-area {
     position: relative;
-    left: 0;
+    inset-inline-start: 0;
     top: 0;
     padding: 0 0 0 6px;
     transition: 0.5s ease-out all;
@@ -252,8 +255,8 @@ a.top-menu-mobile-item {
     height: 3em;
     width: 300px;
     bottom: 0;
-    left: 0;
+    inset-inline-start: 0;
     background: white;
-    padding-left: 0;
+    padding-inline-start: 0;
   }
 }
