@@ -32,7 +32,6 @@ export default function decorate(block) {
   const isRTL = getLanguage() === 'ar';
   const carouselPicContainer = createPicturesContainer(block);
   const buttonContainer = createButtons(isRTL);
-  carouselPicContainer.style.direction = isRTL ? 'rtl' : 'ltr';
 
   block.append(carouselPicContainer);
   block.append(buttonContainer);
