@@ -89,11 +89,19 @@ main .carousel .carousel-buttons-container {
   }
 
   main .carousel .carousel-buttons-container > .carousel-button-prev {
-    right: 50px;
+    inset-inline-end: 50px;
   }
 
   main .carousel .carousel-buttons-container > .carousel-button-next {
-    right: 0;
+    inset-inline-end: 0;
+  }
+
+  :lang(ar) main .carousel .carousel-buttons-container > .carousel-button-prev {
+    inset-inline-end: 0;
+  }
+
+  :lang(ar) main .carousel .carousel-buttons-container > .carousel-button-next {
+    inset-inline-end: 50px;
   }
 
   main .carousel .carousel-buttons-container > .carousel-button-prev::after,
