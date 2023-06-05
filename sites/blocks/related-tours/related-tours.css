@@ -230,6 +230,7 @@ main .section.related-tours-container .related-tours-wrapper {
   font-weight: 600;
   line-height: 1;
   margin-bottom: 0.75rem;
+  margin-top:0;
 }
 
 /* tour includes list */
