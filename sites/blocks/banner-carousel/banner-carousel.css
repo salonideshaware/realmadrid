@@ -1,7 +1,3 @@
-body main .section.banner-carousel-container {
-  padding: 0;
-}
-
 .banner-carousel.block {
   position: relative;
   overflow: hidden;
@@ -55,6 +51,7 @@ body main .section.banner-carousel-container {
 .banner-carousel .carousel-slide .text-container p {
   position: relative;
   z-index: 1;
+  font-size: var(--body-font-size-xs);
   color: var(--background-color);
   max-width: 300px;
   text-align: center;
@@ -168,10 +165,6 @@ body main .section.banner-carousel-container {
     max-width: 100%;
   }
 
-  .banner-carousel .carousel-slide p:last-of-type {
-    max-width: 750px;
-  }
-
   .banner-carousel .control-container .prev, .banner-carousel .control-container .next {
     height: 30px;
     width: 30px;
@@ -182,6 +175,16 @@ body main .section.banner-carousel-container {
     opacity: 0.8;
     cursor: pointer;
     transition: opacity 0.5s;
+  }
+
+  .banner-carousel .carousel-slide .text-container p {
+    font-size: var(--body-font-size-s);
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .banner-carousel .carousel-slide p:last-of-type {
+    max-width: 750px;
   }
 }
 
@@ -219,7 +222,32 @@ banner carousel - single banner option styling
 }
 
 @media screen and (min-width: 990px) {
+  body main .section.banner-carousel-container .default-content-wrapper {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 50px;
+    width: 650px;
+    margin: 0 auto;
+  }
+
+  body main .section.banner-carousel-container .default-content-wrapper p{
+    font-weight: 400;
+  }
+
   .banner-carousel.single-banner .carousel-slide .text-container h2 {
     margin-left: unset;
   }
+}
+
+body main .section.banner-carousel-container {
+  padding: 0;
+}
+
+body main .section.banner-carousel-container .default-content-wrapper {
+  padding: 20px;
+  width: auto;
+}
+
+body main .section.banner-carousel-container .default-content-wrapper p{
+  font-weight: bold;
 }

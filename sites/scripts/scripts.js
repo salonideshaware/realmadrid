@@ -168,6 +168,9 @@ function buildAutoBlocks(main) {
       if (template === 'area-vip') {
         buildHeroBlock(main);
       }
+      if (template === 'tour-detail') {
+        main.parentElement.classList.add('tour');
+      }
     }
   } catch (error) {
     // eslint-disable-next-line no-console
