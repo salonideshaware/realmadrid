@@ -9,12 +9,12 @@ export default async function decorate(block) {
   const resp = await fetch(`${TOUR_LANGUAGE_HOME_PATH[getLanguage()]}/tours.json`);
   if (!resp.ok) return;
 
-  // get the tours for the selected category and sub category
+  // get the tours for the selected category
   const selectedTours = (await resp.json()).data.filter((tour) => {
     // get list of assigned categories for a tour
     const categories = tour.Categories.split(',').map((categoryEntry) => categoryEntry.trim());
-    // check if category matches
-    return categories.includes(tourCategory);
+    // check if category matches and we are not on tour page itself
+    return categories.includes(tourCategory) && tour['Detail Page'] !== document.location.pathname;
   });
 
   // if no tours are found
