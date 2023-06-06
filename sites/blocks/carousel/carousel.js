@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
+import { createOptimizedPicture, getMetadata } from '../../scripts/lib-franklin.js';
 
 function createButtons() {
   const divButtons = document.createElement('div');
@@ -87,5 +87,76 @@ export default function decorate(block) {
       showPic(currentPic, picWidth, carouselPicContainer);
       showHideButtons(currentPic, maxShift, prevButton, nextButton);
     }
+  });
+
+  // Add listeners on images to be pupup showed in a bigger size after click
+  // Get all elements with class 'pic-container'
+  const photos = document.getElementsByClassName('pic-container');
+
+  // Loop over all the photo elements
+  Array.from(photos).forEach((photo) => {
+    // Add click event listener to each photo
+    photo.addEventListener('click', function () {
+      // Create main wrap div and add classes and attributes to it
+      const wrapDiv = document.createElement('div');
+      wrapDiv.classList.add('photo-wrap');
+      wrapDiv.tabIndex = '-1';
+      wrapDiv.style.overflow = 'hidden auto';
+
+      // Create container div and add classes to it
+      const containerDiv = document.createElement('div');
+      containerDiv.classList.add('photo-container');
+
+      // Create content div and add classes to it
+      const contentDiv = document.createElement('div');
+      contentDiv.classList.add('photo-content');
+
+      // Create figure div and add classes to it
+      const figureDiv = document.createElement('div');
+      figureDiv.classList.add('photo-figure');
+
+      // Create close button and add classes, attributes and content to it
+      const closeButton = document.createElement('button');
+      closeButton.title = 'Close (Esc)';
+      closeButton.type = 'button';
+      closeButton.classList.add('photo-close');
+
+      // Create header div and add classes to it
+      const headerDiv = document.createElement('div');
+      headerDiv.classList.add('photo-header');
+
+      // Create title div, add classes to it and set its content
+      const titleDiv = document.createElement('div');
+      titleDiv.classList.add('photo-title');
+      const imgTitle = getMetadata('og:title');
+      titleDiv.textContent = imgTitle;
+
+      // Create an image, add classes and attributes to it - create the image with franklin
+      const breakpoints = [
+        { media: '(max-width: 480px)', width: '480' },
+        { media: '(min-width: 480px) and (max-width: 600px)', width: '600' },
+        { media: '(min-width: 600px) and (max-width: 750px)', width: '750' },
+        { media: '(min-width: 750px) and (max-width: 990px)', width: '960' },
+        { media: '(min-width: 990px) and (max-width:1200px)', width: '480' },
+        { media: '(min-width: 1200px)', width: '960' },
+      ];
+      const optimizedPic = createOptimizedPicture(this.querySelector('img').src, imgTitle, false, breakpoints);
+      const image = optimizedPic.querySelector('img');
+      image.classList.add('photo-img');
+
+      // Append all the created elements to the body or other elements
+      headerDiv.appendChild(titleDiv);
+      figureDiv.append(closeButton, headerDiv, image);
+      contentDiv.appendChild(figureDiv);
+      containerDiv.append(contentDiv);
+      wrapDiv.appendChild(containerDiv);
+      document.body.append(wrapDiv);
+
+      // Add click event listener to the close button
+      closeButton.addEventListener('click', () => {
+        // Remove the created elements from the body when the close button is clicked
+        document.body.removeChild(wrapDiv);
+      });
+    });
   });
 }
