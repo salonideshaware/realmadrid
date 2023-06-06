@@ -366,7 +366,7 @@ export function bindSwipeToElement(el) {
 
   el.addEventListener('touchstart', (e) => {
     touchstartX = e.changedTouches[0].screenX;
-  });
+  }, { passive: true });
 
   el.addEventListener('touchend', (e) => {
     touchendX = e.changedTouches[0].screenX;
@@ -376,7 +376,7 @@ export function bindSwipeToElement(el) {
     if (touchendX > touchstartX) {
       el.dispatchEvent(new CustomEvent('swipe-LTR'));
     }
-  });
+  }, { passive: true });
 }
 
 async function loadPage() {
