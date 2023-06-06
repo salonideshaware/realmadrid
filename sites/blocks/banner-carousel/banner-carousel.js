@@ -1,4 +1,5 @@
 import { bindSwipeToElement } from '../../scripts/scripts.js';
+import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
 
 function nextElement(el, selector) {
   if (selector) {
@@ -148,6 +149,11 @@ export default function decorate(block) {
   // create carousel section
   const carousel = document.createElement('div');
   cols.forEach((slide, index) => {
+    const bannerPic = slide.querySelector('picture');
+    const bannerImg = bannerPic.querySelector('img');
+    const optimizedPic = createOptimizedPicture(bannerImg.src, bannerImg.alt, false, [{ media: '(min-width: 600px)', width: '2000' }, { width: '1200' }]);
+    slide.prepend(optimizedPic);
+    bannerPic.remove();
     slide.classList.add('carousel-slide');
     slide.lastElementChild.classList.add('text-container');
     carousel.append(slide);
