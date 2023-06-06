@@ -1,3 +1,16 @@
+body main .section.banner-carousel-container {
+  padding: 0;
+}
+
+.section.banner-carousel-container .default-content-wrapper {
+  padding: 20px;
+  width: auto;
+}
+
+.section.banner-carousel-container .default-content-wrapper p{
+  font-weight: bold;
+}
+
 .banner-carousel.block {
   position: relative;
   overflow: hidden;
@@ -152,7 +165,7 @@
 }
 
 @media screen and (min-width: 990px) {
-  body main .section .banner-carousel-wrapper {
+  .section .banner-carousel-wrapper {
     margin: 0;
     width: 100%;
   }
@@ -222,7 +235,7 @@ banner carousel - single banner option styling
 }
 
 @media screen and (min-width: 990px) {
-  body main .section.banner-carousel-container .default-content-wrapper {
+  .section.banner-carousel-container .default-content-wrapper {
     padding-left: 0;
     padding-right: 0;
     padding-top: 50px;
@@ -230,24 +243,11 @@ banner carousel - single banner option styling
     margin: 0 auto;
   }
 
-  body main .section.banner-carousel-container .default-content-wrapper p{
+  .section.banner-carousel-container .default-content-wrapper p{
     font-weight: 400;
   }
 
   .banner-carousel.single-banner .carousel-slide .text-container h2 {
     margin-left: unset;
   }
-}
-
-body main .section.banner-carousel-container {
-  padding: 0;
-}
-
-body main .section.banner-carousel-container .default-content-wrapper {
-  padding: 20px;
-  width: auto;
-}
-
-body main .section.banner-carousel-container .default-content-wrapper p{
-  font-weight: bold;
 }
