@@ -518,3 +518,21 @@ main > .matches-container h2 {
     left: 65px;
   }
 }
+
+@media screen and (min-width: 990px) and (max-width: 1200px) {
+  .match .competition-info {
+    flex: 0 0 175px;
+  }
+
+  .match .competition-info span{
+    text-align: end;
+  }
+
+  .match .datetime {
+    margin: 0;
+  }
+
+  .match img.team.logo {
+    margin: 0;
+  }
+}
