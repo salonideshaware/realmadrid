@@ -1,6 +1,10 @@
+.carousel.block {
+  float: left;
+}
+
 main .section > .carousel-wrapper {
-  margin: 0;
-  width: 100%;
+  margin: 0 0 0 -10px;
+  width: 100vw;
   max-width: unset;
   overflow: hidden;
 }
@@ -46,6 +50,11 @@ main .carousel .carousel-buttons-container {
 }
 
 @media (min-width: 990px) {
+  main .section > .carousel-wrapper {
+    width: 100%;
+    margin: 0;
+  }
+
   main .carousel > .carousel-pics-container .pic-container {
     margin-right: 4px;
     width: 480px;
