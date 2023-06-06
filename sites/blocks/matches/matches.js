@@ -268,9 +268,15 @@ export default async function decorate(block) {
   const { aemGqEndpoint, noMatches } = placeholders;
   const { sport } = config;
   const url = new URL(`${aemGqEndpoint}${API[sport.toLowerCase()]}`); // todo: add params fromDate endDate
-  const response = await fetch(url);
-  const data = await response.json();
-  const items = data.data.matchList.items.map(renderMatch(placeholders));
+  let items = [];
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    items = data.data.matchList.items.map(renderMatch(placeholders));
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.log('unable to fetch matches list');
+  }
   const itemsWrapper = createDiv(
     'match-list',
     ...items,
