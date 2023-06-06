@@ -3,17 +3,18 @@ import { readBlockConfig, loadBlock } from '../../scripts/lib-franklin.js';
 export default async function decorate(block) {
   // get config entries
   const cfg = readBlockConfig(block);
+
   const {
-    pretitle, title, promo, desktop, navigation, mobile, tours,
+    pretitle, title, promo, desktop, navigation, mobile,
   } = cfg;
   const promoTitle = cfg['promo-title'];
+  const tourCategory = cfg['tour-category'];
+  const tourSubCategory = cfg['tour-sub-category'];
 
   // create basic dom structure
   const dom = document.createRange().createContextualFragment(`
       <div class='content'>
         <div class='content-wrapper'>
-          <div class='ticket-container'>
-          </div>
         </div>
       </div>
       <div class='background'>
@@ -21,7 +22,8 @@ export default async function decorate(block) {
   `);
 
   // shortcuts
-  const ticketContainer = dom.querySelector('.ticket-container');
+  const content = dom.querySelector('.content');
+  const contentWrapper = dom.querySelector('.content-wrapper');
   const background = dom.querySelector('.background');
 
   // if a pretitle is defined
@@ -29,14 +31,14 @@ export default async function decorate(block) {
     const preTitleElem = document.createElement('p');
     preTitleElem.classList.add('pretitle');
     preTitleElem.textContent = pretitle;
-    ticketContainer.before(preTitleElem);
+    contentWrapper.append(preTitleElem);
   }
 
   // if title is defined
   if (title) {
     const titleElem = document.createElement('h1');
     titleElem.textContent = title;
-    ticketContainer.before(titleElem);
+    contentWrapper.append(titleElem);
   }
 
   // if navigation is defined
@@ -48,7 +50,7 @@ export default async function decorate(block) {
       divNavContainer.classList.add('navcontainer');
       const navElem = document.createElement('nav');
       divNavContainer.append(navElem);
-      ticketContainer.before(divNavContainer);
+      contentWrapper.append(divNavContainer);
       // get the navigation table from the fragment
       const navEntries = document.createRange().createContextualFragment(await resp.text()).querySelector('.navigation');
       // add entries
@@ -81,7 +83,7 @@ export default async function decorate(block) {
     if (promo) {
       promoElem.append(` ${promo}`);
     }
-    ticketContainer.before(promoElem);
+    contentWrapper.append(promoElem);
   }
 
   // if background is defined
@@ -104,28 +106,37 @@ export default async function decorate(block) {
   block.textContent = '';
   block.append(dom);
 
-  // what tours are offered
-  if (tours) {
-    // start list
-    const ul = document.createElement('ul');
-    ticketContainer.append(ul);
+  // what main tour categories are offered
+  if (tourCategory) {
+    const ticketCardListBlock = document.createRange().createContextualFragment(`
+      <div class='ticket-card-list hero' data-block-name='ticket-card-list' >
+        <div>
+          <div>${tourCategory}</div>
+        </div>
+      </div>
+    `);
 
-    tours.forEach(async (tour) => {
-      const li = document.createElement('li');
-      ul.append(li);
-      // read tour data from detail page
-      const resp = await fetch(`${tour}.plain.html`);
-      if (resp.ok) {
-        const ticketCardBlock = document.createRange().createContextualFragment(`
-            <div class='ticket-card' data-block-name='ticket-card' >
-            <div>
-              <div>${tour}</div>
-            <div>
-          </div>
-        `);
-        await loadBlock(ticketCardBlock.firstElementChild);
-        li.append(ticketCardBlock);
-      }
-    });
+    await loadBlock(ticketCardListBlock.firstElementChild);
+    contentWrapper.append(ticketCardListBlock);
+  }
+
+  // if sub categories are defined
+  if (tourSubCategory) {
+    const subCatContainer = document.createRange().createContextualFragment(`
+    <div class='sub-wrapper'>
+      <h2 class='sub-cat-title'>
+        <span class='sub-cat-subtitle'>También podéis elegir</span>
+        VISITAS COMBINADAS
+      </h2>
+      <div class='ticket-card-list hero sub' data-block-name='ticket-card-list' >
+        <div>
+          <div>${tourSubCategory}</div>
+        </div>
+      </div>
+    </div>
+    `);
+    content.append(subCatContainer);
+
+    await loadBlock(content.querySelector('.ticket-card-list.hero.sub'));
   }
 }
