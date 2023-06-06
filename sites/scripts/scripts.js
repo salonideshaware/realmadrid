@@ -16,7 +16,7 @@ import {
   fetchPlaceholders,
 } from './lib-franklin.js';
 
-const LCP_BLOCKS = []; // add your LCP blocks to the list
+const LCP_BLOCKS = ['hero-tour']; // add your LCP blocks to the list
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -89,7 +89,7 @@ const VIP_AREA_LANGUAGE_HOME_PATH = {
 
 const TOUR_SECTION = 'tour-bernabeu';
 
-const TOUR_LANGUAGE_HOME_PATH = {
+export const TOUR_LANGUAGE_HOME_PATH = {
   es: `${DOCROOT}/${TOUR_SECTION}`,
   en: `${DOCROOT}/en/${TOUR_SECTION}`,
   fr: `${DOCROOT}/fr/${TOUR_SECTION}`,
@@ -237,8 +237,11 @@ async function loadLazy(doc) {
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
-  loadHeader(doc.querySelector('header'));
-  loadFooter(doc.querySelector('footer'));
+  /* Don't show header and footer in the authoring guide */
+  if (toClassName(getMetadata('template')) !== 'documentation') {
+    loadHeader(doc.querySelector('header'));
+    loadFooter(doc.querySelector('footer'));
+  }
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   addFavIcon(`${window.hlx.codeBasePath}/styles/favicon.svg`);

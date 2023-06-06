@@ -66,6 +66,7 @@
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
   --header-font-family: "RMNeue","rmneue-normal-400-fallback";
   --header-font-family-bold: "RMNeue","rmneue-normal-700-fallback";
+  --icons-font-family : "Real-Madrid-Icons", sans-serif;
 
   /* RM: body sizes */
   --body-font-size-m: 20px;
@@ -580,4 +581,28 @@ body.vip-faq main .section div p, body.vip-faq main .section div ul {
     grid-area: content;
     margin-top:  40px 0 0 0;
   }
+}
+
+/** STYLES FOR AUTHORING GUIDE **/
+/* stylelint-disable-next-line no-descending-specificity */
+body.documentation h2 {
+  margin-top: 100px;
+  font-weight: 400;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+body.documentation h3 {
+  margin-top: 60px;
+  font-weight: 400;
+  font-size: 1.1em;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+body.documentation img {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  display: block;
+  border:solid 1px #444;
 }
