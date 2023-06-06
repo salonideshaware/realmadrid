@@ -409,24 +409,6 @@ body.tour .section.hero-tour-container .hero-tour.block {
   margin: 0;
 }
 
-.hero-tour.block .ticket-card-list.hero .ticket-type .label {
-    display: inline-block;
-    border-radius: 0.3125rem;
-    background-color: #ad8100;
-    font-size: 0.75rem;
-    line-height: 1;
-    letter-spacing: 0.72px;
-    text-align: center;
-    text-transform: uppercase;
-    white-space: nowrap;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translate(-50%, -50%);
-}
-
 /* title */
 .hero-tour.block .ticket-card-list.hero .ticket-type .title {
   font-size: 2.75rem;
