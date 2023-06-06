@@ -153,6 +153,18 @@ function buildFAQPage(main) {
 }
 
 /**
+ * Decorates the main content container to match tour detail page styling.
+ * the main content container is the one which contains text only and no other blocks.
+ * @param {Element} main The main element
+ */
+function buildTourDetailContent(main) {
+  main.parentElement.classList.add('tour');
+  const contentWrappers = main.querySelectorAll(':scope > div');
+  [...contentWrappers].filter((contentWrapper) => !contentWrapper.querySelector('div'))
+    .map((contentWrapper) => contentWrapper.classList.add('main-content'));
+}
+
+/**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
@@ -169,7 +181,7 @@ function buildAutoBlocks(main) {
         buildHeroBlock(main);
       }
       if (template === 'tour-detail') {
-        main.parentElement.classList.add('tour');
+        buildTourDetailContent(main);
       }
     }
   } catch (error) {
