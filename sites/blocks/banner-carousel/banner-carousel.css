@@ -2,12 +2,12 @@ body main .section.banner-carousel-container {
   padding: 0;
 }
 
-.section.banner-carousel-container .default-content-wrapper {
+body main .section.banner-carousel-container .default-content-wrapper {
   padding: 20px;
   width: auto;
 }
 
-.section.banner-carousel-container .default-content-wrapper p{
+body main .section.banner-carousel-container .default-content-wrapper p {
   font-weight: bold;
 }
 
@@ -235,7 +235,7 @@ banner carousel - single banner option styling
 }
 
 @media screen and (min-width: 990px) {
-  .section.banner-carousel-container .default-content-wrapper {
+ body main .section.banner-carousel-container .default-content-wrapper {
     padding-left: 0;
     padding-right: 0;
     padding-top: 50px;
@@ -243,11 +243,12 @@ banner carousel - single banner option styling
     margin: 0 auto;
   }
 
-  .section.banner-carousel-container .default-content-wrapper p{
+ body main .section.banner-carousel-container .default-content-wrapper p{
     font-weight: 400;
   }
 
   .banner-carousel.single-banner .carousel-slide .text-container h2 {
     margin-left: unset;
+    width: 650px;
   }
 }
