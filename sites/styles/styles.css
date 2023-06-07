@@ -184,9 +184,7 @@ body.area-vip h2 {
   color: var(--heading-color);
   text-transform: uppercase;
   margin-bottom: 21px;
-  margin-inline-start: 10px;
   padding-bottom: 5px;
-  width: var(--section-heading-width);
   border-right: 4px solid transparent;
   border-bottom: 4px solid var(--heading-border-color);
 }
@@ -295,6 +293,12 @@ main .section > div {
     width: auto;
   }
 
+  /* stylelint-disable-next-line no-descending-specificity */
+  body.area-vip h2 {
+    width: var(--section-heading-width);
+    margin-inline-start: 10px;
+  }
+
   .section.info-vip {
     display: grid;
     grid-template-columns: auto 800px 400px auto;
@@ -329,8 +333,9 @@ main .section > div {
 }
 
 /* TOUR STYLES */
-body.tour main p {
-  font-size: var(--body-font-size-s);
+body.tour main p,
+body.tour main li {
+  font-size: var(--body-font-size-xs);
 }
 
 body.tour main .section {
@@ -347,10 +352,6 @@ body.tour main .section p {
 body.tour .section .default-content-wrapper {
   padding-bottom: 61px;
   padding-top: 54px;
-}
-
-body.tour .section.padding-bottom-small .default-content-wrapper {
-  padding-bottom: 28px;
 }
 
 body.tour .default-content-wrapper ul {
@@ -370,7 +371,7 @@ body.tour main .section .default-content-wrapper p {
 
 body.tour main .section .default-content-wrapper p:last-of-type.button-container a {
   text-transform: none;
-  font-size: var(--body-font-size-s);
+  font-size: var(--body-font-size-xs);
   color: var(--text-color);
   background-color: unset;
   font-weight: 500;
@@ -402,7 +403,6 @@ body.tour main .merge-blocks-desktop {
 
 @media (min-width: 990px) {
   body.tour .section .default-content-wrapper {
-    padding-bottom: 89px;
     padding-top: 83px;
   }
 
@@ -411,7 +411,7 @@ body.tour main .merge-blocks-desktop {
     width: var(--wrapper-width);
     margin: 0 auto;
     column-gap: 26px;
-    padding-bottom: 96px;
+    padding-bottom: 76px;
   }
 
   body.tour .merge-blocks-desktop .columns-wrapper{
@@ -429,12 +429,12 @@ body.tour main .merge-blocks-desktop {
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
-body.tour.tour-detail main .main-section h2 {
+body.tour.tour-detail main .main-content .default-content-wrapper h2 {
   font-size: var(--heading-font-size-l);
   margin-bottom: 0;
 }
 
-body.tour.tour-detail main .main-section h3 {
+body.tour.tour-detail main .main-content .default-content-wrapper h3 {
   font-size: var(--heading-font-size-s);
   font-weight: 300;
   margin-bottom: 13px;
@@ -443,12 +443,12 @@ body.tour.tour-detail main .main-section h3 {
   color: var(--heading-color);
 }
 
-body.tour.tour-detail main .main-section blockquote {
+body.tour.tour-detail main .main-content .default-content-wrapper blockquote {
   padding: 0 28px;
   margin: 0;
 }
 
-body.tour.tour-detail main .main-section blockquote p {
+body.tour.tour-detail main .main-content .default-content-wrapper blockquote p {
   font-size: var(--body-font-size-m);
   font-weight: 300;
   font-style: italic;
@@ -456,25 +456,25 @@ body.tour.tour-detail main .main-section blockquote p {
   color: #64809b;
 }
 
-body.tour.tour-detail main .main-section p:first-of-type {
+body.tour.tour-detail main .main-content .default-content-wrapper p:first-of-type {
   margin-bottom: 20px;
 }
 
-body.tour.tour-detail main .main-section ul {
+body.tour.tour-detail main .main-content .default-content-wrapper ul {
   margin-left: 0;
   padding-left: 24px;
 }
 
-body.tour.tour-detail main .main-section ul li::marker {
+body.tour.tour-detail main .main-content .default-content-wrapper ul li::marker {
   color: #d8dfe6;
 }
 
-body.tour.tour-detail main .main-section ul li {
+body.tour.tour-detail main .main-content .default-content-wrapper ul li {
   color: var(--text-color);
 }
 
-body.tour.tour-detail main .main-section blockquote::before,
-body.tour.tour-detail main .main-section blockquote::after {
+body.tour.tour-detail main .main-content .default-content-wrapper blockquote::before,
+body.tour.tour-detail main .main-content .default-content-wrapper blockquote::after {
   content: '';
   width: 50px;
   height: 1px;
@@ -484,41 +484,46 @@ body.tour.tour-detail main .main-section blockquote::after {
 }
 
 @media (min-width: 990px) {
-  body.tour.tour-detail main .main-section {
+  body.tour.tour-detail main .main-content:first-of-type {
     width: 930px;
     margin: 0 auto;
     padding: 0;
   }
 
-  body.tour.tour-detail main .main-section .default-content-wrapper {
+  body.tour.tour-detail main .main-content .default-content-wrapper {
     width: auto;
   }
 
-  body.tour.tour-detail main .main-section h2 {
+  body.tour.tour-detail main .main-content .default-content-wrapper h2 {
     font-size: var(--heading-font-size-xxxl);
     line-height: 65px;
   }
 
-  body.tour.tour-detail main .main-section h3 {
+  body.tour.tour-detail main .main-content .default-content-wrapper h3 {
     margin-top: 70px;
     font-size: var(--heading-font-size-m);
   }
 
-  body.tour.tour-detail main .main-section p,
-  body.tour.tour-detail main .main-section h3 {
+  body.tour.tour-detail main .main-content .default-content-wrapper p,
+  body.tour.tour-detail main .main-content .default-content-wrapper h3 {
     padding-left: 290px;
   }
 
-  body.tour.tour-detail main .main-section blockquote {
+  body.tour.tour-detail main .main-content .default-content-wrapper p,
+  body.tour.tour-detail main .main-content .default-content-wrapper li {
+    font-size: 17px;
+  }
+
+  body.tour.tour-detail main .main-content .default-content-wrapper blockquote {
     padding-left: 431px;
     padding-right: 135px;
   }
 
-  body.tour.tour-detail main .main-section blockquote p {
+  body.tour.tour-detail main .main-content .default-content-wrapper blockquote p {
     padding: 0;
   }
 
-  body.tour.tour-detail main .main-section ul {
+  body.tour.tour-detail main .main-content .default-content-wrapper ul {
     padding-left: 314px;
   }
 }

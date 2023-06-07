@@ -66,6 +66,7 @@ body.tour .section.section-organize-visit .default-content-wrapper {
   flex-basis: max-content;
   line-height: 22px;
   font-weight: 400;
+  font-size: var(--body-font-size-xs);
   color: var(--text-color);
 }
 
