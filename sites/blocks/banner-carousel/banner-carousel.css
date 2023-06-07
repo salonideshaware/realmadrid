@@ -61,6 +61,7 @@ body main .section.banner-carousel-container .default-content-wrapper p {
   display: block;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .banner-carousel .carousel-slide .text-container p {
   position: relative;
   z-index: 1;
