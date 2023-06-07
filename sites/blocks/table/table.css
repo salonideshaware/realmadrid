@@ -40,6 +40,24 @@
   text-align: left;
 }
 
+/* no heading variant */
+.table.no-heading table thead {
+  border-right: 1px solid;
+}
+
+.table.no-heading table thead tr {
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+}
+
+.table.no-heading table th {
+  font-weight: 400;
+}
+
+.table.no-heading table p {
+  margin: 0;
+}
+
 /* striped variant */
 .table.striped tbody tr:nth-child(odd) {
   background-color: var(--overlay-background-color);
