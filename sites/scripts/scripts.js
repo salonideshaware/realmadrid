@@ -153,6 +153,18 @@ function buildFAQPage(main) {
 }
 
 /**
+ * Decorates the main content container to match tour detail page styling.
+ * the main content container is the one which contains text only and no other blocks.
+ * @param {Element} main The main element
+ */
+function buildTourDetailContent(main) {
+  main.parentElement.classList.add('tour');
+  const contentWrappers = main.querySelectorAll(':scope > div');
+  [...contentWrappers].filter((contentWrapper) => !contentWrapper.querySelector('div'))
+    .map((contentWrapper) => contentWrapper.classList.add('main-content'));
+}
+
+/**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
@@ -167,6 +179,9 @@ function buildAutoBlocks(main) {
       }
       if (template === 'area-vip') {
         buildHeroBlock(main);
+      }
+      if (template === 'tour-detail') {
+        buildTourDetailContent(main);
       }
     }
   } catch (error) {
@@ -351,7 +366,7 @@ export function bindSwipeToElement(el) {
 
   el.addEventListener('touchstart', (e) => {
     touchstartX = e.changedTouches[0].screenX;
-  });
+  }, { passive: true });
 
   el.addEventListener('touchend', (e) => {
     touchendX = e.changedTouches[0].screenX;
@@ -361,7 +376,7 @@ export function bindSwipeToElement(el) {
     if (touchendX > touchstartX) {
       el.dispatchEvent(new CustomEvent('swipe-LTR'));
     }
-  });
+  }, { passive: true });
 }
 
 async function loadPage() {
