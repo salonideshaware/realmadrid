@@ -1,5 +1,5 @@
 .carousel.block {
-  float: left;
+  min-height: 235px;
 }
 
 main .section > .carousel-wrapper {
