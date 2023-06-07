@@ -249,7 +249,7 @@ a.top-menu-mobile-item {
 
   .sub-popup-menu-area {
     position: relative;
-    inset-inline-start: 0;
+    left: 0;
     top: 0;
     padding: 0;
     padding-inline-start: 6px;
