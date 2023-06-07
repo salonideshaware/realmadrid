@@ -1,8 +1,15 @@
+.carousel.block {
+  min-height: 235px;
+}
+
 main .section > .carousel-wrapper {
-  margin: 0;
-  width: 100%;
+  width: 100vw;
   max-width: unset;
   overflow: hidden;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-inline-start: -10px;
+  margin-inline-end: 0;
 }
 
 main .carousel > .carousel-pics-container {
@@ -46,6 +53,11 @@ main .carousel .carousel-buttons-container {
 }
 
 @media (min-width: 990px) {
+  main .section > .carousel-wrapper {
+    width: 100%;
+    margin: 0;
+  }
+
   main .carousel > .carousel-pics-container .pic-container {
     margin-right: 4px;
     width: 480px;

@@ -184,9 +184,7 @@ body.area-vip h2 {
   color: var(--heading-color);
   text-transform: uppercase;
   margin-bottom: 21px;
-  margin-inline-start: 10px;
   padding-bottom: 5px;
-  width: var(--section-heading-width);
   border-right: 4px solid transparent;
   border-bottom: 4px solid var(--heading-border-color);
 }
@@ -293,6 +291,12 @@ main .section > div {
   body.area-vip .section.section.info-vip > .default-content-wrapper:first-of-type h2 {
     font-size: var(--heading-font-size-m);
     width: auto;
+  }
+
+  /* stylelint-disable-next-line no-descending-specificity */
+  body.area-vip h2 {
+    width: var(--section-heading-width);
+    margin-inline-start: 10px;
   }
 
   .section.info-vip {
