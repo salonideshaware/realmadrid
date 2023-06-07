@@ -29,7 +29,7 @@
   box-sizing: border-box;
   position: relative;
   top: 0;
-  inset-inline-start: -1100px;
+  left: -1100px;
   width: 1100px;
   height: 100%;
   opacity: 0;
@@ -249,12 +249,18 @@ a.top-menu-mobile-item {
 
   .sub-popup-menu-area {
     position: relative;
-    inset-inline-start: 0;
+    left: 0;
     top: 0;
-    padding: 0 0 0 6px;
+    padding: 0;
+    padding-inline-start: 6px;
     transition: 0.5s ease-out all;
     height: 0;
     display: none;
+  }
+
+  .sub-popup-menu-area:lang(ar) {
+    left: unset;
+    right: 0;
   }
 
   .selected .sub-popup-menu-area {
