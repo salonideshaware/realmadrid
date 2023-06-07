@@ -161,6 +161,7 @@ export default async function decorate(block) {
       img.setAttribute('src', entry[2]);
       slide.append(img);
     }
+    
     // add the title
     const title = document.createElement('h2');
     title.classList.add('title');
