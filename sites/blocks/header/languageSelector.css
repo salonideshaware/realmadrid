@@ -77,6 +77,11 @@
   overflow-y: scroll;
 }
 
+.language-selector-dropdown:lang(ar) {
+  right: 10px;
+  left: unset;
+}
+
 .language-selector-dropdown.visible {
   visibility: visible;
 }
@@ -124,6 +129,11 @@
     height: calc(100vh - var(--nav-height) + 2px);
     border: 0;
     border-radius: 0;
+  }
+
+  .language-selector-dropdown:lang(ar) {
+    right: 0;
+    left: unset;
   }
 
   .language-button-item {
