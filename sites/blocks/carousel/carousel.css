@@ -63,6 +63,7 @@ main .carousel .carousel-buttons-container {
     width: 480px;
     height: 320px;
     cursor: pointer;
+    overflow: hidden;
   }
 
   main .carousel > .carousel-pics-container .pic-container > picture:hover::after {
