@@ -39,9 +39,11 @@ function readBlockConfigBySections(block) {
       // url for image or video
       const a = row.children[1].querySelector(':scope a');
       if (a) {
-        slide[1] = a.getAttribute('href');
+        slide[1] = 'video';
+        slide[2] = a.getAttribute('href');
       } else {
-        slide[1] = row.children[1].querySelector(':scope img').getAttribute('src');
+        slide[1] = 'image';
+        slide[2] = row.children[1].querySelector(':scope img').getAttribute('src');
       }
       cfg.desktop.push(slide);
     }
@@ -125,9 +127,51 @@ export default async function decorate(block) {
     <div class='background'>
       <img class='mobile' alt='${cfg.mobile.title}' src='${cfg.mobile.image}' title='${cfg.mobile.title}'>
     </div>
+  `);
+
+  const carousel = document.createRange().createContextualFragment(`
     <div class='carousel'>
+      <div class='slides'>
+      </div>
+      <div class='arrow-left'></div>
+      <div class='arrow-right'></div>
     </div>
   `);
+
+  // add the carousel entries
+  const slidesContainer = carousel.querySelector('.carousel .slides');
+  cfg.desktop.forEach((entry) => {
+    const slide = document.createElement('div');
+    slide.classList.add('slide');
+
+    // add video or image
+    if (entry[1] === 'video') {
+      const video = document.createElement('video');
+      video.setAttribute('autoplay', 'autoplay');
+      video.setAttribute('muted', 'muted');
+      video.setAttribute('loop', 'loop');
+      video.setAttribute('playsinline', 'playsinline');
+      const source = document.createElement('source');
+      source.setAttribute('src', entry[2]);
+      source.setAttribute('type', 'video/mp4');
+      video.append(source);
+      slide.append(video);
+    } else {
+      const img = document.createElement('img');
+      img.setAttribute('src', entry[2]);
+      slide.append(img);
+    }
+    // add the title
+    const title = document.createElement('h2');
+    title.classList.add('title');
+    // eslint-disable-next-line prefer-destructuring
+    title.innerText = entry[0];
+    slide.append(title);
+
+    slidesContainer.append(slide);
+  });
+
+  block.closest('.section.hero-tour-detail-container').prepend(carousel);
 
   // if there is no combo image
   if (comboImage === '') {
@@ -155,6 +199,7 @@ export default async function decorate(block) {
     `);
     dom.querySelector('.product-name').append(title);
   }
+
   block.textContent = '';
   block.append(dom);
 }

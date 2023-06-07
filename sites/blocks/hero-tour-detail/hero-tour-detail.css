@@ -296,6 +296,147 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .ba
   display: block;
 }
 
+/* carousel container */
+body.tour-detail .section.hero-tour-detail-container .carousel {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  display: none;
+  z-index:0;
+  margin: 0;
+
+}
+
+/* carousel slides container */
+body.tour-detail .section.hero-tour-detail-container .carousel .slides {
+  height: 100%;
+  width: auto;
+  position: relative;
+  transition-property: transform;
+  display: flex;
+  z-index: 1;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* a single slide in a carousel */
+body.tour-detail .section.hero-tour-detail-container .carousel .slides .slide {
+  width: 100%;
+  height: 100%;
+  transition-property: transform;
+  flex: 0 0 auto;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+/* video slide */
+body.tour-detail .section.hero-tour-detail-container .carousel .slides .slide > video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  min-height: 100vh;
+  height: auto;
+  object-fit: cover;
+}
+
+/* image slide */
+body.tour-detail .section.hero-tour-detail-container .carousel .slides .slide > img {
+  width: auto;
+  min-width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* title of a slide */ 
+body.tour-detail .section.hero-tour-detail-container .carousel .slides .slide .title {
+  left: auto;
+  right: 9.375rem;
+  bottom: 5.25rem;
+  text-align: right;
+  margin-left: 20rem;
+  position: absolute;
+  width: calc(100% - 2.5rem);
+  font-family: var(--heading-font-family);
+  font-size: 2.1875rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.7px;
+  color: var(--background-color);
+  z-index: 2;
+}
+
+/* arrow left */ 
+body.tour-detail .section.hero-tour-detail-container .carousel .arrow-left {
+  cursor: pointer;
+  transform: translateX(-2.8125rem);
+  width: 1.9375rem;
+  height: 1.9375rem;
+  bottom: 9.375rem;
+  right: 9.375rem;
+  border-radius: 50%;
+  background-color: rgba(255 255 255 / 80%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.25s ease-in-out;
+  position: absolute;
+  z-index: 1;
+}
+
+body.tour-detail .section.hero-tour-detail-container .carousel .arrow-left::before {
+  width: 1rem;
+  height: 1rem;
+  font-size: 1rem;
+  content: '\e913';
+  display: block;
+  font-family: Real-Madrid-New-Icons, sans-serif;
+  flex: 0 1 auto;
+  line-height: 1;
+  color: #000;
+  font-style: normal;
+  font-variant: normal;
+}
+
+/* arrow right */ 
+body.tour-detail .section.hero-tour-detail-container .carousel .arrow-right {
+  cursor: pointer;
+  width: 1.9375rem;
+  height: 1.9375rem;
+  bottom: 9.375rem;
+  right: 9.375rem;
+  border-radius: 50%;
+  background-color: rgba(255 255 255 / 80%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.25s ease-in-out;
+  position: absolute;
+  z-index: 1;
+}
+
+body.tour-detail .section.hero-tour-detail-container .carousel .arrow-right::before {
+  width: 1rem;
+  height: 1rem;
+  font-size: 1rem;
+  content: '\e914';
+  display: block;
+  font-family: Real-Madrid-New-Icons, sans-serif;
+  flex: 0 1 auto;
+  line-height: 1;
+  color: #000;
+  font-style: normal;
+  font-variant: normal;
+}
+
 /* the mobile background is overlayed with a dotted pattern */
 @media (max-width: 960px) {
   body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block::before {
@@ -313,7 +454,7 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .ba
 @media (min-width: 960px) {
   body.tour-detail .section.hero-tour-detail-container {
     /* the section */
-    height: calc(100vh - 150px);
+    height: calc(100vh - 60px);
     min-height: 36.875rem;
   }
 
@@ -487,9 +628,15 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .ba
     line-height: 1.57;
   }
 
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .background .mobile {
+  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .background  {
     display: none;
   }
+
+  /* carousel container */
+  body.tour-detail .section.hero-tour-detail-container .carousel {
+    display: block;
+}
+
 }
 
 @media (min-width: 1200px) {
