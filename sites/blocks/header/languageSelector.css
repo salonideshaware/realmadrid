@@ -70,11 +70,16 @@
   border: 2px solid #3E30FA;
   border-radius: 10px;
   bottom: calc(100% + 10px);
-  inset-inline-start: 10px;
+  left: 10px;
   z-index: 9999;
   width: 250px;
   height: 250px;
   overflow-y: scroll;
+}
+
+.language-selector-dropdown:lang(ar) {
+  right: 10px;
+  left: unset;
 }
 
 .language-selector-dropdown.visible {
@@ -117,13 +122,18 @@
     display: block;
     visibility: hidden;
     z-index: 9999;
-    inset-inline-start: 0;
+    left: 0;
     width: 300px;
     overflow-y: scroll;
     bottom: 0;
     height: calc(100vh - var(--nav-height) + 2px);
     border: 0;
     border-radius: 0;
+  }
+
+  .language-selector-dropdown:lang(ar) {
+    right: 0;
+    left: unset;
   }
 
   .language-button-item {

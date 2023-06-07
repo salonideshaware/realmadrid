@@ -4,7 +4,7 @@
   box-sizing: border-box;
   position: absolute;
   top: calc(var(--nav-height));
-  inset-inline-start: 0;
+  left: 0;
   width: 100vw;
   height: calc(100vh - var(--nav-height) - 1px);
   z-index: 100;
@@ -13,6 +13,12 @@
   overscroll-behavior: none;
   transition: 0.5s ease-out all;
 }
+
+.popup-menu-area:lang(ar) {
+  right: 0;
+  left: unset;
+}
+
 
 .popup-menu-area.visible {
   visibility: visible;
@@ -32,9 +38,19 @@
   transition: 0.5s ease-out left, opacity;
 }
 
+.popup-menu:lang(ar) {
+  left: unset;
+  right: -1100px;
+}
+
 .popup-menu-area.visible .popup-menu {
-  inset-inline-start: 0;
+  left: 0;
   opacity: 1;
+}
+
+.popup-menu-area.visible .popup-menu:lang(ar) {
+  left: unset;
+  right: 0;
 }
 
 .top-menu-mobile {
@@ -114,12 +130,17 @@ a.top-menu-mobile-item {
 
 .sub-popup-menu-area {
   position: absolute;
-  inset-inline-start: 350px;
+  left: 350px;
   width: 300px;
   top: -5px;
   padding-top: 43px;
   padding-inline-start: 59px;
   padding-inline-end: 40px;
+}
+
+.sub-popup-menu-area:lang(ar) {
+  left: unset;
+  right: 350px;
 }
 
 .sub-popup-menu-item {
@@ -141,9 +162,14 @@ a.top-menu-mobile-item {
 
 .image-popup-menu-area {
   position: absolute;
-  inset-inline-start: 700px;
+  left: 700px;
   top: 0;
   padding: 30px 20px;
+}
+
+.image-popup-menu-area:lang(ar) {
+  left: unset;
+  right: 700px;
 }
 
 .image-popup-menu-area img {
@@ -180,8 +206,13 @@ a.top-menu-mobile-item {
 
 @media screen and (max-width: 1160px) {
   .popup-menu {
-    inset-inline-start: -770px;
+    left: -770px;
     width: 770px;
+  }
+
+  .popup-menu:lang(ar) {
+    right: -770px;
+    left: unset;
   }
 
   .image-popup-menu-area {
@@ -191,8 +222,13 @@ a.top-menu-mobile-item {
 
 @media screen and (max-width: 1056px) {
   .popup-menu {
-    inset-inline-start: -300px;
+    left: -300px;
     width: 300px;
+  }
+
+  .popup-menu:lang(ar) {
+    right: -300px;
+    left: unset;
   }
 
   .scrollable-popup-menu-area {
@@ -255,8 +291,13 @@ a.top-menu-mobile-item {
     height: 3em;
     width: 300px;
     bottom: 0;
-    inset-inline-start: 0;
+    left: 0;
     background: white;
     padding-inline-start: 0;
+  }
+
+  .language-popup-menu-area:lang(ar) {
+    left: unset;
+    right: 0;
   }
 }
