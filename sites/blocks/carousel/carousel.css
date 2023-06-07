@@ -3,10 +3,13 @@
 }
 
 main .section > .carousel-wrapper {
-  margin: 0 0 0 -10px;
   width: 100vw;
   max-width: unset;
   overflow: hidden;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-inline-start: -10px;
+  margin-inline-end: 0;
 }
 
 main .carousel > .carousel-pics-container {
