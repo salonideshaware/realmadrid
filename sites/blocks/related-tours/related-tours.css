@@ -272,7 +272,7 @@ main .section.related-tours-container .related-tours-wrapper {
 .related-tours.block .ticket-card-list.related .info-link::after  {
   background-image: url('/sites/icons/arrow-right.svg');
   filter: invert(24%) sepia(95%) saturate(4099%) hue-rotate(200deg) brightness(93%) contrast(101%);
-  display: inline-block;
+  display: inline-flex;
   text-decoration: none;
   border: solid 1px #0067d1;
   border-radius: 50%;
