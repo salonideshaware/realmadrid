@@ -1,5 +1,4 @@
-import { fetchPlaceholders } from '../../scripts/lib-franklin.js';
-import { getLanguage, TOUR_LANGUAGE_HOME_PATH } from '../../scripts/scripts.js';
+import { getLanguage, TOUR_LANGUAGE_HOME_PATH, fetchLanguagePlaceholders } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   // get tour category
@@ -21,7 +20,7 @@ export default async function decorate(block) {
   if (selectedTours.length === 0) return;
 
   // get placeholders (non-existing values are undefined)
-  const placeholders = await fetchPlaceholders();
+  const placeholders = await fetchLanguagePlaceholders();
   const {
     itIncludes = 'Incluye',
     moreInformation = 'Más información',
