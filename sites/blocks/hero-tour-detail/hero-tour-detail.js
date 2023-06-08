@@ -1,48 +1,82 @@
+/* eslint-disable no-unused-expressions */
 import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
-import { getLanguage, bindSwipeToElement, fetchLanguagePlaceholders, TOUR_LANGUAGE_HOME_PATH } from '../../scripts/scripts.js';
+import {
+  getLanguage, bindSwipeToElement, fetchLanguagePlaceholders, TOUR_LANGUAGE_HOME_PATH,
+} from '../../scripts/scripts.js';
 
 // translate to the next/previous slide
-function slideLeftOrRight(imgNum, width, slidesContainer) {
-  console.log(slidesContainer);
-  const transform = `transform: translate3d(-${width * imgNum}px, 0px, 0px); transition-duration: 300ms;`;
-  slidesContainer.style.cssText = transform;
+function slideLeftOrRight(direction, slidesContainer, previous, next) {
+  // get currently active slide
+  const activeSlide = slidesContainer.querySelector('[aria-selected="true"]');
+  // check if there is a previous or next slide
+  const nextSlide = direction === 'left' ? activeSlide.previousElementSibling : activeSlide.nextElementSibling;
+  if (nextSlide) {
+    // get 0 index based slide number
+    const slideNum = parseInt(nextSlide.dataset.slide, 10);
+    // update aria labels
+    activeSlide.setAttribute('aria-selected', 'false');
+    nextSlide.setAttribute('aria-selected', 'true');
+    // do the transform
+    const transform = `transform: translate3d(-${slidesContainer.offsetWidth * slideNum}px, 0px, 0px); transition-duration: 300ms;`;
+    slidesContainer.style.cssText = transform;
+    // update the button stati
+    slideNum === 0 ? previous.classList.add('disabled') : previous.classList.remove('disabled');
+    slideNum === slidesContainer.querySelectorAll('.slide').length - 1 ? next.classList.add('disabled') : next.classList.remove('disabled');
+  }
 }
 
 // add carousel buttons and events
 function initCarousel(block) {
+  const carousel = document.querySelector('main .section.hero-tour-detail-container .carousel');
+  const slidesContainer = carousel.querySelector('.slides');
+
   // create previous and next buttons
-  const previous = document.createRange().createContextualFragment(
-    '<div class="arrow previous disabled" tabindex="0" role="button" aria-label="Previous Slide" aria-disabled="true"></div>',
-  );
-  const next = document.createRange().createContextualFragment(
-    '<div class="arrow next" tabindex="0" role="button" aria-label="Next Slide" aria-disabled="false"></div>',
-  );
-  block.querySelector('.carousel').append(previous);
-  block.querySelector('.carousel').append(next);
+  const previous = document.createElement('div');
+  previous.classList.add('arrow', 'previous', 'disabled');
+  previous.setAttribute('tabindex', '0');
+  previous.setAttribute('role', 'button');
+  previous.setAttribute('aria-label', 'Previous Slide');
+  previous.setAttribute('aria-disabled', 'true');
+
+  const next = document.createElement('div');
+  next.classList.add('arrow', 'next');
+  next.setAttribute('tabindex', '0');
+  next.setAttribute('role', 'button');
+  next.setAttribute('aria-label', 'Next Slide');
+  next.setAttribute('aria-disabled', 'false');
+
+  carousel.append(previous);
+  carousel.append(next);
 
   // left and right swipe events
   bindSwipeToElement(block);
   block.addEventListener('swipe-RTL', () => {
-    console.log('Swipe Right to Left');
+    slideLeftOrRight('right', slidesContainer, previous, next);
   });
 
   block.addEventListener('swipe-LTR', () => {
-    console.log('Swipe Left to Right');
+    slideLeftOrRight('left', slidesContainer, previous, next);
   });
 
   // button click events
-  previous.querySelector('.arrow').addEventListener('click', () => {
-    console.log('Clicked Previous');
+  carousel.querySelector('.arrow.previous').addEventListener('click', () => {
+    slideLeftOrRight('left', slidesContainer, previous, next);
   });
 
-  next.querySelector('.arrow').addEventListener('click', () => {
-    console.log('Clicked Next');
-    slideLeftOrRight(1, 300, block.querySelector('.carousel .slides'));
+  carousel.querySelector('.arrow.next').addEventListener('click', () => {
+    slideLeftOrRight('right', slidesContainer, previous, next);
+  });
+
+  // window resize event
+  window.addEventListener('resize', () => {
+    const slideNum = parseInt(slidesContainer.querySelector('[aria-selected="true"]').dataset.slide, 10);
+    const transform = `transform: translate3d(-${slidesContainer.offsetWidth * slideNum}px, 0px, 0px); transition-duration: 0ms;`;
+    slidesContainer.style.cssText = transform;
   });
 }
 
 // initialize the carousel main structure
-function buildCarousel(cfg, block) {
+function buildCarousel(cfg) {
   // set up carousel structure
   const carousel = document.createRange().createContextualFragment(`
   <div class='carousel'>
@@ -57,6 +91,8 @@ function buildCarousel(cfg, block) {
     const eager = i === 0;
     const slide = document.createElement('div');
     slide.classList.add('slide');
+    slide.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+    slide.dataset.slide = i;
 
     // add video or image
     if (entry[1] === 'video') {
@@ -85,8 +121,7 @@ function buildCarousel(cfg, block) {
     slidesContainer.append(slide);
   });
 
-  // the carousel container has to be placed directly below the section div
-  block.closest('.section.hero-tour-detail-container').prepend(carousel);
+  return carousel;
 }
 
 // reads block config grouped by sections
@@ -220,7 +255,10 @@ export default async function decorate(block) {
   dom.querySelector('.background').append(backgroundImage);
 
   // build carousel dom
-  buildCarousel(cfg, block);
+  const carousel = buildCarousel(cfg);
+
+  // the carousel container has to be placed directly below the section div
+  block.closest('.section.hero-tour-detail-container').prepend(carousel);
 
   // if there is more then one slide, add buttons and scroll events
   if (cfg.desktop.length > 1) {
