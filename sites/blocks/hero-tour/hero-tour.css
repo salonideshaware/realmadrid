@@ -101,49 +101,34 @@ body.tour .section.hero-tour-container .hero-tour.block {
 /* the icon on the left */
 .hero-tour.block .content .navcontainer nav a::before {
   content: var(--nav-icon);
-  font-family: Real-Madrid-New-Icons, sans-serif;
-  width: 1.1875rem;
-  text-indent: -.375rem;
-  margin-right: 0.5rem;
-  height: 1rem;
-  font-size: 2rem;
-  display: block;
-  margin-bottom: 0.06rem;
-  line-height: 0.6;
-  font-weight: 400;
-  font-style: normal;
-  font-variant: normal;
-  color: var(--background-color);
+  width: 30px;
+  display: inline-block;
+  filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(203deg) brightness(120%) contrast(112%);
+}
+
+.hero-tour.block .content .navcontainer nav a.selected::before {
+  filter: invert(0%) sepia(91%) saturate(7500%) hue-rotate(349deg) brightness(104%) contrast(96%);
 }
 
 /* when we are on the page itself */
 .hero-tour.block .content .navcontainer nav a.selected {
   color: black;
-  background-color: rgba(255 255 255 / 85%);
   cursor: default;
   pointer-events: none;
-}
-
-.hero-tour.block .content .navcontainer nav a.selected::before {
-  color:black;
+  background-color: var(--background-color);
 }
 
 /* icon on the right for external links */
 .hero-tour.block .content .navcontainer nav a::after {
   content: var(--external-icon);
-  font-family: Real-Madrid-New-Icons, sans-serif;
-  font-size: 0.75rem;
-  display: flex;
-  align-items: center;
-  width: 0.5625rem;
-  text-indent: -.125rem;
-  height: 1em;
-  margin-left: 0.5rem;
-  line-height: 1;
-  font-weight: 400;
-  font-style: normal;
-  font-variant: normal;
-  color: var(--background-color);
+  display: inline-block;
+  width: 10px;
+  padding-left: 7px;
+  filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(203deg) brightness(120%) contrast(112%);
+}
+
+.hero-tour.block .content .navcontainer nav a.selected::after {
+  filter: invert(0%) sepia(91%) saturate(7500%) hue-rotate(349deg) brightness(104%) contrast(96%);
 }
 
 /* promo text */
@@ -173,7 +158,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
 /* sub category wrapper */
 .hero-tour.block .content .sub-wrapper {
   padding-bottom: 2.5rem;
-} 
+}
 
 /* sub category title */
 .hero-tour.block .content .sub-wrapper .sub-cat-title {
@@ -185,7 +170,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
   letter-spacing: 0.07rem;
   color: #fff;
   text-transform: uppercase;
-} 
+}
 
 /* sub category pre title */
 .hero-tour.block .content .sub-wrapper .sub-cat-title .sub-cat-subtitle {
@@ -275,17 +260,6 @@ body.tour .section.hero-tour-container .hero-tour.block {
     height: 1.625rem;
   }
 
-  .hero-tour.block .content .navcontainer nav a::before {
-    width: 1.0625rem;
-    text-indent: -.25rem;
-    height: 0.8125rem;
-    font-size: 1.625rem;
-  }
-
-  .hero-tour.block .content .navcontainer nav a::after {
-    font-size: 0.625rem;
-  }
-
   /* promo text */
   .hero-tour.block .content .promo {
     font-size: 1.25rem;
@@ -304,7 +278,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
     background-color: #f7f7f7;
     color: #000;
     padding: 3.125rem 0 2.8125rem;
-  } 
+  }
 
   /* sub category title */
   .hero-tour.block .content .sub-wrapper .sub-cat-title {
@@ -313,7 +287,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-  } 
+  }
 
   /* sub category pre title */
   .hero-tour.block .content .sub-wrapper .sub-cat-title .sub-cat-subtitle {
@@ -382,23 +356,16 @@ body.tour .section.hero-tour-container .hero-tour.block {
 
 /* stylelint-disable-next-line no-descending-specificity */
 .hero-tour.block .ticket-card-list.hero > ul > li > a::after  {
-  content: '\e914';
-  font-family: Real-Madrid-New-Icons, sans-serif;
-  font-size: 0.625rem;
-  display: inline-flex;
+  content: url('/sites/icons/arrow-right.svg');
+  filter: invert(24%) sepia(95%) saturate(4099%) hue-rotate(200deg) brightness(93%) contrast(101%);
+  width: 13px;
+  height: 13px;
+  display: inline-block;
   text-decoration: none;
-  align-items: center;
-  justify-content: center;
-  width: 0.8125rem;
-  height: 0.8125rem;
-  overflow: hidden;
   border: solid 0.06rem #0067d1;
   border-radius: 50%;
   box-sizing: border-box;
-  padding-top: 0.06rem;
   transform: translateX(0.5rem);
-  font-style: normal;
-  font-variant: normal;
 }
 
 /* ticket type block */
@@ -640,7 +607,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
     background-color: transparent;
     padding: 1.25rem 1.875rem 1.5625rem;
     border-bottom-right-radius: 1rem;
-    border-bottom-left-radius: 1rem; 
+    border-bottom-left-radius: 1rem;
   }
 
   /* 'includes' text */
