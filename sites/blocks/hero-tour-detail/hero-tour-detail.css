@@ -1,3 +1,5 @@
+/* stylelint-disable no-descending-specificity */
+
 /* --- mobile --- */
 
 /* the section */
@@ -18,7 +20,7 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block {
 }
 
 /* the root div */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content {
+.hero-tour-detail.block .content {
   position: absolute;
   top: 0;
   left: 0;
@@ -30,7 +32,7 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .co
 }
 
 /* breadcrumb */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .breadcrumb {
+.hero-tour-detail.block .content .breadcrumb {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
@@ -49,7 +51,7 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .co
   border-radius: 0 1rem 1rem 0;
 }
 
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .breadcrumb::before {
+.hero-tour-detail.block .content .breadcrumb::before {
   content: '\e913';
   display: inline-block;
   font-family: Real-Madrid-New-Icons, sans-serif;
@@ -65,7 +67,7 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .co
 }
 
 /* product div (the card) */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product {
+.hero-tour-detail.block .content .product {
   position: relative;
   margin: 0 auto 1.875rem;
   width: calc(100vw - 1.875rem);
@@ -81,7 +83,7 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .co
 }
 
 /*  the golden label */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .label {
+.hero-tour-detail.block .content .product .label {
   display: inline-block;
   border-radius: 0.3125rem;
   background-color: #ad8100;
@@ -100,7 +102,7 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .co
 }
 
 /* product name/subtitle container */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .product-name {
+.hero-tour-detail.block .content .product .product-name {
   padding: 1.25rem;
   box-sizing: border-box;
   text-align: center;
@@ -108,7 +110,7 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .co
 }
 
 /* title h1 */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .product-name .title {
+.hero-tour-detail.block .content .product .product-name .title {
   font-size: 3.375rem;
   font-weight: 300;
   line-height: 1;
@@ -119,7 +121,7 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .co
 }
 
 /* subtitle inside h1 */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .product-name .title .subtitle {
+.hero-tour-detail.block .content .product .product-name .title .subtitle {
   display: block;
   font-size: 0.8125rem;
   line-height: 1;
@@ -131,7 +133,7 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .co
 }
 
 /* combo image + title */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .product-name .combo-container {
+.hero-tour-detail.block .content .product .product-name .combo-container {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -142,14 +144,14 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .co
 }
 
 /* combo image  */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .product-name .combo-container .combo-image-container > img {
+.hero-tour-detail.block .content .product .product-name .combo-container .combo-image-container > img {
   margin: 0 0 0 auto;
   max-width: 100%;
   max-height: 3.25rem;
 }
 
 /* plus sign after combo image  */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .product-name .combo-container .plus {
+.hero-tour-detail.block .content .product .product-name .combo-container .plus {
   font-size: 1.375rem;
   padding-top: 0.25rem;
   color: #607d99;
@@ -159,7 +161,7 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .co
 }
 
 /* title and subtitle for combo image  */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .product-name .combo-container .combo-title-container {
+.hero-tour-detail.block .content .product .product-name .combo-container .combo-title-container {
   padding: 0;
   width: calc(50% - 16px);
   text-align: left;
@@ -167,7 +169,7 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .co
   position: relative;
 }
 
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .product-name .combo-container .combo-title-container .title {
+.hero-tour-detail.block .content .product .product-name .combo-container .combo-title-container .title {
   font-family: var(--body-font-family);
   font-size: 1.875rem;
   font-weight: 300;
@@ -189,20 +191,20 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .co
 }
 
 /* buy info (price description and buy button) */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .buy-info {
+.hero-tour-detail.block .content .product .buy-info {
   display: flex;
   padding-bottom: 1.25rem;
 }
 
 /* price info */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .buy-info .price {
+.hero-tour-detail.block .content .product .buy-info .price {
   box-sizing: border-box;
   padding-right: 1.25rem;
   width: 50%;
   flex: 0 1 auto;
 }
 
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .buy-info .price > p {
+.hero-tour-detail.block .content .product .buy-info .price > p {
   font-size: 0.9375rem;
   letter-spacing: -0.3px;
   text-align: right;
@@ -210,20 +212,20 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .co
 }
 
 /* amount */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .buy-info .price > p .amount {
+.hero-tour-detail.block .content .product .buy-info .price > p .amount {
   font-size: 1.5625rem;
   font-weight: 600;
   letter-spacing: -0.5px;
 }
 
 /* currency */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .buy-info .price > p .currency {
+.hero-tour-detail.block .content .product .buy-info .price > p .currency {
   font-size: 1.125rem;
   letter-spacing: -0.36px;
 }
 
 /* price subtitle */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .buy-info .price > p .subtitle {
+.hero-tour-detail.block .content .product .buy-info .price > p .subtitle {
   display: block;
   font-size: 0.875rem;
   letter-spacing: 0.14px;
@@ -232,13 +234,13 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .co
 }
 
 /* buy button */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .buy-info .button-buy {
+.hero-tour-detail.block .content .product .buy-info .button-buy {
   margin: 0;
   width: 50%;
   flex: 0 1 auto;
 }
 
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .buy-info .button-buy > a {
+.hero-tour-detail.block .content .product .buy-info .button-buy > a {
   display: block;
   width: 100%;
   border-radius: 0.625rem;
@@ -257,13 +259,13 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .co
 }
 
 /* product info description */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product-info {
+.hero-tour-detail.block .content .product-info {
   padding: 0 1.875rem 1.25rem;
   box-sizing: border-box;
 }
 
 /* description title */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product-info  .description-container > h3 {
+.hero-tour-detail.block .content .product-info  .description-container > h3 {
   font-family: var(--heading-font-family);
   font-size: 1.25rem;
   line-height: 1.5;
@@ -274,7 +276,7 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .co
 }
 
 /* description title */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product-info  .description-container > p {
+.hero-tour-detail.block .content .product-info  .description-container > p {
   font-size: 1.0625rem;
   line-height: 1.53;
   margin: 0;
@@ -282,13 +284,13 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .co
 }
 
 /* background */
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .background {
+.hero-tour-detail.block .background {
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
 
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .background img {
+.hero-tour-detail.block .background img {
   width: auto;
   min-width: 100%;
   height: 100%;
@@ -299,7 +301,7 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .ba
 /* carousel container */
 body.tour-detail .section.hero-tour-detail-container .carousel {
   position: absolute;
-  top: 0px;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
@@ -452,13 +454,13 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next::befo
   }
 
   /* breadcrumb */
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .breadcrumb {
+  .hero-tour-detail.block .content .breadcrumb {
     border-radius: 1rem;
     margin: 2.5rem auto 1.25rem 0;
   }
 
   /* product div (the card) */
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product {
+  .hero-tour-detail.block .content .product {
     width: auto;
     transform: none;
     max-width: none;
@@ -468,7 +470,7 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next::befo
   }
 
   /*  the golden label */
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .label {
+  .hero-tour-detail.block .content .product .label {
     border-radius: 0;
     border-top-right-radius: 0.3125rem;
     border-bottom-right-radius: 0.3125rem;
@@ -481,20 +483,20 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next::befo
   }
 
   /* product name/subtitle container */
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .product-name {
+  .hero-tour-detail.block .content .product .product-name {
     padding: 1.25rem 0 1.25rem 0.625rem;
     box-sizing: border-box;
   }
 
   /* title h1 */
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .product-name .title {
+  .hero-tour-detail.block .content .product .product-name .title {
     font-size: 4.6875rem;
     text-align: left;
     color: var(--background-color);
   }
 
   /* subtitle inside h1 */
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .product-name .title .subtitle {
+  .hero-tour-detail.block .content .product .product-name .title .subtitle {
     line-height: 1;
     letter-spacing: 0.91px;
     text-align: left;
@@ -503,13 +505,13 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next::befo
   }
 
   /* combo image + title */
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .product-name .combo-container {
+  .hero-tour-detail.block .content .product .product-name .combo-container {
     box-sizing: border-box;
     justify-content: flex-start;
   }
 
   /* combo image container */
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .product-name .combo-container .combo-image-container{
+  .hero-tour-detail.block .content .product .product-name .combo-container .combo-image-container{
     padding: 0.6875rem 0.8125rem 0.625rem;
     box-sizing: border-box;
     border-radius: .625rem;
@@ -517,14 +519,14 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next::befo
   }
   
   /* combo image  */
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .product-name .combo-container .combo-image-container > img {
+  .hero-tour-detail.block .content .product .product-name .combo-container .combo-image-container > img {
     max-width: 100%;
     max-height: 73px;
     margin: 0;
   }
 
   /* plus sign after combo image  */
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .product-name .combo-container .plus {
+  .hero-tour-detail.block .content .product .product-name .combo-container .plus {
     width: auto;
     padding: 0 15px 0 18px;
     box-sizing: border-box;
@@ -534,14 +536,14 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next::befo
     color: var(--background-color);
   }
 
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .product-name .combo-container .combo-title-container .title {
+  .hero-tour-detail.block .content .product .product-name .combo-container .combo-title-container .title {
     font-size: 60px;
     font-weight: 300;
     letter-spacing: normal;
     color: var(--background-color);
   }
   
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .product-name .combo-container .combo-title-container .title .subtitle{
+  .hero-tour-detail.block .content .product .product-name .combo-container .combo-title-container .title .subtitle{
     font-size: 13px;
     font-weight: normal;
     padding-top: 0.3125rem;
@@ -550,39 +552,39 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next::befo
   }
 
   /* buy info (price description and buy button) */
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .buy-info {
+  .hero-tour-detail.block .content .product .buy-info {
     display: block;
     padding: 0 0 1.25rem 0.625rem;
     box-sizing: border-box;
   }
 
   /* price info */
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .buy-info .price {
+  .hero-tour-detail.block .content .product .buy-info .price {
     width: auto;
     padding: 0;
   }
 
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .buy-info .price p {
+  .hero-tour-detail.block .content .product .buy-info .price p {
     text-align: left;
     font-size: 1.0625rem;
     color: var(--background-color);
   }
 
   /* price subtitle */
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .buy-info .price > p .subtitle {
+  .hero-tour-detail.block .content .product .buy-info .price > p .subtitle {
     font-size: 0.8125rem;
     color: var(--background-color);
     margin: 0.125rem 0 0.75rem;
   }
 
   /* buy button  */
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .buy-info .button-buy {
+  .hero-tour-detail.block .content .product .buy-info .button-buy {
     width: auto;
     padding: 0;
   }
 
   /* buy button  */
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .buy-info .button-buy > a {
+  .hero-tour-detail.block .content .product .buy-info .button-buy > a {
     display: inline-block;
     width: auto;
     transform: none;
@@ -592,13 +594,13 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next::befo
   }
 
   /* product info description */
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product-info {
+  .hero-tour-detail.block .content .product-info {
     padding: 0 0 0 0.625rem;
     max-width: 20rem;
   }
 
   /* description title */
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product-info  .description-container > h3 {
+  .hero-tour-detail.block .content .product-info  .description-container > h3 {
     font-family: "Open Sans", Arial, Helvetica, sans-serif;
     font-size: 0.95rem;
     font-weight: 700;
@@ -609,12 +611,12 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next::befo
   }
 
   /* description title */
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product-info  .description-container > p {
+  .hero-tour-detail.block .content .product-info  .description-container > p {
     font-size: 0.875rem;
     line-height: 1.57;
   }
 
-  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .background  {
+  .hero-tour-detail.block .background  {
     display: none;
   }
 
