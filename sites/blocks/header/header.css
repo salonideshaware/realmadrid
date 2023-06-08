@@ -43,6 +43,28 @@
     letter-spacing: 0.2px;
 }
 
+.profile-button {
+    align-items: center;
+    background-color: #3e31fa;
+    border-radius: 50%;
+    border: 2px solid;
+    border-color: #3e31fa;
+    box-shadow: none;
+    color: var(--background-color);
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    font-family: var(--header-font-family-bold);
+    font-weight: 600;
+    font-size: 14px;
+    gap: 10px;
+    justify-content: space-between;
+    letter-spacing: 0.2px;
+    line-height: 21px;
+    padding: 8px 9px;
+    text-transform: none;
+}
+
 header ul {
     list-style-type: none;
     margin: 0;
