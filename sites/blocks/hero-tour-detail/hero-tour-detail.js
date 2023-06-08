@@ -1,6 +1,93 @@
-/* eslint-disable no-continue */
-import { fetchPlaceholders } from '../../scripts/lib-franklin.js';
-import { getLanguage, TOUR_LANGUAGE_HOME_PATH } from '../../scripts/scripts.js';
+import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
+import { getLanguage, bindSwipeToElement, fetchLanguagePlaceholders, TOUR_LANGUAGE_HOME_PATH } from '../../scripts/scripts.js';
+
+// translate to the next/previous slide
+function slideLeftOrRight(imgNum, width, slidesContainer) {
+  console.log(slidesContainer);
+  const transform = `transform: translate3d(-${width * imgNum}px, 0px, 0px); transition-duration: 300ms;`;
+  slidesContainer.style.cssText = transform;
+}
+
+// add carousel buttons and events
+function initCarousel(block) {
+  // create previous and next buttons
+  const previous = document.createRange().createContextualFragment(
+    '<div class="arrow previous disabled" tabindex="0" role="button" aria-label="Previous Slide" aria-disabled="true"></div>',
+  );
+  const next = document.createRange().createContextualFragment(
+    '<div class="arrow next" tabindex="0" role="button" aria-label="Next Slide" aria-disabled="false"></div>',
+  );
+  block.querySelector('.carousel').append(previous);
+  block.querySelector('.carousel').append(next);
+
+  // left and right swipe events
+  bindSwipeToElement(block);
+  block.addEventListener('swipe-RTL', () => {
+    console.log('Swipe Right to Left');
+  });
+
+  block.addEventListener('swipe-LTR', () => {
+    console.log('Swipe Left to Right');
+  });
+
+  // button click events
+  previous.querySelector('.arrow').addEventListener('click', () => {
+    console.log('Clicked Previous');
+  });
+
+  next.querySelector('.arrow').addEventListener('click', () => {
+    console.log('Clicked Next');
+    slideLeftOrRight(1, 300, block.querySelector('.carousel .slides'));
+  });
+}
+
+// initialize the carousel main structure
+function buildCarousel(cfg, block) {
+  // set up carousel structure
+  const carousel = document.createRange().createContextualFragment(`
+  <div class='carousel'>
+    <div class='slides'>
+    </div>
+  </div>
+  `);
+
+  // add the carousel entries
+  const slidesContainer = carousel.querySelector('.carousel .slides');
+  cfg.desktop.forEach((entry, i) => {
+    const eager = i === 0;
+    const slide = document.createElement('div');
+    slide.classList.add('slide');
+
+    // add video or image
+    if (entry[1] === 'video') {
+      const video = document.createElement('video');
+      video.setAttribute('autoplay', '');
+      video.setAttribute('muted', '');
+      video.setAttribute('loop', '');
+      video.setAttribute('playsinline', '');
+      const source = document.createElement('source');
+      source.setAttribute('src', entry[2]);
+      source.setAttribute('type', 'video/mp4');
+      video.append(source);
+      slide.append(video);
+    } else {
+      const image = createOptimizedPicture(entry[2], entry[0], eager);
+      slide.append(image);
+    }
+
+    // add the title
+    const title = document.createElement('h2');
+    title.classList.add('title');
+
+    title.append(entry[0]);
+    slide.append(title);
+
+    slidesContainer.append(slide);
+  });
+
+  // the carousel container has to be placed directly below the section div
+  block.closest('.section.hero-tour-detail-container').prepend(carousel);
+}
 
 // reads block config grouped by sections
 function readBlockConfigBySections(block) {
@@ -90,7 +177,7 @@ export default async function decorate(block) {
     .querySelector(`.navigation a[href='${parentURL}']`)?.innerText;
 
   // get placeholders (non-existing values are undefined)
-  const placeholders = await fetchPlaceholders();
+  const placeholders = await fetchLanguagePlaceholders();
   const {
     from = 'desde',
   } = placeholders;
@@ -125,54 +212,20 @@ export default async function decorate(block) {
       </div>
     </div>
     <div class='background'>
-      <img class='mobile' alt='${cfg.mobile.title}' src='${cfg.mobile.image}' title='${cfg.mobile.title}'>
     </div>
   `);
 
-  const carousel = document.createRange().createContextualFragment(`
-    <div class='carousel'>
-      <div class='slides'>
-      </div>
-      <div class='arrow-left'></div>
-      <div class='arrow-right'></div>
-    </div>
-  `);
+  // add the optimized background image
+  const backgroundImage = createOptimizedPicture(cfg.mobile.image, cfg.mobile.title, true);
+  dom.querySelector('.background').append(backgroundImage);
 
-  // add the carousel entries
-  const slidesContainer = carousel.querySelector('.carousel .slides');
-  cfg.desktop.forEach((entry) => {
-    const slide = document.createElement('div');
-    slide.classList.add('slide');
+  // build carousel dom
+  buildCarousel(cfg, block);
 
-    // add video or image
-    if (entry[1] === 'video') {
-      const video = document.createElement('video');
-      video.setAttribute('autoplay', 'autoplay');
-      video.setAttribute('muted', 'muted');
-      video.setAttribute('loop', 'loop');
-      video.setAttribute('playsinline', 'playsinline');
-      const source = document.createElement('source');
-      source.setAttribute('src', entry[2]);
-      source.setAttribute('type', 'video/mp4');
-      video.append(source);
-      slide.append(video);
-    } else {
-      const img = document.createElement('img');
-      img.setAttribute('src', entry[2]);
-      slide.append(img);
-    }
-    
-    // add the title
-    const title = document.createElement('h2');
-    title.classList.add('title');
-    // eslint-disable-next-line prefer-destructuring
-    title.innerText = entry[0];
-    slide.append(title);
-
-    slidesContainer.append(slide);
-  });
-
-  block.closest('.section.hero-tour-detail-container').prepend(carousel);
+  // if there is more then one slide, add buttons and scroll events
+  if (cfg.desktop.length > 1) {
+    initCarousel(block);
+  }
 
   // if there is no combo image
   if (comboImage === '') {

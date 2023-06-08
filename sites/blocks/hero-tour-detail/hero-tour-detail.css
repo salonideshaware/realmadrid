@@ -288,7 +288,7 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .ba
   overflow: hidden;
 }
 
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .background .mobile {
+body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .background img {
   width: auto;
   min-width: 100%;
   height: 100%;
@@ -349,7 +349,7 @@ body.tour-detail .section.hero-tour-detail-container .carousel .slides .slide > 
 }
 
 /* image slide */
-body.tour-detail .section.hero-tour-detail-container .carousel .slides .slide > img {
+body.tour-detail .section.hero-tour-detail-container .carousel .slides .slide  img {
   width: auto;
   min-width: 100%;
   height: 100%;
@@ -374,10 +374,8 @@ body.tour-detail .section.hero-tour-detail-container .carousel .slides .slide .t
   z-index: 2;
 }
 
-/* arrow left */ 
-body.tour-detail .section.hero-tour-detail-container .carousel .arrow-left {
-  cursor: pointer;
-  transform: translateX(-2.8125rem);
+/* carousel arrows */ 
+body.tour-detail .section.hero-tour-detail-container .carousel .arrow {
   width: 1.9375rem;
   height: 1.9375rem;
   bottom: 9.375rem;
@@ -392,38 +390,7 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow-left {
   z-index: 1;
 }
 
-body.tour-detail .section.hero-tour-detail-container .carousel .arrow-left::before {
-  width: 1rem;
-  height: 1rem;
-  font-size: 1rem;
-  content: '\e913';
-  display: block;
-  font-family: Real-Madrid-New-Icons, sans-serif;
-  flex: 0 1 auto;
-  line-height: 1;
-  color: #000;
-  font-style: normal;
-  font-variant: normal;
-}
-
-/* arrow right */ 
-body.tour-detail .section.hero-tour-detail-container .carousel .arrow-right {
-  cursor: pointer;
-  width: 1.9375rem;
-  height: 1.9375rem;
-  bottom: 9.375rem;
-  right: 9.375rem;
-  border-radius: 50%;
-  background-color: rgba(255 255 255 / 80%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.25s ease-in-out;
-  position: absolute;
-  z-index: 1;
-}
-
-body.tour-detail .section.hero-tour-detail-container .carousel .arrow-right::before {
+body.tour-detail .section.hero-tour-detail-container .carousel .arrow::before {
   width: 1rem;
   height: 1rem;
   font-size: 1rem;
@@ -435,6 +402,25 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow-right::bef
   color: #000;
   font-style: normal;
   font-variant: normal;
+  cursor: pointer;
+}
+
+body.tour-detail .section.hero-tour-detail-container .carousel .arrow.disabled {
+  pointer-events: none;
+  opacity: 0.25;
+  cursor: default;
+}
+
+body.tour-detail .section.hero-tour-detail-container .carousel .arrow.previous {
+  transform: translateX(-2.8125rem);
+}
+
+body.tour-detail .section.hero-tour-detail-container .carousel .arrow.previous::before {
+  content: '\e913';
+}
+
+body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next::before {
+  content: '\e914';
 }
 
 /* the mobile background is overlayed with a dotted pattern */
