@@ -385,4 +385,13 @@ async function loadPage() {
   loadDelayed();
 }
 
+// if on a tours template
+if (toClassName(getMetadata('template')).startsWith('tour')) {
+  // load list of tours
+  const resp = await fetch(`${TOUR_LANGUAGE_HOME_PATH[getLanguage()]}/tours.json`);
+  if (resp.ok) {
+    window.tours = (await resp.json()).data;
+  }
+}
+
 loadPage();

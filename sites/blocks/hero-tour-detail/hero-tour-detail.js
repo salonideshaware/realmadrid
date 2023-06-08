@@ -174,12 +174,8 @@ function readBlockConfigBySections(block) {
 }
 
 export default async function decorate(block) {
-  // get list of tours
-  let resp = await fetch(`${TOUR_LANGUAGE_HOME_PATH[getLanguage()]}/tours.json`);
-  if (!resp.ok) return;
-
   // find the tour info for this page
-  const tourInfo = (await resp.json()).data.filter((tour) => tour['Detail Page'] === document.location.pathname);
+  const tourInfo = window.tours.filter((tour) => tour['Detail Page'] === document.location.pathname);
 
   // if no tours are found skip
   if (tourInfo.length === 0) return;
@@ -204,7 +200,7 @@ export default async function decorate(block) {
 
   // breadcrumb title must be extracted from parent tour page navigation
   // as it differs from title set on the parent page itself
-  resp = await fetch(`${TOUR_LANGUAGE_HOME_PATH[getLanguage()]}/fragments/tour-navigation.plain.html`);
+  const resp = await fetch(`${TOUR_LANGUAGE_HOME_PATH[getLanguage()]}/fragments/tour-navigation.plain.html`);
   if (!resp.ok) return;
   let parentURL = document.location.pathname;
   parentURL = parentURL.substring(0, parentURL.lastIndexOf('/'));

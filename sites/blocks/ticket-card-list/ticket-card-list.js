@@ -1,15 +1,11 @@
-import { getLanguage, TOUR_LANGUAGE_HOME_PATH, fetchLanguagePlaceholders } from '../../scripts/scripts.js';
+import { fetchLanguagePlaceholders } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   // get tour category
   const tourCategory = block.children[0].children[0].textContent.trim().toLowerCase();
 
-  // load list of tours
-  const resp = await fetch(`${TOUR_LANGUAGE_HOME_PATH[getLanguage()]}/tours.json`);
-  if (!resp.ok) return;
-
   // get the tours for the selected category
-  const selectedTours = (await resp.json()).data.filter((tour) => {
+  const selectedTours = window.tours.filter((tour) => {
     // get list of assigned categories for a tour
     const categories = tour.Categories.split(',').map((categoryEntry) => categoryEntry.trim());
     // check if category matches and we are not on tour page itself
