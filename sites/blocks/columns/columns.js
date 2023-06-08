@@ -127,7 +127,7 @@ export default function decorate(block) {
     tabsWrapper.addEventListener('swipe-RTL', (e) => {
       if (e.detail.force > swipeThreshold && targetIndex < tabs.length - 1) {
         targetIndex += 1;
-        smoothScrollToSlide();
+        smoothScrollToSlide(tabsWrapper, tabs, targetIndex);
       }
     });
     tabsWrapper.addEventListener('swipe-LTR', (e) => {
