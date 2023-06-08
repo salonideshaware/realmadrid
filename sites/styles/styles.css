@@ -484,7 +484,7 @@ body.tour.tour-detail main .main-content .default-content-wrapper blockquote::af
 }
 
 @media (min-width: 990px) {
-  body.tour.tour-detail main .main-content:first-of-type {
+  body.tour.tour-detail main .main-content {
     width: 930px;
     margin: 0 auto;
     padding: 0;

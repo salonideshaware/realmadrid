@@ -56,7 +56,7 @@ export default async function decorate(block) {
       // add entries
       [...navEntries.children].forEach((navEntry) => {
         const a = navEntry.children[1].children[0];
-        a.style.setProperty('--nav-icon', `url('/sites/icons/${navEntry.children[0].textContent.trim()}.svg')`);
+        a.style.setProperty('--nav-icon', `url('${window.hlx.codeBasePath}/icons/${navEntry.children[0].textContent.trim()}.svg')`);
         const href = a.getAttribute('href');
         // if its the current page
         if (href.endsWith(document.location.pathname)) {
@@ -64,7 +64,7 @@ export default async function decorate(block) {
         }
         // if its an external link
         if (href.indexOf('www.realmadrid.') === -1) {
-          a.style.setProperty('--external-icon', "url('/sites/icons/open-link.svg')");
+          a.style.setProperty('--external-icon', `url('${window.hlx.codeBasePath}/icons/open-link.svg')`);
         }
         navElem.append(a);
       });

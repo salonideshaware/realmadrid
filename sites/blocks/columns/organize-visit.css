@@ -19,7 +19,7 @@ body.tour .section.section-organize-visit .default-content-wrapper {
 }
 
 .columns.organize-visit .icon.icon-open-link::before {
-  content: url('/sites/icons/open-link.svg');
+  content: url('../../icons/open-link.svg');
   display: inline-flex;
   filter: invert(24%) sepia(95%) saturate(4099%) hue-rotate(200deg) brightness(93%) contrast(101%);
   width: 11px;

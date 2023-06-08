@@ -356,7 +356,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
 
 /* stylelint-disable-next-line no-descending-specificity */
 .hero-tour.block .ticket-card-list.hero > ul > li > a::after  {
-  content: url('/sites/icons/arrow-right.svg');
+  content: url('../../icons/arrow-right.svg');
   filter: invert(24%) sepia(95%) saturate(4099%) hue-rotate(200deg) brightness(93%) contrast(101%);
   width: 13px;
   height: 13px;
