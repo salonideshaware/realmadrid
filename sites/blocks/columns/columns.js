@@ -1,4 +1,5 @@
 import { loadCSS } from '../../scripts/lib-franklin.js';
+import { bindSwipeToElementWithForce } from '../../scripts/scripts.js';
 
 function decorateOrganizeVisit(el) {
   loadCSS(`${window.hlx.codeBasePath}/blocks/columns/organize-visit.css`);
@@ -42,6 +43,25 @@ function decorateFullColumns(el) {
   }
 }
 
+// make the swipe smooth
+function smoothScrollToSlide(tabsWrapper, tabs, targetIndex) {
+  const startPos = tabsWrapper.scrollLeft;
+  const targetPos = tabs[targetIndex].offsetLeft;
+  const change = targetPos - startPos;
+
+  let startTime = null;
+  function step(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const elapsed = timestamp - startTime;
+    const t = Math.min(1, elapsed / 500);
+    tabsWrapper.scrollLeft = startPos + t * change;
+    if (t < 1) {
+      requestAnimationFrame(step);
+    }
+  }
+  requestAnimationFrame(step);
+}
+
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
@@ -71,6 +91,7 @@ export default function decorate(block) {
 
     const tourFaqTabs = block.querySelectorAll('.columns > div');
 
+    const tabs = []; // Array to store all the slide elements
     tourFaqTabs.forEach((tab, index) => {
       const tabTitleFirst = tab.firstElementChild;
       if (tabTitleFirst) {
@@ -79,6 +100,7 @@ export default function decorate(block) {
         newTab.classList.add('swiper-slide');
         tabsWrapper.appendChild(newTab);
         tabTitleFirst.remove();
+        tabs.push(newTab); // Add the new slide to the array
 
         newTab.addEventListener('click', (event) => {
           event.stopPropagation();
@@ -96,6 +118,23 @@ export default function decorate(block) {
       }
       // Remove the content panel from the block element before appending it to the content wrapper
       block.removeChild(tab);
+    });
+
+    // swipe events initialization for tabs using bindSwipeToElement
+    let targetIndex = 0;
+    const swipeThreshold = 100;
+    bindSwipeToElementWithForce(tabsWrapper);
+    tabsWrapper.addEventListener('swipe-RTL', (e) => {
+      if (e.detail.force > swipeThreshold && targetIndex < tabs.length - 1) {
+        targetIndex += 1;
+        smoothScrollToSlide();
+      }
+    });
+    tabsWrapper.addEventListener('swipe-LTR', (e) => {
+      if (e.detail.force > swipeThreshold && targetIndex > 0) {
+        targetIndex -= 1;
+        smoothScrollToSlide(tabsWrapper, tabs, targetIndex);
+      }
     });
 
     // Move the content panels into the new content wrapper div

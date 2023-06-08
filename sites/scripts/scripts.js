@@ -379,6 +379,26 @@ export function bindSwipeToElement(el) {
   }, { passive: true });
 }
 
+export function bindSwipeToElementWithForce(el) {
+  let touchstartX = 0;
+  let touchendX = 0;
+
+  el.addEventListener('touchstart', (e) => {
+    touchstartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  el.addEventListener('touchend', (e) => {
+    touchendX = e.changedTouches[0].screenX;
+    const swipeDistance = Math.abs(touchendX - touchstartX);
+    if (touchendX < touchstartX) {
+      el.dispatchEvent(new CustomEvent('swipe-RTL', { detail: { force: swipeDistance } }));
+    }
+    if (touchendX > touchstartX) {
+      el.dispatchEvent(new CustomEvent('swipe-LTR', { detail: { force: swipeDistance } }));
+    }
+  }, { passive: true });
+}
+
 async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
