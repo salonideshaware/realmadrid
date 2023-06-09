@@ -156,8 +156,12 @@ export default function decorate(block) {
         const para = question.parentElement;
         para.classList.add('question');
         question.classList.add('question');
-        const answer = question.parentElement.nextElementSibling;
-        answer.classList.add('answer');
+        // Making sure that answers with many paragraphs get also the class answer
+        let answer = para.nextElementSibling;
+        while(answer && !answer.querySelector('strong')) {
+          answer.classList.add('answer');
+          answer = answer.nextElementSibling;
+        }      
         if (window.innerWidth <= 768) {
           question.addEventListener('click', (event) => {
             event.stopImmediatePropagation();
@@ -167,31 +171,54 @@ export default function decorate(block) {
               if (otherQuestion !== question) {
                 otherQuestion.classList.remove('open');
                 otherQuestion.classList.add('close');
-                otherQuestion.parentElement.nextElementSibling.classList.remove('open');
-                otherQuestion.parentElement.nextElementSibling.classList.add('close');
+                // New modification starts here
+                // Similar to the previous loop, but now we're closing every non-question paragraph that follows the clicked question
+                let answer = otherQuestion.parentElement.nextElementSibling;
+                while (answer && !answer.querySelector('strong')) {
+                  answer.classList.remove('open');
+                  answer.classList.add('close');
+                  answer = answer.nextElementSibling;
+                }
+                // New modification ends here
               }
             });
 
             const isOpen = question.classList.contains('open');
-            if (isOpen) {
-              question.classList.remove('open');
-              question.classList.add('close');
-              answer.classList.remove('open');
-              answer.classList.add('close');
-            } else {
-              question.classList.remove('close');
-              question.classList.add('open');
-              answer.classList.remove('close');
-              answer.classList.add('open');
+           // New modification starts here
+            // Similarly, when a question is clicked, we open or close all the following non-question paragraphs depending on the state of the question
+            let answer = para.nextElementSibling;
+            while (answer && !answer.querySelector('strong')) {
+              if (isOpen) {
+                question.classList.remove('open');
+                question.classList.add('close');
+                answer.classList.remove('open');
+                answer.classList.add('close');
+              } else {
+                question.classList.remove('close');
+                question.classList.add('open');
+                answer.classList.remove('close');
+                answer.classList.add('open');
+              }
+              answer = answer.nextElementSibling;
             }
           });
           // Display the first question's answer by default
           if (questionIndex === 0) {
             question.classList.add('open');
-            answer.classList.add('open');
+            // New modification starts here
+            // This modification is used to mark the first answer paragraph as 'open' right at the beginning
+            const firstAnswer = para.nextElementSibling;
+            if (firstAnswer) firstAnswer.classList.add('open');
+            // New modification ends here          
           } else {
             question.classList.add('close');
-            answer.classList.add('close');
+            // New modification starts here
+            // This modification is used to mark all non-question paragraphs as 'close' right at the beginning
+            let answer = para.nextElementSibling;
+            while (answer && !answer.querySelector('strong')) {
+              answer.classList.add('close');
+              answer = answer.nextElementSibling;
+            }          
           }
         }
       });
