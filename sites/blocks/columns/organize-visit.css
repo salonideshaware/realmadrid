@@ -2,10 +2,6 @@ body.tour .section.section-organize-visit .default-content-wrapper {
   padding: 0;
 }
 
-.columns.organize-visit svg {
-  display: none;
-}
-
 .columns.organize-visit a {
   text-decoration: underline;
 }
@@ -14,40 +10,20 @@ body.tour .section.section-organize-visit .default-content-wrapper {
   width: 46px;
 }
 
-.columns.organize-visit .icon::before {
-  font-family: Real-Madrid-New-Icons, sans-serif;
-  content: '';
-  font-size: 33px;
+.columns.organize-visit .icon svg {
   position: absolute;
-  margin-top: -5px;
+  display: block;
+  width: 33px;
+  height: 33px;
   color: #6b6b6b;
 }
 
-.columns.organize-visit .icon.icon-date::before {
-  content: '\e905';
-}
-
-.columns.organize-visit .icon.icon-time::before {
-  content: '\e90f';
-}
-
-.columns.organize-visit .icon.icon-contact::before {
-  content: '\e910';
-}
-
-.columns.organize-visit .icon.icon-direction::before {
-  content: '\e911';
-}
-
-.columns.organize-visit .icon.icon-open-link {
-  width: 10px;
-  height: 10px;
-}
-
 .columns.organize-visit .icon.icon-open-link::before {
-  content: '\e916';
-  color: #0067d1;
-  font-size: 11px;
+  content: url('../../icons/open-link.svg');
+  display: inline-flex;
+  filter: invert(24%) sepia(95%) saturate(4099%) hue-rotate(200deg) brightness(93%) contrast(101%);
+  width: 11px;
+  height: 11px;
 }
 
 .columns.organize-visit .visit-box {
