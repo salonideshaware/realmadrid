@@ -158,10 +158,10 @@ export default function decorate(block) {
         question.classList.add('question');
         // Making sure that answers with many paragraphs get also the class answer
         let answer = para.nextElementSibling;
-        while(answer && !answer.querySelector('strong')) {
+        while (answer && !answer.querySelector('strong')) {
           answer.classList.add('answer');
           answer = answer.nextElementSibling;
-        }      
+        }
         if (window.innerWidth <= 768) {
           question.addEventListener('click', (event) => {
             event.stopImmediatePropagation();
@@ -171,22 +171,19 @@ export default function decorate(block) {
               if (otherQuestion !== question) {
                 otherQuestion.classList.remove('open');
                 otherQuestion.classList.add('close');
-                // New modification starts here
-                // Similar to the previous loop, but now we're closing every non-question paragraph that follows the clicked question
-                let answer = otherQuestion.parentElement.nextElementSibling;
+                // Now we're closing every non-question paragraph that follows the clicked question
+                answer = otherQuestion.parentElement.nextElementSibling;
                 while (answer && !answer.querySelector('strong')) {
                   answer.classList.remove('open');
                   answer.classList.add('close');
                   answer = answer.nextElementSibling;
                 }
-                // New modification ends here
               }
             });
 
             const isOpen = question.classList.contains('open');
-           // New modification starts here
-            // Similarly, when a question is clicked, we open or close all the following non-question paragraphs depending on the state of the question
-            let answer = para.nextElementSibling;
+            // We open or close the following non-question paragraphs
+            answer = para.nextElementSibling;
             while (answer && !answer.querySelector('strong')) {
               if (isOpen) {
                 question.classList.remove('open');
@@ -205,20 +202,18 @@ export default function decorate(block) {
           // Display the first question's answer by default
           if (questionIndex === 0) {
             question.classList.add('open');
-            // New modification starts here
-            // This modification is used to mark the first answer paragraph as 'open' right at the beginning
+            // Mark the first answer paragraph as 'open' right at the beginning
             const firstAnswer = para.nextElementSibling;
             if (firstAnswer) firstAnswer.classList.add('open');
-            // New modification ends here          
+            // New modification ends here
           } else {
             question.classList.add('close');
-            // New modification starts here
-            // This modification is used to mark all non-question paragraphs as 'close' right at the beginning
-            let answer = para.nextElementSibling;
+            // Mark all non-question paragraphs as 'close' right at the beginning
+            answer = para.nextElementSibling;
             while (answer && !answer.querySelector('strong')) {
               answer.classList.add('close');
               answer = answer.nextElementSibling;
-            }          
+            }
           }
         }
       });
