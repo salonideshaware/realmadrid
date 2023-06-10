@@ -428,6 +428,15 @@ body.tour main .merge-blocks-desktop {
   }
 }
 
+body.tour.tour-detail main .main-content {
+  padding-top: 61px;
+  padding-bottom: 54px;
+}
+
+body.tour.tour-detail main .main-content .default-content-wrapper {
+  padding-top: 0;
+  padding-bottom: 0;
+}
 /* stylelint-disable-next-line no-descending-specificity */
 body.tour.tour-detail main .main-content .default-content-wrapper h2 {
   font-size: var(--heading-font-size-l);
@@ -487,11 +496,14 @@ body.tour.tour-detail main .main-content .default-content-wrapper blockquote::af
   body.tour.tour-detail main .main-content {
     width: 930px;
     margin: 0 auto;
-    padding: 0;
+    padding-top: 83px;
+    padding-bottom: 61px;
   }
 
   body.tour.tour-detail main .main-content .default-content-wrapper {
     width: auto;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   body.tour.tour-detail main .main-content .default-content-wrapper h2 {
