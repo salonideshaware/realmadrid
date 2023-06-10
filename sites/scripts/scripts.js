@@ -154,14 +154,16 @@ function buildFAQPage(main) {
 
 /**
  * Decorates the main content container to match tour detail page styling.
- * the main content container is the one which contains text only and no other blocks.
+ * the main content container is the first div which starts with text and not another blocks (div).
  * @param {Element} main The main element
  */
 function buildTourDetailContent(main) {
   main.parentElement.classList.add('tour');
   const contentWrappers = main.querySelectorAll(':scope > div');
-  [...contentWrappers].filter((contentWrapper) => !contentWrapper.querySelector('div'))
-    .map((contentWrapper) => contentWrapper.classList.add('main-content'));
+  const mainContentDiv = [...contentWrappers].find((contentWrapper) => contentWrapper.firstElementChild.tagName !== 'DIV');
+  if (mainContentDiv) {
+    mainContentDiv.classList.add('main-content');
+  }
 }
 
 /**

@@ -27,7 +27,8 @@ function slideLeftOrRight(direction, slidesContainer, previous, next) {
 
 // add carousel buttons and events
 function initCarousel(block) {
-  const carousel = document.querySelector('main .section.hero-tour-detail-container .carousel');
+  // we find first the main element in order to support heros embedded as fragments.
+  const carousel = block.closest('main').querySelector('.section.hero-tour-detail-container .carousel');
   const slidesContainer = carousel.querySelector('.slides');
 
   // create previous and next buttons
@@ -221,8 +222,8 @@ export default async function decorate(block) {
   const dom = document.createRange().createContextualFragment(`
     <div class='content'>
       <a href='${parentURL}'class='breadcrumb'>${groupName}</a>
-      <div class='product'>     
-        ${ticketLabel ? `<span class='label'><b>${ticketLabel}</b></span>` : ''}     
+      <div class='product'>
+        ${ticketLabel ? `<span class='label'><b>${ticketLabel}</b></span>` : ''}
         <div class='product-name'>
         </div>
         <div class='buy-info'>
