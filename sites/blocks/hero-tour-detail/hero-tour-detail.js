@@ -98,14 +98,17 @@ function buildCarousel(cfg) {
     // add video or image
     if (entry[1] === 'video') {
       const video = document.createElement('video');
-      video.setAttribute('autoplay', '');
-      video.setAttribute('muted', '');
-      video.setAttribute('loop', '');
-      video.setAttribute('playsinline', '');
+      video.toggleAttribute('autoplay', true);
+      video.toggleAttribute('loop', true);
+      video.toggleAttribute('playsinline', true);
+      video.toggleAttribute('muted', true);
       const source = document.createElement('source');
       source.setAttribute('src', entry[2]);
       source.setAttribute('type', 'video/mp4');
       video.append(source);
+      // Chrome: to load the video, set muted AFTER adding to video element
+      // to document dom
+      video.muted = true;
       slide.append(video);
     } else {
       const image = createOptimizedPicture(entry[2], entry[0], eager);
