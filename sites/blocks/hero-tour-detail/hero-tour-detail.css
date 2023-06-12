@@ -145,7 +145,7 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block {
 }
 
 /* combo image  */
-.hero-tour-detail.block .content .product .product-name .combo-container .combo-image-container > img {
+.hero-tour-detail.block .content .product .product-name .combo-container .combo-image-container  img {
   margin: 0 0 0 auto;
   max-width: 100%;
   max-height: 3.25rem;
@@ -566,7 +566,7 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next::befo
   }
   
   /* combo image  */
-  .hero-tour-detail.block .content .product .product-name .combo-container .combo-image-container > img {
+  .hero-tour-detail.block .content .product .product-name .combo-container .combo-image-container  img {
     max-width: 100%;
     max-height: 73px;
     margin: 0;

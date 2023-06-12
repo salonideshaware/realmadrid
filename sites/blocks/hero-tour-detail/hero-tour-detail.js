@@ -279,7 +279,6 @@ export default async function decorate(block) {
     const title = document.createRange().createContextualFragment(`
       <h1 class='combo-container'>
         <div class='combo-image-container'>
-          <img alt='${comboName}' src='${comboImage}'>
         </div>
         <p class='plus'>+</p>
         <div class='combo-title-container'>
@@ -290,6 +289,10 @@ export default async function decorate(block) {
         </div>
       </h1>
     `);
+
+    const picture = createOptimizedPicture(comboImage, comboName, true);
+    title.querySelector('.combo-image-container').append(picture);
+
     dom.querySelector('.product-name').append(title);
   }
 
