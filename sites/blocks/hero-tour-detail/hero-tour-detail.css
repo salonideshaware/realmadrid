@@ -165,7 +165,7 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block {
 .hero-tour-detail.block .content .product .product-name .combo-container .combo-title-container {
   padding: 0;
   width: calc(50% - 16px);
-  text-align: left;
+  text-align: end;
   box-sizing: border-box;
   position: relative;
 }
@@ -176,10 +176,10 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block {
   font-weight: 300;
   color: #0f3a64;
   line-height: 1;
-  text-align: left;
+  text-align: start;
 }
 
-body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .product-name .combo-container .combo-title-container .title .subtitle{
+.hero-tour-detail.block .content .product .product-name .combo-container .combo-title-container .title .subtitle{
   font-family: var(--body-font-family);
   font-size: 0.5rem;
   font-weight: normal;
@@ -188,7 +188,7 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .co
   line-height: 1;
   display: block;
   padding: 0;
-  text-align: left;
+  text-align: start; 
 }
 
 /* buy info (price description and buy button) */
