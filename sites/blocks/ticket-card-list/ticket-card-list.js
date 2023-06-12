@@ -43,6 +43,8 @@ export default async function decorate(block) {
     const ticketLabel = tour['Ticket Label'];
     const buttonText = tour['Button Text'];
     const comboImage = tour['Combo Image'];
+    const comboName = tour['Combo Name'];
+
     // recover the bullet list
     const ticketText = tour['Ticket Text'].split('\n').map((liContent) => `<li>${liContent.trim()}</li>`);
 
@@ -82,7 +84,7 @@ export default async function decorate(block) {
       // the ticket card DOM for sub categories
       const ticketCard = document.createRange().createContextualFragment(`
       <li>
-        ${comboImage ? `<img src='${comboImage}' class='sub-cat-image'><p class='plus'>+</p>` : ''}
+        ${comboImage ? `<img alt='${comboName}' src='${comboImage}' class='sub-cat-image'><p class='plus'>+</p>` : ''}
         <div class='ticket-type'>
           ${ticketLabel ? `<span class='label'>${ticketLabel}</span>` : ''}
           <div class='title'>${tourName.split('\n').map((line) => `${line.trim()}<br>`).join('')}</div>
@@ -109,7 +111,7 @@ export default async function decorate(block) {
       // the ticket card DOM for sub categories
       const ticketCard = document.createRange().createContextualFragment(`
       <li>
-        ${comboImage ? `<img src='${comboImage}' class='sub-cat-image'>` : ''}
+        ${comboImage ? `<img alt='${comboName}' src='${comboImage}' class='sub-cat-image'>` : ''}
         <a href='${buyLink}' class='buy-button' target='_blank' >${buttonText}</a>
         <a href='${detailPage}' class='info-link'>${moreInformation}</a>
       </li>

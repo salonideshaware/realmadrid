@@ -176,25 +176,26 @@ function readBlockConfigBySections(block) {
 
 export default async function decorate(block) {
   // find the tour info for this page
-  const tourInfo = window.tours.filter((tour) => tour['Detail Page'] === document.location.pathname);
+  const tourInfo = window.tours.filter((tour) => tour['Detail Page'] === 'xx'); //document.location.pathname);
 
-  // if no tours are found skip
-  if (tourInfo.length === 0) return;
+  // if no tours are found start empty
+  if (tourInfo.length === 0) tourInfo[0] = {};
 
   // extract tour info (non existing values are '')
   const {
-    Description,
-    Price,
-    Subtitle,
+    Description = 'Tour Description',
+    Price = '0.00',
+    Subtitle = 'Tour Subtitle',
   } = tourInfo[0];
   const oldPrice = tourInfo[0]['Old Price'];
-  const descriptionTitle = tourInfo[0]['Description Title'];
-  const tourName = tourInfo[0]['Tour Name'];
+  const descriptionTitle = tourInfo[0]['Description Title'] ?? 'Description Title';
+  const tourName = tourInfo[0]['Tour Name'] ?? 'Tour Title';
   const priceSubtitle = tourInfo[0]['Price Subtitle'];
   const buyLink = tourInfo[0]['Buy Link'];
   const ticketLabel = tourInfo[0]['Ticket Label'];
-  const buttonText = tourInfo[0]['Button Text'];
-  const comboImage = tourInfo[0]['Combo Image'];
+  const buttonText = tourInfo[0]['Button Text'] ?? 'Button Text';
+  const comboImage = tourInfo[0]['Combo Image'] ?? '';
+  const comboName = tourInfo[0]['Combo Name'] ?? '';
 
   // read config from block
   const cfg = readBlockConfigBySections(block);
@@ -202,11 +203,14 @@ export default async function decorate(block) {
   // breadcrumb title must be extracted from parent tour page navigation
   // as it differs from title set on the parent page itself
   const resp = await fetch(`${TOUR_LANGUAGE_HOME_PATH[getLanguage()]}/fragments/tour-navigation.plain.html`);
-  if (!resp.ok) return;
-  let parentURL = document.location.pathname;
-  parentURL = parentURL.substring(0, parentURL.lastIndexOf('/'));
-  const groupName = new DOMParser().parseFromString(await resp.text(), 'text/html')
-    .querySelector(`.navigation a[href='${parentURL}']`)?.innerText;
+  let groupName = 'Tour Group';
+  let parentURL = '/';
+  if (resp.ok) {
+    parentURL = document.location.pathname;
+    parentURL = parentURL.substring(0, parentURL.lastIndexOf('/'));
+    groupName = new DOMParser().parseFromString(await resp.text(), 'text/html')
+      .querySelector(`.navigation a[href='${parentURL}']`)?.innerText;
+  }
 
   // get placeholders (non-existing values are undefined)
   const placeholders = await fetchLanguagePlaceholders();
@@ -275,7 +279,7 @@ export default async function decorate(block) {
     const title = document.createRange().createContextualFragment(`
       <h1 class='combo-container'>
         <div class='combo-image-container'>
-          <img src='${comboImage}'>
+          <img alt='${comboName}' src='${comboImage}'>
         </div>
         <p class='plus'>+</p>
         <div class='combo-title-container'>
