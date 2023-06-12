@@ -176,7 +176,7 @@ function readBlockConfigBySections(block) {
 
 export default async function decorate(block) {
   // find the tour info for this page
-  const tourInfo = window.tours.filter((tour) => tour['Detail Page'] === 'xx'); //document.location.pathname);
+  const tourInfo = window.tours.filter((tour) => tour['Detail Page'] === document.location.pathname);
 
   // if no tours are found start empty
   if (tourInfo.length === 0) tourInfo[0] = {};
