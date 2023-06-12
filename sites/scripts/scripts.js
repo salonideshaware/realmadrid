@@ -16,7 +16,7 @@ import {
   fetchPlaceholders,
 } from './lib-franklin.js';
 
-const LCP_BLOCKS = ['hero-tour']; // add your LCP blocks to the list
+const LCP_BLOCKS = ['hero-tour', 'hero-tour-detail', 'tour-detail-template']; // add your LCP blocks to the list
 
 /**
  * Builds hero block and prepends to main in a new section.
