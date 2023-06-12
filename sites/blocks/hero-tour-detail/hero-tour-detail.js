@@ -17,7 +17,7 @@ function slideLeftOrRight(direction, slidesContainer, previous, next) {
     activeSlide.setAttribute('aria-selected', 'false');
     nextSlide.setAttribute('aria-selected', 'true');
     // do the transform
-    const transform = `transform: translate3d(-${slidesContainer.offsetWidth * slideNum}px, 0px, 0px); transition-duration: 300ms;`;
+    const transform = `transform: translate3d(${slidesContainer.offsetWidth * slideNum * (document.body.dir === 'rtl' ? 1 : -1)}px, 0px, 0px); transition-duration: 300ms;`;
     slidesContainer.style.cssText = transform;
     // update the button stati
     slideNum === 0 ? previous.classList.add('disabled') : previous.classList.remove('disabled');
@@ -71,7 +71,7 @@ function initCarousel(block) {
   // window resize event
   window.addEventListener('resize', () => {
     const slideNum = parseInt(slidesContainer.querySelector('[aria-selected="true"]').dataset.slide, 10);
-    const transform = `transform: translate3d(-${slidesContainer.offsetWidth * slideNum}px, 0px, 0px); transition-duration: 0ms;`;
+    const transform = `transform: translate3d(${slidesContainer.offsetWidth * slideNum * (document.body.dir === 'rtl' ? 1 : -1)}px, 0px, 0px); transition-duration: 0ms;`;
     slidesContainer.style.cssText = transform;
   });
 }

@@ -58,18 +58,13 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block {
   font-size: 1.0625rem;
   line-height: 1;
   font-weight: 400;
-  padding-right: 0.5rem;
+  padding-inline-start: 0;
+  padding-inline-end: 0.5rem;
   box-sizing: border-box;
   font-style: normal;
   font-variant: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* breadcrumb arabic */
-.hero-tour-detail.block .content .breadcrumb:lang(ar)::before {
-  padding-right: 0;
-  padding-left: 0.5rem;
 }
 
 /* product div (the card) */
@@ -210,10 +205,11 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .co
   flex: 0 1 auto;
 }
 
+
 .hero-tour-detail.block .content .product .buy-info .price > p {
   font-size: 0.9375rem;
   letter-spacing: -0.3px;
-  text-align: right;
+  text-align: end;
   margin: 0;
 }
 
@@ -262,6 +258,10 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .co
   transform: translateX(1.5625rem);
   text-transform: uppercase;
   text-decoration: none;
+}
+
+.hero-tour-detail.block .content .product .buy-info .button-buy > a:lang(ar){
+  transform: translateX(-1.5625rem);
 }
 
 /* product info description */
@@ -381,8 +381,9 @@ body.tour-detail .section.hero-tour-detail-container .carousel .slides .slide .t
   left: auto;
   right: 9.375rem;
   bottom: 5.25rem;
-  text-align: right;
-  margin-left: 20rem;
+  text-align: end;
+  margin-inline-start: 20rem;
+  margin-inline-end: 0;
   position: absolute;
   width: calc(100% - 2.5rem);
   font-family: var(--heading-font-family);
@@ -392,6 +393,12 @@ body.tour-detail .section.hero-tour-detail-container .carousel .slides .slide .t
   letter-spacing: -0.7px;
   color: var(--background-color);
   z-index: 2;
+}
+
+/* title of a slide (arabic) */ 
+body.tour-detail .section.hero-tour-detail-container .carousel .slides .slide .title:lang(ar) {
+  left: 9.375rem;
+  right: auto;
 }
 
 /* carousel arrows */ 
@@ -435,8 +442,20 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow.previous {
   transform: translateX(-2.8125rem);
 }
 
+body.tour-detail .section.hero-tour-detail-container .carousel .arrow.previous:lang(ar) {
+  transform: none;
+  left: 9.375rem;
+  right: auto;
+}
+
 body.tour-detail .section.hero-tour-detail-container .carousel .arrow.previous::before {
   content: '\e913';
+}
+
+body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next:lang(ar) {
+  transform: translateX(2.8125rem);
+  left: 9.375rem;
+  right: auto;
 }
 
 body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next::before {
@@ -493,11 +512,21 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next::befo
     border-top-right-radius: 0.3125rem;
     border-bottom-right-radius: 0.3125rem;
     letter-spacing: normal;
-    text-align: left;
+    text-align: start;
     box-sizing: border-box;
     padding: 0.5rem 1.75rem 0.5rem 2.5rem;
     position: static;
     transform: translateX(-1.25rem);
+  }
+
+  /*  the golden label (arabic) */
+  .hero-tour-detail.block .content .product .label:lang(ar) {
+    padding: 0.5rem 2.5rem 0.5rem 1.75rem;
+    border-top-left-radius: 0.3125rem;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0.3125rem;
+    border-bottom-right-radius: 0;
+    transform: translateX(1.25rem);
   }
 
   /* product name/subtitle container */
@@ -509,7 +538,7 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next::befo
   /* title h1 */
   .hero-tour-detail.block .content .product .product-name .title {
     font-size: 4.6875rem;
-    text-align: left;
+    text-align: start;
     color: var(--background-color);
   }
 
@@ -517,7 +546,7 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next::befo
   .hero-tour-detail.block .content .product .product-name .title .subtitle {
     line-height: 1;
     letter-spacing: 0.91px;
-    text-align: left;
+    text-align: start;
     color: rgba(255 255 255 / 80%);
     padding-top: .75rem;
   }
@@ -583,7 +612,7 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next::befo
   }
 
   .hero-tour-detail.block .content .product .buy-info .price p {
-    text-align: left;
+    text-align: start;
     font-size: 1.0625rem;
     color: var(--background-color);
   }
@@ -611,6 +640,10 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next::befo
     box-sizing: border-box;
   }
 
+  .hero-tour-detail.block .content .product .buy-info .button-buy > a:lang(ar){
+    transform: none;
+  }
+  
   /* product info description */
   .hero-tour-detail.block .content .product-info {
     padding: 0 0 0 0.625rem;
@@ -651,5 +684,11 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next::befo
     padding: 0.5rem 1.75rem 0.5rem calc((100vw - 75rem) / 2 + .625rem);
     box-sizing: border-box;
     transform: translate(calc(-1 * ((100vw - 75rem) / 2)), 0);
+  }
+
+  /*  the golden label (arabic) */
+  body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block .content .product .label:lang(ar) {
+    padding: 0.5rem calc((100vw - 75rem) / 2 + .625rem) 0.5rem 1.75rem;
+    transform: translate(calc(1 * ((100vw - 75rem) / 2)), 0);
   }
 }
