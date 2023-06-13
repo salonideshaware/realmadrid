@@ -242,7 +242,7 @@ export default async function decorate(block) {
       </div>
       <div class='product-info'>
         <div class='description-container'>
-          <h3 class='description-title'>${descriptionTitle}</h3>
+          <p class='description-title'>${descriptionTitle}</p>
           <p class='description'>${Description}</p>
         </div>
       </div>

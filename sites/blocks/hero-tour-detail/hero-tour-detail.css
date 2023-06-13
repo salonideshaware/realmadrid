@@ -261,7 +261,7 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block {
 }
 
 /* description title */
-.hero-tour-detail.block .content .product-info  .description-container > h3 {
+.hero-tour-detail.block .content .product-info  .description-container .description-title {
   font-family: var(--heading-font-family);
   font-size: 1.25rem;
   line-height: 1.5;
@@ -625,7 +625,7 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next:lang(
   }
 
   /* description title */
-  .hero-tour-detail.block .content .product-info  .description-container > h3 {
+  .hero-tour-detail.block .content .product-info  .description-container .description-title {
     font-family: var(--body-font-family);
     font-size: 0.95rem;
     font-weight: 700;
