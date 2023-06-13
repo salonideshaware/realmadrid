@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
+import { createOptimizedPicture, decorateIcons } from '../../scripts/lib-franklin.js';
 import {
   getLanguage, bindSwipeToElement, fetchLanguagePlaceholders, TOUR_LANGUAGE_HOME_PATH,
 } from '../../scripts/scripts.js';
@@ -38,6 +38,9 @@ function initCarousel(block) {
   previous.setAttribute('role', 'button');
   previous.setAttribute('aria-label', 'Previous Slide');
   previous.setAttribute('aria-disabled', 'true');
+  const iconPrev = document.createElement('span');
+  iconPrev.classList.add('icon', 'icon-arrow-right');
+  previous.append(iconPrev);
 
   const next = document.createElement('div');
   next.classList.add('arrow', 'next');
@@ -45,9 +48,13 @@ function initCarousel(block) {
   next.setAttribute('role', 'button');
   next.setAttribute('aria-label', 'Next Slide');
   next.setAttribute('aria-disabled', 'false');
+  const iconNext = document.createElement('span');
+  iconNext.classList.add('icon', 'icon-arrow-right');
+  next.append(iconNext);
 
   carousel.append(previous);
   carousel.append(next);
+  decorateIcons(carousel);
 
   // left and right swipe events
   bindSwipeToElement(block);
@@ -214,7 +221,7 @@ export default async function decorate(block) {
   // dom structure
   const dom = document.createRange().createContextualFragment(`
     <div class='content'>
-      <a href='${parentURL}'class='breadcrumb'>${groupName}</a>
+      <a href='${parentURL}'class='breadcrumb'><span class='icon icon-arrow-right'></span>${groupName}</a>
       <div class='product'>
         ${ticketLabel ? `<span class='label'><b>${ticketLabel}</b></span>` : ''}
         <div class='product-name'>
@@ -290,5 +297,6 @@ export default async function decorate(block) {
   }
 
   block.textContent = '';
+  decorateIcons(dom);
   block.append(dom);
 }

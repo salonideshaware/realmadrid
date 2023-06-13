@@ -51,20 +51,10 @@ body.tour-detail .section.hero-tour-detail-container .hero-tour-detail.block {
   border-radius: 0 1rem 1rem 0;
 }
 
-.hero-tour-detail.block .content .breadcrumb::before {
-  content: '\e913';
-  display: inline-block;
-  font-family: Real-Madrid-New-Icons, sans-serif;
-  font-size: 1.0625rem;
-  line-height: 1;
-  font-weight: 400;
-  padding-inline-start: 0;
-  padding-inline-end: 0.5rem;
-  box-sizing: border-box;
-  font-style: normal;
-  font-variant: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.hero-tour-detail.block .content .breadcrumb span.icon {
+  padding-inline-start: 0.5rem;
+  height: 18px;
+  transform: rotate(180deg);
 }
 
 /* product div (the card) */
@@ -415,21 +405,13 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow {
   transition: opacity 0.25s ease-in-out;
   position: absolute;
   z-index: 1;
+  cursor:pointer;
+  color: #000;
 }
 
-body.tour-detail .section.hero-tour-detail-container .carousel .arrow::before {
-  width: 1rem;
-  height: 1rem;
-  font-size: 1rem;
-  content: '\e914';
-  display: block;
-  font-family: Real-Madrid-New-Icons, sans-serif;
-  flex: 0 1 auto;
-  line-height: 1;
-  color: #000;
-  font-style: normal;
-  font-variant: normal;
-  cursor: pointer;
+/* rotate the icon */
+body.tour-detail .section.hero-tour-detail-container .carousel .arrow.previous span.icon-arrow-right {
+  transform: rotate(180deg);
 }
 
 body.tour-detail .section.hero-tour-detail-container .carousel .arrow.disabled {
@@ -448,18 +430,10 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow.previous:l
   right: auto;
 }
 
-body.tour-detail .section.hero-tour-detail-container .carousel .arrow.previous::before {
-  content: '\e913';
-}
-
 body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next:lang(ar) {
   transform: translateX(2.8125rem);
   left: 9.375rem;
   right: auto;
-}
-
-body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next::before {
-  content: '\e914';
 }
 
 /* the mobile background is overlayed with a dotted pattern */
@@ -652,7 +626,7 @@ body.tour-detail .section.hero-tour-detail-container .carousel .arrow.next::befo
 
   /* description title */
   .hero-tour-detail.block .content .product-info  .description-container > h3 {
-    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    font-family: var(--body-font-family);
     font-size: 0.95rem;
     font-weight: 700;
     font-style: normal;
