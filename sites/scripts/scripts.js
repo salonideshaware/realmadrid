@@ -16,7 +16,7 @@ import {
   fetchPlaceholders,
 } from './lib-franklin.js';
 
-const LCP_BLOCKS = ['hero-tour', 'hero-tour-detail', 'tour-detail-template']; // add your LCP blocks to the list
+const LCP_BLOCKS = ['hero-tour', 'hero-tour-detail']; // add your LCP blocks to the list
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -158,7 +158,7 @@ function buildFAQPage(main) {
  * @param {Element} main The main element
  */
 function buildTourDetailContent(main) {
-  main.parentElement.classList.add('tour');
+  main.parentElement.classList.add('tour', 'tour-detail');
   const contentWrappers = main.querySelectorAll(':scope > div');
   const mainContentDiv = [...contentWrappers].find((contentWrapper) => contentWrapper.firstElementChild.tagName !== 'DIV');
   if (mainContentDiv) {
@@ -182,7 +182,7 @@ function buildAutoBlocks(main) {
       if (template === 'area-vip') {
         buildHeroBlock(main);
       }
-      if (template === 'tour-detail') {
+      if (template === 'tour-detail' || template === 'tour-detail-template') {
         buildTourDetailContent(main);
       }
     }
@@ -213,8 +213,16 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   // eslint-disable-next-line no-use-before-define
   document.documentElement.lang = getLanguage();
+  const template = getMetadata('template');
+  let main = doc.querySelector('main');
+  if (template === 'tour-detail-template') {
+    const templateMain = await buildPageFromDetailTemplate(doc);
+    if (templateMain) {
+      doc.querySelector('body').replaceChild(templateMain, main);
+    }
+  }
+  main = doc.querySelector('main');
   decorateTemplateAndTheme();
-  const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
     document.body.classList.add('appear');
@@ -223,6 +231,33 @@ async function loadEager(doc) {
     }
     await waitForLCP(LCP_BLOCKS);
   }
+}
+
+async function buildPageFromDetailTemplate(document) {
+  const path = '/sites/tour-bernabeu/colegios/combinado-template';
+  const customText = `
+  <h2 id="entrada-escolar">Entrada escolar</h2>
+  <h2 id="combinada-tour">combinada Tour</h2>
+  <h2 id="bernabéu--faunia">Bernabéu + Faunia</h2>
+  <h3 id="tu-experiencia-en-el-tour-bernabéu-es-mejor-si-la-combinas-con-faunia">Tu experiencia en el Tour Bernabéu es mejor si la combinas con Faunia</h3>
+  <p>Disfruta de la oportunidad de combinar tu entrada para el Tour Bernabéu con Faunia y vive una experiencia inolvidable.</p>`;
+
+  if (path && path.startsWith('/')) {
+    const resp = await fetch(`${path}.plain.html`);
+    if (resp.ok) {
+      const main = document.createElement('main');
+      main.innerHTML = await resp.text();
+      const placeholder = main.querySelector('.custom-text');
+      const parentCustomText = placeholder ? placeholder.parentElement : '';
+      if (parentCustomText) {
+        parentCustomText.classList.add('main-content');
+        placeholder.insertAdjacentHTML('afterend', customText);
+        placeholder.remove();
+      }
+      return main;
+    }
+  }
+  return null;
 }
 
 /**
