@@ -360,7 +360,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
   filter: invert(24%) sepia(95%) saturate(4099%) hue-rotate(200deg) brightness(93%) contrast(101%);
   width: 13px;
   height: 13px;
-  display: inline-flex;
+  display: inline-block;
   text-decoration: none;
   border: solid 0.06rem #0067d1;
   border-radius: 50%;
@@ -821,6 +821,10 @@ body.tour .section.hero-tour-container .hero-tour.block {
   max-width: 100%;
   max-height: 3.25rem;
   display: block;
+}
+
+.hero-tour.block .ticket-card-list.hero.sub picture  {
+  max-height: 3.25rem;
 }
 
 /* the plus sign */

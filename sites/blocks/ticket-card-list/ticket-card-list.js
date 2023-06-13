@@ -1,3 +1,4 @@
+import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
 import { fetchLanguagePlaceholders } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
@@ -84,7 +85,6 @@ export default async function decorate(block) {
       // the ticket card DOM for sub categories
       const ticketCard = document.createRange().createContextualFragment(`
       <li>
-        ${comboImage ? `<img alt='${comboName}' src='${comboImage}' class='sub-cat-image'><p class='plus'>+</p>` : ''}
         <div class='ticket-type'>
           ${ticketLabel ? `<span class='label'>${ticketLabel}</span>` : ''}
           <div class='title'>${tourName.split('\n').map((line) => `${line.trim()}<br>`).join('')}</div>
@@ -103,6 +103,19 @@ export default async function decorate(block) {
       </li>
       `);
 
+      // add optimized version for combo image
+      if (comboImage) {
+        // the + character
+        const plus = document.createElement('p');
+        plus.classList.add('plus');
+        plus.innerText = '+';
+        ticketCard.firstElementChild.prepend(plus);
+        // the optimized combo image
+        const picture = createOptimizedPicture(comboImage, comboName, false, [{ width: '300' }]);
+        ticketCard.firstElementChild.prepend(picture);
+        picture.querySelector('img').classList.add('sub-cat-image');
+      }
+
       ul.append(ticketCard);
     }
 
@@ -111,16 +124,21 @@ export default async function decorate(block) {
       // the ticket card DOM for sub categories
       const ticketCard = document.createRange().createContextualFragment(`
       <li>
-        ${comboImage ? `<img alt='${comboName}' src='${comboImage}' class='sub-cat-image'>` : ''}
         <a href='${buyLink}' class='buy-button' target='_blank' >${buttonText}</a>
         <a href='${detailPage}' class='info-link'>${moreInformation}</a>
       </li>
       `);
 
+      // add optimized version for combo image
+      if (comboImage) {
+        const picture = createOptimizedPicture(comboImage, comboName, false, [{ width: '300' }]);
+        ticketCard.firstElementChild.prepend(picture);
+        picture.querySelector('img').classList.add('sub-cat-image');
+      }
       ul.append(ticketCard);
     }
 
-    // the default ticket card DOM for main category ticketsses);
+    // the default ticket card DOM for main category tickets);
     if ((classes.contains('related') || classes.contains('hero')) && !classes.contains('sub')) {
       const ticketCard = document.createRange().createContextualFragment(`
       <li>

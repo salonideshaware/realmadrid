@@ -108,7 +108,7 @@ function buildCarousel(cfg) {
       video.append(source);
       slide.append(video);
     } else {
-      const image = createOptimizedPicture(entry[2], entry[0], eager);
+      const image = createOptimizedPicture(entry[2], entry[0], eager, [{ width: '2000' }]);
       slide.append(image);
     }
 
@@ -252,7 +252,7 @@ export default async function decorate(block) {
   `);
 
   // add the optimized background image
-  const backgroundImage = createOptimizedPicture(cfg.mobile.image, cfg.mobile.title, true);
+  const backgroundImage = createOptimizedPicture(cfg.mobile.image, cfg.mobile.title, true, [{ width: '960' }]);
   dom.querySelector('.background').append(backgroundImage);
 
   // build carousel dom
