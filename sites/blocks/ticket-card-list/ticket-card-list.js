@@ -1,12 +1,12 @@
 import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
-import { fetchLanguagePlaceholders } from '../../scripts/scripts.js';
+import { fetchLanguagePlaceholders, fetchTours } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   // get tour category
   const tourCategory = block.children[0].children[0].textContent.trim().toLowerCase();
 
   // get the tours for the selected category
-  const selectedTours = window.tours.filter((tour) => {
+  const selectedTours = (await fetchTours()).filter((tour) => {
     // get list of assigned categories for a tour
     const categories = tour.Categories.split(',').map((categoryEntry) => categoryEntry.trim());
     // check if category matches and we are not on tour page itself

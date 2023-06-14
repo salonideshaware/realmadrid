@@ -16,7 +16,7 @@ import {
   fetchPlaceholders,
 } from './lib-franklin.js';
 
-const LCP_BLOCKS = ['hero-tour']; // add your LCP blocks to the list
+const LCP_BLOCKS = ['hero-tour', 'hero-tour-detail']; // add your LCP blocks to the list
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -207,6 +207,37 @@ export function decorateMain(main) {
 }
 
 /**
+ * loads the list of available tours from a spreadsheet
+ */
+export async function fetchTours() {
+  // if on a tours template
+  if (toClassName(getMetadata('template')).startsWith('tour')) {
+    // return list of tours if already loaded
+    if (window.tours?.data) {
+      return window.tours.data;
+    }
+
+    // make sure global storage location exists
+    window.tours = window.tours || {};
+
+    // define promise function
+    const loadTours = async () => {
+      const resp = await fetch(`${TOUR_LANGUAGE_HOME_PATH[getLanguage()]}/tours.json`);
+      window.tours.data = (await resp.json()).data;
+      return window.tours.data;
+    };
+
+    // start download
+    if (!window.tours.promise) {
+      // create promise
+      window.tours.promise = loadTours();
+    }
+    return window.tours.promise;
+  }
+  return null;
+}
+
+/**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
@@ -214,6 +245,7 @@ async function loadEager(doc) {
   // eslint-disable-next-line no-use-before-define
   document.documentElement.lang = getLanguage();
   decorateTemplateAndTheme();
+  fetchTours();
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
@@ -385,15 +417,6 @@ async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
-}
-
-// if on a tours template
-if (toClassName(getMetadata('template')).startsWith('tour')) {
-  // load list of tours
-  const resp = await fetch(`${TOUR_LANGUAGE_HOME_PATH[getLanguage()]}/tours.json`);
-  if (resp.ok) {
-    window.tours = (await resp.json()).data;
-  }
 }
 
 loadPage();

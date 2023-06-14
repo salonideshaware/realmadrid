@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import { createOptimizedPicture, decorateIcons } from '../../scripts/lib-franklin.js';
 import {
-  getLanguage, bindSwipeToElement, fetchLanguagePlaceholders, TOUR_LANGUAGE_HOME_PATH,
+  getLanguage, bindSwipeToElement, fetchLanguagePlaceholders, TOUR_LANGUAGE_HOME_PATH, fetchTours,
 } from '../../scripts/scripts.js';
 
 // translate to the next/previous slide
@@ -176,7 +176,7 @@ function readBlockConfigBySections(block) {
 
 export default async function decorate(block) {
   // find the tour info for this page
-  const tourInfo = window.tours.filter((tour) => tour['Detail Page'] === document.location.pathname);
+  const tourInfo = (await fetchTours()).filter((tour) => tour['Detail Page'] === document.location.pathname);
 
   // if no tours are found start empty
   if (tourInfo.length === 0) tourInfo[0] = {};
