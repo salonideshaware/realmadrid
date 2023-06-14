@@ -98,18 +98,6 @@ body.tour .section.hero-tour-container .hero-tour.block {
   vertical-align: top;
 }
 
-/* the icon on the left */
-.hero-tour.block .content .navcontainer nav a::before {
-  content: var(--nav-icon);
-  width: 30px;
-  display: inline-block;
-  filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(203deg) brightness(120%) contrast(112%);
-}
-
-.hero-tour.block .content .navcontainer nav a.selected::before {
-  filter: invert(0%) sepia(91%) saturate(7500%) hue-rotate(349deg) brightness(104%) contrast(96%);
-}
-
 /* when we are on the page itself */
 .hero-tour.block .content .navcontainer nav a.selected {
   color: black;
@@ -118,17 +106,18 @@ body.tour .section.hero-tour-container .hero-tour.block {
   background-color: var(--background-color);
 }
 
-/* icon on the right for external links */
-.hero-tour.block .content .navcontainer nav a::after {
-  content: var(--external-icon);
-  display: inline-block;
-  width: 10px;
-  padding-left: 7px;
-  filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(203deg) brightness(120%) contrast(112%);
+/* the icon on the left */
+.hero-tour.block .content .navcontainer nav a span.icon {
+  width: 26px;
+  height: 26px;
 }
 
-.hero-tour.block .content .navcontainer nav a.selected::after {
-  filter: invert(0%) sepia(91%) saturate(7500%) hue-rotate(349deg) brightness(104%) contrast(96%);
+
+/* icon on the right for external links */
+.hero-tour.block .content .navcontainer nav span.icon.icon-open-link {
+  margin-left: 0.5rem;
+  width: 0.8rem;
+  height: 0.8rem;
 }
 
 /* promo text */
@@ -360,7 +349,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
   filter: invert(24%) sepia(95%) saturate(4099%) hue-rotate(200deg) brightness(93%) contrast(101%);
   width: 13px;
   height: 13px;
-  display: inline-flex;
+  display: inline-block;
   text-decoration: none;
   border: solid 0.06rem #0067d1;
   border-radius: 50%;
@@ -807,7 +796,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
   text-align: center;
   box-sizing: border-box;
   padding: 1.5625rem 1.25rem;
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-family: var(--body-font-family);
   font-size: 1rem;
   line-height: 1;
   background : var(--background-color);
@@ -821,6 +810,10 @@ body.tour .section.hero-tour-container .hero-tour.block {
   max-width: 100%;
   max-height: 3.25rem;
   display: block;
+}
+
+.hero-tour.block .ticket-card-list.hero.sub picture  {
+  max-height: 3.25rem;
 }
 
 /* the plus sign */

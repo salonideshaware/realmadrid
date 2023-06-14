@@ -422,12 +422,16 @@ main .section.related-tours-container .related-tours-wrapper {
 }
 
 /* the sub category image */
-.related-tours.block .ticket-card-list.related.sub .sub-cat-image {
+.related-tours.block .ticket-card-list.related.sub picture {
   width: auto;
   max-width: 100%;
   display: block;
   max-height: 52px;
   margin: 0 auto 35px;
+}
+
+.related-tours.block .ticket-card-list.related.sub .sub-cat-image {
+  max-height: 52px;
 }
 
 /* the buy button */

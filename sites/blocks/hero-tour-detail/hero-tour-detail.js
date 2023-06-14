@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
-import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
+import { createOptimizedPicture, decorateIcons } from '../../scripts/lib-franklin.js';
 import {
-  getLanguage, bindSwipeToElement, fetchLanguagePlaceholders, TOUR_LANGUAGE_HOME_PATH,
+  getLanguage, bindSwipeToElement, fetchLanguagePlaceholders, TOUR_LANGUAGE_HOME_PATH, fetchTours,
 } from '../../scripts/scripts.js';
 
 // translate to the next/previous slide
@@ -17,7 +17,7 @@ function slideLeftOrRight(direction, slidesContainer, previous, next) {
     activeSlide.setAttribute('aria-selected', 'false');
     nextSlide.setAttribute('aria-selected', 'true');
     // do the transform
-    const transform = `transform: translate3d(-${slidesContainer.offsetWidth * slideNum}px, 0px, 0px); transition-duration: 300ms;`;
+    const transform = `transform: translate3d(${slideNum * (document.body.dir === 'rtl' ? 100 : -100)}%, 0px, 0px); transition-duration: 300ms;`;
     slidesContainer.style.cssText = transform;
     // update the button stati
     slideNum === 0 ? previous.classList.add('disabled') : previous.classList.remove('disabled');
@@ -38,6 +38,9 @@ function initCarousel(block) {
   previous.setAttribute('role', 'button');
   previous.setAttribute('aria-label', 'Previous Slide');
   previous.setAttribute('aria-disabled', 'true');
+  const iconPrev = document.createElement('span');
+  iconPrev.classList.add('icon', 'icon-arrow-right');
+  previous.append(iconPrev);
 
   const next = document.createElement('div');
   next.classList.add('arrow', 'next');
@@ -45,9 +48,13 @@ function initCarousel(block) {
   next.setAttribute('role', 'button');
   next.setAttribute('aria-label', 'Next Slide');
   next.setAttribute('aria-disabled', 'false');
+  const iconNext = document.createElement('span');
+  iconNext.classList.add('icon', 'icon-arrow-right');
+  next.append(iconNext);
 
   carousel.append(previous);
   carousel.append(next);
+  decorateIcons(carousel);
 
   // left and right swipe events
   bindSwipeToElement(block);
@@ -66,13 +73,6 @@ function initCarousel(block) {
 
   carousel.querySelector('.arrow.next').addEventListener('click', () => {
     slideLeftOrRight('right', slidesContainer, previous, next);
-  });
-
-  // window resize event
-  window.addEventListener('resize', () => {
-    const slideNum = parseInt(slidesContainer.querySelector('[aria-selected="true"]').dataset.slide, 10);
-    const transform = `transform: translate3d(-${slidesContainer.offsetWidth * slideNum}px, 0px, 0px); transition-duration: 0ms;`;
-    slidesContainer.style.cssText = transform;
   });
 }
 
@@ -98,17 +98,17 @@ function buildCarousel(cfg) {
     // add video or image
     if (entry[1] === 'video') {
       const video = document.createElement('video');
-      video.setAttribute('autoplay', '');
-      video.setAttribute('muted', '');
-      video.setAttribute('loop', '');
-      video.setAttribute('playsinline', '');
+      video.muted = true;
+      video.toggleAttribute('autoplay', true);
+      video.toggleAttribute('loop', true);
+      video.toggleAttribute('playsinline', true);
       const source = document.createElement('source');
       source.setAttribute('src', entry[2]);
       source.setAttribute('type', 'video/mp4');
       video.append(source);
       slide.append(video);
     } else {
-      const image = createOptimizedPicture(entry[2], entry[0], eager);
+      const image = createOptimizedPicture(entry[2], entry[0], eager, [{ width: '2000' }]);
       slide.append(image);
     }
 
@@ -175,42 +175,42 @@ function readBlockConfigBySections(block) {
 }
 
 export default async function decorate(block) {
-  // get list of tours
-  let resp = await fetch(`${TOUR_LANGUAGE_HOME_PATH[getLanguage()]}/tours.json`);
-  if (!resp.ok) return;
-
   // find the tour info for this page
-  const tourInfo = (await resp.json()).data.filter((tour) => tour['Detail Page'] === document.location.pathname);
+  const tourInfo = (await fetchTours()).filter((tour) => tour['Detail Page'] === document.location.pathname);
 
-  // if no tours are found skip
-  if (tourInfo.length === 0) return;
+  // if no tours are found start empty
+  if (tourInfo.length === 0) tourInfo[0] = {};
 
-  // extract tour info (non existing values are '')
+  // extract tour info (non existing values are '', except when no tour was found => undefined)
   const {
-    Description,
-    Price,
-    Subtitle,
+    Description = 'Tour Description',
+    Price = '0.00',
+    Subtitle = 'Tour Subtitle',
   } = tourInfo[0];
   const oldPrice = tourInfo[0]['Old Price'];
-  const descriptionTitle = tourInfo[0]['Description Title'];
-  const tourName = tourInfo[0]['Tour Name'];
+  const descriptionTitle = tourInfo[0]['Description Title'] ?? 'Description Title';
+  const tourName = tourInfo[0]['Tour Name'] ?? 'Tour Title';
   const priceSubtitle = tourInfo[0]['Price Subtitle'];
   const buyLink = tourInfo[0]['Buy Link'];
   const ticketLabel = tourInfo[0]['Ticket Label'];
-  const buttonText = tourInfo[0]['Button Text'];
-  const comboImage = tourInfo[0]['Combo Image'];
+  const buttonText = tourInfo[0]['Button Text'] ?? 'Button Text';
+  const comboImage = tourInfo[0]['Combo Image'] ?? '';
+  const comboName = tourInfo[0]['Combo Name'] ?? '';
 
   // read config from block
   const cfg = readBlockConfigBySections(block);
 
   // breadcrumb title must be extracted from parent tour page navigation
   // as it differs from title set on the parent page itself
-  resp = await fetch(`${TOUR_LANGUAGE_HOME_PATH[getLanguage()]}/fragments/tour-navigation.plain.html`);
-  if (!resp.ok) return;
-  let parentURL = document.location.pathname;
-  parentURL = parentURL.substring(0, parentURL.lastIndexOf('/'));
-  const groupName = new DOMParser().parseFromString(await resp.text(), 'text/html')
-    .querySelector(`.navigation a[href='${parentURL}']`)?.innerText;
+  const resp = await fetch(`${TOUR_LANGUAGE_HOME_PATH[getLanguage()]}/fragments/tour-navigation.plain.html`);
+  let groupName = 'Tour Group';
+  let parentURL = '/';
+  if (resp.ok) {
+    parentURL = document.location.pathname;
+    parentURL = parentURL.substring(0, parentURL.lastIndexOf('/'));
+    groupName = new DOMParser().parseFromString(await resp.text(), 'text/html')
+      .querySelector(`.navigation a[href='${parentURL}']`)?.innerText;
+  }
 
   // get placeholders (non-existing values are undefined)
   const placeholders = await fetchLanguagePlaceholders();
@@ -221,7 +221,7 @@ export default async function decorate(block) {
   // dom structure
   const dom = document.createRange().createContextualFragment(`
     <div class='content'>
-      <a href='${parentURL}'class='breadcrumb'>${groupName}</a>
+      <a href='${parentURL}'class='breadcrumb'><span class='icon icon-arrow-right'></span>${groupName}</a>
       <div class='product'>
         ${ticketLabel ? `<span class='label'><b>${ticketLabel}</b></span>` : ''}
         <div class='product-name'>
@@ -242,7 +242,7 @@ export default async function decorate(block) {
       </div>
       <div class='product-info'>
         <div class='description-container'>
-          <h3 class='description-title'>${descriptionTitle}</h3>
+          <p class='description-title'>${descriptionTitle}</p>
           <p class='description'>${Description}</p>
         </div>
       </div>
@@ -252,7 +252,7 @@ export default async function decorate(block) {
   `);
 
   // add the optimized background image
-  const backgroundImage = createOptimizedPicture(cfg.mobile.image, cfg.mobile.title, true);
+  const backgroundImage = createOptimizedPicture(cfg.mobile.image, cfg.mobile.title, true, [{ width: '960' }]);
   dom.querySelector('.background').append(backgroundImage);
 
   // build carousel dom
@@ -279,7 +279,6 @@ export default async function decorate(block) {
     const title = document.createRange().createContextualFragment(`
       <h1 class='combo-container'>
         <div class='combo-image-container'>
-          <img src='${comboImage}'>
         </div>
         <p class='plus'>+</p>
         <div class='combo-title-container'>
@@ -290,9 +289,14 @@ export default async function decorate(block) {
         </div>
       </h1>
     `);
+
+    const picture = createOptimizedPicture(comboImage, comboName, true);
+    title.querySelector('.combo-image-container').append(picture);
+
     dom.querySelector('.product-name').append(title);
   }
 
   block.textContent = '';
+  decorateIcons(dom);
   block.append(dom);
 }

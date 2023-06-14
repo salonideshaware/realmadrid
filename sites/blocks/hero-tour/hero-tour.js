@@ -1,4 +1,4 @@
-import { readBlockConfig, loadBlock } from '../../scripts/lib-franklin.js';
+import { readBlockConfig, loadBlock, decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
   // get config entries
@@ -51,22 +51,30 @@ export default async function decorate(block) {
       const navElem = document.createElement('nav');
       divNavContainer.append(navElem);
       contentWrapper.append(divNavContainer);
+
       // get the navigation table from the fragment
       const navEntries = document.createRange().createContextualFragment(await resp.text()).querySelector('.navigation');
       // add entries
       [...navEntries.children].forEach((navEntry) => {
+        // link
         const a = navEntry.children[1].children[0];
-        a.style.setProperty('--nav-icon', `url('${window.hlx.codeBasePath}/icons/${navEntry.children[0].textContent.trim()}.svg')`);
         const href = a.getAttribute('href');
+
         // if its the current page
         if (href.endsWith(document.location.pathname)) {
           a.classList.add('selected');
         }
-        // if its an external link
-        if (href.indexOf('www.realmadrid.') === -1) {
-          a.style.setProperty('--external-icon', `url('${window.hlx.codeBasePath}/icons/open-link.svg')`);
+        // if its an external link, append external icon
+        if (href.startsWith('http')) {
+          const extIcon = document.createElement('span');
+          extIcon.classList.add('icon', 'icon-open-link');
+          a.append(extIcon);
         }
+
+        // prepend svg icon
+        a.prepend(navEntry.children[0].children[0]);
         navElem.append(a);
+        decorateIcons(navElem);
       });
     }
   }

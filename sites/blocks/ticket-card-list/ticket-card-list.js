@@ -1,15 +1,12 @@
-import { getLanguage, TOUR_LANGUAGE_HOME_PATH, fetchLanguagePlaceholders } from '../../scripts/scripts.js';
+import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
+import { fetchLanguagePlaceholders, fetchTours } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   // get tour category
   const tourCategory = block.children[0].children[0].textContent.trim().toLowerCase();
 
-  // load list of tours
-  const resp = await fetch(`${TOUR_LANGUAGE_HOME_PATH[getLanguage()]}/tours.json`);
-  if (!resp.ok) return;
-
   // get the tours for the selected category
-  const selectedTours = (await resp.json()).data.filter((tour) => {
+  const selectedTours = (await fetchTours()).filter((tour) => {
     // get list of assigned categories for a tour
     const categories = tour.Categories.split(',').map((categoryEntry) => categoryEntry.trim());
     // check if category matches and we are not on tour page itself
@@ -47,6 +44,8 @@ export default async function decorate(block) {
     const ticketLabel = tour['Ticket Label'];
     const buttonText = tour['Button Text'];
     const comboImage = tour['Combo Image'];
+    const comboName = tour['Combo Name'];
+
     // recover the bullet list
     const ticketText = tour['Ticket Text'].split('\n').map((liContent) => `<li>${liContent.trim()}</li>`);
 
@@ -86,7 +85,6 @@ export default async function decorate(block) {
       // the ticket card DOM for sub categories
       const ticketCard = document.createRange().createContextualFragment(`
       <li>
-        ${comboImage ? `<img src='${comboImage}' class='sub-cat-image'><p class='plus'>+</p>` : ''}
         <div class='ticket-type'>
           ${ticketLabel ? `<span class='label'>${ticketLabel}</span>` : ''}
           <div class='title'>${tourName.split('\n').map((line) => `${line.trim()}<br>`).join('')}</div>
@@ -105,6 +103,19 @@ export default async function decorate(block) {
       </li>
       `);
 
+      // add optimized version for combo image
+      if (comboImage) {
+        // the + character
+        const plus = document.createElement('p');
+        plus.classList.add('plus');
+        plus.innerText = '+';
+        ticketCard.firstElementChild.prepend(plus);
+        // the optimized combo image
+        const picture = createOptimizedPicture(comboImage, comboName, false, [{ width: '300' }]);
+        ticketCard.firstElementChild.prepend(picture);
+        picture.querySelector('img').classList.add('sub-cat-image');
+      }
+
       ul.append(ticketCard);
     }
 
@@ -113,16 +124,21 @@ export default async function decorate(block) {
       // the ticket card DOM for sub categories
       const ticketCard = document.createRange().createContextualFragment(`
       <li>
-        ${comboImage ? `<img src='${comboImage}' class='sub-cat-image'>` : ''}
         <a href='${buyLink}' class='buy-button' target='_blank' >${buttonText}</a>
         <a href='${detailPage}' class='info-link'>${moreInformation}</a>
       </li>
       `);
 
+      // add optimized version for combo image
+      if (comboImage) {
+        const picture = createOptimizedPicture(comboImage, comboName, false, [{ width: '300' }]);
+        ticketCard.firstElementChild.prepend(picture);
+        picture.querySelector('img').classList.add('sub-cat-image');
+      }
       ul.append(ticketCard);
     }
 
-    // the default ticket card DOM for main category ticketsses);
+    // the default ticket card DOM for main category tickets);
     if ((classes.contains('related') || classes.contains('hero')) && !classes.contains('sub')) {
       const ticketCard = document.createRange().createContextualFragment(`
       <li>
