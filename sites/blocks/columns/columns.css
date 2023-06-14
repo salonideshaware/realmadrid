@@ -229,7 +229,7 @@ body.tour main p.answer {
 
 .question.close::before {
   content: '+';
-  line-height: 1.1;
+  line-height: 1;
 }
 
 @media screen and (min-width: 600px) {
@@ -251,6 +251,12 @@ body.tour main p.answer {
     max-width: 100%;
     overflow-x: auto;
     white-space: nowrap;
+    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer */
+  }
+
+  .swiper-container.tour-faq-tabs::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
   }
 
   .swiper-container.tour-faq-tabs .swiper-slide {

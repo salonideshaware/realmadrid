@@ -1,4 +1,5 @@
 import { loadCSS } from '../../scripts/lib-franklin.js';
+import { bindSwipeToElementWithForce } from '../../scripts/scripts.js';
 
 function decorateOrganizeVisit(el) {
   loadCSS(`${window.hlx.codeBasePath}/blocks/columns/organize-visit.css`);
@@ -42,6 +43,25 @@ function decorateFullColumns(el) {
   }
 }
 
+// make the swipe smooth
+function smoothScrollToSlide(tabsWrapper, tabs, targetIndex) {
+  const startPos = tabsWrapper.scrollLeft;
+  const targetPos = tabs[targetIndex].offsetLeft;
+  const change = targetPos - startPos;
+
+  let startTime = null;
+  function step(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const elapsed = timestamp - startTime;
+    const t = Math.min(1, elapsed / 500);
+    tabsWrapper.scrollLeft = startPos + t * change;
+    if (t < 1) {
+      requestAnimationFrame(step);
+    }
+  }
+  requestAnimationFrame(step);
+}
+
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
@@ -71,6 +91,7 @@ export default function decorate(block) {
 
     const tourFaqTabs = block.querySelectorAll('.columns > div');
 
+    const tabs = []; // Array to store all the slide elements
     tourFaqTabs.forEach((tab, index) => {
       const tabTitleFirst = tab.firstElementChild;
       if (tabTitleFirst) {
@@ -79,6 +100,7 @@ export default function decorate(block) {
         newTab.classList.add('swiper-slide');
         tabsWrapper.appendChild(newTab);
         tabTitleFirst.remove();
+        tabs.push(newTab); // Add the new slide to the array
 
         newTab.addEventListener('click', (event) => {
           event.stopPropagation();
@@ -96,6 +118,23 @@ export default function decorate(block) {
       }
       // Remove the content panel from the block element before appending it to the content wrapper
       block.removeChild(tab);
+    });
+
+    // swipe events initialization for tabs using bindSwipeToElement
+    let targetIndex = 0;
+    const swipeThreshold = 100;
+    bindSwipeToElementWithForce(tabsWrapper);
+    tabsWrapper.addEventListener('swipe-RTL', (e) => {
+      if (e.detail.force > swipeThreshold && targetIndex < tabs.length - 1) {
+        targetIndex += 1;
+        smoothScrollToSlide(tabsWrapper, tabs, targetIndex);
+      }
+    });
+    tabsWrapper.addEventListener('swipe-LTR', (e) => {
+      if (e.detail.force > swipeThreshold && targetIndex > 0) {
+        targetIndex -= 1;
+        smoothScrollToSlide(tabsWrapper, tabs, targetIndex);
+      }
     });
 
     // Move the content panels into the new content wrapper div
@@ -117,8 +156,12 @@ export default function decorate(block) {
         const para = question.parentElement;
         para.classList.add('question');
         question.classList.add('question');
-        const answer = question.parentElement.nextElementSibling;
-        answer.classList.add('answer');
+        // Making sure that answers with many paragraphs get also the class answer
+        let answer = para.nextElementSibling;
+        while (answer && !answer.querySelector('strong')) {
+          answer.classList.add('answer');
+          answer = answer.nextElementSibling;
+        }
         if (window.innerWidth <= 768) {
           question.addEventListener('click', (event) => {
             event.stopImmediatePropagation();
@@ -128,31 +171,49 @@ export default function decorate(block) {
               if (otherQuestion !== question) {
                 otherQuestion.classList.remove('open');
                 otherQuestion.classList.add('close');
-                otherQuestion.parentElement.nextElementSibling.classList.remove('open');
-                otherQuestion.parentElement.nextElementSibling.classList.add('close');
+                // Now we're closing every non-question paragraph that follows the clicked question
+                answer = otherQuestion.parentElement.nextElementSibling;
+                while (answer && !answer.querySelector('strong')) {
+                  answer.classList.remove('open');
+                  answer.classList.add('close');
+                  answer = answer.nextElementSibling;
+                }
               }
             });
 
             const isOpen = question.classList.contains('open');
-            if (isOpen) {
-              question.classList.remove('open');
-              question.classList.add('close');
-              answer.classList.remove('open');
-              answer.classList.add('close');
-            } else {
-              question.classList.remove('close');
-              question.classList.add('open');
-              answer.classList.remove('close');
-              answer.classList.add('open');
+            // We open or close the following non-question paragraphs
+            answer = para.nextElementSibling;
+            while (answer && !answer.querySelector('strong')) {
+              if (isOpen) {
+                question.classList.remove('open');
+                question.classList.add('close');
+                answer.classList.remove('open');
+                answer.classList.add('close');
+              } else {
+                question.classList.remove('close');
+                question.classList.add('open');
+                answer.classList.remove('close');
+                answer.classList.add('open');
+              }
+              answer = answer.nextElementSibling;
             }
           });
           // Display the first question's answer by default
           if (questionIndex === 0) {
             question.classList.add('open');
-            answer.classList.add('open');
+            // Mark the first answer paragraph as 'open' right at the beginning
+            const firstAnswer = para.nextElementSibling;
+            if (firstAnswer) firstAnswer.classList.add('open');
+            // New modification ends here
           } else {
             question.classList.add('close');
-            answer.classList.add('close');
+            // Mark all non-question paragraphs as 'close' right at the beginning
+            answer = para.nextElementSibling;
+            while (answer && !answer.querySelector('strong')) {
+              answer.classList.add('close');
+              answer = answer.nextElementSibling;
+            }
           }
         }
       });
