@@ -1,5 +1,5 @@
 import { createOptimizedPicture, getMetadata } from '../../scripts/lib-franklin.js';
-import { getLanguage } from '../../scripts/scripts.js';
+import { getLanguage, bindSwipeToElement } from '../../scripts/scripts.js';
 
 function createButtons(isRTL) {
   const divButtons = document.createElement('div');
@@ -100,6 +100,22 @@ export default function decorate(block) {
     showHideButtons(currentPic, maxShift, prevButton, nextButton, isRTL);
   });
 
+  bindSwipeToElement(block);
+  block.addEventListener('swipe-RTL', () => {
+    window.clearInterval(carouselInterval);
+    if (currentPic < maxShift) {
+      currentPic += 1;
+      showPic(currentPic, picWidth, carouselPicContainer);
+    }
+  });
+  block.addEventListener('swipe-LTR', () => {
+    window.clearInterval(carouselInterval);
+    if (currentPic >= 1) {
+      currentPic -= 1;
+      showPic(currentPic, picWidth, carouselPicContainer);
+    }
+  });
+
   // Add listeners on images to be pupup showed in a bigger size after click
   // Get all elements with class 'pic-container'
   const photos = document.getElementsByClassName('pic-container');
@@ -107,6 +123,7 @@ export default function decorate(block) {
   // Loop over all the photo elements
   Array.from(photos).forEach((photo) => {
     // Add click event listener to each photo
+    // eslint-disable-next-line func-names
     photo.addEventListener('click', function () {
       // Create main wrap div and add classes and attributes to it
       const wrapDiv = document.createElement('div');

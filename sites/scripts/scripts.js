@@ -153,6 +153,20 @@ function buildFAQPage(main) {
 }
 
 /**
+ * Decorates the main content container to match tour detail page styling.
+ * the main content container is the first div which starts with text and not another blocks (div).
+ * @param {Element} main The main element
+ */
+function buildTourDetailContent(main) {
+  main.parentElement.classList.add('tour');
+  const contentWrappers = main.querySelectorAll(':scope > div');
+  const mainContentDiv = [...contentWrappers].find((contentWrapper) => contentWrapper.firstElementChild.tagName !== 'DIV');
+  if (mainContentDiv) {
+    mainContentDiv.classList.add('main-content');
+  }
+}
+
+/**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
@@ -167,6 +181,9 @@ function buildAutoBlocks(main) {
       }
       if (template === 'area-vip') {
         buildHeroBlock(main);
+      }
+      if (template === 'tour-detail') {
+        buildTourDetailContent(main);
       }
     }
   } catch (error) {
@@ -261,7 +278,7 @@ function loadDelayed() {
 }
 
 const VIP_AREA_INDEX = '/query-index.json';
-const LANG_LOCALE = {
+export const LANG_LOCALE = {
   es: 'es-ES',
   en: 'en-US',
   de: 'de-DE',
@@ -327,10 +344,10 @@ export function wrapMergeBlocksSection(mergeBlockSection) {
 }
 
 /**
-   * Loads a fragment.
-   * @param {string} path The path to the fragment
-   * @returns {HTMLElement} The root element of the fragment
-   */
+ * Loads a fragment.
+ * @param {string} path The path to the fragment
+ * @returns {HTMLElement} The root element of the fragment
+ */
 export async function loadFragment(path) {
   if (path && path.startsWith('/')) {
     const resp = await fetch(`${path}.plain.html`);
@@ -351,7 +368,7 @@ export function bindSwipeToElement(el) {
 
   el.addEventListener('touchstart', (e) => {
     touchstartX = e.changedTouches[0].screenX;
-  });
+  }, { passive: true });
 
   el.addEventListener('touchend', (e) => {
     touchendX = e.changedTouches[0].screenX;
@@ -361,7 +378,7 @@ export function bindSwipeToElement(el) {
     if (touchendX > touchstartX) {
       el.dispatchEvent(new CustomEvent('swipe-LTR'));
     }
-  });
+  }, { passive: true });
 }
 
 async function loadPage() {

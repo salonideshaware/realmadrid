@@ -122,9 +122,9 @@ function renderCalendarIcons(match, placeholders) {
 }
 
 // eslint-disable-next-line no-unused-vars
-function getOptimizedImage(src) { // todo : use that if optimized image is required. See issue#65
+function getOptimizedImage(src) {
   const match = src.match(/(.+)\.([^.]+)$/);
-  return `${match[1]}.app.${match[2]}`;
+  return `${match[1]}.app.${match[2]}?$General$&wid=72&hei=72`;
 }
 
 const renderMatch = (placeholders) => (match) => {
@@ -171,8 +171,8 @@ const renderMatch = (placeholders) => (match) => {
         <span class="time">${timeformat.format(time)}</span>
         <span class="date">${dateformat.format(time)}</span>
       </div>
-      <img class="logo team home" src="${homeTeamLogo._publishUrl}" alt="${homeTeamName}">
-      <img class="logo team away" src="${awayTeamLogo._publishUrl}" alt="${awayTeamName}">
+      <img class="logo team home" src="${getOptimizedImage(homeTeamLogo._publishUrl)}" alt="${homeTeamName}">
+      <img class="logo team away" src="${getOptimizedImage(awayTeamLogo._publishUrl)}" alt="${awayTeamName}">
       <div class="teams">
         <span>${homeTeamName}</span>
         <span>${awayTeamName}</span>
@@ -267,10 +267,16 @@ export default async function decorate(block) {
   const placeholders = await fetchLanguagePlaceholders();
   const { aemGqEndpoint, noMatches } = placeholders;
   const { sport } = config;
-  const url = new URL(`${aemGqEndpoint}${API[sport.toLowerCase()]}`); // todo: add params fromDate endDate
-  const response = await fetch(url);
-  const data = await response.json();
-  const items = data.data.matchList.items.map(renderMatch(placeholders));
+  let items = [];
+  try {
+    const url = new URL(`${aemGqEndpoint}${API[sport.toLowerCase()]}`); // todo: add params fromDate endDate
+    const response = await fetch(url);
+    const data = await response.json();
+    items = data.data.matchList.items.map(renderMatch(placeholders));
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.log(`unable to fetch matches list from ${aemGqEndpoint}${API[sport.toLowerCase()]}`);
+  }
   const itemsWrapper = createDiv(
     'match-list',
     ...items,
@@ -279,7 +285,13 @@ export default async function decorate(block) {
 
   const months = [...new Set(items.map((x) => x.dataset.month))];
   block.innerHTML = '';
-  const filters = createFilters(block, placeholders, months);
-  block.append(filters, itemsWrapper);
-  filters.querySelector(':scope > li:first-child a').click();
+  let filters;
+  if (items.length > 0) {
+    filters = createFilters(block, placeholders, months);
+    block.append(filters);
+  }
+  block.append(itemsWrapper);
+  if (filters) {
+    filters.querySelector(':scope > li:first-child a').click();
+  }
 }
