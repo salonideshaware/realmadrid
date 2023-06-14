@@ -181,7 +181,7 @@ export default async function decorate(block) {
   // if no tours are found start empty
   if (tourInfo.length === 0) tourInfo[0] = {};
 
-  // extract tour info (non existing values are '')
+  // extract tour info (non existing values are '', except when no tour was found => undefined)
   const {
     Description = 'Tour Description',
     Price = '0.00',

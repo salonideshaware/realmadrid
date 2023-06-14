@@ -346,6 +346,10 @@ body.tour-detail .section.hero-tour-detail-container .carousel .slides .slide::a
   background: linear-gradient(to right, rgba(0 0 0 / 65%) 33%, rgba(0 0 0 /10%) 63%);
 }
 
+body.tour-detail .section.hero-tour-detail-container .carousel .slides .slide:lang(ar)::after {
+  background: linear-gradient(to left, rgba(0 0 0 / 65%) 33%, rgba(0 0 0 /10%) 63%);
+}
+
 /* video slide */
 body.tour-detail .section.hero-tour-detail-container .carousel .slides .slide > video {
   position: absolute;
