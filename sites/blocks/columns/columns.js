@@ -125,14 +125,20 @@ export default function decorate(block) {
     const swipeThreshold = 100;
     bindSwipeToElementWithForce(tabsWrapper);
     tabsWrapper.addEventListener('swipe-RTL', (e) => {
-      if (e.detail.force > swipeThreshold && targetIndex < tabs.length - 1) {
-        targetIndex += 1;
+      // Calculate how many tabs to scroll, round up to nearest whole number
+      const scrollAmount = Math.ceil(e.detail.force / swipeThreshold);
+      // If we're not at the last slide...
+      if (targetIndex + scrollAmount < tabs.length) {
+        targetIndex += scrollAmount;
         smoothScrollToSlide(tabsWrapper, tabs, targetIndex);
       }
     });
     tabsWrapper.addEventListener('swipe-LTR', (e) => {
-      if (e.detail.force > swipeThreshold && targetIndex > 0) {
-        targetIndex -= 1;
+      // Calculate how many tabs to scroll, round up to nearest whole number
+      const scrollAmount = Math.ceil(e.detail.force / swipeThreshold);
+      // If we're not at the first slide...
+      if (targetIndex - scrollAmount >= 0) {
+        targetIndex -= scrollAmount;
         smoothScrollToSlide(tabsWrapper, tabs, targetIndex);
       }
     });
