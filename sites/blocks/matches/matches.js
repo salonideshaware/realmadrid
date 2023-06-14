@@ -265,22 +265,28 @@ function createFilters(block, placeholders, months) {
 export default async function decorate(block) {
   const config = readBlockConfig(block);
   const placeholders = await fetchLanguagePlaceholders();
-  const { aemGqEndpoint, noMatches } = placeholders;
-  const { sport } = config;
+  const { aemGqEndpoint = '', noMatches } = placeholders;
+  const { sport = '' } = config;
   let items = [];
   try {
-    const url = new URL(`${aemGqEndpoint}${API[sport.toLowerCase()]}`); // todo: add params fromDate endDate
-    const response = await fetch(url);
-    const data = await response.json();
-    items = data.data.matchList.items.map(renderMatch(placeholders));
+    // todo: add params fromDate endDate
+    if (aemGqEndpoint && API[sport.toLowerCase()]) {
+      const url = new URL(`${aemGqEndpoint}${API[sport.toLowerCase()]}`);
+      const response = await fetch(url);
+      const data = await response.json();
+      if (data && data.data && data.data.matchList && Array.isArray(data.data.matchList.items)) {
+        items = data.data.matchList.items.map(renderMatch(placeholders));
+      }
+    }
   } catch (e) {
     // eslint-disable-next-line no-console
     console.log(`unable to fetch matches list from ${aemGqEndpoint}${API[sport.toLowerCase()]}`);
   }
+  const emptyMatchDiv = createDiv('empty-match', noMatches);
   const itemsWrapper = createDiv(
     'match-list',
     ...items,
-    createDiv('empty-match', noMatches),
+    emptyMatchDiv,
   );
 
   const months = [...new Set(items.map((x) => x.dataset.month))];
@@ -289,6 +295,8 @@ export default async function decorate(block) {
   if (items.length > 0) {
     filters = createFilters(block, placeholders, months);
     block.append(filters);
+  } else {
+    emptyMatchDiv.classList.add('appear');
   }
   block.append(itemsWrapper);
   if (filters) {
