@@ -3,13 +3,13 @@ import { readBlockConfig, loadBlock, decorateIcons } from '../../scripts/lib-fra
 export default async function decorate(block) {
   // get config entries
   const cfg = readBlockConfig(block);
-
   const {
-    pretitle, title, promo, desktop, navigation, mobile,
+    pretitle, title, desktop, navigation, mobile,
   } = cfg;
-  const promoTitle = cfg['promo-title'];
   const tourCategory = cfg['tour-category'];
   const tourSubCategory = cfg['tour-sub-category'];
+  // for promo we keep the original formatting
+  const promo = [...block.querySelectorAll(':scope > div')].filter((entry) => entry.children[0].innerText.trim().toLowerCase() === 'promo');
 
   // create basic dom structure
   const dom = document.createRange().createContextualFragment(`
@@ -80,17 +80,10 @@ export default async function decorate(block) {
   }
 
   // if promo text and/or promo title is defined
-  if (promo || promoTitle) {
+  if (promo[0]) {
     const promoElem = document.createElement('p');
     promoElem.classList.add('promo');
-    if (promoTitle) {
-      const strong = document.createElement('strong');
-      strong.textContent = promoTitle;
-      promoElem.append(strong);
-    }
-    if (promo) {
-      promoElem.append(` ${promo}`);
-    }
+    promoElem.innerHTML = promo[0].children[1].innerHTML;
     contentWrapper.append(promoElem);
   }
 
