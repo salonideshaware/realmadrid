@@ -75,7 +75,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
 /* navigation entries */
 .hero-tour.block .content .navcontainer nav a {
   font-size: 0.875rem;
-  color: #fff;
+  color: var(--background-color);
   height: 2rem;
   margin-right: 1rem;
   flex-shrink: 0;
@@ -91,7 +91,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
   line-height: 0.8;
   padding: 0 0.75rem;
   border-radius: 1rem;
-  border: solid 0.06rem #fff;
+  border: solid 0.06rem var(--background-color);
   background-color: rgba(0 0 0 / 50%);
   text-transform: uppercase;
   text-decoration: none;
@@ -157,7 +157,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
   font-weight: 400;
   line-height: 1.11;
   letter-spacing: 0.07rem;
-  color: #fff;
+  color: var(--background-color);
   text-transform: uppercase;
 }
 
@@ -337,7 +337,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
   padding: 0 1.875rem 1.5625rem;
   box-sizing: border-box;
   display: block;
-  background-color: #fff;
+  background-color: var(--background-color);
   border-bottom-right-radius: 1rem;
   border-bottom-left-radius: 1rem;
   text-decoration: underline;
@@ -455,7 +455,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
 
 /* ticket details block */
 .hero-tour.block .ticket-card-list.hero .ticket-detail {
-  background-color: #fff;
+  background-color: var(--background-color);
   box-sizing: border-box;
   padding: 1.25rem 1.875rem 0.5rem;
 }
