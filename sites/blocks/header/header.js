@@ -1,6 +1,12 @@
 import createTopMenu from './topMenu.js';
 import addPopupMenuButton from './popupMenuButton.js';
-import { fetchNavigationConfig, fetchLanguagePlaceholders } from '../../scripts/scripts.js';
+import {
+  fetchNavigationConfig,
+  fetchLanguagePlaceholders,
+  getNavLink,
+  getLocale,
+} from '../../scripts/scripts.js';
+
 import {
   fetchAuthConfiguration, getEnvironment,
   getInitials,
@@ -30,7 +36,8 @@ export default async function decorate(block) {
 
   const logo = data.data.header.items[0].additionalLogos[0];
   // eslint-disable-next-line no-underscore-dangle
-  const logoImg = logo && logo.image ? `<img src='${logo.image._publishUrl}' style="width: 40px; height: 40px; margin-left: 16px" alt="${logo.title}"/>` : '';
+  const logoImg = logo && logo.image ? `<a href="${getNavLink(logo.url, logo.openNewWindow)}" style="width: 40px; height: 40px"> <img src='${logo.image._publishUrl}'
+     style="width: 40px; height: 40px; margin-left: 16px" alt="${logo.title}"/></a>` : '';
   const { login } = await fetchLanguagePlaceholders();
 
   let userSession;
@@ -55,9 +62,11 @@ export default async function decorate(block) {
     <div style="flex: 1 0 auto; display: flex; flex-direction: row; justify-content: space-between; align-items: center">
     <!-- Logos -->
     <div style="flex: 0 0 auto; display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin: 0 9px 0 10px">
-      <svg focusable="false" width="40" height="40">
-        <use xlink:href="${window.hlx.codeBasePath}/blocks/header/cibeles-sprite.svg#logo-rm"></use>
-      </svg>
+      <a href="/${getLocale()}" style="height: 40px">
+        <svg focusable="false" width="40" height="40">
+          <use xlink:href="${window.hlx.codeBasePath}/blocks/header/cibeles-sprite.svg#logo-rm"></use>
+        </svg>
+      </a>
       <div style="width: 1px; height: 32px; border-right: 1px solid #e1e5ea; margin-left: 9px"></div>
       ${logoImg}
     </div>
@@ -75,7 +84,6 @@ export default async function decorate(block) {
   `));
 
   block.querySelector('.login-button')?.addEventListener('click', async () => {
-    console.debug('sign in logic');
     // 2-User lands on Franklin page without prev sign-in.
     // In this case you need to integrate 2 features:
     // 2A-Integrate with login => 3.1 -> 3.3 from the guide

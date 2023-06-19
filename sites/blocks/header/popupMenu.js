@@ -1,3 +1,4 @@
+import { getNavLink } from '../../scripts/scripts.js';
 import createLanguageSelectorButton from './languageSelector.js';
 
 export function createTopMenuMobile(data) {
@@ -48,7 +49,7 @@ export default async function createPopupMenu(data) {
     }
     subMenu.innerHTML = data.data.header.items[0]
       .mainNavigation[index].childNavigationItems.map((nav) => (
-        `<li><a class='sub-popup-menu-item' href="${nav.url}">${nav.title}</a></li>`
+        `<li><a class='sub-popup-menu-item' href="${getNavLink(nav.url, nav.openNewWindow)}">${nav.title}</a></li>`
       )).join('');
     if (data.data.header.items[0].mainNavigation[index].image) {
       // eslint-disable-next-line no-underscore-dangle
@@ -85,7 +86,7 @@ export default async function createPopupMenu(data) {
         updateSubMenu(index, menuItem);
       });
     } else {
-      link.setAttribute('href', nav.url);
+      link.setAttribute('href', getNavLink(nav.url, nav.openNewWindow));
     }
     menuItem.appendChild(link);
     mainMenu.appendChild(menuItem);

@@ -433,6 +433,21 @@ export function bindSwipeToElementWithForce(el) {
   }, { passive: true });
 }
 
+/**
+ * Converts absolute links to relative ones when the link is
+ * not external.
+ * @param {String} link to be transformed
+ * @param {Boolean} external whether the link points to a different domain or current one.
+ * @returns {String} the link transformed
+ */
+export function getNavLink(link, external = true) {
+  if (external) {
+    return link;
+  }
+  const { pathname, searchParams } = new URL(link);
+  return `${pathname}${searchParams}`;
+}
+
 async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
