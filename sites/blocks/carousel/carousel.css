@@ -103,19 +103,23 @@ main .carousel .carousel-buttons-container {
   }
 
   main .carousel .carousel-buttons-container > .carousel-button-prev {
-    inset-inline-end: 50px;
+    right: 50px;
+    left: unset;
   }
 
   main .carousel .carousel-buttons-container > .carousel-button-next {
-    inset-inline-end: 0;
+    right: 0;
+    left: unset;
   }
 
-  :lang(ar) main .carousel .carousel-buttons-container > .carousel-button-prev {
-    inset-inline-end: 0;
+  main .carousel .carousel-buttons-container > .carousel-button-prev:lang(ar)  {
+    left: 0;
+    right: unset;
   }
 
-  :lang(ar) main .carousel .carousel-buttons-container > .carousel-button-next {
-    inset-inline-end: 50px;
+  main .carousel .carousel-buttons-container > .carousel-button-next:lang(ar)  {
+    left: 50px;
+    right: unset;
   }
 
   main .carousel .carousel-buttons-container > .carousel-button-prev::after,
