@@ -104,10 +104,22 @@ main .carousel .carousel-buttons-container {
 
   main .carousel .carousel-buttons-container > .carousel-button-prev {
     right: 50px;
+    left: unset;
   }
 
   main .carousel .carousel-buttons-container > .carousel-button-next {
     right: 0;
+    left: unset;
+  }
+
+  main .carousel .carousel-buttons-container > .carousel-button-prev:lang(ar)  {
+    left: 0;
+    right: unset;
+  }
+
+  main .carousel .carousel-buttons-container > .carousel-button-next:lang(ar)  {
+    left: 50px;
+    right: unset;
   }
 
   main .carousel .carousel-buttons-container > .carousel-button-prev::after,
@@ -135,7 +147,7 @@ main .carousel .carousel-buttons-container {
 .photo-wrap {
   position: fixed;
   top: 0;
-  inset-inline-start: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background: rgb(255 255 255 / 80%);
@@ -146,6 +158,11 @@ main .carousel .carousel-buttons-container {
   overflow: auto;
   display: grid;
   padding: 0;
+}
+
+.photo-wrap:lang(ar) {
+  left: unset;
+  right: 0;
 }
 
 /* Styles for the image container div */
@@ -178,7 +195,19 @@ main .carousel .carousel-buttons-container {
   cursor: pointer;
   padding: 0;
   top: 15px;
-  inset-inline-end: 21px;
+  right: 21px;
+}
+
+.photo-close:lang(ar) {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  position: absolute;
+  cursor: pointer;
+  padding: 0;
+  top: 15px;
+  left: 21px;
+  right: unset;
 }
 
 .photo-close:hover {
