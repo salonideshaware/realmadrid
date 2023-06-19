@@ -452,12 +452,14 @@ body.tour.tour-detail main .main-content .default-content-wrapper h3 {
   color: var(--heading-color);
 }
 
-body.tour.tour-detail main .main-content .default-content-wrapper blockquote {
+body.tour.tour-detail main .main-content .default-content-wrapper blockquote,
+body.tour.tour-detail main .main-content .placeholder blockquote {
   padding: 0 28px;
   margin: 0;
 }
 
-body.tour.tour-detail main .main-content .default-content-wrapper blockquote p {
+body.tour.tour-detail main .main-content .default-content-wrapper blockquote p,
+body.tour.tour-detail main .main-content .placeholder blockquote p {
   font-size: var(--body-font-size-m);
   font-weight: 300;
   font-style: italic;
@@ -483,7 +485,9 @@ body.tour.tour-detail main .main-content .default-content-wrapper ul li {
 }
 
 body.tour.tour-detail main .main-content .default-content-wrapper blockquote::before,
-body.tour.tour-detail main .main-content .default-content-wrapper blockquote::after {
+body.tour.tour-detail main .main-content .default-content-wrapper blockquote::after,
+body.tour.tour-detail main .main-content .placeholder blockquote::before,
+body.tour.tour-detail main .main-content .placeholder blockquote::after {
   content: '';
   width: 50px;
   height: 1px;
@@ -526,12 +530,14 @@ body.tour.tour-detail main .main-content .default-content-wrapper blockquote::af
     font-size: 17px;
   }
 
-  body.tour.tour-detail main .main-content .default-content-wrapper blockquote {
+  body.tour.tour-detail main .main-content .default-content-wrapper blockquote,
+  body.tour.tour-detail main .main-content .placeholder blockquote {
     padding-left: 431px;
     padding-right: 135px;
   }
 
-  body.tour.tour-detail main .main-content .default-content-wrapper blockquote p {
+  body.tour.tour-detail main .main-content .default-content-wrapper blockquote p,
+  body.tour.tour-detail main .main-content .placeholder blockquote p {
     padding: 0;
   }
 

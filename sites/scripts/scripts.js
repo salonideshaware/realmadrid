@@ -394,6 +394,34 @@ export async function loadFragment(path) {
   return null;
 }
 
+/**
+ * Loads a fragment, finds in the fragment a placeholder section,
+ * and replaces the placeholder section with the customText passed as a parameter
+ * @param {string} placeholderSelector css selector to find the placeholder section
+ * @param {string} customText text to replace the placeholder, can be an html fragment
+ * @returns {HTMLElement} the root element of the fragment with
+ *  the placeholder replaced by custom text.
+ */
+export async function loadFragmentWithPlaceholder(path, placeholderSelector = '.placeholder', customText = '') {
+  if (path && path.startsWith('/')) {
+    const resp = await fetch(`${path}.plain.html`);
+    if (resp.ok) {
+      const main = document.createElement('main');
+      main.innerHTML = await resp.text();
+      const placeholder = main.querySelector(placeholderSelector);
+      const parentCustomText = placeholder ? placeholder.parentElement : '';
+      if (parentCustomText) {
+        placeholder.insertAdjacentHTML('afterend', customText);
+        placeholder.remove();
+      }
+      decorateMain(main);
+      await loadBlocks(main);
+      return main;
+    }
+  }
+  return null;
+}
+
 export function bindSwipeToElement(el) {
   let touchstartX = 0;
   let touchendX = 0;
