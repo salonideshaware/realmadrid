@@ -1,6 +1,7 @@
-import { fetchNavigationConfig,
+import {
+  fetchNavigationConfig,
   getNavLink,
- } from '../../scripts/scripts.js';
+} from '../../scripts/scripts.js';
 
 /* eslint no-underscore-dangle: 0 */
 

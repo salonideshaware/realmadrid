@@ -6,6 +6,7 @@ import {
   getNavLink,
   getLocale,
 } from '../../scripts/scripts.js';
+
 import {
   fetchAuthConfiguration, getEnvironment,
   getInitials,
