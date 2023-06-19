@@ -5,7 +5,7 @@ import {
   fetchLanguagePlaceholders,
   getNavLink,
   getLocale,
- } from '../../scripts/scripts.js';
+} from '../../scripts/scripts.js';
 import {
   fetchAuthConfiguration, getEnvironment,
   getInitials,
@@ -83,7 +83,6 @@ export default async function decorate(block) {
   `));
 
   block.querySelector('.login-button')?.addEventListener('click', async () => {
-    console.debug('sign in logic');
     // 2-User lands on Franklin page without prev sign-in.
     // In this case you need to integrate 2 features:
     // 2A-Integrate with login => 3.1 -> 3.3 from the guide
