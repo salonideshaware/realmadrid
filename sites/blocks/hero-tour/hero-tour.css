@@ -51,7 +51,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
 .hero-tour.block .content .navcontainer {
   width: auto;
   height: 2rem;
-  margin: 1.25rem 1.25rem 1.875rem;
+  margin: 1.25rem 0 1.875rem;
   position: relative;
   padding: 0;
   z-index: 1;
@@ -59,7 +59,9 @@ body.tour .section.hero-tour-container .hero-tour.block {
 
 .hero-tour.block .content .navcontainer nav {
   position: relative;
-  width: 100%;
+  margin: 0 auto;
+  width:max-content;
+  max-width:100%;
   height: 100%;
   padding: 0;
   font-size: 0;
@@ -70,6 +72,22 @@ body.tour .section.hero-tour-container .hero-tour.block {
   transition-property: transform;
   transition-timing-function: ease-out;
   box-sizing: content-box;
+  overflow: auto;
+  scrollbar-width:none;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+}
+
+.hero-tour.block .content .navcontainer nav a:first-child {
+  margin-left: 20px;
+}
+
+.hero-tour.block .content .navcontainer nav a:last-child {
+  margin-right: 20px;
+}
+
+.hero-tour.block .content .navcontainer nav::-webkit-scrollbar {
+  display:none;
 }
 
 /* navigation entries */
@@ -238,10 +256,10 @@ body.tour .section.hero-tour-container .hero-tour.block {
   }
 
   /* navigation */
-  .hero-tour.block .content .navcontainer nav {
-    justify-content: center;
-    margin: 1.875rem 0;
+  /* .hero-tour.block .content .navcontainer nav {
+    margin: 0 auto;
   }
+  */ 
 
   /* navigation entries */
   .hero-tour.block .content .navcontainer nav a {

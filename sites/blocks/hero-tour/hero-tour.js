@@ -1,26 +1,5 @@
 import { readBlockConfig, loadBlock, decorateIcons } from '../../scripts/lib-franklin.js';
-import { bindSwipeToElementWithForce, fetchLanguagePlaceholders } from '../../scripts/scripts.js';
-
-let swipeDistance = 0;
-
-function slideTourNav(navContainer, force) {
-  const direction = force < 0 ? 'left' : 'right';
-  const absForce = Math.abs(force);
-  const { left } = navContainer.firstElementChild.getBoundingClientRect();
-  const { right } = navContainer.lastElementChild.getBoundingClientRect();
-  const maxLeftScroll = right < window.innerWidth ? 0 : right - window.innerWidth;
-  const maxRightScroll = left > 0 ? 0 : Math.abs(left);
-  // if completely visible
-  if (left >= 0 && right <= window.innerWidth) swipeDistance = 0;
-  if (direction === 'left') {
-    swipeDistance -= maxLeftScroll > absForce ? absForce : maxLeftScroll;
-  } else {
-    swipeDistance += maxRightScroll > absForce ? absForce : maxRightScroll;
-  }
-  // do the transform
-  const transform = `transform: translate3d(${swipeDistance}px, 0px, 0px); transition-duration: 300ms;`;
-  navContainer.style.cssText = transform;
-}
+import { fetchLanguagePlaceholders } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   // get config entries
@@ -82,20 +61,6 @@ export default async function decorate(block) {
       divNavContainer.append(navElem);
       contentWrapper.append(divNavContainer);
 
-      // add events
-      bindSwipeToElementWithForce(navElem);
-      navElem.addEventListener('swipe-RTL', (e) => {
-        slideTourNav(navElem, e.detail.force * -1);
-      });
-
-      navElem.addEventListener('swipe-LTR', (e) => {
-        slideTourNav(navElem, e.detail.force);
-      });
-
-      window.addEventListener('resize', () => {
-        slideTourNav(navElem, 0);
-      });
-
       // get the navigation table from the fragment
       const navEntries = document.createRange().createContextualFragment(await resp.text()).querySelector('.navigation');
       // add entries
@@ -150,6 +115,8 @@ export default async function decorate(block) {
 
   block.textContent = '';
   block.append(dom);
+
+  block.querySelector('a.selected').scrollIntoView();
 
   // what main tour categories are offered
   if (tourCategory) {
