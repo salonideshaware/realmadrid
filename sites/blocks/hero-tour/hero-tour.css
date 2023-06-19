@@ -121,7 +121,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
 }
 
 /* promo text */
-.hero-tour.block .content .promo {
+.hero-tour.block .content .promo, .hero-tour.block .content .promo > p {
   margin: 0 auto 0.813rem;
   padding: 0;
   font-family: var(--body-font-family);
@@ -250,11 +250,18 @@ body.tour .section.hero-tour-container .hero-tour.block {
   }
 
   /* promo text */
-  .hero-tour.block .content .promo {
+  .hero-tour.block .content .promo , .hero-tour.block .content .promo > p {
     font-size: 1.25rem;
-    margin-bottom: 4.6875rem;
     font-weight: 400;
     max-width: none;
+  }
+
+  .hero-tour.block .content .promo > p {
+    margin-bottom: 2rem;
+  }
+
+  .hero-tour.block .content .promo  {
+    margin-bottom: 4.6875rem;
   }
 
   .hero-tour.block .content .promo strong {
