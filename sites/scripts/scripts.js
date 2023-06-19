@@ -286,6 +286,13 @@ async function loadLazy(doc) {
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
+  // scroll to active tour navigation entry
+  if (toClassName(getMetadata('template')) === 'tour') {
+    const heroTourBlockNav = document.querySelector('.hero-tour.block .navcontainer > nav');
+    const selected = heroTourBlockNav.querySelector('a.selected');
+    heroTourBlockNav.scrollLeft = selected.offsetLeft - 20;
+  }
+
   /* Don't show header and footer in the authoring guide */
   if (toClassName(getMetadata('template')) !== 'documentation') {
     loadHeader(doc.querySelector('header'));

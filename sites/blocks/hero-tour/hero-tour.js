@@ -116,8 +116,6 @@ export default async function decorate(block) {
   block.textContent = '';
   block.append(dom);
 
-  block.querySelector('a.selected').scrollIntoView();
-
   // what main tour categories are offered
   if (tourCategory) {
     const ticketCardListBlock = document.createRange().createContextualFragment(`
