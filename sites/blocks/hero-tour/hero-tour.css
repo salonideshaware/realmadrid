@@ -78,14 +78,6 @@ body.tour .section.hero-tour-container .hero-tour.block {
   -ms-overflow-style: none;
 }
 
-.hero-tour.block .content .navcontainer nav a:first-child {
-  margin-left: 20px;
-}
-
-.hero-tour.block .content .navcontainer nav a:last-child {
-  margin-right: 20px;
-}
-
 .hero-tour.block .content .navcontainer nav::-webkit-scrollbar {
   display:none;
 }
@@ -114,6 +106,14 @@ body.tour .section.hero-tour-container .hero-tour.block {
   text-transform: uppercase;
   text-decoration: none;
   vertical-align: top;
+}
+
+.hero-tour.block .content .navcontainer nav a:first-child {
+  margin-left: 20px;
+}
+
+.hero-tour.block .content .navcontainer nav a:last-child {
+  margin-right: 20px;
 }
 
 /* when we are on the page itself */
