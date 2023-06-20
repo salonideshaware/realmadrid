@@ -70,7 +70,7 @@ main .section.related-tours-container .related-tours-wrapper {
 @media (min-width: 600px) {
   /* the gradient background starts scrolling */
   body.tour main .section.related-tours-container {
-    padding: 4.6875rem 0.625rem 4.063rem;
+    padding: 4.6875rem 0 4.063rem;
     background-attachment: local;
   }
 
