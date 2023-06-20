@@ -1,4 +1,7 @@
-import { fetchNavigationConfig } from '../../scripts/scripts.js';
+import {
+  fetchNavigationConfig,
+  getNavLink,
+} from '../../scripts/scripts.js';
 
 /* eslint no-underscore-dangle: 0 */
 
@@ -24,7 +27,7 @@ export default async function decorate(block) {
     const mainNavigationItem = document.createElement('li');
     mainNavigation.append(mainNavigationItem);
     mainNavigationItem.appendChild(document.createRange().createContextualFragment(`
-      <a href="${item.url}">${item.title}</a>
+      <a href="${getNavLink(item.url, item.openNewWindow)}">${item.title}</a>
       <svg focusable="false" width="24" height="24"><use xlink:href="${window.hlx.codeBasePath}/blocks/header/cibeles-sprite.svg#chevron-right"></use></svg>
     `));
     const childNavigation = document.createElement('ul');
@@ -34,7 +37,7 @@ export default async function decorate(block) {
       const childNavigationItem = document.createElement('li');
       childNavigation.append(childNavigationItem);
       childNavigationItem.appendChild(document.createRange().createContextualFragment(`
-        <a href="${child.url}">${child.title}</a>
+        <a href="${getNavLink(child.url, child.openNewWindow)}">${child.title}</a>
       `));
     });
   });
@@ -46,7 +49,7 @@ export default async function decorate(block) {
     const li = document.createElement('li');
     extraNavigation.append(li);
     li.appendChild(document.createRange().createContextualFragment(`
-      <a href="${item.url}">${item.title}</a>
+      <a href="${getNavLink(item.url, item.openNewWindow)}">${item.title}</a>
     `));
   });
 
@@ -61,7 +64,7 @@ export default async function decorate(block) {
     const li = document.createElement('li');
     mobileApps.append(li);
     li.appendChild(document.createRange().createContextualFragment(`
-      <a href="${item.url}">
+      <a href="${getNavLink(item.url, item.openNewWindow)}">
         <img src="${item.image._publishUrl}" alt="${item.title}"/>
       </a>
     `));
@@ -74,7 +77,7 @@ export default async function decorate(block) {
     const li = document.createElement('li');
     mainSponsors.append(li);
     li.appendChild(document.createRange().createContextualFragment(`
-      <a href="${item.url}">
+      <a href="${getNavLink(item.url, item.openNewWindow)}">
         <img src="${item.logo._publishUrl}" alt="${item.title}">
       </a>
     `));
@@ -86,7 +89,7 @@ export default async function decorate(block) {
     const li = document.createElement('li');
     otherSponsors.append(li);
     li.appendChild(document.createRange().createContextualFragment(`
-      <a href="${item.url}">
+      <a href="${getNavLink(item.url, item.openNewWindow)}">
         <img src="${item.logo._publishUrl}" alt="${item.title}">
       </a>
     `));
@@ -99,7 +102,7 @@ export default async function decorate(block) {
     const li = document.createElement('li');
     socialLinks.append(li);
     li.appendChild(document.createRange().createContextualFragment(`
-      <a href="${item.url}">
+      <a href="${getNavLink(item.url, item.openNewWindow)}">
         <svg focusable="false" width="24" height="24"><title>${item.title}</title><use xlink:href="${window.hlx.codeBasePath}/blocks/header/cibeles-sprite.svg#${item.title.toLowerCase()}"></use></svg>
       </a>
     `));
@@ -123,7 +126,7 @@ export default async function decorate(block) {
     const li = document.createElement('li');
     bottomBar.append(li);
     li.appendChild(document.createRange().createContextualFragment(`
-      <a href="${item.url}">${item.title}</a>
+      <a href="${getNavLink(item.url, item.openNewWindow)}">${item.title}</a>
     `));
   });
 

@@ -1,12 +1,13 @@
 import { createOptimizedPicture, getMetadata } from '../../scripts/lib-franklin.js';
-import { bindSwipeToElement } from '../../scripts/scripts.js';
+import { getLanguage, bindSwipeToElement } from '../../scripts/scripts.js';
 
-function createButtons() {
+function createButtons(isRTL) {
   const divButtons = document.createElement('div');
   divButtons.classList.add('carousel-buttons-container');
-  divButtons.innerHTML = `<a class="carousel-button carousel-button-prev" aria-label="Previous slide" aria-disabled="false"></a>
-                          <a class="carousel-button carousel-button-next" aria-label="Next slide" aria-disabled="false"></a>`;
-
+  const prevButton = isRTL ? 'Next slide' : 'Previous slide';
+  const nextButton = isRTL ? 'Previous slide' : 'Next slide';
+  divButtons.innerHTML = `<a class="carousel-button carousel-button-prev" aria-label="${prevButton}" aria-disabled="false"></a>
+                          <a class="carousel-button carousel-button-next" aria-label="${nextButton}" aria-disabled="false"></a>`;
   return divButtons;
 }
 
@@ -18,18 +19,19 @@ function createPicturesContainer(block) {
 }
 
 function showPic(picNumber, picWidth, carouselPicContainer) {
-  const transform = `transform: translate3d(-${picWidth * picNumber}px, 0px, 0px); transition-duration: 300ms;`;
+  const transform = `transform: translate3d(${-1 * picWidth * picNumber}px, 0px, 0px); transition-duration: 300ms;`;
   carouselPicContainer.style.cssText = transform;
 }
 
-function showHideButtons(currentPic, maxShift, prevButton, nextButton) {
-  prevButton.style.display = currentPic === 0 ? 'none' : '';
-  nextButton.style.display = currentPic === maxShift ? 'none' : '';
+function showHideButtons(currentPic, maxShift, prevButton, nextButton, isRTL) {
+  prevButton.style.display = (currentPic === 0 && !isRTL) || (currentPic === -maxShift && isRTL) ? 'none' : '';
+  nextButton.style.display = (currentPic === maxShift && !isRTL) || (currentPic === 0 && isRTL) ? 'none' : '';
 }
 
 export default function decorate(block) {
+  const isRTL = getLanguage() === 'ar';
   const carouselPicContainer = createPicturesContainer(block);
-  const buttonContainer = createButtons();
+  const buttonContainer = createButtons(isRTL);
 
   block.append(carouselPicContainer);
   block.append(buttonContainer);
@@ -63,31 +65,39 @@ export default function decorate(block) {
     ? parseInt(picContainerStyle.width, 10) + parseInt(picContainerStyle.marginRight, 10) : 0;
 
   const maxShift = numPics - parseInt(window.innerWidth / picWidth, 10);
-  showHideButtons(currentPic, maxShift, prevButton, nextButton);
-  // Setup auto shift for the carousel
+  showHideButtons(currentPic, maxShift, prevButton, nextButton, isRTL);
+
   carouselInterval = window.setInterval(() => {
-    currentPic = (currentPic === maxShift) ? 0 : currentPic + 1;
+    if (isRTL) {
+      currentPic = currentPic === -maxShift ? 0 : currentPic - 1;
+    } else {
+      currentPic = currentPic === maxShift ? 0 : currentPic + 1;
+    }
     showPic(currentPic, picWidth, carouselPicContainer);
-    showHideButtons(currentPic, maxShift, prevButton, nextButton);
+    showHideButtons(currentPic, maxShift, prevButton, nextButton, isRTL);
   }, 5000);
 
   // add listeners to prev and next buttons
   prevButton.addEventListener('click', () => {
     window.clearInterval(carouselInterval);
-    if (currentPic >= 1) {
-      currentPic -= 1;
-      showPic(currentPic, picWidth, carouselPicContainer);
-      showHideButtons(currentPic, maxShift, prevButton, nextButton);
+    if (isRTL) {
+      currentPic = currentPic < maxShift ? currentPic - 1 : maxShift;
+    } else {
+      currentPic = currentPic > 0 ? currentPic - 1 : 0;
     }
+    showPic(currentPic, picWidth, carouselPicContainer);
+    showHideButtons(currentPic, maxShift, prevButton, nextButton, isRTL);
   });
 
   nextButton.addEventListener('click', () => {
     window.clearInterval(carouselInterval);
-    if (currentPic < maxShift) {
-      currentPic += 1;
-      showPic(currentPic, picWidth, carouselPicContainer);
-      showHideButtons(currentPic, maxShift, prevButton, nextButton);
+    if (isRTL) {
+      currentPic = currentPic < 0 ? currentPic + 1 : 0;
+    } else {
+      currentPic = currentPic < maxShift ? currentPic + 1 : maxShift;
     }
+    showPic(currentPic, picWidth, carouselPicContainer);
+    showHideButtons(currentPic, maxShift, prevButton, nextButton, isRTL);
   });
 
   bindSwipeToElement(block);
