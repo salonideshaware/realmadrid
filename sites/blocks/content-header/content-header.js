@@ -9,7 +9,10 @@ async function getTitle(path) {
 
 export default function decorate(block) {
   block.textContent = '';
-  const title = document.querySelector('title')?.innerText;
+  // if there is an h1 in main text take it as the main title otherwise page title
+  const hasH1Title = document.querySelector('main h1:first-child');
+  const title = hasH1Title ? (hasH1Title.remove(), hasH1Title.innerText) : document.querySelector('title')?.innerText;
+
   // init header DOM structure
   const dom = document.createRange().createContextualFragment(`
     <h1>${title}</h1>
