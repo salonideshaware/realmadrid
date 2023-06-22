@@ -476,6 +476,10 @@ export function bindSwipeToElementWithForce(el) {
  * @returns {String} the link transformed
  */
 export function getNavLink(link, external = true) {
+  // If link is null we link to the homepage
+  if (!link) {
+    return `/${getLocale()}`;
+  }
   if (external) {
     return link;
   }
