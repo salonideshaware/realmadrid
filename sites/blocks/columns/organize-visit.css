@@ -18,8 +18,9 @@ body.tour .section.section-organize-visit .default-content-wrapper {
   color: #6b6b6b;
 }
 
-.columns.organize-visit .icon.icon-open-link::before {
-  content: url('../../icons/open-link.svg');
+.columns.organize-visit .visit-box:last-child a[href*="MuseoRealMadrid" ]::after {
+  content: '';
+  background-image: url('../../icons/open-link.svg');
   display: inline-flex;
   filter: invert(24%) sepia(95%) saturate(4099%) hue-rotate(200deg) brightness(93%) contrast(101%);
   width: 11px;

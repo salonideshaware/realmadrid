@@ -289,8 +289,10 @@ async function loadLazy(doc) {
   // scroll to active tour navigation entry
   if (toClassName(getMetadata('template')) === 'tour') {
     const heroTourBlockNav = document.querySelector('.hero-tour.block .navcontainer > nav');
-    const selected = heroTourBlockNav.querySelector('a.selected');
-    heroTourBlockNav.scrollLeft = selected.offsetLeft - 20;
+    if (heroTourBlockNav) {
+      const selected = heroTourBlockNav.querySelector('a.selected');
+      heroTourBlockNav.scrollLeft = selected.offsetLeft - 20;
+    }
   }
 
   /* Don't show header and footer in the authoring guide */
