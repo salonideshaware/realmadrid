@@ -489,6 +489,25 @@ export function getNavLink(link, external = true) {
   return `${pathname}${searchParams}`;
 }
 
+/**
+ * Loads the script in the head section
+ * @param {string} url and other attrs
+ * @returns script
+ */
+export function loadScript(url, attrs) {
+  const head = document.querySelector('head');
+  const script = document.createElement('script');
+  script.src = url;
+  if (attrs) {
+    // eslint-disable-next-line no-restricted-syntax, guard-for-in
+    for (const attr in attrs) {
+      script.setAttribute(attr, attrs[attr]);
+    }
+  }
+  head.append(script);
+  return script;
+}
+
 async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
