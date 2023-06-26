@@ -2,17 +2,53 @@
 import {
   sampleRUM,
   fetchPlaceholders,
+  getMetadata,
 } from './lib-franklin.js';
 
 // eslint-disable-next-line import/no-cycle
 import {
   loadScript,
+  getCurrentSection,
+  getLanguage,
 } from './scripts.js';
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
 
 // add more delayed functionality here
+function pushPageLoadEvent() {
+  const currentPathArray = window.location.pathname.split('/');
+  const trackingPageName = currentPathArray.length > 2 ? ['realmadrid'].concat(currentPathArray.slice(2)) : ['realmadrid'].concat(currentPathArray);
+  const currentSection = getCurrentSection();
+
+  window.adobeDataLayer.push({
+    event: 'pageLoad',
+    webPageDetails: {
+      pageName: trackingPageName.join(':'),
+      pageTitle: getMetadata('title'),
+      pageURL: window.location.href,
+      pageSection: currentSection,
+      pageLevel1: trackingPageName.length > 1 ? trackingPageName[1] : '',
+      pageLevel2: trackingPageName.length > 2 ? trackingPageName[2] : '',
+      pageLevel3: trackingPageName.length > 3 ? trackingPageName[3] : '',
+      pageLevel4: trackingPageName.length > 4 ? trackingPageName[4] : '',
+      pageType: currentSection,
+      previousPageURL: document.referrer,
+      pageLang: getLanguage(),
+      country: getLanguage(),
+    },
+    /* ,
+      identification: {
+        idpID: '<value>',
+      },
+      user: {
+        userLoginStatus: '<value>',
+        userLoyaltyStatus: '<value>',
+        userAge: '<value>',
+        userGender: '<value>',
+      }, */
+  });
+}
 
 // Load one trust script if not preview and not localhost
 
@@ -47,4 +83,4 @@ if (!window.location.host.includes('hlx.page') && !window.location.host.includes
 } else {
   loadScript('https://assets.adobedtm.com/ab05854e772b/7bc47c0b7114/launch-13b7c868e0a9-staging.min.js');
 }
-// End launch
+pushPageLoadEvent();
