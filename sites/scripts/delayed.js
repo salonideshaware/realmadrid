@@ -15,6 +15,7 @@ sampleRUM('cwv');
 // add more delayed functionality here
 
 // Load one trust script if not preview and not localhost
+
 if (!window.location.host.includes('hlx.page') && !window.location.host.includes('localhost')) {
   const { onetrustId } = fetchPlaceholders();
   if (onetrustId) {
@@ -23,9 +24,22 @@ if (!window.location.host.includes('hlx.page') && !window.location.host.includes
       charset: 'UTF-8',
       'data-domain-script': `${onetrustId}`,
     });
+
+    window.OptanonWrapper = () => {
+      // eslint-disable-next-line no-undef
+      if (typeof RMOneTrustLoaded === 'undefined' || RMOneTrustLoaded !== true) {
+        window.RMOneTrustLoaded = true;
+        const event = new Event('RMOneTrustLoaded');
+        window.dispatchEvent(event);
+      }
+    };
   }
 }
 // End one trust
+
+// Init Adobe data layer
+window.adobeDataLayer = window.adobeDataLayer || [];
+window.adobeDataLayerInPage = true;
 
 // Load Adobe Experience platform data collection (Launch) script
 if (!window.location.host.includes('hlx.page') && !window.location.host.includes('localhost')) {
