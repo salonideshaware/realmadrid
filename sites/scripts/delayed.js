@@ -24,9 +24,9 @@ function pushPageLoadEvent() {
     return;
   }
   const currentLanguage = getLanguage();
-  const pathIndex = currentLanguage === 'es' ? 3 : 4;
-  const currentPathArray = window.location.pathname.split('/');
-  const trackingPageName = currentPathArray.length > pathIndex ? ['realmadrid', currentSection].concat(currentPathArray.slice(pathIndex)) : ['realmadrid'].concat(currentPathArray);
+  const trackingPath = currentLanguage === 'es' ? window.location.pathname : getMetadata('primary-language-url');
+  const trackingPathArray = trackingPath ? trackingPath.split('/') : window.location.pathname.split('/');
+  const trackingPageName = trackingPathArray.length > 3 ? ['realmadrid', currentSection].concat(trackingPathArray.slice(3)) : ['realmadrid'].concat(trackingPathArray);
   const age = window.rm.user ? (new Date(new Date(window.rm.user.birthDateTime) - new Date()).getUTCFullYear() - 1970) : '';
 
   window.adobeDataLayer.push({
