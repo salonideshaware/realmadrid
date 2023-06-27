@@ -23,8 +23,10 @@ function pushPageLoadEvent() {
     // we don't want to track page views out of the vip-area or tour
     return;
   }
+  const currentLanguage = getLanguage();
+  const pathIndex = currentLanguage === 'es' ? 3 : 4;
   const currentPathArray = window.location.pathname.split('/');
-  const trackingPageName = currentPathArray.length > 3 ? ['realmadrid', currentSection].concat(currentPathArray.slice(3)) : ['realmadrid'].concat(currentPathArray);
+  const trackingPageName = currentPathArray.length > pathIndex ? ['realmadrid', currentSection].concat(currentPathArray.slice(pathIndex)) : ['realmadrid'].concat(currentPathArray);
   const age = window.rm.user ? (new Date(new Date(window.rm.user.birthDateTime) - new Date()).getUTCFullYear() - 1970) : '';
 
   window.adobeDataLayer.push({
@@ -40,8 +42,8 @@ function pushPageLoadEvent() {
       pageLevel4: trackingPageName.length > 4 ? trackingPageName[4] : '',
       pageType: currentSection,
       previousPageURL: document.referrer,
-      pageLang: getLanguage(),
-      country: getLanguage(),
+      pageLang: currentLanguage,
+      country: currentLanguage,
     },
     identification: {
       idpID: window.rm.user ? window.rm.user.id : '',
