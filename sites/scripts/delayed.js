@@ -16,45 +16,83 @@ import {
 sampleRUM('cwv');
 
 // add more delayed functionality here
-function pushPageLoadEvent() {
-  window.rm = window.rm || {};
+
+// Calculates the payload for tracking page load event.
+function getPageLoadTrackingPayload() {
   const currentSection = getCurrentSection();
   if (!currentSection) {
     // we don't want to track page views out of the vip-area or tour
-    return;
+    return null;
   }
-  const currentLanguage = getLanguage();
-  const trackingPath = currentLanguage === 'es' ? window.location.pathname : getMetadata('primary-language-url');
-  const trackingPathArray = trackingPath ? trackingPath.split('/') : window.location.pathname.split('/');
-  const trackingPageName = trackingPathArray.length > 3 ? ['realmadrid', currentSection].concat(trackingPathArray.slice(3)) : ['realmadrid'].concat(trackingPathArray);
-  const age = window.rm.user ? (new Date(new Date(window.rm.user.birthDateTime) - new Date()).getUTCFullYear() - 1970) : '';
 
-  window.adobeDataLayer.push({
-    event: 'pageLoad',
-    webPageDetails: {
-      pageName: trackingPageName.join(':'),
-      pageTitle: getMetadata('og:title'),
-      pageURL: window.location.href,
-      pageSection: currentSection,
-      pageLevel1: trackingPageName.length > 1 ? trackingPageName[1] : '',
-      pageLevel2: trackingPageName.length > 2 ? trackingPageName[2] : '',
-      pageLevel3: trackingPageName.length > 3 ? trackingPageName[3] : '',
-      pageLevel4: trackingPageName.length > 4 ? trackingPageName[4] : '',
-      pageType: currentSection,
-      previousPageURL: document.referrer,
-      pageLang: currentLanguage,
-      country: currentLanguage,
-    },
-    identification: {
-      idpID: window.rm.user ? window.rm.user.id : '',
-    },
-    user: {
-      userLoginStatus: window.rm.user ? 'authenticated' : 'not_authenticated',
-      userLoyaltyStatus: window.rm.user ? window.rm.user.tier : '',
-      userAge: age,
-      // userGender: '<value>',
-    },
-  });
+  // Calculate page details
+  const currentLanguage = getLanguage();
+  let trackingPath = window.location.pathname;
+  if (currentLanguage !== 'es') {
+    // generate page name from spanish path, if possible
+    trackingPath = getMetadata('primary-language-url') || trackingPath.replace(`/${currentLanguage}/`, '/');
+  }
+  const trackingPathArray = trackingPath.split('/');
+  const trackingPageName = trackingPathArray.length > 3 ? ['realmadrid', currentSection].concat(trackingPathArray.slice(3)) : ['realmadrid'].concat(trackingPathArray);
+
+  const webPageDetails = {
+    pageName: trackingPageName.join(':'),
+    pageTitle: getMetadata('og:title'),
+    pageURL: window.location.href,
+    pageSection: currentSection,
+    pageLevel1: trackingPageName.length > 1 ? trackingPageName[1] : '',
+    pageLevel2: trackingPageName.length > 2 ? trackingPageName[2] : '',
+    pageLevel3: trackingPageName.length > 3 ? trackingPageName[3] : '',
+    pageLevel4: trackingPageName.length > 4 ? trackingPageName[4] : '',
+    pageType: currentSection,
+    previousPageURL: document.referrer,
+    pageLang: currentLanguage,
+    country: currentLanguage,
+  };
+
+  // Get the pageName we want to track. e.g. realmadrid:tour:colegios:classic
+  // We try to use the path to the page in Spanish.
+  window.rm = window.rm || {};
+  const userInfo = window.rm.user;
+
+  const identification = {
+    idpID: userInfo ? userInfo.id : '',
+  };
+
+  let age = '';
+  try {
+    age = userInfo && userInfo.birthDateTime ? (new Date(new Date(userInfo.birthDateTime) - new Date()).getUTCFullYear() - 1970) : '';
+  } catch (error) {
+    // ignore error while calculating age. Submit empty age.
+  }
+
+  const user = {
+    userLoginStatus: userInfo ? 'authenticated' : 'not_authenticated',
+    userLoyaltyStatus: userInfo ? userInfo.tier : '',
+    userAge: age,
+    // userGender: '<value>',
+  };
+
+  return {
+    webPageDetails,
+    identification,
+    user,
+  };
+}
+
+function pushPageLoadEvent() {
+  // Init Adobe data layer
+  window.adobeDataLayer = window.adobeDataLayer || [];
+  window.adobeDataLayerInPage = true;
+
+  const trackingPayload = getPageLoadTrackingPayload();
+
+  if (trackingPayload) {
+    window.adobeDataLayer.push({
+      event: 'pageLoad',
+      trackingPayload,
+    });
+  }
 }
 
 // Load one trust script if not preview and not localhost
@@ -78,10 +116,6 @@ if (!window.location.host.includes('hlx.page') && !window.location.host.includes
   }
 }
 // End one trust
-
-// Init Adobe data layer
-window.adobeDataLayer = window.adobeDataLayer || [];
-window.adobeDataLayerInPage = true;
 
 // Load Adobe Experience platform data collection (Launch) script
 if (!window.location.host.includes('hlx.page') && !window.location.host.includes('localhost')) {
