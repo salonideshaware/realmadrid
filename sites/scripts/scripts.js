@@ -135,11 +135,11 @@ export function getTourLangRoot(lang) {
 export function getCurrentSection() {
   const currentUrl = window.location.pathname;
   if (VIP_SECTION_PATHS.find((x) => currentUrl.indexOf(x) > -1)) {
-    return 'vip';
+    return 'vip_area';
   } if (TOUR_SECTION_PATHS.find((x) => currentUrl.indexOf(x) > -1)) {
     return 'tour';
   }
-  return 'vip'; // todo: choose proper default
+  return '';
 }
 
 function buildFAQPage(main) {

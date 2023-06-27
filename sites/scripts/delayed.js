@@ -19,6 +19,10 @@ sampleRUM('cwv');
 function pushPageLoadEvent() {
   window.rm = window.rm || {};
   const currentSection = getCurrentSection();
+  if (!currentSection) {
+    // we don't want to track page views out of the vip-area or tour
+    return;
+  }
   const currentPathArray = window.location.pathname.split('/');
   const trackingPageName = currentPathArray.length > 3 ? ['realmadrid', currentSection].concat(currentPathArray.slice(3)) : ['realmadrid'].concat(currentPathArray);
   const age = window.rm.user ? (new Date(new Date(window.rm.user.birthDateTime) - new Date()).getUTCFullYear() - 1970) : '';
@@ -27,7 +31,7 @@ function pushPageLoadEvent() {
     event: 'pageLoad',
     webPageDetails: {
       pageName: trackingPageName.join(':'),
-      pageTitle: getMetadata('title'),
+      pageTitle: getMetadata('og:title'),
       pageURL: window.location.href,
       pageSection: currentSection,
       pageLevel1: trackingPageName.length > 1 ? trackingPageName[1] : '',
@@ -52,7 +56,6 @@ function pushPageLoadEvent() {
 }
 
 // Load one trust script if not preview and not localhost
-
 if (!window.location.host.includes('hlx.page') && !window.location.host.includes('localhost')) {
   const { onetrustId } = fetchPlaceholders();
   if (onetrustId) {
