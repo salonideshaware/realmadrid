@@ -17,9 +17,11 @@ sampleRUM('cwv');
 
 // add more delayed functionality here
 function pushPageLoadEvent() {
-  const currentPathArray = window.location.pathname.split('/');
-  const trackingPageName = currentPathArray.length > 2 ? ['realmadrid'].concat(currentPathArray.slice(2)) : ['realmadrid'].concat(currentPathArray);
+  window.rm = window.rm || {};
   const currentSection = getCurrentSection();
+  const currentPathArray = window.location.pathname.split('/');
+  const trackingPageName = currentPathArray.length > 3 ? ['realmadrid', currentSection].concat(currentPathArray.slice(3)) : ['realmadrid'].concat(currentPathArray);
+  const age = window.rm.user ? (new Date(new Date(window.rm.user.birthDateTime) - new Date()).getUTCFullYear() - 1970) : '';
 
   window.adobeDataLayer.push({
     event: 'pageLoad',
@@ -37,16 +39,15 @@ function pushPageLoadEvent() {
       pageLang: getLanguage(),
       country: getLanguage(),
     },
-    /* ,
-      identification: {
-        idpID: '<value>',
-      },
-      user: {
-        userLoginStatus: '<value>',
-        userLoyaltyStatus: '<value>',
-        userAge: '<value>',
-        userGender: '<value>',
-      }, */
+    identification: {
+      idpID: window.rm.user ? window.rm.user.id : '',
+    },
+    user: {
+      userLoginStatus: window.rm.user ? 'authenticated' : 'not_authenticated',
+      userLoyaltyStatus: window.rm.user ? window.rm.user.tier : '',
+      userAge: age,
+      // userGender: '<value>',
+    },
   });
 }
 
