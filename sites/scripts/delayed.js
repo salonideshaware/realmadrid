@@ -10,6 +10,7 @@ import {
   loadScript,
   getCurrentSection,
   getLanguage,
+  DOCROOT,
 } from './scripts.js';
 
 // Core Web Vitals RUM collection
@@ -94,10 +95,9 @@ function pushPageLoadEvent() {
     });
   }
 }
-
+const { onetrustId, launchPrdScript, launchStgScript } = await fetchPlaceholders(DOCROOT);
 // Load one trust script if not preview and not localhost
 if (!window.location.host.includes('hlx.page') && !window.location.host.includes('localhost')) {
-  const { onetrustId } = fetchPlaceholders();
   if (onetrustId) {
     loadScript('https://cdn.cookielaw.org/scripttemplates/otSDKStub.js', {
       type: 'text/javascript',
@@ -119,8 +119,8 @@ if (!window.location.host.includes('hlx.page') && !window.location.host.includes
 
 // Load Adobe Experience platform data collection (Launch) script
 if (!window.location.host.includes('hlx.page') && !window.location.host.includes('localhost')) {
-  loadScript('https://assets.adobedtm.com/ab05854e772b/7bc47c0b7114/launch-d2e30cc4a650.min.js');
+  loadScript(`https://assets.adobedtm.com${launchPrdScript}`);
 } else {
-  loadScript('https://assets.adobedtm.com/ab05854e772b/7bc47c0b7114/launch-13b7c868e0a9-staging.min.js');
+  loadScript(`https://assets.adobedtm.com${launchStgScript}`);
 }
 pushPageLoadEvent();

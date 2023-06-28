@@ -47,7 +47,7 @@ export default async function decorate(block) {
     console.error(error);
   }
 
-  window.rm = window.rm || [];
+  window.rm = window.rm || {};
   window.rm.user = userSession ? userSession.user : '';
 
   const loginFragment = window.rm.user
