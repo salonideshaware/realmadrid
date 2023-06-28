@@ -33,8 +33,11 @@ function getPageLoadTrackingPayload() {
     // generate page name from spanish path, if possible
     trackingPath = getMetadata('primary-language-url') || trackingPath.replace(`/${currentLanguage}/`, '/');
   }
+  // get rid of the prefix
+  trackingPath = trackingPath.replace(`${DOCROOT}/`, '');
+
   const trackingPathArray = trackingPath.split('/');
-  const trackingPageName = trackingPathArray.length > 3 ? ['realmadrid', currentSection].concat(trackingPathArray.slice(3)) : ['realmadrid'].concat(trackingPathArray);
+  const trackingPageName = trackingPathArray.length > 1 ? ['realmadrid', currentSection].concat(trackingPathArray.slice(1)) : ['realmadrid', currentSection].concat(trackingPathArray);
 
   const webPageDetails = {
     pageName: trackingPageName.join(':'),
