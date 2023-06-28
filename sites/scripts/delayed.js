@@ -41,14 +41,15 @@ function getPageLoadTrackingPayload() {
     pageTitle: getMetadata('og:title'),
     pageURL: window.location.href,
     pageSection: currentSection,
-    level1: trackingPageName.length > 1 ? trackingPageName[1] : '',
-    level2: trackingPageName.length > 2 ? trackingPageName[2] : '',
-    level3: trackingPageName.length > 3 ? trackingPageName[3] : '',
-    level4: trackingPageName.length > 4 ? trackingPageName[4] : '',
+    pageLevel1: trackingPageName.length > 1 ? trackingPageName[1] : '',
+    pageLevel2: trackingPageName.length > 2 ? trackingPageName[2] : '',
+    pageLevel3: trackingPageName.length > 3 ? trackingPageName[3] : '',
+    pageLevel4: trackingPageName.length > 4 ? trackingPageName[4] : '',
     pageType: currentSection,
     previousPageURL: document.referrer,
     pageLang: currentLanguage,
     country: currentLanguage,
+    cms: 'aem_franklin',
   };
 
   // Get the pageName we want to track. e.g. realmadrid:tour:colegios:classic
