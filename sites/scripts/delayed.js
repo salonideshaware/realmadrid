@@ -92,7 +92,7 @@ function pushPageLoadEvent() {
   if (trackingPayload) {
     window.adobeDataLayer.push({
       event: 'pageLoad',
-      trackingPayload,
+      ...trackingPayload,
     });
   }
 }
