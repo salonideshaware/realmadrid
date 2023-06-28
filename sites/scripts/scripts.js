@@ -179,7 +179,7 @@ function buildAutoBlocks(main) {
       if (template === 'vip-faq') {
         buildFAQPage(main);
       }
-      if (template === 'area-vip') {
+      if (template === 'area-vip' || template === 'area-vip-detail') {
         buildHeroBlock(main);
       }
       if (template === 'tour-detail') {
