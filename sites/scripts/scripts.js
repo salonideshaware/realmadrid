@@ -135,11 +135,11 @@ export function getTourLangRoot(lang) {
 export function getCurrentSection() {
   const currentUrl = window.location.pathname;
   if (VIP_SECTION_PATHS.find((x) => currentUrl.indexOf(x) > -1)) {
-    return 'vip';
+    return 'area_vip';
   } if (TOUR_SECTION_PATHS.find((x) => currentUrl.indexOf(x) > -1)) {
     return 'tour';
   }
-  return 'vip'; // todo: choose proper default
+  return '';
 }
 
 function buildFAQPage(main) {
@@ -487,6 +487,24 @@ export function getNavLink(link, external = true) {
   }
   const { pathname, searchParams } = new URL(link);
   return `${pathname}${searchParams}`;
+}
+
+/**
+ * Loads the script in the body section
+ * @param {string} url and other attrs
+ * @returns script
+ */
+export function loadScript(url, attrs) {
+  const script = document.createElement('script');
+  script.src = url;
+  if (attrs) {
+    // eslint-disable-next-line no-restricted-syntax, guard-for-in
+    for (const attr in attrs) {
+      script.setAttribute(attr, attrs[attr]);
+    }
+  }
+  document.body.append(script);
+  return script;
 }
 
 async function loadPage() {

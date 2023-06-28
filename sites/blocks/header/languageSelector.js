@@ -57,7 +57,7 @@ async function createLanguageDropdown(languages, languageButtonContent, currentL
     let defaultUrl = '#';
     if (sectionName === 'tour') {
       defaultUrl = getTourLangRoot(langName);
-    } else if (sectionName === 'vip') {
+    } else {
       defaultUrl = getVIPAreaLangRoot(langName);
     }
     const langUrl = urls[langName]

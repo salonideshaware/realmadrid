@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
-import { readBlockConfig } from '../../scripts/lib-franklin.js';
-import { getLocale, fetchLanguagePlaceholders } from '../../scripts/scripts.js';
+import { fetchPlaceholders, readBlockConfig } from '../../scripts/lib-franklin.js';
+import { getLocale, fetchLanguagePlaceholders, DOCROOT } from '../../scripts/scripts.js';
 // todo : make it configurable
 const API = {
   football: '/realmadridmastersite/matchesVIPFootball',
@@ -265,7 +265,8 @@ function createFilters(block, placeholders, months) {
 export default async function decorate(block) {
   const config = readBlockConfig(block);
   const placeholders = await fetchLanguagePlaceholders();
-  const { aemGqEndpoint = '', noMatches } = placeholders;
+  const { aemGqEndpoint } = await fetchPlaceholders(DOCROOT);
+  const { noMatches } = placeholders;
   const { sport = '' } = config;
   let items = [];
   try {
