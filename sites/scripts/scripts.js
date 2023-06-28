@@ -490,12 +490,11 @@ export function getNavLink(link, external = true) {
 }
 
 /**
- * Loads the script in the head section
+ * Loads the script in the body section
  * @param {string} url and other attrs
  * @returns script
  */
 export function loadScript(url, attrs) {
-  const head = document.querySelector('head');
   const script = document.createElement('script');
   script.src = url;
   if (attrs) {
@@ -504,7 +503,7 @@ export function loadScript(url, attrs) {
       script.setAttribute(attr, attrs[attr]);
     }
   }
-  head.append(script);
+  document.body.append(script);
   return script;
 }
 
