@@ -135,7 +135,7 @@ export function getTourLangRoot(lang) {
 export function getCurrentSection() {
   const currentUrl = window.location.pathname;
   if (VIP_SECTION_PATHS.find((x) => currentUrl.indexOf(x) > -1)) {
-    return 'area_vip';
+    return 'area-vip';
   } if (TOUR_SECTION_PATHS.find((x) => currentUrl.indexOf(x) > -1)) {
     return 'tour';
   }

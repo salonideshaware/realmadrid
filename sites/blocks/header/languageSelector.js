@@ -4,7 +4,7 @@ import {
 
 async function fetchSiteMap() {
   try {
-    const response = await fetch(`${DOCROOT}/sitemap.xml`);
+    const response = await fetch(`${DOCROOT}/${getCurrentSection()}/sitemap.xml`);
     const siteMapText = await response.text();
     const parser = new DOMParser();
     const siteMap = parser.parseFromString(siteMapText, 'text/xml');
