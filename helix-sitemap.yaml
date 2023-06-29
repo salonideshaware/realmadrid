@@ -35,6 +35,7 @@ sitemaps:
         source: /sites/hi/vip-area/query-index.json
         destination: /sites/area-vip/sitemap.xml
         hreflang: hi
+
   tour-bernabeu:
     origin: https://main--realmadrid--hlxsites.hlx.live
     lastmod: YYYY-MM-DD
