@@ -291,7 +291,9 @@ async function loadLazy(doc) {
     const heroTourBlockNav = document.querySelector('.hero-tour.block .navcontainer > nav');
     if (heroTourBlockNav) {
       const selected = heroTourBlockNav.querySelector('a.selected');
-      heroTourBlockNav.scrollLeft = selected.offsetLeft - 20;
+      if (selected) {
+        heroTourBlockNav.scrollLeft = selected.offsetLeft - 20;
+      }
     }
   }
 
