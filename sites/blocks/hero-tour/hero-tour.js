@@ -1,4 +1,9 @@
-import { readBlockConfig, loadBlock, decorateIcons, createOptimizedPicture } from '../../scripts/lib-franklin.js';
+import {
+  readBlockConfig,
+  loadBlock,
+  decorateIcons,
+  createOptimizedPicture,
+} from '../../scripts/lib-franklin.js';
 import { fetchLanguagePlaceholders } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
