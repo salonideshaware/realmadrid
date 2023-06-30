@@ -1,4 +1,9 @@
-import { readBlockConfig, loadBlock, decorateIcons } from '../../scripts/lib-franklin.js';
+import {
+  readBlockConfig,
+  loadBlock,
+  decorateIcons,
+  createOptimizedPicture,
+} from '../../scripts/lib-franklin.js';
 import { fetchLanguagePlaceholders } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
@@ -101,16 +106,22 @@ export default async function decorate(block) {
     // get the picture element
     const imageName = desktop.substring(desktop.lastIndexOf('media_'), desktop.indexOf('?'));
     const picture = block.querySelector(`:scope img[src*="${imageName}"`).parentElement;
-    picture.classList.add('desktop');
-    background.append(picture);
+    const img = picture.querySelector('img');
+    const optimizedPic = createOptimizedPicture(img.src, img.alt, true, [{ width: '2000' }]);
+    optimizedPic.classList.add('desktop');
+    background.append(optimizedPic);
+    picture.remove();
   }
 
   if (mobile) {
     // get the picture element
     const imageName = mobile.substring(mobile.lastIndexOf('media_'), mobile.indexOf('?'));
     const picture = block.querySelector(`:scope img[src*="${imageName}"`).parentElement;
-    picture.classList.add('mobile');
-    background.append(picture);
+    const img = picture.querySelector('img');
+    const optimizedPic = createOptimizedPicture(img.src, img.alt, true, [{ width: '960' }]);
+    optimizedPic.classList.add('mobile');
+    background.append(optimizedPic);
+    picture.remove();
   }
 
   block.textContent = '';

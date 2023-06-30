@@ -107,6 +107,7 @@ if (!window.location.host.includes('hlx.page') && !window.location.host.includes
       type: 'text/javascript',
       charset: 'UTF-8',
       'data-domain-script': `${onetrustId}`,
+      async: true,
     });
 
     window.OptanonWrapper = () => {
