@@ -16,7 +16,7 @@ main .vip-sections-container {
 .vip-sections ul li {
   margin-bottom: 5px;
   position: relative;
-  flex: 1 0 auto;
+  flex: 1 1 auto;
 }
 
 .vip-sections ul .info {
