@@ -157,6 +157,7 @@
       flex-direction: row;
       box-sizing: border-box;
       line-height:normal;
+      align-items: center;
     }
 
     .section.info-vip.homepage.contact-card-container>.contact-card-wrapper .contact-card .telephone::before {
@@ -166,6 +167,7 @@
       font-size: 45px;
       border: 0;
       background: none;
+      margin-bottom: 0;
     }
 
     .section.info-vip.homepage.contact-card-container>.contact-card-wrapper .contact-card .contact {
