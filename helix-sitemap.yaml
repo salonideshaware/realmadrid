@@ -1,5 +1,3 @@
-version: 1
-
 sitemaps:
   area-vip:
     origin: https://main--realmadrid--hlxsites.hlx.live
@@ -7,69 +5,70 @@ sitemaps:
     languages:
       es:
         source: /sites/area-vip/query-index.json
-        destination: /sites/sitemap.xml
+        destination: /sites/area-vip/sitemap.xml
         hreflang: es
       en:
         source: /sites/en/vip-area/query-index.json
-        destination: /sites/sitemap.xml
+        destination: /sites/area-vip/sitemap.xml
         hreflang: en
       de:
         source: /sites/de/vip-zone/query-index.json
-        destination: /sites/sitemap.xml
+        destination: /sites/area-vip/sitemap.xml
         hreflang: de
       fr:
         source: /sites/fr/zone-vip/query-index.json
-        destination: /sites/sitemap.xml
+        destination: /sites/area-vip/sitemap.xml
         hreflang: fr
       pt:
         source: /sites/pt/area-vip/query-index.json
-        destination: /sites/sitemap.xml
+        destination: /sites/area-vip/sitemap.xml
         hreflang: pt
       ja:
         source: /sites/ja/vip-area/query-index.json
-        destination: /sites/sitemap.xml
+        destination: /sites/area-vip/sitemap.xml
         hreflang: ja
       ar:
         source: /sites/ar/vip-area/query-index.json
-        destination: /sites/sitemap.xml
+        destination: /sites/area-vip/sitemap.xml
         hreflang: ar
       hi:
         source: /sites/hi/vip-area/query-index.json
-        destination: /sites/sitemap.xml
+        destination: /sites/area-vip/sitemap.xml
         hreflang: hi
+
   tour-bernabeu:
     origin: https://main--realmadrid--hlxsites.hlx.live
     lastmod: YYYY-MM-DD
     languages:
       es:
         source: /sites/tour-bernabeu/query-index.json
-        destination: /sites/sitemap.xml
+        destination: /sites/tour-bernabeu/sitemap.xml
         hreflang: es
       en:
         source: /sites/en/tour-bernabeu/query-index.json
-        destination: /sites/sitemap.xml
+        destination: /sites/tour-bernabeu/sitemap.xml
         hreflang: en
       de:
         source: /sites/de/tour-bernabeu/query-index.json
-        destination: /sites/sitemap.xml
+        destination: /sites/tour-bernabeu/sitemap.xml
         hreflang: de
       fr:
         source: /sites/fr/tour-bernabeu/query-index.json
-        destination: /sites/sitemap.xml
+        destination: /sites/tour-bernabeu/sitemap.xml
         hreflang: fr
       pt:
         source: /sites/pt/tour-bernabeu/query-index.json
-        destination: /sites/sitemap.xml
+        destination: /sites/tour-bernabeu/sitemap.xml
         hreflang: pt
       ja:
         source: /sites/ja/tour-bernabeu/query-index.json
-        destination: /sites/sitemap.xml
+        destination: /sites/tour-bernabeu/sitemap.xml
         hreflang: ja
       ar:
         source: /sites/ar/tour-bernabeu/query-index.json
-        destination: /sites/sitemap.xml
+        destination: /sites/tour-bernabeu/sitemap.xml
         hreflang: ar
       hi:
         source: /sites/hi/tour-bernabeu/query-index.json
-        destination: /sites/sitemap.xml
+        destination: /sites/tour-bernabeu/sitemap.xml
         hreflang: hi

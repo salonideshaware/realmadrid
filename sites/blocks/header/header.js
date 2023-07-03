@@ -47,9 +47,12 @@ export default async function decorate(block) {
     console.error(error);
   }
 
-  const loginFragment = userSession && userSession.user
+  window.rm = window.rm || {};
+  window.rm.user = userSession ? userSession.user : '';
+
+  const loginFragment = window.rm.user
     ? `<button class="profile-button">
-      ${getInitials(userSession.user.fullName)}
+      ${getInitials(window.rm.user.fullName)}
     </button>`
     : `<button class="login-button">
       <svg focusable="false" width="16" height="16" aria-hidden="true" style="margin-left: 0px; filter: invert(26%) sepia(75%) saturate(7487%) hue-rotate(245deg) brightness(95%) contrast(107%);">

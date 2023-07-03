@@ -1,8 +1,15 @@
-import { readBlockConfig, loadBlock, decorateIcons } from '../../scripts/lib-franklin.js';
+import {
+  readBlockConfig,
+  loadBlock,
+  decorateIcons,
+  createOptimizedPicture,
+} from '../../scripts/lib-franklin.js';
+import { fetchLanguagePlaceholders } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   // get config entries
   const cfg = readBlockConfig(block);
+
   const {
     pretitle, title, desktop, navigation, mobile,
   } = cfg;
@@ -10,6 +17,13 @@ export default async function decorate(block) {
   const tourSubCategory = cfg['tour-sub-category'];
   // for promo we keep the original formatting
   const promo = [...block.querySelectorAll(':scope > div')].filter((entry) => entry.children[0].innerText.trim().toLowerCase() === 'promo');
+
+  // get placeholders (non-existing values are undefined)
+  const placeholders = await fetchLanguagePlaceholders();
+  const {
+    youCanAlsoChoose = 'También podéis elegir',
+    combinedVisits = 'VISITAS COMBINADAS',
+  } = placeholders;
 
   // create basic dom structure
   const dom = document.createRange().createContextualFragment(`
@@ -92,16 +106,22 @@ export default async function decorate(block) {
     // get the picture element
     const imageName = desktop.substring(desktop.lastIndexOf('media_'), desktop.indexOf('?'));
     const picture = block.querySelector(`:scope img[src*="${imageName}"`).parentElement;
-    picture.classList.add('desktop');
-    background.append(picture);
+    const img = picture.querySelector('img');
+    const optimizedPic = createOptimizedPicture(img.src, img.alt, true, [{ width: '2000' }]);
+    optimizedPic.classList.add('desktop');
+    background.append(optimizedPic);
+    picture.remove();
   }
 
   if (mobile) {
     // get the picture element
     const imageName = mobile.substring(mobile.lastIndexOf('media_'), mobile.indexOf('?'));
     const picture = block.querySelector(`:scope img[src*="${imageName}"`).parentElement;
-    picture.classList.add('mobile');
-    background.append(picture);
+    const img = picture.querySelector('img');
+    const optimizedPic = createOptimizedPicture(img.src, img.alt, true, [{ width: '960' }]);
+    optimizedPic.classList.add('mobile');
+    background.append(optimizedPic);
+    picture.remove();
   }
 
   block.textContent = '';
@@ -126,8 +146,8 @@ export default async function decorate(block) {
     const subCatContainer = document.createRange().createContextualFragment(`
     <div class='sub-wrapper'>
       <h2 class='sub-cat-title'>
-        <span class='sub-cat-subtitle'>También podéis elegir</span>
-        VISITAS COMBINADAS
+        <span class='sub-cat-subtitle'>${youCanAlsoChoose}</span>
+        ${combinedVisits}
       </h2>
       <div class='ticket-card-list hero sub' data-block-name='ticket-card-list' >
         <div>

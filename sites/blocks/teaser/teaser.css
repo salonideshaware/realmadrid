@@ -1,0 +1,95 @@
+/* the wrapper */
+.teaser-wrapper {
+  padding-bottom: 55px;
+}
+
+/* the block itself */
+.teaser.block {
+  padding: 20px;
+}
+
+/* give every uneven teaser darker background */
+.section.teaser-container .teaser-wrapper:nth-child(odd) .teaser.block {
+  background-color : #eee;
+}
+
+/* the flex container inside the block */
+.teaser.block > div {
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+}
+
+/* in mobile image comes first */
+.taser.block div.image {
+  order: 1;
+}
+
+/* text comes second */
+.teaser.block div.text {
+  order: 2;
+}
+
+/* text title */
+.teaser.block > div > div > h1 {
+  color: var(--heading-border-color);
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: var(--heading-font-size-m);
+  margin: 0;
+}
+
+/* the 'more info' link */
+.teaser.block > div > div > a {
+  font-size: 0.875rem;
+  color: #0067d1;
+  padding: 0 0 2rem;
+  display: block;
+  text-decoration: underline;
+}
+
+.teaser.block > div > div > a::after  {
+  content: '';
+  background-image: url('../../icons/arrow-right.svg');
+  filter: invert(24%) sepia(95%) saturate(4099%) hue-rotate(200deg) brightness(93%) contrast(101%);
+  display: inline-flex;
+  text-decoration: none;
+  border: solid 1px #0067d1;
+  border-radius: 50%;
+  box-sizing: border-box;
+  width: 13px;
+  height: 13px;
+  transform: translateX(0.5rem);
+}
+
+/* the image */
+.teaser.block > div > div  img {
+  width: auto;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* switch to desktop */
+@media (min-width:600px) {
+  /* change the flex flow to row */
+  .teaser.block > div {
+    flex-direction: row;
+    gap: 40px;
+  }
+
+  /* set back to natural order */
+  .taser.block div.image {
+    order: initial;
+  }
+  
+  /* set back to natural order */
+  .teaser.block div.text {
+    order: initial;
+  }
+
+  /* each flex entry gets 50% */
+  .teaser.block > div > div {
+    width: 50%;
+  }
+}

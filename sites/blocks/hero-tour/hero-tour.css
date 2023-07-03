@@ -51,7 +51,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
 .hero-tour.block .content .navcontainer {
   width: auto;
   height: 2rem;
-  margin: 1.25rem 1.25rem 1.875rem;
+  margin: 1.25rem 0 1.875rem;
   position: relative;
   padding: 0;
   z-index: 1;
@@ -59,7 +59,9 @@ body.tour .section.hero-tour-container .hero-tour.block {
 
 .hero-tour.block .content .navcontainer nav {
   position: relative;
-  width: 100%;
+  margin: 0 auto;
+  width:max-content;
+  max-width:100%;
   height: 100%;
   padding: 0;
   font-size: 0;
@@ -70,12 +72,20 @@ body.tour .section.hero-tour-container .hero-tour.block {
   transition-property: transform;
   transition-timing-function: ease-out;
   box-sizing: content-box;
+  overflow: auto;
+  scrollbar-width:none;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+}
+
+.hero-tour.block .content .navcontainer nav::-webkit-scrollbar {
+  display:none;
 }
 
 /* navigation entries */
 .hero-tour.block .content .navcontainer nav a {
   font-size: 0.875rem;
-  color: #fff;
+  color: var(--background-color);
   height: 2rem;
   margin-inline-end: 1rem;
   flex-shrink: 0;
@@ -91,11 +101,19 @@ body.tour .section.hero-tour-container .hero-tour.block {
   line-height: 0.8;
   padding: 0 0.75rem;
   border-radius: 1rem;
-  border: solid 0.06rem #fff;
+  border: solid 0.06rem var(--background-color);
   background-color: rgba(0 0 0 / 50%);
   text-transform: uppercase;
   text-decoration: none;
   vertical-align: top;
+}
+
+.hero-tour.block .content .navcontainer nav a:first-child {
+  margin-left: 20px;
+}
+
+.hero-tour.block .content .navcontainer nav a:last-child {
+  margin-right: 20px;
 }
 
 /* when we are on the page itself */
@@ -157,7 +175,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
   font-weight: 400;
   line-height: 1.11;
   letter-spacing: 0.07rem;
-  color: #fff;
+  color: var(--background-color);
   text-transform: uppercase;
 }
 
@@ -243,10 +261,11 @@ body.tour .section.hero-tour-container .hero-tour.block {
   }
 
   /* navigation */
-  .hero-tour.block .content .navcontainer nav {
-    justify-content: center;
-    margin: 1.875rem 0;
+
+  /* .hero-tour.block .content .navcontainer nav {
+    margin: 0 auto;
   }
+  */
 
   /* navigation entries */
   .hero-tour.block .content .navcontainer nav a {
@@ -349,7 +368,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
   padding: 0 1.875rem 1.5625rem;
   box-sizing: border-box;
   display: block;
-  background-color: #fff;
+  background-color: var(--background-color);
   border-bottom-right-radius: 1rem;
   border-bottom-left-radius: 1rem;
   text-decoration: underline;
@@ -357,7 +376,8 @@ body.tour .section.hero-tour-container .hero-tour.block {
 
 /* stylelint-disable-next-line no-descending-specificity */
 .hero-tour.block .ticket-card-list.hero > ul > li > a::after  {
-  content: url('../../icons/arrow-right.svg');
+  content: '';
+  background-image: url('../../icons/arrow-right.svg');
   filter: invert(24%) sepia(95%) saturate(4099%) hue-rotate(200deg) brightness(93%) contrast(101%);
   width: 13px;
   height: 13px;
@@ -471,7 +491,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
 
 /* ticket details block */
 .hero-tour.block .ticket-card-list.hero .ticket-detail {
-  background-color: #fff;
+  background-color: var(--background-color);
   box-sizing: border-box;
   padding: 1.25rem 1.875rem 0.5rem;
 }
@@ -789,7 +809,7 @@ body.tour .section.hero-tour-container .hero-tour.block {
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 0.9375rem;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -809,17 +829,30 @@ body.tour .section.hero-tour-container .hero-tour.block {
 /* -- the sub category ticket cards (no breakpoints ) -- */
 
 /* the list of sub category tickets */
-.hero-tour.block .ticket-card-list.hero.sub ul {
+
+.hero-tour.block .ticket-card-list.hero.sub > ul {
   position: relative;
-  width: 100%;
   height: 100%;
   z-index: 1;
   display: flex;
   list-style-type: none;
   transition-property: transform;
   box-sizing: content-box;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
+  scrollbar-width:none;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width:max-content;
+  max-width: 100%;
+  flex-wrap: nowrap;
+}
+
+
+.hero-tour.block .ticket-card-list.hero.sub > ul::-webkit-scrollbar  {
+  display:none;
 }
 
 /* li is the root element of a card */
@@ -839,7 +872,8 @@ body.tour .section.hero-tour-container .hero-tour.block {
   font-size: 1rem;
   line-height: 1;
   background : var(--background-color);
-  margin-inline-end: 15px;
+  margin-right: 8px;
+  margin-left: 8px;
 }
 
 /* the combo image */
@@ -955,4 +989,5 @@ body.tour .section.hero-tour-container .hero-tour.block {
   font-size: 0.8125rem;
   line-height: 1;
   color: #0067d1;
+  padding: 0 0.875rem;
 }

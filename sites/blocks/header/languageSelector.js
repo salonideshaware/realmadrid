@@ -1,10 +1,11 @@
 import {
-  getLocale, getVIPAreaLangRoot, getTourLangRoot, getCurrentSection, DOCROOT,
+  getLocale, getVIPAreaLangRoot, getTourLangRoot, getCurrentSection,
 } from '../../scripts/scripts.js';
 
 async function fetchSiteMap() {
   try {
-    const response = await fetch(`${DOCROOT}/sitemap.xml`);
+    const sitemapRoot = getCurrentSection() === 'tour' ? getTourLangRoot('es') : getVIPAreaLangRoot('es');
+    const response = await fetch(`${sitemapRoot}/sitemap.xml`);
     const siteMapText = await response.text();
     const parser = new DOMParser();
     const siteMap = parser.parseFromString(siteMapText, 'text/xml');
@@ -57,7 +58,7 @@ async function createLanguageDropdown(languages, languageButtonContent, currentL
     let defaultUrl = '#';
     if (sectionName === 'tour') {
       defaultUrl = getTourLangRoot(langName);
-    } else if (sectionName === 'vip') {
+    } else {
       defaultUrl = getVIPAreaLangRoot(langName);
     }
     const langUrl = urls[langName]

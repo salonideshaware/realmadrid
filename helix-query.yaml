@@ -230,7 +230,7 @@ indices:
   tour-bernabeu-en:
     include:
       - /sites/en/tour-bernabeu
-      - /sites/en/tour-bernabeu/*
+      - /sites/en/tour-bernabeu/**
     exclude:
       - /sites/en/tour-bernabeu/fragments/**
     target: /sites/en/tour-bernabeu/query-index.json
