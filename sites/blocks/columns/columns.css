@@ -87,6 +87,8 @@
     grid-column: 2/3;
     grid-row: auto;
     padding: 25px 100px 0 15px;
+    padding-inline-start: 100px;
+    padding-inline-end: 15px;
   }
 
   /* COLUMNS VIP LOCATION TYPE */
@@ -108,8 +110,8 @@
   .columns.vip-location > div > div:nth-of-type(2) ul {
     padding: 0;
     flex-wrap: wrap;
-    margin-left: 20px;
-    margin-right: 0;
+    margin-inline-start: 20px;
+    margin-inline-end: 0;
   }
 
   .columns.vip-location > div > div:nth-of-type(2) ul li {
@@ -219,7 +221,7 @@ body.tour main p.answer {
   position: absolute;
   right: 100%;
   top: 0.125rem;
-  margin-right: 0.75rem;
+  margin-inline-end: 0.75rem;
 }
 
 .question.open::before {
@@ -230,6 +232,11 @@ body.tour main p.answer {
 .question.close::before {
   content: '+';
   line-height: 1;
+}
+
+.question.open:lang(ar)::before, .question.close:lang(ar)::before {
+  right: unset;
+  left: 100%;
 }
 
 @media screen and (min-width: 600px) {

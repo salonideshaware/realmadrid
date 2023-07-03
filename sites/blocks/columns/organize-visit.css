@@ -37,7 +37,7 @@ body.tour .section.section-organize-visit .default-content-wrapper {
 }
 
 .columns.organize-visit .text-wrapper {
-  border-left: 5px solid #cdcdcd;
+  border-inline-start: 5px solid #cdcdcd;
   padding: 7px 11px;
   flex-basis: max-content;
   line-height: 22px;
@@ -68,7 +68,7 @@ body.tour .section.section-organize-visit .default-content-wrapper {
   }
 
   .columns.organize-visit .visit-box .text-wrapper {
-    border-left: 2px solid #cdcdcd;
+    border-inline-start: 2px solid #cdcdcd;
     padding: 5px 14px;
     flex-basis: 100%;
   }
