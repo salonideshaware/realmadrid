@@ -37,7 +37,8 @@ function getPageLoadTrackingPayload() {
   trackingPath = trackingPath.replace(`${DOCROOT}/`, '');
 
   const trackingPathArray = trackingPath.split('/');
-  const trackingPageName = trackingPathArray.length > 1 ? ['realmadrid', currentSection].concat(trackingPathArray.slice(1)) : ['realmadrid', currentSection].concat(trackingPathArray);
+  const trackingPageName = trackingPathArray.length > 1 ? ['realmadrid', currentSection].concat(trackingPathArray.slice(1))
+    : ['realmadrid'].concat(trackingPathArray);
 
   const webPageDetails = {
     pageName: trackingPageName.join(':'),
@@ -54,6 +55,13 @@ function getPageLoadTrackingPayload() {
     country: currentLanguage,
     cms: 'aem_franklin',
   };
+
+  // Replace dashes with underscores in values for specific properties
+  ['pageName', 'pageSection', 'pageLevel1', 'pageLevel2', 'pageLevel3', 'pageType'].forEach((key) => {
+    if (webPageDetails[key]) {
+      webPageDetails[key] = webPageDetails[key].replace(/-/g, '_');
+    }
+  });
 
   // Get the pageName we want to track. e.g. realmadrid:tour:colegios:classic
   // We try to use the path to the page in Spanish.
