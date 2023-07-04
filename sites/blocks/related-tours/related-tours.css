@@ -27,7 +27,7 @@ main .section.related-tours-container .related-tours-wrapper {
   letter-spacing: -0.53px;
   color: var(--background-color);
   margin-bottom: 1.875rem;
-  padding-left: 1.5625rem;
+  padding-inline-start: 1.5625rem;
 }
 
 /* related tours subtitle */
@@ -163,7 +163,7 @@ main .section.related-tours-container .related-tours-wrapper {
 }
 
 .related-tours.block .ticket-card-list.related .info-buy .price > p {
-  text-align: right;
+  text-align: end;
   font-size: 0.9375rem;
   letter-spacing: -0.3px;
   margin: 0;
@@ -189,7 +189,7 @@ main .section.related-tours-container .related-tours-wrapper {
   display: block;
   color: #444;
   font-size: 0.875rem;
-  text-align: right;
+  text-align: end;
 }
 
 /* buy button */
@@ -217,6 +217,10 @@ main .section.related-tours-container .related-tours-wrapper {
   text-decoration: none;
 }
 
+.related-tours.block .ticket-card-list.related .info-buy .buy-button > a:lang(ar) {
+  transform: translateX(-1.5625rem);
+}
+
 /* ticked detail container */
 .related-tours.block .ticket-card-list.related .ticket-detail {
   background-color: var(--background-color);
@@ -235,7 +239,8 @@ main .section.related-tours-container .related-tours-wrapper {
 
 /* tour includes list */
 .related-tours.block .ticket-card-list.related .ticket-detail .content > ul {
-  margin: 0 0 1.125rem 1.125rem;
+  margin: 0 0 1.125rem;
+  margin-inline-end: 1.125rem;
   padding: 0;
   list-style-type: none;
   font-size: 1rem;
@@ -253,6 +258,11 @@ main .section.related-tours-container .related-tours-wrapper {
   display: block;
   position: absolute;
   left: -.75rem;
+}
+
+.related-tours.block .ticket-card-list.related .ticket-detail .content > ul > li:lang(ar)::before  {
+  left: unset;
+  right: -.75rem;
 }
 
 /* more info link */
@@ -281,6 +291,10 @@ main .section.related-tours-container .related-tours-wrapper {
   width: 13px;
   height: 13px;
   transform: translateX(0.5rem);
+}
+
+.related-tours.block .ticket-card-list.related .info-link:lang(ar)::after {
+  transform: translateX(-0.5rem);
 }
 
 @media (min-width: 600px) {
@@ -336,7 +350,9 @@ main .section.related-tours-container .related-tours-wrapper {
 
   /* buy button */
   .related-tours.block .ticket-card-list.related .info-buy .buy-button {
-    padding: 0 0.9375rem 0 1.25rem;
+    padding: 0;
+    padding-inline-end: 1.25rem;
+    padding-inline-start: 0.9375rem;
   }
 
   .related-tours.block .ticket-card-list.related .info-buy .buy-button > a {
@@ -363,7 +379,8 @@ main .section.related-tours-container .related-tours-wrapper {
   .related-tours.block .ticket-card-list.related .ticket-detail .content > ul {
     font-size: 0.8125rem;
     line-height: 1.77;
-    margin: 0 0 0.875rem 0.625rem;
+    margin: 0 0 0.875rem;
+    margin-inline-end: 0.625rem;
   }
 
   /* more info link */
@@ -374,6 +391,11 @@ main .section.related-tours-container .related-tours-wrapper {
     left: 0;
     padding: 0 1.875rem;
     box-sizing: border-box;
+  }
+
+  .related-tours.block .ticket-card-list.related .info-link:lang(ar) {
+    left: unset;
+    right: 0;
   }
 }
 
@@ -411,6 +433,10 @@ main .section.related-tours-container .related-tours-wrapper {
   flex-wrap:nowrap;
   justify-content: initial;
   min-width: 100%;
+}
+
+.related-tours.block .ticket-card-list.related.sub > ul:lang(ar) {
+  float: right;
 }
 
 .related-tours.block .ticket-card-list.related.sub > ul::-webkit-scrollbar {
