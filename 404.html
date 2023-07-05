@@ -21,7 +21,7 @@
       };
       const segments = window.location.pathname.split('/');
       const locale = segments[1] && LANG_LOCALE[segments[1]] ? LANG_LOCALE[segments[1]] : 'es-ES';
-      window.location.href = `https://${document.location.hostname}/${locale}/error/not-found`;  
+      window.location.href = `https://${host}/${locale}/error/not-found`;  
     }
   </script>
   
