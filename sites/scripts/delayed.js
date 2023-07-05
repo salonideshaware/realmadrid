@@ -41,6 +41,10 @@ function getPageLoadTrackingPayload() {
   const trackingPageName = trackingPathArray.length > 1 ? ['realmadrid', currentSection].concat(trackingPathArray.slice(1))
     : ['realmadrid', currentSection];
 
+  if (currentSection === 'tour' && trackingPageName.length === 2) {
+    trackingPageName.push('individual');
+  }
+
   const webPageDetails = {
     pageName: trackingPageName.join(':'),
     pageTitle: getMetadata('og:title'),
