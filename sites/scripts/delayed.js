@@ -36,18 +36,20 @@ function getPageLoadTrackingPayload() {
   // get rid of the prefix
   trackingPath = trackingPath.replace(`${DOCROOT}/`, '');
 
+  // Get the pageName we want to track. e.g. realmadrid:tour:colegios:classic
   const trackingPathArray = trackingPath.split('/');
-  const trackingPageName = trackingPathArray.length > 1 ? ['realmadrid', currentSection].concat(trackingPathArray.slice(1)) : ['realmadrid', currentSection].concat(trackingPathArray);
+  const trackingPageName = trackingPathArray.length > 1 ? ['realmadrid', currentSection].concat(trackingPathArray.slice(1))
+    : ['realmadrid', currentSection];
 
   const webPageDetails = {
     pageName: trackingPageName.join(':'),
     pageTitle: getMetadata('og:title'),
     pageURL: window.location.href,
     pageSection: currentSection,
-    pageLevel1: trackingPageName.length > 1 ? trackingPageName[1] : '',
-    pageLevel2: trackingPageName.length > 2 ? trackingPageName[2] : '',
-    pageLevel3: trackingPageName.length > 3 ? trackingPageName[3] : '',
-    pageLevel4: trackingPageName.length > 4 ? trackingPageName[4] : '',
+    pageLevel1: trackingPageName.length > 2 ? trackingPageName[2] : '',
+    pageLevel2: trackingPageName.length > 3 ? trackingPageName[3] : '',
+    pageLevel3: trackingPageName.length > 4 ? trackingPageName[4] : '',
+    pageLevel4: trackingPageName.length > 5 ? trackingPageName[5] : '',
     pageType: currentSection,
     previousPageURL: document.referrer,
     pageLang: currentLanguage,
@@ -55,8 +57,13 @@ function getPageLoadTrackingPayload() {
     cms: 'aem_franklin',
   };
 
-  // Get the pageName we want to track. e.g. realmadrid:tour:colegios:classic
-  // We try to use the path to the page in Spanish.
+  // Replace dashes with underscores in values for specific properties
+  ['pageName', 'pageSection', 'pageLevel1', 'pageLevel2', 'pageLevel3', 'pageType'].forEach((key) => {
+    if (webPageDetails[key]) {
+      webPageDetails[key] = webPageDetails[key].replace(/-/g, '_');
+    }
+  });
+
   window.rm = window.rm || {};
   const userInfo = window.rm.user;
 
