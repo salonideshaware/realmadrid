@@ -3,6 +3,28 @@
 
 <head>
   <title>Page not found</title>
+
+  <script type="text/javascript">
+    // redirect to RM error page when host is a production domain
+    const host = document.location.hostname;
+    if (!host.includes('localhost') && !host.includes('.hlx.')) {
+      // point to locale specific RM error page 
+      const LANG_LOCALE = {
+        es: 'es-ES',
+        en: 'en-US',
+        de: 'de-DE',
+        fr: 'fr-FR',
+        pt: 'pt-PT',
+        ar: 'ar-AE',
+        hi: 'hi-IN',
+        ja: 'ja-JP',
+      };
+      const segments = window.location.pathname.split('/');
+      const locale = segments[1] && LANG_LOCALE[segments[1]] ? LANG_LOCALE[segments[1]] : 'es-ES';
+      window.location.href = `https://${host}/${locale}/error/not-found`;  
+    }
+  </script>
+  
   <script type="text/javascript">
     window.isErrorPage = true;
     window.errorCode = '404';
