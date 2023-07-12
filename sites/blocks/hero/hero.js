@@ -11,7 +11,7 @@ async function addNavigation(block) {
   const vipRoot = getVIPAreaLangRoot();
   const currentPath = document.location.pathname;
   // no navigation for VIP root page
-  if (currentPath === vipRoot) return;
+  // if (currentPath === vipRoot) return;
 
   // get query index for this language
   const index = await getVIPQueryindex(vipRoot);
