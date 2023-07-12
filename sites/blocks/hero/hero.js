@@ -36,8 +36,8 @@ async function addNavigation(block) {
   const childrenDiv = document.createElement('div');
   childrenDiv.classList.add('children');
   index.forEach((entry) => {
-    if (entry.path.startsWith(currentPath) && entry.path.split('/').length === childrenDepth && 
-    entry.category !== 'vip-area-detail') {
+    if (entry.path.startsWith(currentPath) && entry.path.split('/').length === childrenDepth
+    && entry.category !== 'vip-area-detail') {
       childrenDiv.append(document.createRange().createContextualFragment(`
       <a href='${entry.path}'class='child'></span>${entry.title}</a>
       `));
