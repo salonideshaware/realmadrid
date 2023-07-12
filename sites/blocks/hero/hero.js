@@ -11,7 +11,7 @@ async function addNavigation(block) {
   const vipRoot = getVIPAreaLangRoot();
   const currentPath = document.location.pathname;
   // no navigation for VIP root page
-  // if (currentPath === vipRoot) return;
+  if (currentPath === vipRoot) return;
 
   // get query index for this language
   const index = await getVIPQueryindex(vipRoot);
@@ -36,9 +36,10 @@ async function addNavigation(block) {
   const childrenDiv = document.createElement('div');
   childrenDiv.classList.add('children');
   index.forEach((entry) => {
-    if (entry.path.startsWith(currentPath) && entry.path.split('/').length === childrenDepth) {
+    if (entry.path.startsWith(currentPath) && entry.path.split('/').length === childrenDepth && 
+    entry.category !== 'vip-area-detail') {
       childrenDiv.append(document.createRange().createContextualFragment(`
-      <a href='${entry.path}'class='child'><span class='icon icon-arrow-right'></span>${entry.title}</a>
+      <a href='${entry.path}'class='child'></span>${entry.title}</a>
       `));
     }
   });
