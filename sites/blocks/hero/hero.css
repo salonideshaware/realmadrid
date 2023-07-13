@@ -68,6 +68,7 @@ main .hero .navigation .child {
   margin: 1rem 0.5rem;
   font-size: 0.8125rem;
   text-decoration: none;
+  text-transform: uppercase;
   color: var(--background-color);
   line-height: 1;
   font-weight: 600;
