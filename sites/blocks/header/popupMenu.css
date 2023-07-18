@@ -19,6 +19,21 @@
   height: calc(100% - 3em);
 }
 
+.scrollable-popup-menu-area::-webkit-scrollbar {
+  width: .25rem;
+  height: .25rem;
+}
+
+.scrollable-popup-menu-area::-webkit-scrollbar-thumb {
+  background-color: var(--rm-color-grayscale-light, #c7ccd6);
+  border: 3px solid transparent;
+  border-radius: 1.25rem;
+}
+
+.scrollable-popup-menu-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 .popup-menu-area:lang(ar) {
   right: 0;
   left: unset;
