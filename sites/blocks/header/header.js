@@ -9,7 +9,6 @@ import {
 
 import {
   fetchAuthConfiguration, getEnvironment,
-  getInitials,
   getUserSession,
   signIn,
 } from './auth.js';
