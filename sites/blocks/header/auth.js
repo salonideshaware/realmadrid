@@ -268,10 +268,3 @@ export async function getUserSession() {
     user,
   };
 }
-
-export function getInitials(str) {
-  if (!str) {
-    return '';
-  }
-  return str.split(' ').map((word) => word[0].toUpperCase()).join('');
-}

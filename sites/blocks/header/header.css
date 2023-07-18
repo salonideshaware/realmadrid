@@ -62,7 +62,7 @@
     letter-spacing: 0.2px;
     line-height: 21px;
     padding: 8px 9px;
-    text-transform: none;
+    text-transform: uppercase;
 }
 
 header ul {
