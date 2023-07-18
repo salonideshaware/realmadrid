@@ -14,6 +14,27 @@
   transition: 0.5s ease-out all;
 }
 
+.scrollable-popup-menu-area {
+  overflow-y: auto;
+  overflow-x:hidden;
+  height: calc(100% - 3em);
+}
+
+.sub-popup-menu-area::-webkit-scrollbar,  .scrollable-popup-menu-area::-webkit-scrollbar {
+  width: .25rem;
+  height: .25rem;
+}
+
+.sub-popup-menu-area::-webkit-scrollbar-thumb,  .scrollable-popup-menu-area::-webkit-scrollbar-thumb {
+  background-color: var(--rm-color-grayscale-light, #c7ccd6);
+  border: 3px solid transparent;
+  border-radius: 1.25rem;
+}
+
+.sub-popup-menu-area::-webkit-scrollbar-track,  .scrollable-popup-menu-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 .popup-menu-area:lang(ar) {
   right: 0;
   left: unset;
@@ -131,11 +152,13 @@ a.top-menu-mobile-item {
 .sub-popup-menu-area {
   position: absolute;
   left: 350px;
-  width: 300px;
-  top: -5px;
+  width: 260px;
+  top: 0;
   padding-top: 43px;
   padding-inline-start: 59px;
   padding-inline-end: 40px;
+  overflow-y: auto;
+  height: calc(100% - 5.375em);
 }
 
 .sub-popup-menu-area:lang(ar) {
@@ -202,6 +225,8 @@ a.top-menu-mobile-item {
 .language-popup-menu-area {
   border-top: 1px solid #E1E5E9;
   padding-inline-start: 40px;
+  background-color: white;
+  position:relative;
 }
 
 @media screen and (max-width: 1160px) {
@@ -229,11 +254,6 @@ a.top-menu-mobile-item {
   .popup-menu:lang(ar) {
     right: -300px;
     left: unset;
-  }
-
-  .scrollable-popup-menu-area {
-    overflow-y: scroll;
-    height: calc(100% - 3em);
   }
 
   .top-menu-mobile {
