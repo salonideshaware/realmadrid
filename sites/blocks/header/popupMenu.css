@@ -16,6 +16,7 @@
 
 .scrollable-popup-menu-area {
   overflow-y: auto;
+  overflow-x:hidden;
   height: calc(100% - 3em);
 }
 
