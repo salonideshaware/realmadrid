@@ -142,7 +142,7 @@ a.top-menu-mobile-item {
   padding-inline-start: 59px;
   padding-inline-end: 40px;
   overflow-y: scroll;
-  height: calc(100% - 3em);
+  height: calc(100% - 6em);
 }
 
 .sub-popup-menu-area:lang(ar) {
