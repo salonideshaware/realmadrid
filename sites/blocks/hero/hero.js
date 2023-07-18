@@ -10,8 +10,6 @@ async function addNavigation(block) {
   // get language dependent root
   const vipRoot = getVIPAreaLangRoot();
   const currentPath = document.location.pathname;
-  // no navigation for VIP root page
-  // if (currentPath === vipRoot) return;
 
   // get query index for this language
   const index = await getVIPQueryindex(vipRoot);
@@ -25,28 +23,32 @@ async function addNavigation(block) {
   const parentPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
   // get index entry for parent
   const parentIndex = index.find((parentEntry) => parentEntry.path === parentPath);
+  // append parent link to hero navigation
   if (parentIndex) {
     nav.append(document.createRange().createContextualFragment(`
     <a href='${parentPath}'class='parent'><span class='icon icon-arrow-right'></span>${parentIndex.title}</a>
     `));
   }
 
-  // add direct children
+  // check for children
   const childrenDepth = currentPath.split('/').length + 1;
-  const childrenDiv = document.createElement('div');
-  childrenDiv.classList.add('children');
-  index.forEach((entry) => {
-    if (entry.path.startsWith(currentPath) && entry.path.split('/').length === childrenDepth
-    && entry.category !== 'vip-area-detail') {
+  const childrenIndex = index.filter((entry) => entry.path.startsWith(currentPath)
+    // ignore vip area detail pages
+    && entry.path.split('/').length === childrenDepth && entry.category !== 'vip-area-detail');
+
+  if (childrenIndex) {
+    // create children list root element
+    const childrenDiv = document.createElement('div');
+    childrenDiv.classList.add('children');
+    // add children
+    childrenIndex.forEach((entry) => {
       childrenDiv.append(document.createRange().createContextualFragment(`
-      <a href='${entry.path}'class='child'></span>${entry.title}</a>
-      `));
-    }
-  });
-  if (childrenDiv.hasChildNodes()) {
+      <a href='${entry.path}'class='child'>${entry.title}</a>`));
+    });
+    // add children list to hero navittion
     nav.append(childrenDiv);
   }
-
+  // decorate the arrow icon for the parent link
   decorateIcons(nav);
   // append navigation block
   block.prepend(nav);
