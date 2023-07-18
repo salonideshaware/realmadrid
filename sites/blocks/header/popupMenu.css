@@ -19,18 +19,18 @@
   height: calc(100% - 3em);
 }
 
-.scrollable-popup-menu-area::-webkit-scrollbar {
+.sub-popup-menu-area::-webkit-scrollbar,  .scrollable-popup-menu-area::-webkit-scrollbar {
   width: .25rem;
   height: .25rem;
 }
 
-.scrollable-popup-menu-area::-webkit-scrollbar-thumb {
+.sub-popup-menu-area::-webkit-scrollbar-thumb,  .scrollable-popup-menu-area::-webkit-scrollbar-thumb {
   background-color: var(--rm-color-grayscale-light, #c7ccd6);
   border: 3px solid transparent;
   border-radius: 1.25rem;
 }
 
-.scrollable-popup-menu-area::-webkit-scrollbar-track {
+.sub-popup-menu-area::-webkit-scrollbar-track,  .scrollable-popup-menu-area::-webkit-scrollbar-track {
   background: transparent;
 }
 
