@@ -14,6 +14,11 @@
   transition: 0.5s ease-out all;
 }
 
+.scrollable-popup-menu-area {
+  overflow-y: scroll;
+  height: calc(100% - 3em);
+}
+
 .popup-menu-area:lang(ar) {
   right: 0;
   left: unset;
@@ -229,11 +234,6 @@ a.top-menu-mobile-item {
   .popup-menu:lang(ar) {
     right: -300px;
     left: unset;
-  }
-
-  .scrollable-popup-menu-area {
-    overflow-y: scroll;
-    height: calc(100% - 3em);
   }
 
   .top-menu-mobile {
