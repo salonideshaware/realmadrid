@@ -141,6 +141,8 @@ a.top-menu-mobile-item {
   padding-top: 43px;
   padding-inline-start: 59px;
   padding-inline-end: 40px;
+  overflow-y: scroll;
+  height: calc(100% - 3em);
 }
 
 .sub-popup-menu-area:lang(ar) {
@@ -207,6 +209,8 @@ a.top-menu-mobile-item {
 .language-popup-menu-area {
   border-top: 1px solid #E1E5E9;
   padding-inline-start: 40px;
+  background-color: white;
+  position:relative;
 }
 
 @media screen and (max-width: 1160px) {
