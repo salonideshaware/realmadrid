@@ -15,12 +15,8 @@
 }
 
 .scrollable-popup-menu-area {
-  overflow-y: hidden;
-  height: calc(100% - 3em);
-}
-
-.scrollable-popup-menu-area:hover {
   overflow-y: auto;
+  height: calc(100% - 3em);
 }
 
 .sub-popup-menu-area::-webkit-scrollbar,  .scrollable-popup-menu-area::-webkit-scrollbar {
@@ -160,12 +156,8 @@ a.top-menu-mobile-item {
   padding-top: 43px;
   padding-inline-start: 59px;
   padding-inline-end: 40px;
-  overflow-y: hidden;
-  height: calc(100% - 5.375em);
-}
-
-.sub-popup-menu-area:hover {
   overflow-y: auto;
+  height: calc(100% - 5.375em);
 }
 
 .sub-popup-menu-area:lang(ar) {
