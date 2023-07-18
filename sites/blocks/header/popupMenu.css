@@ -137,7 +137,7 @@ a.top-menu-mobile-item {
   position: absolute;
   left: 350px;
   width: 260px;
-  top: -5px;
+  top: 0;
   padding-top: 43px;
   padding-inline-start: 59px;
   padding-inline-end: 40px;
