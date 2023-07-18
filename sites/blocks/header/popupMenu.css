@@ -15,7 +15,7 @@
 }
 
 .scrollable-popup-menu-area {
-  overflow-y: scroll;
+  overflow-y: auto;
   height: calc(100% - 3em);
 }
 
@@ -141,7 +141,7 @@ a.top-menu-mobile-item {
   padding-top: 43px;
   padding-inline-start: 59px;
   padding-inline-end: 40px;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: calc(100% - 5.375em);
 }
 
