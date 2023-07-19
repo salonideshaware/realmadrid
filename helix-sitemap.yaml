@@ -5,35 +5,35 @@ sitemaps:
     languages:
       es:
         source: /sites/area-vip/query-index.json
-        destination: /sites/area-vip/sitemap.xml
+        destination: /sites/sitemap.xml
         hreflang: es
       en:
         source: /sites/en/vip-area/query-index.json
-        destination: /sites/area-vip/sitemap.xml
+        destination: /sites/sitemap.xml
         hreflang: en
       de:
         source: /sites/de/vip-zone/query-index.json
-        destination: /sites/area-vip/sitemap.xml
+        destination: /sites/sitemap.xml
         hreflang: de
       fr:
         source: /sites/fr/zone-vip/query-index.json
-        destination: /sites/area-vip/sitemap.xml
+        destination: /sites/sitemap.xml
         hreflang: fr
       pt:
         source: /sites/pt/area-vip/query-index.json
-        destination: /sites/area-vip/sitemap.xml
+        destination: /sites/sitemap.xml
         hreflang: pt
       ja:
         source: /sites/ja/vip-area/query-index.json
-        destination: /sites/area-vip/sitemap.xml
+        destination: /sites/sitemap.xml
         hreflang: ja
       ar:
         source: /sites/ar/vip-area/query-index.json
-        destination: /sites/area-vip/sitemap.xml
+        destination: /sites/sitemap.xml
         hreflang: ar
       hi:
         source: /sites/hi/vip-area/query-index.json
-        destination: /sites/area-vip/sitemap.xml
+        destination: /sites/sitemap.xml
         hreflang: hi
 
   tour-bernabeu:
@@ -42,15 +42,15 @@ sitemaps:
     languages:
       es:
         source: /sites/tour-bernabeu/query-index.json
-        destination: /sites/tour-bernabeu/sitemap.xml
+        destination: /sites/sitemap.xml
         hreflang: es
       en:
         source: /sites/en/tour-bernabeu/query-index.json
-        destination: /sites/tour-bernabeu/sitemap.xml
+        destination: /sites/sitemap.xml
         hreflang: en
       de:
         source: /sites/de/tour-bernabeu/query-index.json
-        destination: /sites/tour-bernabeu/sitemap.xml
+        destination: /sites/sitemap.xml
         hreflang: de
       fr:
         source: /sites/fr/tour-bernabeu/query-index.json
@@ -58,17 +58,17 @@ sitemaps:
         hreflang: fr
       pt:
         source: /sites/pt/tour-bernabeu/query-index.json
-        destination: /sites/tour-bernabeu/sitemap.xml
+        destination: /sites/sitemap.xml
         hreflang: pt
       ja:
         source: /sites/ja/tour-bernabeu/query-index.json
-        destination: /sites/tour-bernabeu/sitemap.xml
+        destination: /sites/sitemap.xml
         hreflang: ja
       ar:
         source: /sites/ar/tour-bernabeu/query-index.json
-        destination: /sites/tour-bernabeu/sitemap.xml
+        destination: /sites/sitemap.xml
         hreflang: ar
       hi:
         source: /sites/hi/tour-bernabeu/query-index.json
-        destination: /sites/tour-bernabeu/sitemap.xml
+        destination: /sites/sitemap.xml
         hreflang: hi
