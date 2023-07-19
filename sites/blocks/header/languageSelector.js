@@ -4,8 +4,7 @@ import {
 
 async function fetchSiteMap() {
   try {
-    const sitemapRoot = getCurrentSection() === 'tour' ? getTourLangRoot('es') : getVIPAreaLangRoot('es');
-    const response = await fetch(`${sitemapRoot}/sitemap.xml`);
+    const response = await fetch('/sites/sitemap.xml');
     const siteMapText = await response.text();
     const parser = new DOMParser();
     const siteMap = parser.parseFromString(siteMapText, 'text/xml');
