@@ -1,18 +1,11 @@
 import { decorateIcons, createOptimizedPicture } from '../../scripts/lib-franklin.js';
-import { getVIPAreaLangRoot } from '../../scripts/scripts.js';
-
-async function getVIPQueryindex(vipRoot) {
-  const resp = await fetch(`${vipRoot}/query-index.json`);
-  return resp.ok ? (await resp.json()).data : null;
-}
+import { fetchVIPAreaIndex } from '../../scripts/scripts.js';
 
 async function addNavigation(block) {
-  // get language dependent root
-  const vipRoot = getVIPAreaLangRoot();
   const currentPath = document.location.pathname;
 
   // get query index for this language
-  const index = await getVIPQueryindex(vipRoot);
+  const index = await fetchVIPAreaIndex();
   if (index === null) return;
 
   // nav container div
@@ -34,7 +27,7 @@ async function addNavigation(block) {
   const childrenDepth = currentPath.split('/').length + 1;
   const childrenIndex = index.filter((entry) => entry.path.startsWith(currentPath)
     // ignore vip area detail pages
-    && entry.path.split('/').length === childrenDepth && entry.category !== 'vip-area-detail');
+    && entry.path.split('/').length === childrenDepth && !entry.category.startsWith('vip-area-detail'));
 
   if (childrenIndex) {
     // create children list root element
