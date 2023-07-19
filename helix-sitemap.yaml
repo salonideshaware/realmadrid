@@ -37,7 +37,7 @@ sitemaps:
         hreflang: hi
 
   tour-bernabeu:
-    origin: https://mwww.realmadrid.com
+    origin: https://main--realmadrid--hlxsites.hlx.live
     lastmod: YYYY-MM-DD
     languages:
       es:
