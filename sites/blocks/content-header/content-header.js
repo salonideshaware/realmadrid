@@ -1,14 +1,10 @@
-async function getTitle(path) {
-  const resp = await fetch(`${path}`);
-  if (resp.ok) {
-    const text = await resp.text();
-    return document.createRange().createContextualFragment(text).querySelector('title')?.innerText;
-  }
-  return '';
-}
+import { fetchVIPAreaIndex } from '../../scripts/scripts.js';
 
-export default function decorate(block) {
+export default async function decorate(block) {
   block.textContent = '';
+  // get the index for this VIP section
+  const index = await fetchVIPAreaIndex();
+
   // if there is an h1 in main text take it as the main title otherwise page title
   const hasH1Title = document.querySelector('main h1:first-child');
   const title = hasH1Title ? (hasH1Title.remove(), hasH1Title.innerText) : document.querySelector('title')?.innerText;
@@ -32,8 +28,8 @@ export default function decorate(block) {
     if (nextSubPath !== curPath) {
       const a = document.createElement('a');
       a.setAttribute('href', nextSubPath);
-      const parentTitle = await getTitle(nextSubPath);
-      if (parentTitle !== '') {
+      const parentTitle = index.find((e) => e.path === nextSubPath)?.title;
+      if (parentTitle !== undefined) {
         a.innerText = parentTitle;
         breadcrumb.append(a);
         breadcrumb.append(' · ');

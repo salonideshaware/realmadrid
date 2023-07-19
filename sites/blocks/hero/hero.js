@@ -1,4 +1,51 @@
-import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
+import { decorateIcons, createOptimizedPicture } from '../../scripts/lib-franklin.js';
+import { fetchVIPAreaIndex } from '../../scripts/scripts.js';
+
+async function addNavigation(block) {
+  const currentPath = document.location.pathname;
+
+  // get query index for this language
+  const index = await fetchVIPAreaIndex();
+  if (index === null) return;
+
+  // nav container div
+  const nav = document.createElement('div');
+  nav.classList.add('navigation');
+
+  // get parent path
+  const parentPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
+  // get index entry for parent
+  const parentIndex = index.find((parentEntry) => parentEntry.path === parentPath);
+  // append parent link to hero navigation
+  if (parentIndex) {
+    nav.append(document.createRange().createContextualFragment(`
+    <a href='${parentPath}'class='parent'><span class='icon icon-arrow-right'></span>${parentIndex.title}</a>
+    `));
+  }
+
+  // check for children
+  const childrenDepth = currentPath.split('/').length + 1;
+  const childrenIndex = index.filter((entry) => entry.path.startsWith(currentPath)
+    // ignore vip area detail pages
+    && entry.path.split('/').length === childrenDepth && !entry.category.startsWith('vip-area-detail'));
+
+  if (childrenIndex) {
+    // create children list root element
+    const childrenDiv = document.createElement('div');
+    childrenDiv.classList.add('children');
+    // add children
+    childrenIndex.forEach((entry) => {
+      childrenDiv.append(document.createRange().createContextualFragment(`
+      <a href='${entry.path}'class='child'>${entry.title}</a>`));
+    });
+    // add children list to hero navittion
+    nav.append(childrenDiv);
+  }
+  // decorate the arrow icon for the parent link
+  decorateIcons(nav);
+  // append navigation block
+  block.prepend(nav);
+}
 
 function createVideo(block) {
   const anchors = [...block.querySelectorAll('a[href$=".mp4"]')];
@@ -69,5 +116,9 @@ export default async function decorate(block) {
     heroContent.classList.add('hero-content');
     block.append(heroContent);
   }
+
+  // add navigation to hero block
+  addNavigation(block);
+
   return block;
 }

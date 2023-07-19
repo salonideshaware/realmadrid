@@ -20,8 +20,55 @@ main .hero {
   margin-top:-64px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content:flex-end;
   color: var(--background-color);
+}
+
+main .hero .navigation {
+  z-index: 3;
+  margin-top:80px;
+  flex-grow: 2;
+}
+
+main .hero .navigation .parent, main .hero .navigation .child {
+  display: inline-flex;
+  align-items: center;
+  min-width: max-content;
+  justify-content: flex-start;
+  height: 2rem;
+  margin: 0.5rem;
+  font-size: 0.8125rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--background-color);
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.13px;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  background-color: rgba(100 100 100 / 40%);
+  border-radius: 1rem;
+}
+
+main .hero .navigation .parent span.icon {
+  padding-inline-start: 0.5rem;
+  height: 18px;
+  transform: rotate(180deg);
+}
+
+main .hero .children {
+  display: flex;
+  transition-property: transform;
+  transition-timing-function: ease-out;
+  box-sizing: content-box;
+  overflow: auto;
+  scrollbar-width:none;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+}
+
+main .hero .children::-webkit-scrollbar {
+  display:none;
 }
 
 main .hero-content {

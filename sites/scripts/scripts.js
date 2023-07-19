@@ -237,6 +237,40 @@ export async function fetchTours() {
   return null;
 }
 
+const VIP_AREA_INDEX = '/query-index.json';
+
+/**
+ * loads the index if we are on a VIP area page.
+ */
+export async function fetchVIPAreaIndex() {
+  const vipRoot = getVIPAreaLangRoot();
+  // if we are on a vip area page
+  if (window.location.pathname.startsWith(vipRoot)) {
+    // return query index for this language
+    if (window.vipIndex?.data) {
+      return window.vipIndex.data;
+    }
+
+    // make sure global storage location exists
+    window.vipIndex = window.vipIndex || {};
+
+    // define promise function
+    const loadVIPAreaIndex = async () => {
+      const resp = await fetch(`${vipRoot}${VIP_AREA_INDEX}`);
+      window.vipIndex.data = (await resp.json()).data;
+      return window.vipIndex.data;
+    };
+
+    // start download
+    if (!window.vipIndex.promise) {
+      // create promise
+      window.vipIndex.promise = loadVIPAreaIndex();
+    }
+    return window.vipIndex.promise;
+  }
+  return null;
+}
+
 /**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
@@ -320,7 +354,6 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
-const VIP_AREA_INDEX = '/query-index.json';
 export const LANG_LOCALE = {
   es: 'es-ES',
   en: 'en-US',
@@ -352,11 +385,6 @@ export async function fetchNavigationConfig() {
     console.error(error);
   }
   return navigationConfig;
-}
-
-export function getVipAreaIndexPath(url) {
-  language = getLanguage();
-  return `${url.origin}${VIP_AREA_LANGUAGE_HOME_PATH[language]}${VIP_AREA_INDEX}`;
 }
 
 export async function fetchLanguagePlaceholders() {
