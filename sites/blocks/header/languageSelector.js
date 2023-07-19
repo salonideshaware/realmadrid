@@ -4,7 +4,8 @@ import {
 
 async function fetchSiteMap() {
   try {
-    const response = await fetch('/sites/sitemap.xml');
+    const sitemapSuffix = getCurrentSection() === 'tour' ? 'tour-bernabeu' : 'area-vip';
+    const response = await fetch(`/sites/sitemap-${sitemapSuffix}.xml`);
     const siteMapText = await response.text();
     const parser = new DOMParser();
     const siteMap = parser.parseFromString(siteMapText, 'text/xml');
