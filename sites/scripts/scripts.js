@@ -16,6 +16,19 @@ import {
   fetchPlaceholders,
 } from './lib-franklin.js';
 
+const AUDIENCES_CONFIG = {
+  audiences: {
+    mobile: {
+      label: 'Mobile',
+      test: () => window.innerWidth < 600,
+    },
+    desktop: {
+      label: 'Desktop',
+      test: () => window.innerWidth >= 600,
+    },
+  },
+};
+
 const LCP_BLOCKS = ['hero-tour', 'hero-tour-detail']; // add your LCP blocks to the list
 
 /**
@@ -276,6 +289,13 @@ export async function fetchVIPAreaIndex() {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
+  const experiment = getMetadata('experiment');
+  const instantExperiment = getMetadata('instant-experiment');
+  if (instantExperiment || experiment) {
+    // eslint-disable-next-line import/no-cycle
+    const { runExperiment } = await import('../experimentation/experimentation.js');
+    await runExperiment(experiment, instantExperiment, AUDIENCES_CONFIG);
+  }
   // eslint-disable-next-line no-use-before-define
   document.documentElement.lang = getLanguage();
   decorateTemplateAndTheme();
@@ -339,6 +359,11 @@ async function loadLazy(doc) {
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   addFavIcon(`${window.hlx.codeBasePath}/styles/favicon.svg`);
+  // Experimentation preview
+  if (window.location.hostname.endsWith('hlx.page') || window.location.hostname === 'localhost') {
+    // eslint-disable-next-line import/no-cycle
+    import('../tools/preview/experimentation-preview.js');
+  }
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
