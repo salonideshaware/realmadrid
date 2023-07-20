@@ -287,7 +287,7 @@ async function createSegments() {
  * @return {Object} returns a badge or empty string
  */
 async function decoratePreviewMode() {
-  loadCSS('./tools/preview/experimentation-preview.css');
+  loadCSS('/sites/tools/preview/experimentation-preview.css');
   const overlay = document.createElement('div');
   overlay.className = 'hlx-preview-overlay';
   overlay.append(await createExperiment());
