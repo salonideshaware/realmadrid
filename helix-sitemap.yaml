@@ -1,6 +1,6 @@
 sitemaps:
   area-vip:
-    origin: https://main--realmadrid--hlxsites.hlx.live
+    origin: https://www.realmadrid.com
     lastmod: YYYY-MM-DD
     languages:
       es:
@@ -37,7 +37,7 @@ sitemaps:
         hreflang: hi
 
   tour-bernabeu:
-    origin: https://main--realmadrid--hlxsites.hlx.live
+    origin: https://www.realmadrid.com
     lastmod: YYYY-MM-DD
     languages:
       es:
