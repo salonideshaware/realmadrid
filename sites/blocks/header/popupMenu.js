@@ -47,6 +47,13 @@ export default async function createPopupMenu(data) {
       selectedMenuItem = null;
       return;
     }
+
+    if (menuItem.querySelector('a').hasAttribute('href')) {
+      // navigate to the link when href is present
+      window.location.href = menuItem.querySelector('a').getAttribute('href');
+      return;
+    }
+
     subMenu.innerHTML = data.data.header.items[0]
       .mainNavigation[index].childNavigationItems.map((nav) => (
         `<li><a class='sub-popup-menu-item' href="${getNavLink(nav.url, nav.openNewWindow)}">${nav.title}</a></li>`
@@ -58,7 +65,7 @@ export default async function createPopupMenu(data) {
       // eslint-disable-next-line prefer-template
       const imageUrl = originalImageUrl.slice(0, lastDotIndex) + '.app.' + originalImageUrl.slice(lastDotIndex) + '?wid=150';
       imageArea.innerHTML = `
-        <img src="${imageUrl}"></img>
+        <img src="${imageUrl}" alt="">
       `;
     } else {
       imageArea.innerHTML = '';
@@ -81,9 +88,16 @@ export default async function createPopupMenu(data) {
     link.innerHTML = `<span>${nav.title}</span>`;
     if (nav.childNavigationItems.length) {
       link.innerHTML += hasChildrenIcon;
+      link.setAttribute('href', '#');
+      link.setAttribute('data-index', index);
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        updateSubMenu(index, menuItem);
+        const submenuIndex = e.currentTarget.getAttribute('data-index');
+        if (e.currentTarget.hasAttribute('href')) {
+          window.location.href = e.currentTarget.getAttribute('href');
+        } else {
+          updateSubMenu(submenuIndex, menuItem);
+        }
       });
     } else {
       link.setAttribute('href', getNavLink(nav.url, nav.openNewWindow));
@@ -110,7 +124,7 @@ export default async function createPopupMenu(data) {
 
   const sponsorIcons = data.data.header.items[0].sponsors.map((sponsor) => (
     // eslint-disable-next-line no-underscore-dangle
-    `<img src='${sponsor.logo._publishUrl}' style="width: 57px; height: 40px; margin: -6px 9px 0 10px; padding: 5px"/>`
+    `<img src='${sponsor.logo._publishUrl}' style="width: 57px; height: 40px; margin: -6px 9px 0 10px; padding: 5px" alt="Sponsor Icon"/>`
   )).join('');
 
   sponsors.innerHTML = `

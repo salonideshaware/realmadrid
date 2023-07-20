@@ -54,7 +54,7 @@ export default async function decorate(block) {
       ${window.rm.user.name[0]}${window.rm.user.surname[0]}
     </button>`
     : `<button class="login-button">
-      <svg focusable="false" width="16" height="16" aria-hidden="true" style="margin-left: 0px; filter: invert(26%) sepia(75%) saturate(7487%) hue-rotate(245deg) brightness(95%) contrast(107%);">
+      <svg focusable="false" width="16" height="16" aria-hidden="true" style="margin-left: 0; filter: invert(26%) sepia(75%) saturate(7487%) hue-rotate(245deg) brightness(95%) contrast(107%);">
         <use xlink:href="${window.hlx.codeBasePath}/blocks/header/cibeles-sprite.svg#profile"></use>
       </svg>
       ${login}
@@ -64,7 +64,7 @@ export default async function decorate(block) {
     <div style="flex: 1 0 auto; display: flex; flex-direction: row; justify-content: space-between; align-items: center">
     <!-- Logos -->
     <div style="flex: 0 0 auto; display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin: 0 9px 0 10px">
-      <a href="/${getLocale()}" style="height: 40px">
+      <a href="/${getLocale()}" style="height: 40px" aria-label="Logos">
         <svg focusable="false" width="40" height="40">
           <use xlink:href="${window.hlx.codeBasePath}/blocks/header/cibeles-sprite.svg#logo-rm"></use>
         </svg>
@@ -75,7 +75,7 @@ export default async function decorate(block) {
       ${createTopMenu(data)}
       <div class="header-left-section">
         ${sponsorIcons}
-        <a class="header-sponsors-link" href="${sponsorsLink?.url}">
+        <a class="header-sponsors-link" href="${sponsorsLink?.url}" aria-label="Sponsor Links">
           <svg focusable="false" width="24" height="24" style="margin-right: 9px; filter: invert(75%) sepia(18%) saturate(182%) hue-rotate(178deg) brightness(95%) contrast(87%);">
             <use xlink:href="${window.hlx.codeBasePath}/blocks/header/cibeles-sprite.svg#dots-v"></use>
           </svg>
