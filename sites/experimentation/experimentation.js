@@ -151,7 +151,7 @@ export async function getExperimentConfig(experimentId, instantExperiment) {
     return (config);
   }
 
-  const path = `/experimentation/${experimentId}/manifest.json`;
+  const path = `/sites/experimentation/${experimentId}/manifest.json`;
   try {
     const resp = await fetch(path);
     if (!resp.ok) {
