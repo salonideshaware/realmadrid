@@ -43,6 +43,10 @@
     letter-spacing: 0.2px;
 }
 
+.login-button:hover:not(.button) {
+    background-color: transparent;
+}
+
 .profile-button {
     align-items: center;
     background-color: #3e31fa;
