@@ -29,7 +29,7 @@ export default async function decorate(block) {
 
   const sponsorIcons = data.data.header.items[0].sponsors.map((sponsor) => (
     // eslint-disable-next-line no-underscore-dangle
-    `<img src='${sponsor.logo._publishUrl}' class="header-sponsor-icon" alt="${sponsor.title}"/>`
+    `<a href="${getNavLink(sponsor.url, sponsor.openNewWindow ?? false)}" target="${sponsor.openNewWindow ? '_blank' : '_self'}" class="header-sponsor-link"><img src='${sponsor.logo._publishUrl}' class="header-sponsor-icon" alt="${sponsor.title}"/></a>`
   )).join('');
   const { sponsorsLink } = data.data.header.items[0];
 

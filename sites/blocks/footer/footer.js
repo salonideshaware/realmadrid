@@ -77,7 +77,7 @@ export default async function decorate(block) {
     const li = document.createElement('li');
     mainSponsors.append(li);
     li.appendChild(document.createRange().createContextualFragment(`
-      <a href="${getNavLink(item.url, item.openNewWindow)}">
+      <a href="${getNavLink(item.url, item.openNewWindow ?? false)}" target="${item.openNewWindow ? '_blank' : '_self'}">
         <img src="${item.logo._publishUrl}" alt="${item.title}">
       </a>
     `));
@@ -89,7 +89,7 @@ export default async function decorate(block) {
     const li = document.createElement('li');
     otherSponsors.append(li);
     li.appendChild(document.createRange().createContextualFragment(`
-      <a href="${getNavLink(item.url, item.openNewWindow)}">
+      <a href="${getNavLink(item.url, item.openNewWindow ?? false)}" target="${item.openNewWindow ? '_blank' : '_self'}">
         <img src="${item.logo._publishUrl}" alt="${item.title}">
       </a>
     `));
