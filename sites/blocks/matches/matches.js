@@ -278,9 +278,8 @@ export default async function decorate(block) {
   try {
     // todo: add params fromDate endDate
     if (aemGqEndpoint && API[sport.toLowerCase()]) {
-      const url = new URL(`${aemGqEndpoint}${API[sport.toLowerCase()]}`);
-      url.searchParams.set('fromDate', new Date().toISOString());
-      url.searchParams.set('toDate', SEASON_END_DATE);
+      const filter = `fromDate=${new Date().toISOString()};toDate=${SEASON_END_DATE}`;
+      const url = new URL(`${aemGqEndpoint}${API[sport.toLowerCase()]};${filter}`);
       const response = await fetch(url);
       const data = await response.json();
       if (data && data.data && data.data.matchList && Array.isArray(data.data.matchList.items)) {
