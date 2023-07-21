@@ -102,7 +102,7 @@ export default async function decorate(block) {
     const li = document.createElement('li');
     socialLinks.append(li);
     li.appendChild(document.createRange().createContextualFragment(`
-      <a href="${getNavLink(item.url, item.openNewWindow)}">
+      <a href="${getNavLink(item.url, item.openNewWindow)}" class="social-links">
         <svg focusable="false" width="24" height="24"><title>${item.title}</title><use xlink:href="${window.hlx.codeBasePath}/blocks/header/cibeles-sprite.svg#${item.title.toLowerCase()}"></use></svg>
       </a>
     `));
