@@ -21,13 +21,34 @@
     transform: translateY(calc(0rem - var(--nav-height)));
 }
 
+.header-menu {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center
+}
+
+.header-menu:hover {
+    cursor: pointer;
+    color: var(--link-hover-color);
+}
+
+a.rm-link-logo {
+    transition-delay: 0s;
+    transition-duration: 0.4s;
+    transition-property: color;
+    transition-timing-function: ease-in-out;
+}
+
+a.rm-link-logo:hover svg { color: red; fill: blue }
+
 .login-button {
     box-shadow: none;
-    border: 2px solid;
     font-family: var(--header-font-family-bold);
     font-weight: 600;
     font-size: 14px;
-    border-color: #3e31fa;
+    border: 2px solid #3e31fa;
     color: #3e31fa;
     line-height: 21px;
     border-radius: 8px;
@@ -51,8 +72,7 @@
     align-items: center;
     background-color: #3e31fa;
     border-radius: 50%;
-    border: 2px solid;
-    border-color: #3e31fa;
+    border: 2px solid #3e31fa;
     box-shadow: none;
     color: var(--background-color);
     display: flex;
