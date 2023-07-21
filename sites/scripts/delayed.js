@@ -58,6 +58,7 @@ function getPageLoadTrackingPayload() {
     previousPageURL: document.referrer,
     pageLang: currentLanguage,
     country: currentLanguage,
+    pageLoadType: 'sequential',
     cms: 'aem_franklin',
   };
 
