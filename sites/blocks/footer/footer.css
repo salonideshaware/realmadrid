@@ -184,6 +184,10 @@ a.social-links:hover svg {
   fill: var(--link-primary-color);
 }
 
+a.footer-bottom-links:hover {
+  color: var(--link-primary-color);
+}
+
 .footer-logo {
   display: inline-block;
   margin: 0;
