@@ -61,10 +61,10 @@ export default async function decorate(block) {
     </button>`;
 
   block.appendChild(document.createRange().createContextualFragment(`
-    <div style="flex: 1 0 auto; display: flex; flex-direction: row; justify-content: space-between; align-items: center">
+    <div class="header-menu">
     <!-- Logos -->
     <div style="flex: 0 0 auto; display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin: 0 9px 0 10px">
-      <a href="/${getLocale()}" style="height: 40px" aria-label="Logos">
+      <a href="/${getLocale()}" class="rm-link-logo" style="height: 40px" aria-label="Logos">
         <svg focusable="false" width="40" height="40">
           <use xlink:href="${window.hlx.codeBasePath}/blocks/header/cibeles-sprite.svg#logo-rm"></use>
         </svg>
