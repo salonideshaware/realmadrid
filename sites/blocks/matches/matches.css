@@ -6,8 +6,19 @@ main > .matches-container {
   padding: 40px 10px 35px;
 }
 
+main > .matches-container:lang(ar) {
+  background: linear-gradient(to left, #3476b6 0%, #699ac9 100%);
+  position:relative;
+  margin: 50px 0 0;
+  box-sizing: border-box;
+  padding: 40px 10px 35px;
+}
+
 main > .matches-container > * {
-  margin: 50px 0 0 10px;
+  margin: 0;
+  margin-top: 50px;
+  margin-inline-end: 0;
+  margin-inline-start: 10px;
 }
 
 main > .matches-container::before {
@@ -24,10 +35,15 @@ main > .matches-container::before {
   border-bottom: 25px solid transparent;
 }
 
+main > .matches-container:lang(ar)::before {
+  left: 0;
+  right: unset;
+}
+
 main > .matches-container h2 {
   color: var(--background-color);
   border-bottom-color: var(--background-color);
-  margin-left: 0;
+  margin-inline-start: 0;
 }
 
 .matches .filters {
@@ -51,7 +67,7 @@ main > .matches-container h2 {
 }
 
 .matches > .filters > .option {
-  margin-right: 22px;
+  margin-inline-end: 22px;
   flex: 0 1 auto;
 }
 
@@ -70,6 +86,11 @@ main > .matches-container h2 {
   overflow: hidden;
   overflow-y: auto;
   text-align: center;
+}
+
+.matches .filters.level-2:lang(ar) {
+  left: unset;
+  right: -10px;
 }
 
 .matches .filters.level-2 > .option {
@@ -213,7 +234,7 @@ main > .matches-container h2 {
 }
 
 .matches .filters[data-selected="calendar"] + .match-list {
-  margin-left: 32px;
+  margin-inline-start: 32px;
   width: calc(100% - 32px);
 }
 
@@ -225,6 +246,12 @@ main > .matches-container h2 {
   right: 0;
   position: absolute;
 }
+
+.match > input:lang(ar) {
+  left: 0;
+  right: unset;
+}
+
 
 .match > input::before {
   line-height: 1.4;
@@ -335,7 +362,7 @@ main > .matches-container h2 {
   }
 
   .matches .filters[data-selected="calendar"] + .match-list {
-    margin-left: 0;
+    margin-inline-start: 0;
     width: 100%;
   }
 
@@ -343,7 +370,8 @@ main > .matches-container h2 {
     font-size: 0.75rem;
     min-height: 70px;
     margin: 0 0 10px;
-    padding: 5px 0 5px 20px;
+    padding: 5px 0;
+    padding-inline-start: 20px;
     align-items: center;
     width: 100%;
     flex-wrap: nowrap;
@@ -367,14 +395,16 @@ main > .matches-container h2 {
     width: 52px;
     height: 52px;
     flex-basis: 60px;
-    margin-left: 27px;
+    margin-inline-start: 27px;
     order: 4;
     margin-top: 0;
   }
 
   .match .datetime {
     flex-basis: 100px;
-    margin: 0 50px 0 7px;
+    margin: 0;
+    margin-inline-start: 7px;
+    margin-inline-end: 50px;
     align-self: center;
     font-size: 26px;
     order: 3;
@@ -389,17 +419,20 @@ main > .matches-container h2 {
     align-items: end;
     font-size: 0.75rem;
     flex: 0 0 205px;
-    padding-right: 15px;
-    border-right: 1px solid rgb(0 0 0 / 12%);
-    margin: 5px 5px 5px 0;
+    padding-inline-end: 15px;
+    border-inline-end: 1px solid rgb(0 0 0 / 12%);
+    margin: 5px;
+    margin-inline-start: 0;
     order: 2;
   }
 
   .match .teams {
     flex-direction: column;
-    padding-right: 15px;
+    padding-inline-end: 15px;
     align-items: flex-start;
-    margin: 0 5px 0 10px;
+    margin: 0;
+    margin-inline-end: 5px;
+    margin-inline-start: 10px;
   }
 
   .match .teams > span:first-child::after {
@@ -407,8 +440,8 @@ main > .matches-container h2 {
   }
 
   .match .price {
-    text-align: right;
-    margin-right: 20px;
+    text-align: end;
+    margin-inline-end: 20px;
     font-size: 14px;
     font-weight: 100;
   }
@@ -439,7 +472,7 @@ main > .matches-container h2 {
 
   .matches .filters.level-2 {
     display: none;
-    padding-left: 80px;
+    padding-inline-start: 80px;
     font-size: 15px;
     position: static;
     height: auto;
@@ -497,9 +530,14 @@ main > .matches-container h2 {
     display: flex;
   }
 
+  .match > input + div.calendar-info:lang(ar) {
+    right: unset;
+    left: 0;
+  }
+
   .match > input:checked + div.calendar-info {
     width: 1200px;
-    padding-left: 153px;
+    padding-inline-start: 153px;
     flex-direction: row;
   }
 
@@ -509,12 +547,17 @@ main > .matches-container h2 {
     position: absolute;
     background-color: var(--background-color);
     z-index: 12;
-    margin-left: 0;
+    margin-inline-start: 0;
     margin-top: 0;
   }
 
   .match > input:checked ~ .match-content > .logo.away {
     left: 65px;
+  }
+
+  .match > input:checked ~ .match-content > .logo.away:lang(ar) {
+    right: 65px;
+    left: unset;
   }
 }
 
