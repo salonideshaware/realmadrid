@@ -107,7 +107,7 @@ footer {
 }
 
 .footer-main-navigation li svg {
-  fill: #3e31fa;
+  fill: var(--link-primary-color);
   float: right;
   vertical-align: center;
   display: none;
