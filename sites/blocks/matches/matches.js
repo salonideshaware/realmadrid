@@ -171,7 +171,9 @@ const renderMatch = (placeholders) => (match) => {
         <span class="time">${timeformat.format(time)}</span>
         <span class="date">${dateformat.format(time)}</span>
       </div>
-      <img class="logo team home" src="${getOptimizedImage(homeTeamLogo._publishUrl)}" alt="${homeTeamName}">
+      ${homeTeamLogo && homeTeamLogo._publishUrl
+    ? `<img class="logo team home" src="${getOptimizedImage(homeTeamLogo._publishUrl)}" alt="${homeTeamName}">`
+    : ''}
       <img class="logo team away" src="${getOptimizedImage(awayTeamLogo._publishUrl)}" alt="${awayTeamName}">
       <div class="teams">
         <span>${homeTeamName}</span>
@@ -281,7 +283,7 @@ export default async function decorate(block) {
     }
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.log(`unable to fetch matches list from ${aemGqEndpoint}${API[sport.toLowerCase()]}`);
+    console.log(`unable to fetch matches list from ${aemGqEndpoint}${API[sport.toLowerCase()]}. Error ${e}`);
   }
   const emptyMatchDiv = createDiv('empty-match', noMatches);
   const itemsWrapper = createDiv(
