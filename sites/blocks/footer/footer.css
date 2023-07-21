@@ -107,7 +107,7 @@ footer {
 }
 
 .footer-main-navigation li svg {
-  fill: #3e31fa;
+  fill: var(--link-primary-color);
   float: right;
   vertical-align: center;
   display: none;
@@ -180,6 +180,10 @@ footer {
   text-align: right;
 }
 
+a.social-links:hover svg {
+  fill: var(--link-primary-color);
+}
+
 .footer-logo {
   display: inline-block;
   margin: 0;
@@ -204,6 +208,10 @@ footer {
   line-height: 15px;
   color: #5E6A83;
   padding: 0 5px;
+}
+
+.footer-bottom-links li a:hover {
+  color: var(--link-primary-color);
 }
 
 .footer-bottom-links li:first-child a {

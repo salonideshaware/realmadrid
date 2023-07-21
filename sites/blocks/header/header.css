@@ -30,18 +30,20 @@
 }
 
 a.rm-link-logo {
-    transition: color 0.4s ease-in-out;
+    transition: 0.4s ease-in-out;
 }
 
-a.rm-link-logo:hover svg { color: red; fill: #3e31fa }
+a.rm-link-logo:hover svg {
+    fill: var(--link-primary-color);
+}
 
 .login-button {
     box-shadow: none;
     font-family: var(--header-font-family-bold);
     font-weight: 600;
     font-size: 14px;
-    border: 2px solid #3e31fa;
-    color: #3e31fa;
+    border: 2px solid var(--link-primary-color);
+    color: var(--link-primary-color);
     line-height: 21px;
     border-radius: 8px;
     background-color: transparent;
@@ -62,9 +64,9 @@ a.rm-link-logo:hover svg { color: red; fill: #3e31fa }
 
 .profile-button {
     align-items: center;
-    background-color: #3e31fa;
+    background-color: var(--link-primary-color);
     border-radius: 50%;
-    border: 2px solid #3e31fa;
+    border: 2px solid var(--link-primary-color);
     box-shadow: none;
     color: var(--background-color);
     display: flex;
