@@ -210,8 +210,8 @@ a.social-links:hover svg {
   padding: 0 5px;
 }
 
-a.bottom-links:hover {
-  fill: var(--link-primary-color);
+.footer-bottom-links li a:hover {
+  color: var(--link-primary-color);
 }
 
 .footer-bottom-links li:first-child a {
