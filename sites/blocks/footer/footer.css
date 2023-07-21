@@ -180,7 +180,7 @@ footer {
   text-align: right;
 }
 
-.social-links a:hover svg {
+a.social-links:hover svg {
   fill: var(--link-primary-color);
 }
 
