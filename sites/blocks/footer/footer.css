@@ -184,10 +184,6 @@ a.social-links:hover svg {
   fill: var(--link-primary-color);
 }
 
-a.footer-bottom-links:hover {
-  color: var(--link-primary-color);
-}
-
 .footer-logo {
   display: inline-block;
   margin: 0;
@@ -212,6 +208,10 @@ a.footer-bottom-links:hover {
   line-height: 15px;
   color: #5E6A83;
   padding: 0 5px;
+}
+
+.footer-bottom-links li:hover {
+  color: var(--link-primary-color);
 }
 
 .footer-bottom-links li:first-child a {
