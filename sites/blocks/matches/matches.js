@@ -174,7 +174,9 @@ const renderMatch = (placeholders) => (match) => {
       ${homeTeamLogo && homeTeamLogo._publishUrl
     ? `<img class="logo team home" src="${getOptimizedImage(homeTeamLogo._publishUrl)}" alt="${homeTeamName}">`
     : ''}
-      <img class="logo team away" src="${getOptimizedImage(awayTeamLogo._publishUrl)}" alt="${awayTeamName}">
+    ${awayTeamLogo && awayTeamLogo._publishUrl
+    ? `<img class="logo team away" src="${getOptimizedImage(awayTeamLogo._publishUrl)}" alt="${awayTeamName}">`
+    : ''}
       <div class="teams">
         <span>${homeTeamName}</span>
         <span>${awayTeamName}</span>
