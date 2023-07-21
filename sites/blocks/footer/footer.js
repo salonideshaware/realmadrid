@@ -126,7 +126,7 @@ export default async function decorate(block) {
     const li = document.createElement('li');
     bottomBar.append(li);
     li.appendChild(document.createRange().createContextualFragment(`
-      <a href="${getNavLink(item.url, item.openNewWindow)}">${item.title}</a>
+      <a href="${getNavLink(item.url, item.openNewWindow)}" class="bottom-links">${item.title}</a>
     `));
   });
 
