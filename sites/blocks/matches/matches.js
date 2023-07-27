@@ -7,6 +7,8 @@ const API = {
   basketball: '/realmadridmastersite/matchesVIPBasket',
 };
 
+const SEASON_END_DATE = '2024-06-30T12:00Z';
+
 const timeformat = new Intl.DateTimeFormat(getLocale(), { minute: '2-digit', hour12: false, hour: '2-digit' });
 const dateformat = new Intl.DateTimeFormat(getLocale(), { weekday: 'short', month: 'short', day: '2-digit' });
 const monthFormat = new Intl.DateTimeFormat(getLocale(), { month: 'short' });
@@ -171,8 +173,12 @@ const renderMatch = (placeholders) => (match) => {
         <span class="time">${timeformat.format(time)}</span>
         <span class="date">${dateformat.format(time)}</span>
       </div>
-      <img class="logo team home" src="${getOptimizedImage(homeTeamLogo._publishUrl)}" alt="${homeTeamName}">
-      <img class="logo team away" src="${getOptimizedImage(awayTeamLogo._publishUrl)}" alt="${awayTeamName}">
+      ${homeTeamLogo && homeTeamLogo._publishUrl
+    ? `<img class="logo team home" src="${getOptimizedImage(homeTeamLogo._publishUrl)}" alt="${homeTeamName}">`
+    : ''}
+    ${awayTeamLogo && awayTeamLogo._publishUrl
+    ? `<img class="logo team away" src="${getOptimizedImage(awayTeamLogo._publishUrl)}" alt="${awayTeamName}">`
+    : ''}
       <div class="teams">
         <span>${homeTeamName}</span>
         <span>${awayTeamName}</span>
@@ -272,7 +278,8 @@ export default async function decorate(block) {
   try {
     // todo: add params fromDate endDate
     if (aemGqEndpoint && API[sport.toLowerCase()]) {
-      const url = new URL(`${aemGqEndpoint}${API[sport.toLowerCase()]}`);
+      const filter = `fromDate=${new Date().toISOString()};toDate=${SEASON_END_DATE}`;
+      const url = new URL(`${aemGqEndpoint}${API[sport.toLowerCase()]};${filter}`);
       const response = await fetch(url);
       const data = await response.json();
       if (data && data.data && data.data.matchList && Array.isArray(data.data.matchList.items)) {
@@ -281,7 +288,7 @@ export default async function decorate(block) {
     }
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.log(`unable to fetch matches list from ${aemGqEndpoint}${API[sport.toLowerCase()]}`);
+    console.log(`unable to fetch matches list from ${aemGqEndpoint}${API[sport.toLowerCase()]}. Error ${e}`);
   }
   const emptyMatchDiv = createDiv('empty-match', noMatches);
   const itemsWrapper = createDiv(
