@@ -85,6 +85,7 @@ export default async function createPopupMenu(data) {
         e.preventDefault();
         updateSubMenu(index, menuItem);
       });
+      link.setAttribute('href', '#');
     } else {
       link.setAttribute('href', getNavLink(nav.url, nav.openNewWindow));
     }
