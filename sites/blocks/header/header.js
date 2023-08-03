@@ -76,7 +76,7 @@ export default async function decorate(block) {
       <div class="header-left-section">
         ${sponsorIcons}
         <a class="header-sponsors-link" href="${sponsorsLink?.url}" aria-label="Sponsor Links">
-          <svg focusable="false" width="24" height="24" style="margin-right: 9px; filter: invert(75%) sepia(18%) saturate(182%) hue-rotate(178deg) brightness(95%) contrast(87%);">
+          <svg focusable="false" width="24" height="24" style="margin-right: 9px;">
             <use xlink:href="${window.hlx.codeBasePath}/blocks/header/cibeles-sprite.svg#dots-v"></use>
           </svg>
         </a>

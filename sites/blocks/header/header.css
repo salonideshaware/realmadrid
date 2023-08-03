@@ -29,6 +29,14 @@
     align-items: center;
 }
 
+.header-sponsors-link:not(:hover) svg {
+    filter: invert(75%) sepia(18%) saturate(182%) hue-rotate(178deg) brightness(95%) contrast(87%);
+}
+
+.header-sponsors-link:hover svg {
+    fill: var(--link-primary-color);
+}
+
 a.rm-link-logo {
     transition: 0.4s ease-in-out;
 }
