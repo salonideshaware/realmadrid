@@ -59,6 +59,10 @@
   transition: 0.5s ease-out left, opacity;
 }
 
+.hamburger-menu:hover {
+  fill: blue;
+}
+
 .popup-menu:lang(ar) {
   left: unset;
   right: -1100px;

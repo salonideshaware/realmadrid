@@ -5,7 +5,7 @@ export default async function addPopupMenuButton(block, data) {
   const icon = () => {
     const src = `${window.hlx.codeBasePath}/blocks/header/cibeles-sprite.svg#${state ? 'times' : 'menu'}`;
     return `
-        <svg focusable="false" width="24" height="24" aria-hidden="true">
+        <svg focusable="false" width="24" height="24" aria-hidden="true" class="hamburger-menu">
             <use xlink:href="${src}"></use>
         </svg>
     `;
